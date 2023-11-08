@@ -964,6 +964,10 @@ void DijetHistosFill::Loop(bool debug_by_run=false, bool debug_by_event=false)
       2.65, 2.853, 2.964, 3.139, 3.314, 3.489, 3.664, 3.839, 4.013, 4.191,
       4.363, 4.538, 4.716, 4.889, 5.191};
    const int nx = sizeof(vx)/sizeof(vx[0])-1;
+
+
+    
+
    // Current L2Res |eta| binning from Jindrich
    // https://indico.cern.ch/event/1263476/contributions/5311425/attachments/2612023/4513129/L2Res+HDM-March15.pdf
    double vxd[] =
