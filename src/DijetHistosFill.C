@@ -965,7 +965,7 @@ void DijetHistosFill::Loop()
    const int nx = sizeof(vx)/sizeof(vx[0])-1;
 
 
-    
+
 
    // Current L2Res |eta| binning from Jindrich
    // https://indico.cern.ch/event/1263476/contributions/5311425/attachments/2612023/4513129/L2Res+HDM-March15.pdf
@@ -1165,6 +1165,81 @@ void DijetHistosFill::Loop()
        h->p2pur = new TProfile2D("p2pur",";|#eta_{jet}|;p_{T,jet} (GeV);"
 				 "Purity",
 				 nxd,vxd, nptd, vptd);
+
+       dout->mkdir("MCtruth/Flavor");
+       dout->cd("MCtruth/Flavor");     
+      h->p2r_s = new TProfile2D("p2r_s",";|#eta_{jet}|;p_{T,gen} (GeV);"
+			                         "p_{T,s-jet}/p_{T,gen}",
+			                         nxd,vxd, nptd, vptd);
+      h->p2r_ud = new TProfile2D("p2r_ud",";|#eta_{jet}|;p_{T,gen} (GeV);"
+			                           "p_{T,ud-jet}/p_{T,gen}",
+			                           nxd,vxd, nptd, vptd);
+      h->p2r_g = new TProfile2D("p2r_g",";|#eta_{jet}|;p_{T,gen} (GeV);"
+			                          "p_{T,g-jet}/p_{T,gen}",
+			                          nxd,vxd, nptd, vptd);
+      h->p2r_c = new TProfile2D("p2r_c",";|#eta_{jet}|;p_{T,gen} (GeV);"
+			                           "p_{T,c-jet}/p_{T,gen}",
+			                           nxd,vxd, nptd, vptd);
+      h->p2r_b = new TProfile2D("p2r_b",";|#eta_{jet}|;p_{T,gen} (GeV);"
+			                          "p_{T,b-jet}/p_{T,gen}",
+			                          nxd,vxd, nptd, vptd);
+
+                                                                                    
+      h->h2r_s = new TH2D("h2r_s",";p_{T,gen} (GeV);"
+			                              "p_{T,gen}/p_{T,s-jet}",
+			                              nptd_e, vptd_e,nxd_e,vxd_e);
+      h->h2r_ud = new TH2D("h2r_ud",";p_{T,gen} (GeV);"
+			                               "p_{T,gen}/p_{T,ud-jet}",
+			                               nptd_e, vptd_e,nxd_e,vxd_e);
+      h->h2r_c = new TH2D("h2r_c",";p_{T,gen} (GeV);"
+			                              "p_{T,gen}/p_{T,c-jet}",
+			                              nptd_e, vptd_e,nxd_e,vxd_e);                 
+      h->h2r_b = new TH2D("h2r_b",";p_{T,gen} (GeV);"
+			                              "p_{T,gen}/p_{T,b-jet}",
+			                              nptd_e, vptd_e,nxd_e,vxd_e);                  
+      h->h2r_g = new TH2D("h2r_g",";p_{T,gen} (GeV);"
+			                              "p_{T,gen}/p_{T,g-jet}",
+			                              nptd_e, vptd_e,nxd_e,vxd_e); 
+
+
+      h->p1r = new TProfile("p1r",";p_{T,gen} (GeV);"
+			                     "p_{T,jet}/p_{T,gen}",
+			                     nptd, vptd);                                                                              
+      h->p1r_s = new TProfile("p1r_s",";p_{T,gen} (GeV);"
+			                       "p_{T,s-jet}/p_{T,gen}",
+			                       nptd, vptd);
+      h->p1r_ud = new TProfile("p1r_ud",";p_{T,gen} (GeV);"
+			                        "p_{T,ud-jet}/p_{T,gen}",
+			                        nptd, vptd);
+      h->p1r_c = new TProfile("p1r_c",";p_{T,gen} (GeV);"
+			                       "p_{T,c-jet}/p_{T,gen}",
+			                       nptd, vptd);                 
+      h->p1r_b = new TProfile("p1r_b",";p_{T,gen} (GeV);"
+			                       "p_{T,b-jet}/p_{T,gen}",
+			                       nptd, vptd);                  
+      h->p1r_g = new TProfile("p1r_g",";p_{T,gen} (GeV);"
+			                       "p_{T,g-jet}/p_{T,gen}",
+			                       nptd, vptd); 
+
+      h->h1r = new TProfile("h1r",";p_{T,gen} (GeV);"
+			                          "p_{T,gen}/p_{T,jet}",
+			                          nptd, vptd);                                                                              
+      h->h1r_s = new TProfile("h1r_s",";p_{T,gen} (GeV);"
+			                            "p_{T,gen}/p_{T,s-jet}",
+			                            nptd, vptd);
+      h->h1r_ud = new TProfile("h1r_ud",";p_{T,gen} (GeV);"
+			                             "p_{T,gen}/p_{T,ud-jet}",
+			                             nptd, vptd);
+      h->h1r_c = new TProfile("h1r_c",";p_{T,gen} (GeV);"
+			                            "p_{T,gen}/p_{T,c-jet}",
+			                            nptd, vptd);                 
+      h->h1r_b = new TProfile("h1r_b",";p_{T,gen} (GeV);"
+			                            "p_{T,gen}/p_{T,b-jet}",
+			                            nptd, vptd);                  
+      h->h1r_g = new TProfile("h1r_g",";p_{T,gen} (GeV);"
+			                            "p_{T,gen}/p_{T,g-jet}",
+			                            nptd, vptd); 
+
      } // isMC && doMCtruth
    
      // Jet veto per trigger
@@ -2068,6 +2143,47 @@ void DijetHistosFill::Loop()
 	    h->p2jsf->Fill(fabs(p4.Eta()), p4g.Pt(), 
 			   smearJets ? Jet_CF[i] : 1, w);
 	    h->p2r->Fill(fabs(p4.Eta()), p4g.Pt(), p4.Pt() / p4g.Pt(), w);
+      if (fabs(p4.Eta()) < 1.3) {h->h2r->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+      if (fabs(p4.Eta()) < 1.3) { h->p1r->Fill(p4g.Pt(), p4.Pt() / p4g.Pt(), w); }
+      if (fabs(p4.Eta()) < 1.3) { h->h1r->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+      if (j < 3) {
+        bool isAlljet = true;
+        bool isSjet = (abs(Jet_partonFlavour[i]) == 3);
+        bool isUDjet = (abs(Jet_partonFlavour[i]) == 1 || abs(Jet_partonFlavour[i]) == 2 );
+        bool isCjet = (abs(Jet_partonFlavour[i]) == 4);
+        bool isBjet = (abs(Jet_partonFlavour[i]) == 5);
+        bool isGjet = (Jet_partonFlavour[i] == 21);
+        if (isSjet) {
+          h->p2r_s->Fill(fabs(p4.Eta()), p4g.Pt(), p4.Pt() / p4g.Pt(), w);
+          if (fabs(p4.Eta()) < 1.3) { h->p1r_s->Fill(p4g.Pt(), p4.Pt() / p4g.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) {h->h2r_s->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) { h->h1r_s->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+        }
+        if (isUDjet) {
+          h->p2r_ud->Fill(fabs(p4.Eta()), p4g.Pt(), p4.Pt() / p4g.Pt(), w);
+          if (fabs(p4.Eta()) < 1.3) { h->p1r_ud->Fill(p4g.Pt(), p4.Pt() / p4g.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) {h->h2r_ud->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) { h->h1r_ud->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+        }
+        if (isGjet) {
+          h->p2r_g->Fill(fabs(p4.Eta()), p4g.Pt(), p4.Pt() / p4g.Pt(), w);
+          if (fabs(p4.Eta()) < 1.3) { h->p1r_g->Fill(p4g.Pt(), p4.Pt() / p4g.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) {h->h2r_g->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) { h->h1r_g->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+        }
+        if (isCjet) {
+          h->p2r_c->Fill(fabs(p4.Eta()), p4g.Pt(), p4.Pt() / p4g.Pt(), w);
+          if (fabs(p4.Eta()) < 1.3) { h->p1r_c->Fill(p4g.Pt(), p4.Pt() / p4g.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) {h->h2r_c->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) { h->h1r_c->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+        }
+        if (isBjet) {
+          h->p2r_b->Fill(fabs(p4.Eta()), p4g.Pt(), p4.Pt() / p4g.Pt(), w);
+          if (fabs(p4.Eta()) < 1.3) { h->p1r_b->Fill(p4g.Pt(), p4.Pt() / p4g.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) {h->h2r_b->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+          if (fabs(p4.Eta()) < 1.3) { h->h1r_b->Fill(p4g.Pt(), p4g.Pt() / p4.Pt(), w); }
+        }
+      }
 	  }
 	  h->p2effz->Fill(fabs(p4g.Eta()), p4g.Pt(), hasMatchVtx ? 1 : 0, w);
 	  if (hasMatchVtx)
