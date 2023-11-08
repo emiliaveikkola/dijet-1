@@ -318,7 +318,7 @@ CorrectionSet getCorrectionsForDataset(const std::string& dataset) {
 }
 
 
-void DijetHistosFill::Loop(bool debug_by_run=false, bool debug_by_event=false)
+void DijetHistosFill::Loop()
 {
 //   In a ROOT session, you can do:
 //      root> .L DijetHistosFill.C
@@ -344,8 +344,7 @@ void DijetHistosFill::Loop(bool debug_by_run=false, bool debug_by_event=false)
 //    fChain->GetEntry(jentry);       //read all branches
 //by  b_branchname->GetEntry(ientry); //read only this branch
    if (fChain == 0) return;
-   debug = debug_by_run;
-   debugevent = debug_by_event;
+
 
    //ROOT.EnableImplicitMT(); // From Nico on Skype, to parallelize processing
 
