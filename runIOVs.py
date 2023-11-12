@@ -16,7 +16,7 @@ IOV_list= [    'UL2016BCD','UL2016EF','UL2016GH',
     '2023BCv123_ZB','2023Cv4_ZB','2023D_ZB',
     'Summer22MG','Summer22EEMG',
     'Summer22MG1','Summer22MG2',
-    'Summer22EEMG1','Summer22EEMG2','Summer22EEMG3','Summer22EEMG4'
+    'Summer22EEMG1','Summer22EEMG2','Summer22EEMG3','Summer22EEMG4', 'testi2022'
 ]
 version = 'v32'
 
