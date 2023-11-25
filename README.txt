@@ -28,7 +28,7 @@ Copy files locally for further processing
 Hadd files together as needed (either JetMET+ZB, or parts of IOV)
 - python addAllIOVs.py
 
-After producing the jmenano_[data,mc])_out_v[X].root root files and hadding: 
+After producing the jmenano_[data,mc]_out_v[X].root root files and hadding: 
 - root -l -b -q DijetHistosCombine.C+g   [merge triggers]
 - root -l -b -q DijetHistosJER.C+g       [JER SF]
 - root -l -b -q DijetHistosL2Res.C+g     [dijet L2Res]
@@ -75,6 +75,9 @@ Bugs:
 (To do: add 40to70 to Summer22EEMG, filter out bad files). 
 (To-do: Downdload Summer23 and ReReco samples. Not yet done for ZeroBias at least)
 
+// v35. Added new L2L3Residuals along with L2Residuals. Fixed Flag_ filter introduced in v33
+// v34. L2L3Residual for Run3
+// v33. Updated Run 3 MET filter flags
 // v32. Update HF |eta| binning. Extend pT binning. Add L2Res for CD+EFG. E still prompt. Update 2022C_ZB and 2022D_ZB to re-reco.
 
 // v31b,c. Processeed re-reco 2022C,D (is code already v32 for |eta| binning?)
