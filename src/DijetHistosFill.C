@@ -796,7 +796,7 @@ void DijetHistosFill::Loop()
      useJERSFvsPt = false;
    }
 
-    if (dataset=="testi2022") {
+    if (dataset=="testi2022MG") {
         jec = getFJC("",//Summer22EEPrompt22_V1_MC_L1FastJet_AK4PFPuppi",
         //"Summer22EEPrompt22_V1_MC_L2Relative_AK4PFPuppi",
         "Winter22Run3_V2_MC_L2Relative_AK4PFPuppi", // Mikel
@@ -1811,7 +1811,7 @@ void DijetHistosFill::Loop()
 	fjv = new TFile("rootfiles/hotjets-UL18.root","READ");
    if (dataset=="2022C" || dataset=="2022D" || dataset=="2022C_ZB" ||
        dataset=="2022D_ZB" || dataset=="Summer22" ||
-       dataset=="Summer22Flat" || dataset == "testi2022" ||
+       dataset=="Summer22Flat" || dataset == "testi2022MG" ||
        TString(dataset.c_str()).Contains("Summer22MG"))
      fjv = new TFile("rootfiles/jetveto2022CD.root","READ");
    if (dataset=="2022E" || dataset=="2022F" || dataset=="2022G" ||
@@ -1848,7 +1848,7 @@ void DijetHistosFill::Loop()
      h2jv = (TH2D*)fjv->Get("h2hot_ul18_plus_hem1516_and_hbp2m1");
    if (dataset=="2022C" || dataset=="2022D" || dataset=="2022C_ZB" ||
        dataset=="2022D_ZB" || dataset=="Summer22" ||
-       dataset=="Summer22Flat" || dataset == "testi2022" ||
+       dataset=="Summer22Flat" || dataset == "testi2022MG" ||
        TString(dataset.c_str()).Contains("Summer22MG"))
      h2jv = (TH2D*)fjv->Get("jetvetomap");
    if (dataset=="2022E" || dataset=="2022F" || dataset=="2022G" ||
