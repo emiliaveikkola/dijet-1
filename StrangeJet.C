@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <TLegend.h>
+#include <TColor.h>
 
 
 void StrangeJet::Loop()
@@ -39,9 +40,11 @@ void StrangeJet::Loop()
 
    //TH1D *h = new TH1D("h",";PtCand;N",1000,0,100);
    //TH1D *h2 = new TH1D("h2",";PtCand;N",1000,0,100);
-   TH1D *h_ud = new TH1D("h_ud",";PtCand;N",1000,0,100);
-   TH1D *h_ud2 = new TH1D("h_ud2",";PtCand;N",1000,0,100);
+   TH1D *h_d = new TH1D("h_d",";PtCand;N",1000,0,100);
+   TH1D *h_u = new TH1D("h_u",";PtCand;N",1000,0,100);
    TH1D *h_s = new TH1D("h_s",";PtCand;N",1000,0,100);
+   TH1D *h_d2 = new TH1D("h_d2",";PtCand;N",1000,0,100);
+   TH1D *h_u2 = new TH1D("h_u2",";PtCand;N",1000,0,100);
    TH1D *h_s2 = new TH1D("h_s2",";PtCand;N",1000,0,100);   
      
    Long64_t nentries = fChain->GetEntriesFast();
@@ -63,7 +66,8 @@ void StrangeJet::Loop()
 	  int iJet = GenJetGenPartCand_jetIdx[j];
 	  int iCand = GenJetGenPartCand_GenPartCandIdx[j];
 	  bool isSjet = (abs(GenJet_partonFlavour[i]) == 3);
-          bool isUDjet = (abs(GenJet_partonFlavour[i]) == 1 || abs(GenJet_partonFlavour[i]) == 2 );
+      bool isDjet = (abs(Jet_partonFlavour[i]) == 1);
+	  bool isUjet = (abs(Jet_partonFlavour[i]) == 2 );
 
 	  if (isSjet) {
 	    if (i == iJet) {
@@ -75,12 +79,22 @@ void StrangeJet::Loop()
 	    }
 	  }
 
-	  if (isUDjet) {
+	  if (isDjet) {
 	    if (i == iJet) {
 	      // cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
 	      double pt = GenJet_pt[iJet];
 	      if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
-		h_ud->Fill(GenPartCand_pt[iCand]);
+		h_d->Fill(GenPartCand_pt[iCand]);
+	      }
+	    }
+	  }
+
+	  if (isUjet) {
+	    if (i == iJet) {
+	      // cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
+	      double pt = GenJet_pt[iJet];
+	      if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
+		h_u->Fill(GenPartCand_pt[iCand]);
 	      }
 	    }
 	  }
@@ -103,16 +117,28 @@ void StrangeJet::Loop()
 	  int iJet = JetPFCand_jetIdx[j];
 	  int iCand = JetPFCand_PFCandIdx[j];
 	  bool isSjet = (abs(Jet_partonFlavour[i]) == 3);
-	  bool isUDjet = (abs(Jet_partonFlavour[i]) == 1 || abs(Jet_partonFlavour[i]) == 2 );
-	  if (isUDjet) {
+	  bool isDjet = (abs(Jet_partonFlavour[i]) == 1);
+	  bool isUjet = (abs(Jet_partonFlavour[i]) == 2 );
+
+	  if (isDjet) {
 	    if (i == iJet) {
 	      // cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
 	      double pt = Jet_pt[iJet];
 	      if (fabs(Jet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
-		h_ud2->Fill(PFCand_pt[iCand]);
+		h_d2->Fill(PFCand_pt[iCand]);
 	      }
 	    }
 	  }
+
+		if (isUjet) {
+				if (i == iJet) {
+				// cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
+				double pt = Jet_pt[iJet];
+				if (fabs(Jet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
+				h_u2->Fill(PFCand_pt[iCand]);
+				}
+				}
+			}
 
 	  if (isSjet) {
 	    if (i == iJet) {
@@ -141,27 +167,43 @@ void StrangeJet::Loop()
    // h->Draw();
    //h2->Draw("SAMES");
 
-   h_ud->SetLineColor(kTeal);
-h_ud2->SetLineColor(kAzure);
-h_s->SetLineColor(kViolet);
-h_s2->SetLineColor(kSlate);
+/* h_d->SetLineColor(kRed);
+h_d->SetLineColor(kRed);
+h_ud2->SetLineColor(kBlue);
+h_s->SetLineColor(kGreen);
+h_s2->SetLineColor(kOrange); */
 
      // Create a TCanvas
    TCanvas *canvas = new TCanvas("canvas", "Particle Candidates in Jets", 800, 600);
+   canvas->SetLogy();
+
+   // Set line colors for each histogram
+	h_d->SetLineColor(kRed);
+	h_u->SetLineColor(kBlue);
+	h_s->SetLineColor(kGreen);
+	h_d2->SetLineColor(kPink);
+	h_u2->SetLineColor(kViolet);
+	h_s2->SetLineColor(kTeal);
 
    // Create a legend
    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
    legend->SetTextSize(0.03);
 
    // Draw histograms with lines and add entries to the legend
-   h_ud->Draw("LSAME");
-   legend->AddEntry(h_ud, "UD GenJets", "l");
+   h_d->Draw("LSAME");
+   legend->AddEntry(h_d, "D GenJets", "l");
 
-   h_ud2->Draw("LSAME");
-   legend->AddEntry(h_ud2, "UD RecoJets", "l");
+   h_u->Draw("LSAME");
+   legend->AddEntry(h_u, "U GenJets", "l");
 
    h_s->Draw("LSAME");
    legend->AddEntry(h_s, "S GenJets", "l");
+
+   h_d2->Draw("LSAME");
+   legend->AddEntry(h_d2, "D RecoJets", "l");
+
+   h_u2->Draw("LSAME");
+   legend->AddEntry(h_u2, "U RecoJets", "l");
 
    h_s2->Draw("LSAME");
    legend->AddEntry(h_s2, "S RecoJets", "l");
