@@ -40,6 +40,11 @@ void StrangeJet::Loop()
    
   cout << "Hello World!" << endl;
 
+  int nSjet = 0;
+  int nUjet = 0;
+  int nDjet = 0;
+
+
   // Set custom binning
   Double_t xbins[] = {0.0, 0.04762, 0.09750, 0.14976, 0.20450, 0.26186, 0.32194, 0.38489, 0.45083, 0.51991,
 		      0.59228, 0.66810, 0.74753, 0.83074, 0.91791, 1.00923, 1.10490, 1.20513, 1.31013, 1.42013,
@@ -89,12 +94,15 @@ void StrangeJet::Loop()
 	  double pt = GenJet_pt[iJet];
 	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
 	    if (isSjet) {
+			nSjet++;
 	      h_s->Fill(GenPartCand_pt[iCand]);
 	    }
 	    if (isDjet) {
+			nDjet++;
 	      h_d->Fill(GenPartCand_pt[iCand]);
 	    }
 	    if (isUjet) {
+			nUjet++;
 	      h_u->Fill(GenPartCand_pt[iCand]);
 	    }
 	  }
@@ -173,10 +181,33 @@ void StrangeJet::Loop()
      h_ud2->SetLineColor(kBlue);
      h_s->SetLineColor(kGreen);
      h_s2->SetLineColor(kOrange); */
+
+
+	 cout << nSjet << " " << nUjet << " " << nDjet << endl;
+
+	h_u->Scale(1.0f/nUjet);
+	h_s->Scale(1.0f/nSjet);
+	h_d->Scale(1.0f/nDjet);
+
+
+	// Get the mean and mean error for each histogram
+	double meanD = h_d->GetMean();
+	double meanErrorD = h_d->GetMeanError();
+
+	double meanU = h_u->GetMean();
+	double meanErrorU = h_u->GetMeanError();
+
+	double meanS = h_s->GetMean();
+	double meanErrorS = h_s->GetMeanError();
+
+	// Print or use the means and mean errors as needed
+	cout << "Mean D: " << meanD << " +/- " << meanErrorD << endl;
+	cout << "Mean U: " << meanU << " +/- " << meanErrorU << endl;
+	cout << "Mean S: " << meanS << " +/- " << meanErrorS << endl; 
   
   // Create a TCanvas
   TCanvas *canvas = new TCanvas("canvas", "Particle Candidates in Jets", 800, 600);
-  canvas->SetLogy();
+  //canvas->SetLogy();
   
   // Set line colors for each histogram
   h_d->SetLineColor(kRed);
@@ -191,13 +222,13 @@ void StrangeJet::Loop()
   legend->SetTextSize(0.03);
   
   // Draw histograms with lines and add entries to the legend
-  h_d->Draw("");
+  h_d->Draw("HE");
   legend->AddEntry(h_d, "D GenJets", "l");
   
-  h_u->Draw("SAMES");
+  h_u->Draw("HESAME");
   legend->AddEntry(h_u, "U GenJets", "l");
   
-  h_s->Draw("SAMES");
+  h_s->Draw("HESAME");
   legend->AddEntry(h_s, "S GenJets", "l");
   
   /* h_d2->Draw("LSAME");
