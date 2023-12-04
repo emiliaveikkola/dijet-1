@@ -40,12 +40,8 @@ void StrangeJet::Loop()
    
   cout << "Hello World!" << endl;
 
-  int nSjet = 0;
-  int nUjet = 0;
-  int nDjet = 0;
 
-
-  // Set custom binning
+  // Bins
   Double_t xbins[] = {0.0, 0.04762, 0.09750, 0.14976, 0.20450, 0.26186, 0.32194, 0.38489, 0.45083, 0.51991,
 		      0.59228, 0.66810, 0.74753, 0.83074, 0.91791, 1.00923, 1.10490, 1.20513, 1.31013, 1.42013,
 		      1.53536, 1.65609, 1.78256, 1.91505, 2.05386, 2.19927, 2.35160, 2.51119, 2.67838, 2.85353,
@@ -94,15 +90,12 @@ void StrangeJet::Loop()
 	  double pt = GenJet_pt[iJet];
 	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
 	    if (isSjet) {
-			nSjet++;
 	      h_s->Fill(GenPartCand_pt[iCand]);
 	    }
 	    if (isDjet) {
-			nDjet++;
 	      h_d->Fill(GenPartCand_pt[iCand]);
 	    }
 	    if (isUjet) {
-			nUjet++;
 	      h_u->Fill(GenPartCand_pt[iCand]);
 	    }
 	  }
@@ -182,15 +175,25 @@ void StrangeJet::Loop()
      h_s->SetLineColor(kGreen);
      h_s2->SetLineColor(kOrange); */
 
+   int nUjet = h_u->GetEntries();
+   int nDjet = h_d->GetEntries();
+   int nSjet = h_s->GetEntries();
 
-	 cout << nSjet << " " << nUjet << " " << nDjet << endl;
-
-	h_u->Scale(1.0f/nUjet);
-	h_s->Scale(1.0f/nSjet);
-	h_d->Scale(1.0f/nDjet);
+   cout << nSjet << " " << nUjet << " " << nDjet << endl;
 
 
-	// Get the mean and mean error for each histogram
+  // Normalizing with number of jets
+	h_u->Scale(1./nUjet);
+	h_s->Scale(1./nSjet);
+	h_d->Scale(1./nDjet);
+
+  // Normalizing with the width of the x-axis
+  h_u->Scale(1,"width");
+	h_s->Scale(1,"width");
+	h_d->Scale(1,"width");
+
+
+	// The mean and mean error for each histogram
 	double meanD = h_d->GetMean();
 	double meanErrorD = h_d->GetMeanError();
 
