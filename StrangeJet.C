@@ -42,27 +42,24 @@ void StrangeJet::Loop()
 
 
   // Bins
-  Double_t xbins[] = {0.0, 0.04762, 0.09750, 0.14976, 0.20450, 0.26186, 0.32194, 0.38489, 0.45083, 0.51991,
-		      0.59228, 0.66810, 0.74753, 0.83074, 0.91791, 1.00923, 1.10490, 1.20513, 1.31013, 1.42013,
-		      1.53536, 1.65609, 1.78256, 1.91505, 2.05386, 2.19927, 2.35160, 2.51119, 2.67838, 2.85353,
-		      3.03702, 3.22924, 3.43062, 3.64159, 3.86260, 4.09414, 4.33670, 4.59081, 4.85702, 5.13591,
-		      5.42807, 5.73415, 6.05480, 6.39072, 6.74264, 7.11131, 7.49753, 7.90215, 8.32603, 8.77010,
-		      9.23531, 9.72267, 10.23324, 10.76812, 11.32847, 11.91550, 12.53048, 13.17474, 13.84968,
-		      14.55676, 15.29751, 16.07353, 16.88650, 17.73817, 18.63041, 19.56512, 20.54435, 21.57020,
-		      22.64489, 23.77076, 24.95024, 26.18588, 27.48036, 28.83647, 30.25716, 31.74549, 33.30469,
-		      34.93814, 36.64936, 38.44206, 40.32012, 42.28761, 44.34879, 46.50810, 48.77024, 51.14008,
-		      53.62277, 56.22368, 58.94843, 61.80291, 64.79332, 67.92612, 71.20809, 74.64633, 78.24829,
-		      82.02176, 85.97490, 90.11628, 94.45485, 100.0}; // Adjust the bin edges as needed
+  Double_t xbins[] = {0.11633, 0.17847, 0.24341, 0.31129, 0.38224, 0.45639, 0.53389, 0.61489, 0.69955, 0.78804, 0.88053, 0.97719, 1.07823, 1.18382, 1.29419, 1.40955, 1.53011, 1.65613, 1.78784, 1.92549, 2.06937, 2.21975, 2.37693, 2.5412, 2.7129, 2.89235, 3.07992, 3.27595, 3.48085, 3.695, 3.91883, 4.15277, 4.39728, 4.65284, 4.91995, 5.19912, 5.49091, 5.79588, 6.11463, 6.44778, 6.79598, 7.15992, 7.5403, 7.93787, 8.3534, 8.7877, 9.24163, 9.71606, 10.21193, 10.73021, 11.2719, 11.83807, 12.42982, 13.0483, 13.69473, 14.37037, 15.07653, 15.8146, 16.58602, 17.39229, 18.23499, 19.11576, 20.03633, 20.99849, 22.00413, 23.0552, 24.15376, 25.30195, 26.50203, 27.75632, 29.06729, 30.43749, 31.86959, 33.36641, 34.93085, 36.56597, 38.27498, 40.0612, 41.92812, 43.8794, 45.91884, 48.05043, 50.27832, 52.60688, 55.04064, 57.58437, 60.24303, 63.02181, 65.92614, 68.96169, 72.1344, 75.45046, 78.91634, 82.53882, 86.32497, 90.28218, 94.41819, 98.74107}; // Adjust the bin edges as needed
   int nxbins = sizeof(xbins) / sizeof(xbins[0]) - 1;
 
+  TDirectory *curdir = gDirectory;
+  TFile *fout = new TFile("output.root","recreate");
+  
   //TH1D *h = new TH1D("h",";PtCand;N",1000,0,100);
   //TH1D *h2 = new TH1D("h2",";PtCand;N",1000,0,100);
   TH1D *h_d = new TH1D("h_d",";PtCand;N", nxbins, xbins);
   TH1D *h_u = new TH1D("h_u",";PtCand;N", nxbins, xbins);
   TH1D *h_s = new TH1D("h_s",";PtCand;N", nxbins, xbins);
-  TH1D *h_d2 = new TH1D("h_d2",";PtCand;N", nxbins, xbins);
-  TH1D *h_u2 = new TH1D("h_u2",";PtCand;N", nxbins, xbins);
-  TH1D *h_s2 = new TH1D("h_s2",";PtCand;N", nxbins, xbins);   
+  TH1D *h_dus = new TH1D("h_dus",";PtCand;N", nxbins, xbins);
+  TH1D *h_d2 = new TH1D("h_d2",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_u2 = new TH1D("h_u2",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_s2 = new TH1D("h_s2",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_dus2 = new TH1D("h_s2",";PtCand, ratio;N", nxbins, xbins);
+
+  curdir->cd();   
      
   Long64_t nentries = fChain->GetEntriesFast();
 
@@ -88,19 +85,30 @@ void StrangeJet::Loop()
 	if (i == iJet) {
 	  // cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
 	  double pt = GenJet_pt[iJet];
+    double p2 = sqrt(pow(GenPartCand_pt[iCand],2)+pow(GenPartCand_mass[iCand],2));
 	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
-	    if (isSjet) {
-	      h_s->Fill(GenPartCand_pt[iCand]);
-	    }
-	    if (isDjet) {
-	      h_d->Fill(GenPartCand_pt[iCand]);
-	    }
-	    if (isUjet) {
-	      h_u->Fill(GenPartCand_pt[iCand]);
-	    }
-	  }
+      if (isSjet || isUjet || isDjet) {
+        h_dus->Fill(GenPartCand_pt[iCand]);
+        h_dus2->Fill(p2);
+      }
+      if (isSjet) {
+        h_s->Fill(GenPartCand_pt[iCand]);
+        h_s2->Fill(p2);
+      }
+      if (isDjet) {
+        h_d->Fill(GenPartCand_pt[iCand]);
+        h_d2->Fill(p2);
+      }
+      if (isUjet) {
+        h_u->Fill(GenPartCand_pt[iCand]);
+        h_u2->Fill(p2);
+      }
+    }
 	}
-	
+	//h_s2 = h_s / h_dus;
+  //h_u2 = h_u / h_dus;
+  //h_d2 = h_d / h_dus;
+
 	// if (i == iJet) {
 	// cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
 	//double pt = GenJet_pt[iJet];
@@ -165,6 +173,9 @@ void StrangeJet::Loop()
     //cout << endl;
     
   }
+  fout->Write();
+  fout->Close();
+  exit(0);
   //h->SetLineColor(kRed);
   // h->Draw();
   //h2->Draw("SAMES");
@@ -209,9 +220,10 @@ void StrangeJet::Loop()
 	cout << "Mean S: " << meanS << " +/- " << meanErrorS << endl; 
   
   // Create a TCanvas
-  TCanvas *canvas = new TCanvas("canvas", "Particle Candidates in Jets", 800, 600);
-  //canvas->SetLogy();
-  
+  TCanvas *canvas1 = new TCanvas("canvas1", "Particle Candidates in Jets", 800, 600);
+  canvas1->SetLogy();
+  canvas1->SetLogx();
+
   // Set line colors for each histogram
   h_d->SetLineColor(kRed);
   h_u->SetLineColor(kBlue);
@@ -234,18 +246,68 @@ void StrangeJet::Loop()
   h_s->Draw("HESAME");
   legend->AddEntry(h_s, "S GenJets", "l");
   
-  /* h_d2->Draw("LSAME");
+  h_d2->Draw("LSAME");
      legend->AddEntry(h_d2, "D RecoJets", "l");
      
      h_u2->Draw("LSAME");
      legend->AddEntry(h_u2, "U RecoJets", "l");
      
      h_s2->Draw("LSAME");
-     legend->AddEntry(h_s2, "S RecoJets", "l"); */
+     legend->AddEntry(h_s2, "S RecoJets", "l");
   
   // Draw the legend
   legend->Draw();
   
   // Show the canvas
-  canvas->Draw();
+  canvas1->Draw();
+
+  // Normalizing with number of jets
+	/*h_u->Scale(1./nUjet);
+	h_s->Scale(1./nSjet);
+	h_d->Scale(1./nDjet);
+
+  // Normalizing with the width of the x-axis
+  h_u->Scale(1,"width");
+	h_s->Scale(1,"width");
+	h_d->Scale(1,"width");
+
+ TCanvas *canvas2 = new TCanvas("canvas2", "Particle Candidates in Jets2", 800, 600);
+  canvas2->SetLogy();
+  canvas2->SetLogx();
+
+  // Set line colors for each histogram
+  h_d2->SetLineColor(kRed);
+  h_u2->SetLineColor(kBlue);
+  h_s2->SetLineColor(kGreen);
+  
+  // Create a legend
+  TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+  legend->SetTextSize(0.03);
+  
+  // Draw histograms with lines and add entries to the legend
+  h_d->Draw("HE");
+  legend->AddEntry(h_d, "D GenJets", "l");
+  
+  h_u->Draw("HESAME");
+  legend->AddEntry(h_u, "U GenJets", "l");
+  
+  h_s->Draw("HESAME");
+  legend->AddEntry(h_s, "S GenJets", "l");
+  
+   h_d2->Draw("LSAME");
+     legend->AddEntry(h_d2, "D RecoJets", "l");
+     
+     h_u2->Draw("LSAME");
+     legend->AddEntry(h_u2, "U RecoJets", "l");
+     
+     h_s2->Draw("LSAME");
+     legend->AddEntry(h_s2, "S RecoJets", "l");
+  
+  // Draw the legend
+  legend->Draw();
+  
+  // Show the canvas
+  canvas->Draw();*/
+
+  /*TCanvas *canvas = new tdrDiCanvas("camvas", "Name", canvas1, canvas2);*/
 }
