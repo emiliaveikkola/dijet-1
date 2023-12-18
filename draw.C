@@ -161,8 +161,13 @@
   hrs->SetLineColor(kGreen);
   
   hrs->Draw();
+  legend->AddEntry(hrs, "S GenJets ratio", "l");
+
   hru->Draw("SAME");
+  legend->AddEntry(hru, "U GenJets ratio", "l");
+
   hrd->Draw("SAME");
+  legend->AddEntry(hrd, "D GenJets ratio", "l");
 
   // Draw the legend
   legend->Draw();
