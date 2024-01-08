@@ -57,7 +57,7 @@ void StrangeJet::Loop()
   TH1D *h_d2 = new TH1D("h_d2",";PtCand, energy ratio;N", nxbins, xbins);
   TH1D *h_u2 = new TH1D("h_u2",";PtCand, energy ratio;N", nxbins, xbins);
   TH1D *h_s2 = new TH1D("h_s2",";PtCand, energy ratio;N", nxbins, xbins);
-  TH1D *h_dus2 = new TH1D("h_s2",";PtCand, energy ratio;N", nxbins, xbins);
+  TH1D *h_dus2 = new TH1D("h_dus2",";PtCand, energy ratio;N", nxbins, xbins);
 
   curdir->cd();   
      
