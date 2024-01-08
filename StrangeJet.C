@@ -50,14 +50,14 @@ void StrangeJet::Loop()
   
   //TH1D *h = new TH1D("h",";PtCand;N",1000,0,100);
   //TH1D *h2 = new TH1D("h2",";PtCand;N",1000,0,100);
-  TH1D *h_d = new TH1D("h_d",";PtCand;N", nxbins, xbins);
-  TH1D *h_u = new TH1D("h_u",";PtCand;N", nxbins, xbins);
-  TH1D *h_s = new TH1D("h_s",";PtCand;N", nxbins, xbins);
-  TH1D *h_dus = new TH1D("h_dus",";PtCand;N", nxbins, xbins);
-  TH1D *h_d2 = new TH1D("h_d2",";PtCand, ratio;N", nxbins, xbins);
-  TH1D *h_u2 = new TH1D("h_u2",";PtCand, ratio;N", nxbins, xbins);
-  TH1D *h_s2 = new TH1D("h_s2",";PtCand, ratio;N", nxbins, xbins);
-  TH1D *h_dus2 = new TH1D("h_s2",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_d = new TH1D("h_d",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_u = new TH1D("h_u",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_s = new TH1D("h_s",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_dus = new TH1D("h_dus",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_d2 = new TH1D("h_d2",";PtCand, energy ratio;N", nxbins, xbins);
+  TH1D *h_u2 = new TH1D("h_u2",";PtCand, energy ratio;N", nxbins, xbins);
+  TH1D *h_s2 = new TH1D("h_s2",";PtCand, energy ratio;N", nxbins, xbins);
+  TH1D *h_dus2 = new TH1D("h_s2",";PtCand, energy ratio;N", nxbins, xbins);
 
   curdir->cd();   
      
