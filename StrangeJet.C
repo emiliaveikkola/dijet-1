@@ -87,6 +87,18 @@ void StrangeJet::Loop()
 	  double pt = GenJet_pt[iJet];
     double p2 = sqrt(pow(GenPartCand_pt[iCand],2)+pow(GenPartCand_mass[iCand],2));
 	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
+
+      if (GenPartCand_charge[iCand] == 0){
+        if (PFCand_pdgId[iCand] == 22){
+        }
+
+      }
+
+      if (GenPartCand_charge[iCand] != 0){
+
+      }
+
+
       if (isSjet || isUjet || isDjet) {
         h_dus->Fill(GenPartCand_pt[iCand]);
         h_dus2->Fill(p2);
