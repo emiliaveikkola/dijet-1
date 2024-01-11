@@ -59,6 +59,24 @@ void StrangeJet::Loop()
   TH1D *h_s2 = new TH1D("h_s2",";PtCand, energy ratio;N", nxbins, xbins);
   TH1D *h_dus2 = new TH1D("h_dus2",";PtCand, energy ratio;N", nxbins, xbins);
 
+  TH1D *h_d3 = new TH1D("h_d3",";PtCand, ratio nh;N", nxbins, xbins);
+  TH1D *h_u3 = new TH1D("h_u3",";PtCand, ratio nh;N", nxbins, xbins);
+  TH1D *h_s3 = new TH1D("h_s3",";PtCand, ratio nh;N", nxbins, xbins);
+  TH1D *h_dus3 = new TH1D("h_dus3",";PtCand, ratio nh;N", nxbins, xbins);
+  TH1D *h_d4 = new TH1D("h_d4",";PtCand, energy ratio nh;N", nxbins, xbins);
+  TH1D *h_u4 = new TH1D("h_u4",";PtCand, energy ratio nh;N", nxbins, xbins);
+  TH1D *h_s4 = new TH1D("h_s4",";PtCand, energy ratio nh;N", nxbins, xbins);
+  TH1D *h_dus4 = new TH1D("h_dus4",";PtCand, energy ratio nh;N", nxbins, xbins);
+
+  TH1D *h_d5 = new TH1D("h_d5",";PtCand, ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_u5 = new TH1D("h_u5",";PtCand, ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_s5 = new TH1D("h_s5",";PtCand, ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_dus5 = new TH1D("h_dus5",";PtCand, ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_d6 = new TH1D("h_d6",";PtCand, energy ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_u6 = new TH1D("h_u6",";PtCand, energy ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_s6 = new TH1D("h_s6",";PtCand, energy ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_dus6 = new TH1D("h_dus6",";PtCand, energy ratio nh + photon;N", nxbins, xbins);
+
   curdir->cd();   
      
   Long64_t nentries = fChain->GetEntriesFast();
@@ -75,12 +93,28 @@ void StrangeJet::Loop()
     
     for (int i = 0; i != nGenJet; ++i) {
       //cout << "  GenJet " << i << ":" << GenJet_pt[i] << ", " << endl;
+
+ /*    for (int k = 0; k != nPhoton; ++k) {
+  int iPhoton = Photon_jetIdx[k];
+  int iPhotonPart = Photon_genPartIdx[k];
+  bool isPhoton = (GenJet_partonFlavour[i] == 22);
+
+  if (i == iPhoton) {
+    double pt_ph = Photon_pt[iPhoton];
+    if (fabs(Photon_eta[iPhoton]) < 1.3 && pt_ph > 60 && pt_ph < 100 && isPhoton) {
+      h_p->Fill(Photon_pt[iPhoton]);
+    }
+  }
+
+      }*/
       for (int j = 0; j != nGenJetGenPartCand; ++j) {
 	int iJet = GenJetGenPartCand_jetIdx[j];
 	int iCand = GenJetGenPartCand_GenPartCandIdx[j];
 	bool isSjet = (abs(GenJet_partonFlavour[i]) == 3);
 	bool isDjet = (abs(GenJet_partonFlavour[i]) == 1);
 	bool isUjet = (abs(GenJet_partonFlavour[i]) == 2 );
+  bool isPhoton = (GenJet_partonFlavour[i] == 22);
+
 
 	if (i == iJet) {
 	  // cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
@@ -88,16 +122,50 @@ void StrangeJet::Loop()
     double p2 = sqrt(pow(GenPartCand_pt[iCand],2)+pow(GenPartCand_mass[iCand],2));
 	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
 
-      if (GenPartCand_charge[iCand] == 0){
-        if (PFCand_pdgId[iCand] == 22){
+// Neutral hadrons
+      if (GenPartCand_charge[iCand] == 0 && !isPhoton){
+
+        if (isSjet || isUjet || isDjet) {
+          h_dus3->Fill(GenPartCand_pt[iCand]);
+          h_dus4->Fill(p2);
         }
-
+        if (isSjet) {
+          h_s3->Fill(GenPartCand_pt[iCand]);
+          h_s4->Fill(p2);
+        }
+        if (isDjet) {
+          h_d3->Fill(GenPartCand_pt[iCand]);
+          h_d4->Fill(p2);
+        }
+        if (isUjet) {
+          h_u3->Fill(GenPartCand_pt[iCand]);
+          h_u4->Fill(p2);
+        }
       }
 
+// Neutral hadrons and photons
+      if (GenPartCand_charge[iCand] == 0 && isPhoton){
+
+        if (isSjet || isUjet || isDjet) {
+          h_dus5->Fill(GenPartCand_pt[iCand]);
+          h_dus6->Fill(p2);
+        }
+        if (isSjet) {
+          h_s5->Fill(GenPartCand_pt[iCand]);
+          h_s6->Fill(p2);
+        }
+        if (isDjet) {
+          h_d5->Fill(GenPartCand_pt[iCand]);
+          h_d6->Fill(p2);
+        }
+        if (isUjet) {
+          h_u5->Fill(GenPartCand_pt[iCand]);
+          h_u6->Fill(p2);
+        }
+      }
+
+// Charged hadrons
       if (GenPartCand_charge[iCand] != 0){
-
-      }
-
 
       if (isSjet || isUjet || isDjet) {
         h_dus->Fill(GenPartCand_pt[iCand]);
@@ -116,18 +184,8 @@ void StrangeJet::Loop()
         h_u2->Fill(p2);
       }
     }
+    }
 	}
-	//h_s2 = h_s / h_dus;
-  //h_u2 = h_u / h_dus;
-  //h_d2 = h_d / h_dus;
-
-	// if (i == iJet) {
-	// cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
-	//double pt = GenJet_pt[iJet];
-	//if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
-	// h->Fill(GenPartCand_pt[iCand]);
-	//}
-	// }
       }
       //cout << endl;
     }
@@ -188,138 +246,4 @@ void StrangeJet::Loop()
   fout->Write();
   fout->Close();
   exit(0);
-  //h->SetLineColor(kRed);
-  // h->Draw();
-  //h2->Draw("SAMES");
-  
-  /* h_d->SetLineColor(kRed);
-     h_d->SetLineColor(kRed);
-     h_ud2->SetLineColor(kBlue);
-     h_s->SetLineColor(kGreen);
-     h_s2->SetLineColor(kOrange); */
-
-   int nUjet = h_u->GetEntries();
-   int nDjet = h_d->GetEntries();
-   int nSjet = h_s->GetEntries();
-
-   cout << nSjet << " " << nUjet << " " << nDjet << endl;
-
-
-  // Normalizing with number of jets
-	h_u->Scale(1./nUjet);
-	h_s->Scale(1./nSjet);
-	h_d->Scale(1./nDjet);
-
-  // Normalizing with the width of the x-axis
-  h_u->Scale(1,"width");
-	h_s->Scale(1,"width");
-	h_d->Scale(1,"width");
-
-
-	// The mean and mean error for each histogram
-	double meanD = h_d->GetMean();
-	double meanErrorD = h_d->GetMeanError();
-
-	double meanU = h_u->GetMean();
-	double meanErrorU = h_u->GetMeanError();
-
-	double meanS = h_s->GetMean();
-	double meanErrorS = h_s->GetMeanError();
-
-	// Print or use the means and mean errors as needed
-	cout << "Mean D: " << meanD << " +/- " << meanErrorD << endl;
-	cout << "Mean U: " << meanU << " +/- " << meanErrorU << endl;
-	cout << "Mean S: " << meanS << " +/- " << meanErrorS << endl; 
-  
-  // Create a TCanvas
-  TCanvas *canvas1 = new TCanvas("canvas1", "Particle Candidates in Jets", 800, 600);
-  canvas1->SetLogy();
-  canvas1->SetLogx();
-
-  // Set line colors for each histogram
-  h_d->SetLineColor(kRed);
-  h_u->SetLineColor(kBlue);
-  h_s->SetLineColor(kGreen);
-  h_d2->SetLineColor(kPink);
-  h_u2->SetLineColor(kViolet);
-  h_s2->SetLineColor(kTeal);
-  
-  // Create a legend
-  TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-  legend->SetTextSize(0.03);
-  
-  // Draw histograms with lines and add entries to the legend
-  h_d->Draw("HE");
-  legend->AddEntry(h_d, "D GenJets", "l");
-  
-  h_u->Draw("HESAME");
-  legend->AddEntry(h_u, "U GenJets", "l");
-  
-  h_s->Draw("HESAME");
-  legend->AddEntry(h_s, "S GenJets", "l");
-  
-  h_d2->Draw("LSAME");
-     legend->AddEntry(h_d2, "D RecoJets", "l");
-     
-     h_u2->Draw("LSAME");
-     legend->AddEntry(h_u2, "U RecoJets", "l");
-     
-     h_s2->Draw("LSAME");
-     legend->AddEntry(h_s2, "S RecoJets", "l");
-  
-  // Draw the legend
-  legend->Draw();
-  
-  // Show the canvas
-  canvas1->Draw();
-
-  // Normalizing with number of jets
-	/*h_u->Scale(1./nUjet);
-	h_s->Scale(1./nSjet);
-	h_d->Scale(1./nDjet);
-
-  // Normalizing with the width of the x-axis
-  h_u->Scale(1,"width");
-	h_s->Scale(1,"width");
-	h_d->Scale(1,"width");
-
- TCanvas *canvas2 = new TCanvas("canvas2", "Particle Candidates in Jets2", 800, 600);
-  canvas2->SetLogy();
-  canvas2->SetLogx();
-
-  // Set line colors for each histogram
-  h_d2->SetLineColor(kRed);
-  h_u2->SetLineColor(kBlue);
-  h_s2->SetLineColor(kGreen);
-  
-  // Create a legend
-  TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-  legend->SetTextSize(0.03);
-  
-  // Draw histograms with lines and add entries to the legend
-  h_d->Draw("HE");
-  legend->AddEntry(h_d, "D GenJets", "l");
-  
-  h_u->Draw("HESAME");
-  legend->AddEntry(h_u, "U GenJets", "l");
-  
-  h_s->Draw("HESAME");
-  legend->AddEntry(h_s, "S GenJets", "l");
-  
-   h_d2->Draw("LSAME");
-     legend->AddEntry(h_d2, "D RecoJets", "l");
-     
-     h_u2->Draw("LSAME");
-     legend->AddEntry(h_u2, "U RecoJets", "l");
-     
-     h_s2->Draw("LSAME");
-     legend->AddEntry(h_s2, "S RecoJets", "l");
-  
-  // Draw the legend
-  legend->Draw();
-  
-  // Show the canvas
-  canvas->Draw();*/
-
-  /*TCanvas *canvas = new tdrDiCanvas("camvas", "Name", canvas1, canvas2);*/
 }

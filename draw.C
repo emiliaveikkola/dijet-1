@@ -10,7 +10,18 @@
   TH1D *h_d2 = (TH1D*) f->Get("h_d2");
   TH1D *h_u2 = (TH1D*) f->Get("h_u2");
   TH1D *h_s2 = (TH1D*) f->Get("h_s2");
-  TH1D *h_dus2 = (TH1D*) f->Get("h_dus");
+  TH1D *h_dus2 = (TH1D*) f->Get("h_dus2");
+
+  TH1D *h_d3 = (TH1D*) f->Get("h_d3");
+  TH1D *h_u3 = (TH1D*) f->Get("h_u3");
+  TH1D *h_s3 = (TH1D*) f->Get("h_s3");
+  TH1D *h_dus3 = (TH1D*) f->Get("h_dus3");
+  TH1D *h_d4 = (TH1D*) f->Get("h_d4");
+  TH1D *h_u4 = (TH1D*) f->Get("h_u4");
+  TH1D *h_s4 = (TH1D*) f->Get("h_s4");
+  TH1D *h_dus4 = (TH1D*) f->Get("h_dus4");
+
+  TH1D *h_p = (TH1D*) f->Get("h_p");
 
 //h->SetLineColor(kRed);
   // h->Draw();
@@ -32,22 +43,45 @@
    int nS2jet = h_s2->GetEntries();
    int nDUS2jet = h_dus2->GetEntries();
 
+   int nU3jet = h_u3->GetEntries();
+   int nD3jet = h_d3->GetEntries();
+   int nS3jet = h_s3->GetEntries();
+   int nDUS3jet = h_dus3->GetEntries();
 
-   cout << nSjet << " " << nUjet << " " << nDjet << endl;
+   int nU4jet = h_u4->GetEntries();
+   int nD4jet = h_d4->GetEntries();
+   int nS4jet = h_s4->GetEntries();
+   int nDUS4jet = h_dus4->GetEntries();
+
+   int nPhoton = h_p->GetEntries();
+   //int nPhoton2 = h_p2->GetEntries();
+   
+   //cout << nSjet << " " << nUjet << " " << nDjet << endl;
 
 
   // Normalizing with number of jets
 	h_u->Scale(1./nUjet);
 	h_s->Scale(1./nSjet);
 	h_d->Scale(1./nDjet);
-    h_dus->Scale(1./nDUSjet);
+  h_dus->Scale(1./nDUSjet);
 
-    h_u2->Scale(1./nU2jet);
+  h_u2->Scale(1./nU2jet);
 	h_s2->Scale(1./nS2jet);
 	h_d2->Scale(1./nD2jet);
-    h_dus2->Scale(1./nDUS2jet);
+  h_dus2->Scale(1./nDUS2jet);
 
+  h_u3->Scale(1./nU3jet);
+	h_s3->Scale(1./nS3jet);
+	h_d3->Scale(1./nD3jet);
+  h_dus3->Scale(1./nDUS3jet);
 
+  h_u4->Scale(1./nU4jet);
+	h_s4->Scale(1./nS4jet);
+	h_d4->Scale(1./nD4jet);
+  h_dus4->Scale(1./nDUS4jet);
+
+  //h_p->Scale(1./nPhoton);
+	//h_p2->Scale(1./nPhoton2);
 
   // Normalizing with the width of the x-axis
     h_u->Scale(1,"width");
@@ -60,6 +94,18 @@
 	h_d2->Scale(1,"width");
     h_dus2->Scale(1,"width");
 
+    h_u3->Scale(1,"width");
+	h_s3->Scale(1,"width");
+	h_d3->Scale(1,"width");
+    h_dus3->Scale(1,"width");
+
+h_u4->Scale(1,"width");
+	h_s4->Scale(1,"width");
+	h_d4->Scale(1,"width");
+    h_dus4->Scale(1,"width");
+
+  h_p->Scale(1,"width");
+	//h_p2->Scale(1,"width");
 
 	// The mean and mean error for each histogram
 	double meanD = h_d->GetMean();
@@ -182,6 +228,18 @@
   TH1D *hru2 = (TH1D*)h_u2->Clone("hru2");
   TH1D *hrd2 = (TH1D*)h_d2->Clone("hrd2");
 
+  TH1D *hrs3 = (TH1D*)h_s3->Clone("hrs3");
+  TH1D *hru3 = (TH1D*)h_u3->Clone("hru3");
+  TH1D *hrd3 = (TH1D*)h_d3->Clone("hrd3");
+
+  TH1D *hrs4 = (TH1D*)h_s4->Clone("hrs4");
+  TH1D *hru4 = (TH1D*)h_u4->Clone("hru4");
+  TH1D *hrd4 = (TH1D*)h_d4->Clone("hrd4");
+
+  TH1D *hrp = (TH1D*)h_p->Clone("hrp");
+  //TH1D *hrp2 = (TH1D*)h_p2->Clone("hrp2");
+  
+
   // Canvas size parameters from tdrDiCanvas
     int W_ref = 600;
     int H_ref = 600;
@@ -195,21 +253,22 @@
     int H = H_ref * (1 + (1-T_ref-B_ref)*F_ref+M_ref);
 
     // Create a canvas with the specified dimensions
-    TCanvas *canvas = new TCanvas("canvas", "Canvas Title", W, H);
-    canvas->Divide(1, 2);
+    TCanvas *canvas = new TCanvas("canvas", "Canvas Title", 2400, 1000);
+    canvas->Divide(3, 2); // Divide the main canvas into three vertical sections
+
 
   
 
     // Set up the upper pad (Pad 1)
     canvas->cd(1);
-    float Hup = H_ref * (1-B_ref);
-    float Tup = T_ref * H_ref / Hup;
-    float Bup = 0.01;
-    gPad->SetPad(0, H_ref * F_ref / H, 1, 1);
-    gPad->SetLeftMargin(L);
-    gPad->SetRightMargin(R);
-    gPad->SetTopMargin(Tup);
-    gPad->SetBottomMargin(Bup);
+    //float Hup = H_ref * (1-B_ref);
+    //float Tup = T_ref * H_ref / Hup;
+    //float Bup = 0.01;
+    //gPad->SetPad(0, H_ref * F_ref / H, 1, 1);
+    //gPad->SetLeftMargin(L);
+    //gPad->SetRightMargin(R);
+    //gPad->SetTopMargin(Tup);
+    //gPad->SetBottomMargin(Bup);
     gPad->SetLogx();
   
   hrs->Divide(h_dus);
@@ -220,7 +279,7 @@
   hru->SetLineColor(kBlue);
   hrs->SetLineColor(kGreen);
 
-  TLegend *legend1 = new TLegend(0.7, 0.75, 0.9, 0.9);
+  TLegend *legend1 = new TLegend(0.35, 0.7, 0.65, 0.9);
   legend1->SetTextSize(0.03);
 
   hrs->Draw();
@@ -237,16 +296,18 @@
   latex.SetTextSize(0.05); // Adjust text size as needed
   latex.DrawLatexNDC(0.1, 0.95, "Upper Pad Title"); // NDC coordinates for placement
 
+  gPad->Update();
+
 // Set up the lower pad (Pad 2)
-    canvas->cd(2);
-    float Hdw = H - Hup;
-    float Tdw = M_ref * H_ref / Hdw;
-    float Bdw = B_ref * H_ref / Hdw;
-    gPad->SetPad(0, 0, 1, H_ref * F_ref / H);
-    gPad->SetLeftMargin(L);
-    gPad->SetRightMargin(R);
-    gPad->SetTopMargin(Tdw);
-    gPad->SetBottomMargin(Bdw);
+    canvas->cd(4);
+    //float Hdw = H - Hup;
+    //float Tdw = M_ref * H_ref / Hdw;
+    //float Bdw = B_ref * H_ref / Hdw;
+    //gPad->SetPad(0, 0, 1, H_ref * F_ref / H);
+    //gPad->SetLeftMargin(L);
+    //gPad->SetRightMargin(R);
+    //gPad->SetTopMargin(Tdw);
+    //gPad->SetBottomMargin(Bdw);
     gPad->SetLogx();
 
   hrs2->Divide(h_dus2);
@@ -258,7 +319,7 @@
   hrs2->SetLineColor(kGreen);
 
      // Create a legend
-  TLegend *legend2 = new TLegend(0.7, 0.75, 0.9, 0.9);
+  TLegend *legend2 = new TLegend(0.35, 0.7, 0.65, 0.9);
   legend2->SetTextSize(0.03);
 
   hrs2->Draw();
@@ -273,11 +334,110 @@
   latex.SetTextSize(0.05); // Adjust text size as needed
   latex.DrawLatexNDC(0.1, 0.95, "Lower Pad Title"); // NDC coordinates for placement
 
+
+  gPad->Update();
+
+    canvas->cd(2);
+    //gPad->SetPad(0, H_ref * F_ref / H, 1, 1);
+    //gPad->SetLeftMargin(L);
+    //gPad->SetRightMargin(R);
+    //gPad->SetTopMargin(Tup);
+    //gPad->SetBottomMargin(Bup);
+    gPad->SetLogx();
+  
+  hrs3->Divide(h_dus3);
+  hru3->Divide(h_dus3);
+  hrd3->Divide(h_dus3);
+
+  hrd3->SetLineColor(kRed);
+  hru3->SetLineColor(kBlue);
+  hrs3->SetLineColor(kGreen);
+
+  TLegend *legend3 = new TLegend(0.35, 0.7, 0.65, 0.9);
+  legend3->SetTextSize(0.03);
+
+  hrs3->Draw();
+  legend3->AddEntry(hrs3, "S GenJets ratio", "l");
+  hru3->Draw("SAME");
+  legend3->AddEntry(hru3, "U GenJets ratio", "l");
+  hrd3->Draw("SAME");
+  legend3->AddEntry(hrd3, "D GenJets ratio", "l");
+
+  // Draw the legend
+  legend3->Draw();
+
+  latex.SetTextSize(0.05); // Adjust text size as needed
+  latex.DrawLatexNDC(0.1, 0.95, "Upper Pad Title"); // NDC coordinates for placement
+
+  gPad->Update();
+
+// Set up the lower pad (Pad 2)
+    canvas->cd(5);
+    //gPad->SetPad(0, 0, 1, H_ref * F_ref / H);
+    //gPad->SetLeftMargin(L);
+    //gPad->SetRightMargin(R);
+    //gPad->SetTopMargin(Tdw);
+    //gPad->SetBottomMargin(Bdw);
+    gPad->SetLogx();
+
+  hrs4->Divide(h_dus4);
+  hru4->Divide(h_dus4);
+  hrd4->Divide(h_dus4);
+
+  hrd4->SetLineColor(kRed);
+  hru4->SetLineColor(kBlue);
+  hrs4->SetLineColor(kGreen);
+
+     // Create a legend
+  TLegend *legend4 = new TLegend(0.35, 0.7, 0.65, 0.9);
+  legend4->SetTextSize(0.03);
+
+  hrs4->Draw();
+  legend4->AddEntry(hrs4, "S GenJets ratio, energy", "l");
+  hru4->Draw("SAME");
+  legend4->AddEntry(hru4, "U GenJets ratio, energy", "l");
+  hrd4->Draw("SAME");
+  legend4->AddEntry(hrd4, "D GenJets ratio, energy", "l");
+
+  legend4->Draw();
+  
+  latex.SetTextSize(0.05); // Adjust text size as needed
+  latex.DrawLatexNDC(0.1, 0.95, "Lower Pad Title"); // NDC coordinates for placement
+
+  gPad->Update();
+
+
+    canvas->cd(3);
+
+    //gPad->SetPad(0, H_ref * F_ref / H, 1, 1);
+    //gPad->SetLeftMargin(L);
+    //gPad->SetRightMargin(R);
+    //gPad->SetTopMargin(Tup);
+    //gPad->SetBottomMargin(Bup);
+    gPad->SetLogx();
+  
+  hrp->Divide(h_dus3);
+  hrp->SetLineColor(kRed);
+
+  TLegend *legend5 = new TLegend(0.7, 0.75, 0.9, 0.9);
+  legend5->SetTextSize(0.03);
+
+  hrp->Draw();
+  legend5->AddEntry(hrp, "S GenJets ratio", "l");
+
+  // Draw the legend
+  legend5->Draw();
+
+  latex.SetTextSize(0.05); // Adjust text size as needed
+  latex.DrawLatexNDC(0.1, 0.95, "Upper Pad Title"); // NDC coordinates for placement
+
+  gPad->Update();
+
+
 // Finalize the canvas
-    canvas->cd(0); // Go back to the main canvas before final update
+    canvas->cd(); // Go back to the main canvas before final update
     canvas->Update();
-    canvas->RedrawAxis();
-    canvas->GetFrame()->Draw();
+    canvas->Draw();
   
   // Show the canvas
  // canvas->Draw();
