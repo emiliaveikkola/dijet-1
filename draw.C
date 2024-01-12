@@ -21,7 +21,14 @@
   TH1D *h_s4 = (TH1D*) f->Get("h_s4");
   TH1D *h_dus4 = (TH1D*) f->Get("h_dus4");
 
-  TH1D *h_p = (TH1D*) f->Get("h_p");
+  TH1D *h_d5 = (TH1D*) f->Get("h_d5");
+  TH1D *h_u5 = (TH1D*) f->Get("h_u5");
+  TH1D *h_s5 = (TH1D*) f->Get("h_s5");
+  TH1D *h_dus5 = (TH1D*) f->Get("h_dus5");
+  TH1D *h_d6 = (TH1D*) f->Get("h_d6");
+  TH1D *h_u6 = (TH1D*) f->Get("h_u6");
+  TH1D *h_s6 = (TH1D*) f->Get("h_s6");
+  TH1D *h_dus6 = (TH1D*) f->Get("h_dus6");
 
 //h->SetLineColor(kRed);
   // h->Draw();
@@ -53,8 +60,17 @@
    int nS4jet = h_s4->GetEntries();
    int nDUS4jet = h_dus4->GetEntries();
 
-   int nPhoton = h_p->GetEntries();
-   //int nPhoton2 = h_p2->GetEntries();
+   int nU5jet = h_u5->GetEntries();
+   int nD5jet = h_d5->GetEntries();
+   int nS5jet = h_s5->GetEntries();
+   int nDUS5jet = h_dus5->GetEntries();
+
+   int nU6jet = h_u6->GetEntries();
+   int nD6jet = h_d6->GetEntries();
+   int nS6jet = h_s6->GetEntries();
+   int nDUS6jet = h_dus6->GetEntries();
+
+ 
    
    //cout << nSjet << " " << nUjet << " " << nDjet << endl;
 
@@ -80,8 +96,15 @@
 	h_d4->Scale(1./nD4jet);
   h_dus4->Scale(1./nDUS4jet);
 
-  //h_p->Scale(1./nPhoton);
-	//h_p2->Scale(1./nPhoton2);
+  h_u5->Scale(1./nU5jet);
+	h_s5->Scale(1./nS5jet);
+	h_d5->Scale(1./nD5jet);
+  h_dus5->Scale(1./nDUS5jet);
+
+  h_u6->Scale(1./nU6jet);
+	h_s6->Scale(1./nS6jet);
+	h_d6->Scale(1./nD6jet);
+  h_dus6->Scale(1./nDUS6jet);
 
   // Normalizing with the width of the x-axis
     h_u->Scale(1,"width");
@@ -104,8 +127,16 @@ h_u4->Scale(1,"width");
 	h_d4->Scale(1,"width");
     h_dus4->Scale(1,"width");
 
-  h_p->Scale(1,"width");
-	//h_p2->Scale(1,"width");
+      h_u5->Scale(1,"width");
+	h_s5->Scale(1,"width");
+	h_d5->Scale(1,"width");
+    h_dus5->Scale(1,"width");
+
+h_u6->Scale(1,"width");
+	h_s6->Scale(1,"width");
+	h_d6->Scale(1,"width");
+    h_dus6->Scale(1,"width");
+
 
 	// The mean and mean error for each histogram
 	double meanD = h_d->GetMean();
@@ -236,9 +267,13 @@ h_u4->Scale(1,"width");
   TH1D *hru4 = (TH1D*)h_u4->Clone("hru4");
   TH1D *hrd4 = (TH1D*)h_d4->Clone("hrd4");
 
-  TH1D *hrp = (TH1D*)h_p->Clone("hrp");
-  //TH1D *hrp2 = (TH1D*)h_p2->Clone("hrp2");
-  
+   TH1D *hrs5 = (TH1D*)h_s5->Clone("hrs5");
+  TH1D *hru5 = (TH1D*)h_u5->Clone("hru5");
+  TH1D *hrd5 = (TH1D*)h_d5->Clone("hrd5");
+
+  TH1D *hrs6 = (TH1D*)h_s6->Clone("hrs6");
+  TH1D *hru6 = (TH1D*)h_u6->Clone("hru6");
+  TH1D *hrd6 = (TH1D*)h_d6->Clone("hrd6");
 
   // Canvas size parameters from tdrDiCanvas
     int W_ref = 600;
@@ -279,7 +314,7 @@ h_u4->Scale(1,"width");
   hru->SetLineColor(kBlue);
   hrs->SetLineColor(kGreen);
 
-  TLegend *legend1 = new TLegend(0.35, 0.7, 0.65, 0.9);
+  TLegend *legend1 = new TLegend(0.35, 0.7, 0.7, 0.9);
   legend1->SetTextSize(0.03);
 
   hrs->Draw();
@@ -319,7 +354,7 @@ h_u4->Scale(1,"width");
   hrs2->SetLineColor(kGreen);
 
      // Create a legend
-  TLegend *legend2 = new TLegend(0.35, 0.7, 0.65, 0.9);
+  TLegend *legend2 = new TLegend(0.35, 0.7, 0.7, 0.9);
   legend2->SetTextSize(0.03);
 
   hrs2->Draw();
@@ -353,7 +388,7 @@ h_u4->Scale(1,"width");
   hru3->SetLineColor(kBlue);
   hrs3->SetLineColor(kGreen);
 
-  TLegend *legend3 = new TLegend(0.35, 0.7, 0.65, 0.9);
+  TLegend *legend3 = new TLegend(0.35, 0.7, 0.7, 0.9);
   legend3->SetTextSize(0.03);
 
   hrs3->Draw();
@@ -389,7 +424,7 @@ h_u4->Scale(1,"width");
   hrs4->SetLineColor(kGreen);
 
      // Create a legend
-  TLegend *legend4 = new TLegend(0.35, 0.7, 0.65, 0.9);
+  TLegend *legend4 = new TLegend(0.35, 0.7, 0.7, 0.9);
   legend4->SetTextSize(0.03);
 
   hrs4->Draw();
@@ -416,20 +451,64 @@ h_u4->Scale(1,"width");
     //gPad->SetBottomMargin(Bup);
     gPad->SetLogx();
   
-  hrp->Divide(h_dus3);
-  hrp->SetLineColor(kRed);
+  hrs5->Divide(h_dus5);
+  hru5->Divide(h_dus5);
+  hrd5->Divide(h_dus5);
 
-  TLegend *legend5 = new TLegend(0.7, 0.75, 0.9, 0.9);
+  hrd5->SetLineColor(kRed);
+  hru5->SetLineColor(kBlue);
+  hrs5->SetLineColor(kGreen);
+
+     // Create a legend
+  TLegend *legend5 = new TLegend(0.35, 0.7, 0.7, 0.9);
   legend5->SetTextSize(0.03);
 
-  hrp->Draw();
-  legend5->AddEntry(hrp, "S GenJets ratio", "l");
+  //hrs5->Draw();
+  //legend5->AddEntry(hrs5, "S GenJets ratio, energy", "l");
+  hru5->Draw("SAME");
+  legend5->AddEntry(hru5, "U GenJets ratio, energy", "l");
+  //hrd5->Draw("SAME");
+  //legend5->AddEntry(hrd5, "D GenJets ratio, energy", "l");
 
-  // Draw the legend
   legend5->Draw();
-
+  
   latex.SetTextSize(0.05); // Adjust text size as needed
-  latex.DrawLatexNDC(0.1, 0.95, "Upper Pad Title"); // NDC coordinates for placement
+  latex.DrawLatexNDC(0.1, 0.95, "Lower Pad Title"); // NDC coordinates for placement
+
+  gPad->Update();
+
+    canvas->cd(6);
+
+    //gPad->SetPad(0, H_ref * F_ref / H, 1, 1);
+    //gPad->SetLeftMargin(L);
+    //gPad->SetRightMargin(R);
+    //gPad->SetTopMargin(Tup);
+    //gPad->SetBottomMargin(Bup);
+    gPad->SetLogx();
+  
+  hrs6->Divide(h_dus6);
+  hru6->Divide(h_dus6);
+  hrd6->Divide(h_dus6);
+
+  hrd6->SetLineColor(kRed);
+  hru6->SetLineColor(kBlue);
+  hrs6->SetLineColor(kGreen);
+
+     // Create a legend
+  TLegend *legend6 = new TLegend(0.35, 0.7, 0.7, 0.9);
+  legend6->SetTextSize(0.03);
+
+  //hrs6->Draw();
+  //legend6->AddEntry(hrs6, "S GenJets ratio, energy", "l");
+  hru6->Draw("SAME");
+  legend6->AddEntry(hru6, "U GenJets ratio, energy", "l");
+  //hrd6->Draw("SAME");
+  //legend6->AddEntry(hrd6, "D GenJets ratio, energy", "l");
+
+  legend6->Draw();
+  
+  latex.SetTextSize(0.05); // Adjust text size as needed
+  latex.DrawLatexNDC(0.1, 0.95, "Lower Pad Title"); // NDC coordinates for placement
 
   gPad->Update();
 
