@@ -53,30 +53,46 @@ void StrangeJet::Loop()
   TH1D *h_d = new TH1D("h_d",";PtCand, ratio;N", nxbins, xbins);
   TH1D *h_u = new TH1D("h_u",";PtCand, ratio;N", nxbins, xbins);
   TH1D *h_s = new TH1D("h_s",";PtCand, ratio;N", nxbins, xbins);
-  TH1D *h_dus = new TH1D("h_dus",";PtCand, ratio;N", nxbins, xbins);
+  TH1D *h_dus = new TH1D("h_dus",";PtCand;N", nxbins, xbins);
   TH1D *h_d2 = new TH1D("h_d2",";PtCand, energy ratio;N", nxbins, xbins);
   TH1D *h_u2 = new TH1D("h_u2",";PtCand, energy ratio;N", nxbins, xbins);
   TH1D *h_s2 = new TH1D("h_s2",";PtCand, energy ratio;N", nxbins, xbins);
-  TH1D *h_dus2 = new TH1D("h_dus2",";PtCand, energy ratio;N", nxbins, xbins);
+  TH1D *h_dus2 = new TH1D("h_dus2",";PtCand, energy;N", nxbins, xbins);
+
+  TH1D *h_dusall = new TH1D("h_dusall",";PtCand, all S,U,D jets;N", nxbins, xbins);
 
   TH1D *h_d3 = new TH1D("h_d3",";PtCand, ratio nh;N", nxbins, xbins);
   TH1D *h_u3 = new TH1D("h_u3",";PtCand, ratio nh;N", nxbins, xbins);
   TH1D *h_s3 = new TH1D("h_s3",";PtCand, ratio nh;N", nxbins, xbins);
-  TH1D *h_dus3 = new TH1D("h_dus3",";PtCand, ratio nh;N", nxbins, xbins);
+  TH1D *h_dus3 = new TH1D("h_dus3",";PtCand, nh;N", nxbins, xbins);
   TH1D *h_d4 = new TH1D("h_d4",";PtCand, energy ratio nh;N", nxbins, xbins);
   TH1D *h_u4 = new TH1D("h_u4",";PtCand, energy ratio nh;N", nxbins, xbins);
   TH1D *h_s4 = new TH1D("h_s4",";PtCand, energy ratio nh;N", nxbins, xbins);
-  TH1D *h_dus4 = new TH1D("h_dus4",";PtCand, energy ratio nh;N", nxbins, xbins);
+  TH1D *h_dus4 = new TH1D("h_dus4",";PtCand, energy nh;N", nxbins, xbins);
 
   TH1D *h_d5 = new TH1D("h_d5",";PtCand, ratio nh + photon;N", nxbins, xbins);
   TH1D *h_u5 = new TH1D("h_u5",";PtCand, ratio nh + photon;N", nxbins, xbins);
   TH1D *h_s5 = new TH1D("h_s5",";PtCand, ratio nh + photon;N", nxbins, xbins);
-  TH1D *h_dus5 = new TH1D("h_dus5",";PtCand, ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_dus5 = new TH1D("h_dus5",";PtCand, nh + photon;N", nxbins, xbins);
   TH1D *h_d6 = new TH1D("h_d6",";PtCand, energy ratio nh + photon;N", nxbins, xbins);
   TH1D *h_u6 = new TH1D("h_u6",";PtCand, energy ratio nh + photon;N", nxbins, xbins);
   TH1D *h_s6 = new TH1D("h_s6",";PtCand, energy ratio nh + photon;N", nxbins, xbins);
-  TH1D *h_dus6 = new TH1D("h_dus6",";PtCand, energy ratio nh + photon;N", nxbins, xbins);
+  TH1D *h_dus6 = new TH1D("h_dus6",";PtCand, energy nh + photon;N", nxbins, xbins);
 
+  TH1D *h_k0l = new TH1D("h_k0l",";PtCand, ratio K^0_L;N", nxbins, xbins);
+  TH1D *h_k0s = new TH1D("h_k0s",";PtCand, ratio K^0_S;N", nxbins, xbins);
+  TH1D *h_kp = new TH1D("h_kp",";PtCand, ratio K^+;N", nxbins, xbins);
+  TH1D *h_k0 = new TH1D("h_kp",";PtCand, ratio K^0;N", nxbins, xbins);
+  TH1D *h_lambda = new TH1D("h_lambda",";PtCand, ratio Lambda;N", nxbins, xbins);
+  TH1D *h_sigma0 = new TH1D("h_sigma0",";PtCand, ratio Sigma^0;N", nxbins, xbins);
+
+  TH1D *h_k0l2 = new TH1D("h_k0l2",";PtCand, ratio K^0_L;N", nxbins, xbins);
+  TH1D *h_k0s2 = new TH1D("h_k0s2",";PtCand, ratio K^0_S;N", nxbins, xbins);
+  TH1D *h_kp2 = new TH1D("h_kp2",";PtCand, ratio K^+;N", nxbins, xbins);
+  TH1D *h_k02 = new TH1D("h_kp2",";PtCand, ratio K^0;N", nxbins, xbins);
+  TH1D *h_lambda2 = new TH1D("h_lambda2",";PtCand, ratio Lambda;N", nxbins, xbins);
+  TH1D *h_sigma02 = new TH1D("h_sigma02",";PtCand, ratio Sigma^0;N", nxbins, xbins);
+  
   curdir->cd();   
      
   Long64_t nentries = fChain->GetEntriesFast();
@@ -113,7 +129,13 @@ void StrangeJet::Loop()
 	bool isSjet = (abs(GenJet_partonFlavour[i]) == 3);
 	bool isDjet = (abs(GenJet_partonFlavour[i]) == 1);
 	bool isUjet = (abs(GenJet_partonFlavour[i]) == 2 );
-  bool isPhoton = (GenJet_partonFlavour[i] == 22);
+  bool isPhoton = (GenPartCand_pdgId[i] == 22);
+  bool isKaonp = (GenPartCand_pdgId[i] == 321);
+  bool isKaon0 = (GenPartCand_pdgId[i] == 311);
+  bool isKaonL = (GenPartCand_pdgId[i] == 130);
+  bool isKaonS = (GenPartCand_pdgId[i] == 310);
+  bool isLambda = (GenPartCand_pdgId[i] == 3122);
+  bool isSigma = (GenPartCand_pdgId[i] == 3212);
 
 
 	if (i == iJet) {
@@ -122,28 +144,111 @@ void StrangeJet::Loop()
     double p2 = sqrt(pow(GenPartCand_pt[iCand],2)+pow(GenPartCand_mass[iCand],2));
 	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 60 && pt < 100) {
 
+// All DUS jets
+      if (isSjet || isUjet || isDjet) {
+            h_dusall->Fill(GenPartCand_pt[iCand]);
+      }
+
 // Neutral hadrons
-      if (GenPartCand_charge[iCand] == 0 && !isPhoton){
+      if (GenPartCand_charge[iCand] == 0){
 
         if (isSjet || isUjet || isDjet) {
           h_dus3->Fill(GenPartCand_pt[iCand]);
           h_dus4->Fill(p2);
         }
+
         if (isSjet) {
           h_s3->Fill(GenPartCand_pt[iCand]);
           h_s4->Fill(p2);
+
+          if (isKaonL) {
+            h_k0l->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaonS) {
+            h_k0s->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaonp) {
+            h_kp->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaon0) {
+            h_k0->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isSigma) {
+            h_sigma0->Fill(GenPartCand_pt[iCand]); 
+          }
+
+          if (isLambda) {
+            h_lambda->Fill(GenPartCand_pt[iCand]); 
+          }
         }
+
         if (isDjet) {
           h_d3->Fill(GenPartCand_pt[iCand]);
           h_d4->Fill(p2);
+
+          if (isKaonL) {
+            h_k0l2->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaonS) {
+            h_k0s2->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaonp) {
+            h_kp2->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaon0) {
+            h_k02->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isSigma) {
+            h_sigma02->Fill(GenPartCand_pt[iCand]); 
+          }
+
+          if (isLambda) {
+            h_lambda2->Fill(GenPartCand_pt[iCand]); 
+          }
         }
+
+
         if (isUjet) {
           h_u3->Fill(GenPartCand_pt[iCand]);
           h_u4->Fill(p2);
+
+          if (isKaonL) {
+            h_k0l2->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaonS) {
+            h_k0s2->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaonp) {
+            h_kp2->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaon0) {
+            h_k02->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isSigma) {
+            h_sigma02->Fill(GenPartCand_pt[iCand]); 
+          }
+
+          if (isLambda) {
+            h_lambda2->Fill(GenPartCand_pt[iCand]); 
+          }
         }
+
+
       }
 
-// Neutral hadrons and photons
+/* // Neutral hadrons and photons
       if (GenPartCand_charge[iCand] == 0 && isPhoton){
 
         if (isSjet || isUjet || isDjet) {
@@ -162,26 +267,99 @@ void StrangeJet::Loop()
           h_u5->Fill(GenPartCand_pt[iCand]);
           h_u6->Fill(p2);
         }
-      }
+      }*/
 
 // Charged hadrons
       if (GenPartCand_charge[iCand] != 0){
 
-      if (isSjet || isUjet || isDjet) {
-        h_dus->Fill(GenPartCand_pt[iCand]);
-        h_dus2->Fill(p2);
-      }
-      if (isSjet) {
-        h_s->Fill(GenPartCand_pt[iCand]);
-        h_s2->Fill(p2);
-      }
+        if (isSjet || isUjet || isDjet) {
+          h_dus->Fill(GenPartCand_pt[iCand]);
+          h_dus2->Fill(p2);
+        }
+        if (isSjet) {
+          h_s->Fill(GenPartCand_pt[iCand]);
+          h_s2->Fill(p2);
+
+          if (isKaonL) {
+            h_k0l->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaonS) {
+            h_k0s->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaonp) {
+            h_kp->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isKaon0) {
+            h_k0->Fill(GenPartCand_pt[iCand]);
+          }
+
+          if (isSigma) {
+            h_sigma0->Fill(GenPartCand_pt[iCand]); 
+          }
+
+          if (isLambda) {
+            h_lambda->Fill(GenPartCand_pt[iCand]); 
+          }
+        }
+
       if (isDjet) {
         h_d->Fill(GenPartCand_pt[iCand]);
         h_d2->Fill(p2);
+
+        if (isKaonL) {
+          h_k0l2->Fill(GenPartCand_pt[iCand]);
+        }
+
+        if (isKaonS) {
+          h_k0s2->Fill(GenPartCand_pt[iCand]);
+        }
+
+         if (isKaonp) {
+          h_kp2->Fill(GenPartCand_pt[iCand]);
+        }
+
+        if (isKaon0) {
+          h_k02->Fill(GenPartCand_pt[iCand]);
+        }
+
+        if (isSigma) {
+          h_sigma02->Fill(GenPartCand_pt[iCand]); 
+        }
+
+        if (isLambda) {
+          h_lambda2->Fill(GenPartCand_pt[iCand]); 
+        }
       }
+      
       if (isUjet) {
         h_u->Fill(GenPartCand_pt[iCand]);
         h_u2->Fill(p2);
+        if (isKaonL) {
+          h_k0l2->Fill(GenPartCand_pt[iCand]);
+        }
+
+        if (isKaonS) {
+          h_k0s2->Fill(GenPartCand_pt[iCand]);
+        }
+
+         if (isKaonp) {
+          h_kp2->Fill(GenPartCand_pt[iCand]);
+        }
+
+        if (isKaon0) {
+          h_k02->Fill(GenPartCand_pt[iCand]);
+        }
+
+        if (isSigma) {
+          h_sigma02->Fill(GenPartCand_pt[iCand]); 
+        }
+
+        if (isLambda) {
+          h_lambda2->Fill(GenPartCand_pt[iCand]); 
+        }
       }
     }
     }
