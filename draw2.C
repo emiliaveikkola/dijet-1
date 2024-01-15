@@ -1,6 +1,6 @@
 #include "tdrstyle_mod22.C"
 
-  void draw(){
+  void draw2(){
   TFile *f = new TFile("output.root","read");
 
   TH1D *h_k0l = (TH1D*) f->Get("h_k0l");
