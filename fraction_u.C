@@ -38,7 +38,7 @@ hru3->Divide(h_uall);
 hru5->Divide(h_uall);
 
 // Create a stack
-THStack *hu = new THStack("hu", "Pt fraction; PtCand; Jet pt fraction");
+THStack *hu = new THStack("hu", "Pt fraction for U; PtCand; Jet pt fraction");
 
 // Set histogram fill colors and add to stack
 hru->SetFillColor(kRed);

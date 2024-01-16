@@ -69,7 +69,7 @@ hs->Add(hrlambda);
 hs->Add(hrsigma0);
 
 // Draw the stack
-TCanvas *c1 = new TCanvas("c1", "Pt fractions", 800, 600);
+TCanvas *c1 = new TCanvas("c1", "Pt fractions for S", 800, 600);
 hs->Draw("hist");
 
 // Create legend
