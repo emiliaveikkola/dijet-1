@@ -8,16 +8,16 @@ void fraction() {
 // Open the ROOT file containing the histograms
 TFile *file = new TFile("output.root", "READ");
 // Retrieve the histograms
-TH1D *h_s = (TH1D*)file->Get("h_s");
-TH1D *h_s3 = (TH1D*)file->Get("h_s3");
-TH1D *h_s5 = (TH1D*)file->Get("h_s5");
-TH1D *h_sall = (TH1D*)file->Get("h_sall");
+TH1D *h_s_new = (TH1D*)file->Get("h_s_new");
+TH1D *h_s3_new = (TH1D*)file->Get("h_s3_new");
+TH1D *h_s5_new = (TH1D*)file->Get("h_s5_new");
+TH1D *h_sall_new = (TH1D*)file->Get("h_sall_new");
 
 // Normalize the histograms to percentages
-int nSjet = h_s->GetEntries();
-int nS3jet = h_s3->GetEntries();
-int nS5jet = h_s5->GetEntries();
-int nSall = h_sall->GetEntries();
+int nSjet = h_s_new->GetEntries();
+int nS3jet = h_s3_new->GetEntries();
+int nS5jet = h_s5_new->GetEntries();
+int nSall = h_sall_new->GetEntries();
 
 /*h_s->Scale(1./nSjet);
 h_s3->Scale(1./nS3jet);
@@ -29,21 +29,25 @@ h_s3->Scale(1,"width");
 h_s5->Scale(1,"width");
 h_sall->Scale(1,"width");*/
 
-TH1D *hrs = (TH1D*)h_s->Clone("hrs");
-TH1D *hrs3 = (TH1D*)h_s3->Clone("hrs3");
-TH1D *hrs5 = (TH1D*)h_s5->Clone("hrs5");
+TH1D *hrs = (TH1D*)h_s_new->Clone("hrs");
+TH1D *hrs3 = (TH1D*)h_s3_new->Clone("hrs3");
+TH1D *hrs5 = (TH1D*)h_s5_new->Clone("hrs5");
 
-hrs->Divide(h_sall);
-hrs3->Divide(h_sall);
-hrs5->Divide(h_sall);
+/*hrs->Sumw2();
+hrs3->Sumw2();
+hrs5->Sumw2();*/
+
+hrs->Divide(h_s_new,h_sall_new,1,1,"b");
+hrs3->Divide(h_s3_new,h_sall_new,1,1,"b");
+hrs5->Divide(h_s5_new,h_sall_new,1,1,"b");
 
 // Create a stack
 THStack *hs = new THStack("hs", "Pt fraction for S; PtCand; Jet pt fraction");
 
 // Set histogram fill colors and add to stack
-hrs->SetFillColor(kRed);
-hrs3->SetFillColor(kBlue);
-hrs5->SetFillColor(kGreen);
+hrs->SetFillColor(625);
+hrs5->SetFillColor(410);
+hrs3->SetFillColor(593);
 
 // Add histograms to the stack
 hs->Add(hrs);
@@ -52,13 +56,14 @@ hs->Add(hrs5);
 
 // Draw the stack
 TCanvas *c1 = new TCanvas("c1", "Pt fractions", 800, 600);
-hs->Draw("hist");
+c1->SetLogx();
+hs->Draw("HISTE");
 
 // Create legend
 TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-legend->AddEntry(hrs, "Charged Hadrons", "f");
-legend->AddEntry(hrs3, "Neutral Hadrons", "f");
 legend->AddEntry(hrs5, "Photons", "f");
+legend->AddEntry(hrs3, "Neutral Hadrons", "f");
+legend->AddEntry(hrs, "Charged Hadrons", "f");
 legend->Draw();
 // Assuming the x-axis categories are correctly set when histograms were created
 // If you need to set labels for the x-axis categories, do it here
