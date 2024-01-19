@@ -128,7 +128,7 @@ hs_u->Add(hrs5);*/
 setTDRStyle();
 lumi_136TeV = "Run3";
 extraText = "Private";
-TH1D *h1 = tdrHist("h","Jet p_{T} fraction (S-U & D-U)",-0.06 + 1e-4,0.10 -1e-4,"p_{T,cand} (GeV)",0.1,100);
+TH1D *h1 = tdrHist("h","Jet p_{T} fraction (S-U)",-0.06 + 1e-4,0.10 -1e-4,"p_{T,cand} (GeV)",0.1,100);
 TCanvas *c1 = tdrCanvas("c1",h1,8,kSquare);
 c1->SetLogx();
 //hrs->SetFillStyle(kNone);
@@ -166,7 +166,7 @@ c1->Modified();
 c1->Update();
 c1->SaveAs("pdf/differenceSU.pdf");
 
-TH1D *h2 = tdrHist("h2","Jet p_{T} fraction (D-U)",-0.06 + 1e-4,0.10 -1e-4,"p_{T,cand} (GeV)",0.1,100);
+TH1D *h2 = tdrHist("h2","Jet p_{T} fraction (D-U)",-0.06 + 1e-4,0.08 -1e-4,"p_{T,cand} (GeV)",0.1,100);
 TCanvas *c2 = tdrCanvas("c1",h2,8,kSquare);
 c2->SetLogx();
 
@@ -269,6 +269,48 @@ c4->RedrawAxis();
 c4->Modified();
 c4->Update();
 c4->SaveAs("pdf/differenceSDU.pdf");
+
+TH1D *h5 = tdrHist("h5","Jet p_{T} fraction (S-U & D-U)",-0.07 + 1e-4,0.15 -1e-4,"p_{T,cand} (GeV)",0.1,100);
+TCanvas *c5 = tdrCanvas("c5",h5,8,kSquare);
+c5->SetLogx();
+
+tdrDraw(hrs,"histe",kFullSquare,kRed,kSolid,-1,kNone);
+hrs->SetMarkerSize(1.5);
+tdrDraw(hrs3,"histe",kFullCircle,kGreen+2,kSolid,-1,kNone);
+hrs3->SetMarkerSize(1.5);
+tdrDraw(hrs5,"histe",kFullDiamond,kBlue,kSolid,-1,kNone);
+hrs5->SetMarkerSize(1.75);
+tdrDraw(hrd,"histe",kSquare,kRed,kDashed,-1,kNone);
+hrd->SetMarkerSize(1.5);
+tdrDraw(hrd3,"histe",kCircle,kGreen+2,kDashed,-1,kNone);
+hrd3->SetMarkerSize(1.5);
+tdrDraw(hrd5,"histe",kOpenDiamond,kBlue,kDashed,-1,kNone);
+hrd5->SetMarkerSize(1.75);
+
+
+// Create legend
+//TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+TLegend *leg5 = tdrLeg(0.5,0.9-0.05*6,0.75,0.9);
+leg5->AddEntry(hrs5, "Photons S-U", "ple");
+leg5->AddEntry(hrs3, "Neutral Hadron S-U", "ple");
+leg5->AddEntry(hrs, "Charged Hadrons S-U", "ple");
+leg5->AddEntry(hrd5, "Photons D-U", "ple");
+leg5->AddEntry(hrd3, "Neutral Hadrons D-U", "ple");
+leg5->AddEntry(hrd, "Charged Hadrons D-U", "ple");
+leg5->Draw();
+
+TLatex *tex5 = new TLatex();
+tex5->SetNDC(); tex5->SetTextSize(0.045);
+tex5->DrawLatex(0.17,0.8,"|#eta| < 1.3");
+tex5->DrawLatex(0.17,0.75,"60 < p_{T,jet} < 140 GeV");
+// Assuming the x-axis categories are correctly set when histograms were created
+// If you need to set labels for the x-axis categories, do it here
+
+// Update the canvas to reflect changes
+c5->RedrawAxis();
+c5->Modified();
+c5->Update();
+c5->SaveAs("pdf/differenceSU&DU.pdf");
 // Do not close the file if you want to interact with the histograms further
 // file->Close(); // Uncomment this if you're done with the file
 }
