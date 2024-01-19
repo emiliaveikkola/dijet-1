@@ -128,7 +128,7 @@ hs_u->Add(hrs5);*/
 setTDRStyle();
 lumi_136TeV = "Run3";
 extraText = "Private";
-TH1D *h1 = tdrHist("h","Jet p_{T} fraction (S-U)",-0.06 + 1e-4,0.10 -1e-4,"p_{T,cand} (GeV)",0.1,100);
+TH1D *h1 = tdrHist("h1","Jet p_{T} fraction (S-U)",0,1"p_{T,cand} (GeV)",0.1,100);
 TCanvas *c1 = tdrCanvas("c1",h1,8,kSquare);
 c1->SetLogx();
 //hrs->SetFillStyle(kNone);
