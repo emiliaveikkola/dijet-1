@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include "tdrstyle_mod22.C"
 
 void fraction_a() {
 
@@ -85,12 +86,12 @@ std::string uppercase = input;
     }
 
 // Create a stack
-THStack *h = new THStack(("h" + input).c_str(), ("Pt fraction for " + uppercase + "; PtCand; Jet pt fraction").c_str());
+THStack *h = new THStack(("h" + input).c_str(), ("; p_{T,cand} (GeV); " + uppercase + " Jet p_{T} fraction").c_str());
 
 // Set histogram fill colors and add to stack
 hr->SetFillColor(625);
-hr5->SetFillColor(410);
-hr3->SetFillColor(593);
+hr5->SetFillColor(593);
+hr3->SetFillColor(410);
 
 // Add histograms to the stack
 h->Add(hr);
@@ -98,16 +99,47 @@ h->Add(hr3);
 h->Add(hr5);
 
 // Draw the stack
-TCanvas *c1 = new TCanvas("c1", "Pt fractions", 800, 600);
+TCanvas *c1 = new TCanvas("c1", "p_{T} fractions", 800, 600);
 c1->SetLogx();
-h->Draw("histe");
+h->Draw("hist");
+
+gPad->SetBottomMargin(0.14);
+gPad->SetRightMargin(0.17);
+gPad->Update();
+TH1 *hh = h->GetHistogram();
+hh->GetXaxis()->SetTitleSize(0.06);
+hh->GetXaxis()->SetTitleOffset(1.07);
+hh->GetYaxis()->SetTitleSize(0.06);
+hh->GetYaxis()->SetTitleOffset(0.7);
+hh->GetXaxis()->SetLabelSize(0.05); 
+hh->GetYaxis()->SetLabelSize(0.05); 
 
 // Create legend
-TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-legend->AddEntry(hr5, "Photons", "f");
-legend->AddEntry(hr3, "Neutral Hadrons", "f");
-legend->AddEntry(hr, "Charged Hadrons", "f");
-legend->Draw();
+TLegend *leg = tdrLeg(0.83,0.8-0.06*3,1.05,0.9);
+leg->AddEntry(hr5, "Photons", "f");
+leg->AddEntry(hr3, "#splitline{Neutral}{Hadrons}", "f");
+leg->AddEntry(hr, "#splitline{Charged}{Hadrons}", "f");
+leg->SetTextSize(0.04);
+leg->Draw();
+
+TLatex *tex1 = new TLatex();
+tex1->SetNDC(); tex1->SetTextSize(0.035);
+tex1->DrawLatex(0.15,0.77,"|#eta| < 1.3");
+tex1->DrawLatex(0.15,0.72,"60 < p_{T,jet} < 140 GeV");
+
+TLatex *tex2 = new TLatex();
+tex2->SetNDC(); tex2->SetTextSize(0.065);
+tex2->DrawLatex(0.1,0.92,"CMS");
+
+TLatex *tex3 = new TLatex();
+tex3->SetNDC(); tex3->SetTextSize(0.05);
+tex3->SetTextFont(42);
+tex3->DrawLatex(0.61,0.92,"Run3 (13.6 TeV)");
+
+TLatex *tex4 = new TLatex();
+tex4->SetNDC(); tex4->SetTextSize(0.045);
+tex4->SetTextFont(52);
+tex4->DrawLatex(0.15,0.83,"Private");
 // Assuming the x-axis categories are correctly set when histograms were created
 // If you need to set labels for the x-axis categories, do it here
 
