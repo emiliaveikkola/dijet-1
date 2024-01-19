@@ -178,14 +178,14 @@ void StrangeJet::Loop()
   TH1D *h_du5_new = new TH1D("h_du5_new",";PtCand ch S;N", nxbinss, xbinss);
 
 
-  TH1D *h_k0l = new TH1D("h_k0l",";PtCand K^0_L;N", nxbins, xbins);
-  TH1D *h_k0s = new TH1D("h_k0s",";PtCand K^0_S;N", nxbins, xbins);
-  TH1D *h_kp = new TH1D("h_kp",";PtCand K^+;N", nxbins, xbins);
-  TH1D *h_k0 = new TH1D("h_k0",";PtCand K^0;N", nxbins, xbins);
-  TH1D *h_lambda = new TH1D("h_lambda",";PtCand Lambda;N", nxbins, xbins);
-  TH1D *h_sigma0 = new TH1D("h_sigma0",";PtCand Sigma^0;N", nxbins, xbins);
-  TH1D *h_pion0 = new TH1D("h_pion0",";PtCand Pi^0;N", nxbins, xbins);
-  TH1D *h_pionp = new TH1D("h_pionp",";PtCand Pi^+/-;N", nxbins, xbins);
+  TH1D *h_k0l = new TH1D("h_k0l",";PtCand K^0_L;N", nxbinss, xbinss);
+  TH1D *h_k0s = new TH1D("h_k0s",";PtCand K^0_S;N", nxbinss, xbinss);
+  TH1D *h_kp = new TH1D("h_kp",";PtCand K^+;N", nxbinss, xbinss);
+  TH1D *h_k0 = new TH1D("h_k0",";PtCand K^0;N", nxbinss, xbinss);
+  TH1D *h_lambda = new TH1D("h_lambda",";PtCand Lambda;N", nxbinss, xbinss);
+  TH1D *h_sigma0 = new TH1D("h_sigma0",";PtCand Sigma^0;N", nxbinss, xbinss);
+  TH1D *h_pion0 = new TH1D("h_pion0",";PtCand Pi^0;N", nxbinss, xbinss);
+  TH1D *h_pionp = new TH1D("h_pionp",";PtCand Pi^+/-;N", nxbinss, xbinss);
 
   TH1D *h_k0l2 = new TH1D("h_k0l2",";PtCand K^0_L;N", nxbins, xbins);
   TH1D *h_k0s2 = new TH1D("h_k0s2",";PtCand K^0_S;N", nxbins, xbins);
