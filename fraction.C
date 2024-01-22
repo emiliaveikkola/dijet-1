@@ -135,7 +135,7 @@ c1->SaveAs("pdf/fractionsS.pdf");
 
 
 // Create a stack
-THStack *hu = new THStack("hu", "; PtCand; U Jet p_{T} fraction");
+THStack *hu = new THStack("hu", "; p_{T,cand}; U Jet p_{T} fraction");
 
 // Set histogram fill colors and add to stack
 hru->SetFillColor(625);
@@ -198,7 +198,7 @@ c2->SaveAs("pdf/fractionsU.pdf");
 
 
 // Create a stack
-THStack *hd = new THStack("hd", "; PtCand; D Jet p_{T} fraction");
+THStack *hd = new THStack("hd", "; p_{T,cand}; D Jet p_{T} fraction");
 
 // Set histogram fill colors and add to stack
 hrd->SetFillColor(625);

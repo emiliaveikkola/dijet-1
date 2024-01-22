@@ -100,7 +100,7 @@ hrdu5->Divide(h_duall_three);
 //TH1D *h1 = tdrHist("h","Jet p_{T} fraction (S-U)",-0.06 + 1e-4,0.10 -1e-4,"p_{T,cand} (GeV)",0.1,100);
 //TCanvas *c1 = tdrCanvas("c1",h1,8,kSquare);
 //c1->SetLogx();
-THStack *hs = new THStack("hs", "; p_{T,cand} (GeV); Jet p_{T} fraction");
+THStack *hs = new THStack("hs", "; p_{T,cand} (GeV); S Jet p_{T} fraction");
 //hs->GetXaxis()->SetTitleSize(0.05);
 //hs->GetYaxis()->SetTitleSize(0.05);
 //hs->GetXaxis()->SetTitleOffset(1.2);
