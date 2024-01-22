@@ -10,31 +10,31 @@ void difference() {
 // Open the ROOT file containing the histograms
 TFile *file = new TFile("output.root", "READ");
 // Retrieve the histograms
-TH1D *h_u_new = (TH1D*)file->Get("h_u_new");
-TH1D *h_u3_new = (TH1D*)file->Get("h_u3_new");
-TH1D *h_u5_new = (TH1D*)file->Get("h_u5_new");
-TH1D *h_uall_new = (TH1D*)file->Get("h_uall_new");
+TH1D *h_u_three = (TH1D*)file->Get("h_u_three");
+TH1D *h_u3_three = (TH1D*)file->Get("h_u3_three");
+TH1D *h_u5_three = (TH1D*)file->Get("h_u5_three");
+TH1D *h_uall_three = (TH1D*)file->Get("h_uall_three");
 
-TH1D *h_s_new = (TH1D*)file->Get("h_s_new");
-TH1D *h_s3_new = (TH1D*)file->Get("h_s3_new");
-TH1D *h_s5_new = (TH1D*)file->Get("h_s5_new");
-TH1D *h_sall_new = (TH1D*)file->Get("h_sall_new");
+TH1D *h_s_three = (TH1D*)file->Get("h_s_three");
+TH1D *h_s3_three = (TH1D*)file->Get("h_s3_three");
+TH1D *h_s5_three = (TH1D*)file->Get("h_s5_three");
+TH1D *h_sall_three = (TH1D*)file->Get("h_sall_three");
 
-TH1D *h_d_new = (TH1D*)file->Get("h_d_new");
-TH1D *h_d3_new = (TH1D*)file->Get("h_d3_new");
-TH1D *h_d5_new = (TH1D*)file->Get("h_d5_new");
-TH1D *h_dall_new = (TH1D*)file->Get("h_dall_new");
+TH1D *h_d_three = (TH1D*)file->Get("h_d_three");
+TH1D *h_d3_three = (TH1D*)file->Get("h_d3_three");
+TH1D *h_d5_three = (TH1D*)file->Get("h_d5_three");
+TH1D *h_dall_three = (TH1D*)file->Get("h_dall_three");
 
-TH1D *h_du_new = (TH1D*)file->Get("h_du_new");
-TH1D *h_du3_new = (TH1D*)file->Get("h_du3_new");
-TH1D *h_du5_new = (TH1D*)file->Get("h_du5_new");
-TH1D *h_duall_new = (TH1D*)file->Get("h_duall_new");
+TH1D *h_du_three = (TH1D*)file->Get("h_du_three");
+TH1D *h_du3_three = (TH1D*)file->Get("h_du3_three");
+TH1D *h_du5_three = (TH1D*)file->Get("h_du5_three");
+TH1D *h_duall_three = (TH1D*)file->Get("h_duall_three");
 
 // Normalize the histograms to percentages
-/*int nUjet = h_u_new->GetEntries();
-int nU3jet = h_u3_new->GetEntries();
-int nU5jet = h_u5_new->GetEntries();
-int nUall = h_uall_new->GetEntries();
+/*int nUjet = h_u_three->GetEntries();
+int nU3jet = h_u3_three->GetEntries();
+int nU5jet = h_u5_three->GetEntries();
+int nUall = h_uall_three->GetEntries();
 
 h_s->Scale(1./nSjet);
 h_s3->Scale(1./nS3jet);
@@ -46,37 +46,37 @@ h_s3->Scale(1,"width");
 h_s5->Scale(1,"width");
 h_sall->Scale(1,"width");*/
 
-TH1D *hru = (TH1D*)h_u_new->Clone("hru");
-TH1D *hru3 = (TH1D*)h_u3_new->Clone("hru3");
-TH1D *hru5 = (TH1D*)h_u5_new->Clone("hru5");
+TH1D *hru = (TH1D*)h_u_three->Clone("hru");
+TH1D *hru3 = (TH1D*)h_u3_three->Clone("hru3");
+TH1D *hru5 = (TH1D*)h_u5_three->Clone("hru5");
 
-TH1D *hrs = (TH1D*)h_s_new->Clone("hrs");
-TH1D *hrs3 = (TH1D*)h_s3_new->Clone("hrs3");
-TH1D *hrs5 = (TH1D*)h_s5_new->Clone("hrs5");
+TH1D *hrs = (TH1D*)h_s_three->Clone("hrs");
+TH1D *hrs3 = (TH1D*)h_s3_three->Clone("hrs3");
+TH1D *hrs5 = (TH1D*)h_s5_three->Clone("hrs5");
 
-TH1D *hrd = (TH1D*)h_d_new->Clone("hrd");
-TH1D *hrd3 = (TH1D*)h_d3_new->Clone("hrd3");
-TH1D *hrd5 = (TH1D*)h_d5_new->Clone("hrd5");
+TH1D *hrd = (TH1D*)h_d_three->Clone("hrd");
+TH1D *hrd3 = (TH1D*)h_d3_three->Clone("hrd3");
+TH1D *hrd5 = (TH1D*)h_d5_three->Clone("hrd5");
 
-TH1D *hrdu = (TH1D*)h_du_new->Clone("hrdu");
-TH1D *hrdu3 = (TH1D*)h_du3_new->Clone("hrdu3");
-TH1D *hrdu5 = (TH1D*)h_du5_new->Clone("hrdu5");
+TH1D *hrdu = (TH1D*)h_du_three->Clone("hrdu");
+TH1D *hrdu3 = (TH1D*)h_du3_three->Clone("hrdu3");
+TH1D *hrdu5 = (TH1D*)h_du5_three->Clone("hrdu5");
 
-hru->Divide(h_u_new,h_uall_new,1,1,"b");
-hru3->Divide(h_u3_new,h_uall_new,1,1,"b");
-hru5->Divide(h_u5_new,h_uall_new,1,1,"b");
+hru->Divide(h_u_three,h_uall_three,1,1,"b");
+hru3->Divide(h_u3_three,h_uall_three,1,1,"b");
+hru5->Divide(h_u5_three,h_uall_three,1,1,"b");
 
-hrs->Divide(h_s_new,h_sall_new,1,1,"b");
-hrs3->Divide(h_s3_new,h_sall_new,1,1,"b");
-hrs5->Divide(h_s5_new,h_sall_new,1,1,"b");
+hrs->Divide(h_s_three,h_sall_three,1,1,"b");
+hrs3->Divide(h_s3_three,h_sall_three,1,1,"b");
+hrs5->Divide(h_s5_three,h_sall_three,1,1,"b");
 
-hrd->Divide(h_d_new,h_dall_new,1,1,"b");
-hrd3->Divide(h_d3_new,h_dall_new,1,1,"b");
-hrd5->Divide(h_d5_new,h_dall_new,1,1,"b");
+hrd->Divide(h_d_three,h_dall_three,1,1,"b");
+hrd3->Divide(h_d3_three,h_dall_three,1,1,"b");
+hrd5->Divide(h_d5_three,h_dall_three,1,1,"b");
 
-hrdu->Divide(h_du_new,h_duall_new,1,1,"b");
-hrdu3->Divide(h_du3_new,h_duall_new,1,1,"b");
-hrdu5->Divide(h_du5_new,h_duall_new,1,1,"b");
+hrdu->Divide(h_du_three,h_duall_three,1,1,"b");
+hrdu3->Divide(h_du3_three,h_duall_three,1,1,"b");
+hrdu5->Divide(h_du5_three,h_duall_three,1,1,"b");
 
 // Set histogram fill colors and add to stack
 /* hru->SetFillColor(625);
