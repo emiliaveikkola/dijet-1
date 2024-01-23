@@ -3,7 +3,10 @@ R__LOAD_LIBRARY(StrangeJet_C.so);
 
 void mk_StrangeJet(){
   TChain *c = new TChain("Events");
-  c->AddFile("tree_JMEPFNano_qcd.root");
+  string filename;
+  ifstream fin("input_files/mcFiles_local_emilia.txt");
+  while (fin >> filename) { c->AddFile(filename.c_str()); }
+  //c->MakeClass("StrangeJetNew");
   StrangeJet s(c);
   s.Loop();
 }
