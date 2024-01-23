@@ -193,7 +193,9 @@ void StrangeJet::Loop()
   
   curdir->cd();
      
-  Long64_t nentries = fChain->GetEntriesFast();
+  Long64_t nentries = fChain->GetEntries();
+
+  cout << "Looping over " << nentries << " events" << endl << flush;
 
   Long64_t nbytes = 0, nb = 0;
   for (Long64_t jentry=0; jentry<nentries;jentry++) {
@@ -202,7 +204,7 @@ void StrangeJet::Loop()
     nb = fChain->GetEntry(jentry);   nbytes += nb;
     // if (Cut(ientry) < 0) continue;
     
-    
+    if (jentry % 100000 == 0) cout << "." << flush;
     //      cout << "Processing Event " << event << endl;
     
     for (int i = 0; i != nGenJet; ++i) {
@@ -227,7 +229,7 @@ void StrangeJet::Loop()
 
       double esum(0), esumch(0), esumnh(0), esumne(0);
       for (int j = 0; j != nGenJetGenPartCand; ++j) {
-	int iJet = GenJetGenPartCand_jetIdx[j];
+	int iJet = GenJetGenPartCand_genJetIdx[j];
 	int iCand = GenJetGenPartCand_GenPartCandIdx[j];
 	
   bool isPhoton = (GenPartCand_pdgId[iCand] == 22);
