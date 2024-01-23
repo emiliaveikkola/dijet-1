@@ -52,7 +52,7 @@ TProfile *psne = (TProfile*)file->Get("psne");
 setTDRStyle();
 lumi_136TeV = "Run3";
 extraText = "Private";
-TH1D *h1 = tdrHist("h1","U Jet energy fraction",0,1,"p_{T,cand} (GeV)",10,5300);
+TH1D *h1 = tdrHist("h1","U Jet energy fraction",0,1,"p_{T,genjet} (GeV)",10,5300);
 TCanvas *c1 = tdrCanvas("c1",h1,8,kSquare);
 c1->SetLogx();
 
@@ -82,7 +82,7 @@ c1->Modified();
 c1->Update();
 c1->SaveAs("pdf/energyfractionU.pdf");
 
-TH1D *h2 = tdrHist("h2","D Jet energy fraction",0,1,"p_{T,cand} (GeV)",10,5300);
+TH1D *h2 = tdrHist("h2","D Jet energy fraction",0,1,"p_{T,genjet} (GeV)",10,5300);
 TCanvas *c2 = tdrCanvas("c2",h2,8,kSquare);
 c2->SetLogx();
 
@@ -112,7 +112,7 @@ c2->Modified();
 c2->Update();
 c2->SaveAs("pdf/energyfractionD.pdf");
 
-TH1D *h3 = tdrHist("h3","S Jet energy fraction",0,1,"p_{T,cand} (GeV)",10,5300);
+TH1D *h3 = tdrHist("h3","S Jet energy fraction",0,1,"p_{T,genjet} (GeV)",10,5300);
 TCanvas *c3 = tdrCanvas("c3",h3,8,kSquare);
 c3->SetLogx();
 
