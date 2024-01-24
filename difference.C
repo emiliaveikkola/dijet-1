@@ -128,7 +128,7 @@ hs_u->Add(hrs5);*/
 setTDRStyle();
 lumi_136TeV = "Run3";
 extraText = "Private";
-TH1D *h1 = tdrHist("h1","Jet p_{T} fraction (S-U)",0,1"p_{T,cand} (GeV)",0.1,100);
+TH1D *h1 = tdrHist("h1","Jet p_{T} fraction (S-U)",-0.1 + 1e-4,0.14 -1e-4,"p_{T,cand} (GeV)",0.1,100);
 TCanvas *c1 = tdrCanvas("c1",h1,8,kSquare);
 c1->SetLogx();
 //hrs->SetFillStyle(kNone);
@@ -166,7 +166,7 @@ c1->Modified();
 c1->Update();
 c1->SaveAs("pdf/differenceSU.pdf");
 
-TH1D *h2 = tdrHist("h2","Jet p_{T} fraction (D-U)",-0.06 + 1e-4,0.08 -1e-4,"p_{T,cand} (GeV)",0.1,100);
+TH1D *h2 = tdrHist("h2","Jet p_{T} fraction (D-U)",-0.02 + 1e-4,0.03 -1e-4,"p_{T,cand} (GeV)",0.1,100);
 TCanvas *c2 = tdrCanvas("c1",h2,8,kSquare);
 c2->SetLogx();
 
@@ -199,7 +199,7 @@ c2->Modified();
 c2->Update();
 c2->SaveAs("pdf/differenceDU.pdf");
 
-TH1D *h3 = tdrHist("h3","Jet p_{T} fraction (S-D)",-0.09 + 1e-4,0.12 -1e-4,"p_{T,cand} (GeV)",0.1,100);
+TH1D *h3 = tdrHist("h3","Jet p_{T} fraction (S-D)",-0.1 + 1e-4,0.14 -1e-4,"p_{T,cand} (GeV)",0.1,100);
 TCanvas *c3 = tdrCanvas("c1",h3,8,kSquare);
 c3->SetLogx();
 
@@ -232,7 +232,7 @@ c3->Modified();
 c3->Update();
 c3->SaveAs("pdf/differenceSD.pdf");
 
-TH1D *h4 = tdrHist("h4","Jet p_{T} fraction (S-DU)",-0.07 + 1e-4,0.10 -1e-4,"p_{T,cand} (GeV)",0.1,100);
+TH1D *h4 = tdrHist("h4","Jet p_{T} fraction (S-DU)",-0.1 + 1e-4,0.14 -1e-4,"p_{T,cand} (GeV)",0.1,100);
 TCanvas *c4 = tdrCanvas("c4",h4,8,kSquare);
 c4->SetLogx();
 //hrs->SetFillStyle(kNone);
@@ -270,7 +270,7 @@ c4->Modified();
 c4->Update();
 c4->SaveAs("pdf/differenceSDU.pdf");
 
-TH1D *h5 = tdrHist("h5","Jet p_{T} fraction (S-U & D-U)",-0.07 + 1e-4,0.15 -1e-4,"p_{T,cand} (GeV)",0.1,100);
+TH1D *h5 = tdrHist("h5","Jet p_{T} fraction (S-U & D-U)",-0.1 + 1e-4,0.21 -1e-4,"p_{T,cand} (GeV)",0.1,100);
 TCanvas *c5 = tdrCanvas("c5",h5,8,kSquare);
 c5->SetLogx();
 
