@@ -23,7 +23,7 @@ void binns() {
         binSum += hist->GetBinContent(bin);
 
         // Check if the cumulative sum exceeds one-third of the total events
-        if (binSum >  2* totalEvents / 3) {
+        if (binSum >  9* totalEvents / 10) {
             // Get the center of the current bin
             binCenter = hist->GetBinCenter(bin);
             // Break the loop as we found the required bin
@@ -33,7 +33,7 @@ void binns() {
 
     // Use binCenter for further analysis
     // For example, print it to the console
-    std::cout << "The bin center after reaching one-third of total events: " << binCenter << std::endl;
+    std::cout << "The bin center: " << binCenter << std::endl;
 
     // Close the file
     file->Close();
