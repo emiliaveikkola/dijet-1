@@ -19,8 +19,10 @@ TH1D *h_pionps = (TH1D*)file->Get("h_pionps");
 TH1D *h_pion0s = (TH1D*)file->Get("h_pion0s");
 TH1D *h_lambdas = (TH1D*)file->Get("h_lambdas");
 TH1D *h_sigma0s = (TH1D*)file->Get("h_sigma0s");
-TH1D *h_sall_three = (TH1D*)file->Get("h_sall_three");
-TH1D *h_s5_three = (TH1D*)file->Get("h_s5_three");
+TH1D *h_protons = (TH1D*)file->Get("h_protons");
+TH1D *h_neutrons = (TH1D*)file->Get("h_neutrons");
+TH1D *h_sall_mod = (TH1D*)file->Get("h_sall_mod");
+TH1D *h_s5_mod = (TH1D*)file->Get("h_s5_mod");
 
 // U jets
 TH1D *h_k0lu = (TH1D*)file->Get("h_k0lu");
@@ -31,8 +33,10 @@ TH1D *h_pionpu = (TH1D*)file->Get("h_pionpu");
 TH1D *h_pion0u = (TH1D*)file->Get("h_pion0u");
 TH1D *h_lambdau = (TH1D*)file->Get("h_lambdau");
 TH1D *h_sigma0u = (TH1D*)file->Get("h_sigma0u");
-TH1D *h_uall_three = (TH1D*)file->Get("h_uall_three");
-TH1D *h_u5_three = (TH1D*)file->Get("h_u5_three");
+TH1D *h_protonu = (TH1D*)file->Get("h_protonu");
+TH1D *h_neutronu = (TH1D*)file->Get("h_neutronu");
+TH1D *h_uall_mod = (TH1D*)file->Get("h_uall_mod");
+TH1D *h_u5_mod = (TH1D*)file->Get("h_u5_mod");
 
 // D jets
 TH1D *h_k0ld = (TH1D*)file->Get("h_k0ld");
@@ -43,8 +47,10 @@ TH1D *h_pionpd = (TH1D*)file->Get("h_pionpd");
 TH1D *h_pion0d = (TH1D*)file->Get("h_pion0d");
 TH1D *h_lambdad = (TH1D*)file->Get("h_lambdad");
 TH1D *h_sigma0d = (TH1D*)file->Get("h_sigma0d");
-TH1D *h_dall_three = (TH1D*)file->Get("h_dall_three");
-TH1D *h_d5_three = (TH1D*)file->Get("h_d5_three");
+TH1D *h_protond = (TH1D*)file->Get("h_protond");
+TH1D *h_neutrond = (TH1D*)file->Get("h_neutrond");
+TH1D *h_dall_mod = (TH1D*)file->Get("h_dall_mod");
+TH1D *h_d5_mod = (TH1D*)file->Get("h_d5_mod");
 
 
 // Normalize the histograms to percentages
@@ -75,7 +81,9 @@ TH1D *hrlambdas = (TH1D*)h_lambdas->Clone("hrlambdas");
 TH1D *hrsigma0s = (TH1D*)h_sigma0s->Clone("hrsigma0s");
 TH1D *hrpionps = (TH1D*)h_pionps->Clone("hrpionps");
 TH1D *hrpion0s = (TH1D*)h_pion0s->Clone("hrpion0s");
-TH1D *hrs5 = (TH1D*)h_s5_three->Clone("hrs5");
+TH1D *hrprotons = (TH1D*)h_protons->Clone("hrprotons");
+TH1D *hrneutrons = (TH1D*)h_neutrons->Clone("hrneutrons");
+TH1D *hrs5 = (TH1D*)h_s5_mod->Clone("hrs5");
 
 TH1D *hrk0lu = (TH1D*)h_k0lu->Clone("hrk0lu");
 TH1D *hrk0su = (TH1D*)h_k0su->Clone("hrk0su");
@@ -85,7 +93,9 @@ TH1D *hrlambdau = (TH1D*)h_lambdau->Clone("hrlambdau");
 TH1D *hrsigma0u = (TH1D*)h_sigma0u->Clone("hrsigma0u");
 TH1D *hrpionpu = (TH1D*)h_pionpu->Clone("hrpionpu");
 TH1D *hrpion0u = (TH1D*)h_pion0u->Clone("hrpion0u");
-TH1D *hru5 = (TH1D*)h_u5_three->Clone("hru5");
+TH1D *hrprotonu = (TH1D*)h_protonu->Clone("hrprotonu");
+TH1D *hrneutronu = (TH1D*)h_neutronu->Clone("hrneutronu");
+TH1D *hru5 = (TH1D*)h_u5_mod->Clone("hru5");
 
 TH1D *hrk0ld = (TH1D*)h_k0ld->Clone("hrk0ld");
 TH1D *hrk0sd = (TH1D*)h_k0sd->Clone("hrk0sd");
@@ -95,7 +105,9 @@ TH1D *hrlambdad = (TH1D*)h_lambdad->Clone("hrlambdad");
 TH1D *hrsigma0d = (TH1D*)h_sigma0d->Clone("hrsigma0d");
 TH1D *hrpionpd = (TH1D*)h_pionpd->Clone("hrpionpd");
 TH1D *hrpion0d = (TH1D*)h_pion0d->Clone("hrpion0d");
-TH1D *hrd5 = (TH1D*)h_d5_three->Clone("hrd5");
+TH1D *hrprotond = (TH1D*)h_protond->Clone("hrprotond");
+TH1D *hrneutrond = (TH1D*)h_neutrond->Clone("hrneutrond");
+TH1D *hrd5 = (TH1D*)h_d5_mod->Clone("hrd5");
 
 TH1D *hrk0ldu = (TH1D*)h_k0lu->Clone("hrk0ldu");
 TH1D *hrk0sdu = (TH1D*)h_k0su->Clone("hrk0sdu");
@@ -105,11 +117,15 @@ TH1D *hrlambdadu = (TH1D*)h_lambdau->Clone("hrlambdadu");
 TH1D *hrsigma0du = (TH1D*)h_sigma0u->Clone("hrsigma0du");
 TH1D *hrpionpdu = (TH1D*)h_pionpu->Clone("hrpionpdu");
 TH1D *hrpion0du = (TH1D*)h_pion0u->Clone("hrpion0du");
-TH1D *hrdu5 = (TH1D*)h_u5_three->Clone("hrdu5");
+TH1D *hrdu5 = (TH1D*)h_u5_mod->Clone("hrdu5");
 
-TH1D *h_duall_three = (TH1D*)h_uall_three->Clone("h_duall_three");
+TH1D *hrprotondu = (TH1D*)h_protonu->Clone("hrprotondu");
+TH1D *hrneutrondu = (TH1D*)h_neutronu->Clone("hrneutrondu");
+TH1D *h_duall_mod = (TH1D*)h_uall_mod->Clone("h_duall_mod");
 
-h_duall_three->Add(h_dall_three);
+hrprotondu->Add(h_protond);
+hrneutrondu->Add(h_neutrond);
+h_duall_mod->Add(h_dall_mod);
 
 hrk0ldu->Add(hrk0ld);
 hrk0sdu->Add(hrk0sd);
@@ -122,45 +138,53 @@ hrpion0du->Add(hrpion0d);
 hrdu5->Add(hrd5);
 
 
-hrk0ls->Divide(h_sall_three);
-hrk0ss->Divide(h_sall_three);
-hrkps->Divide(h_sall_three);
+hrk0ls->Divide(h_sall_mod);
+hrk0ss->Divide(h_sall_mod);
+hrkps->Divide(h_sall_mod);
 //hrk0s->Divide(h_sall);
-hrlambdas->Divide(h_sall_three);
-hrsigma0s->Divide(h_sall_three);
-hrpionps->Divide(h_sall_three);
-hrpion0s->Divide(h_sall_three);
-hrs5->Divide(h_sall_three);
+hrlambdas->Divide(h_sall_mod);
+hrsigma0s->Divide(h_sall_mod);
+hrpionps->Divide(h_sall_mod);
+hrpion0s->Divide(h_sall_mod);
+hrprotons->Divide(h_sall_mod);
+hrneutrons->Divide(h_sall_mod);
+hrs5->Divide(h_sall_mod);
 
-hrk0lu->Divide(h_uall_three);
-hrk0su->Divide(h_uall_three);
-hrkpu->Divide(h_uall_three);
-//hrk0u->Divide(h_uall_three);
-hrlambdau->Divide(h_uall_three);
-hrsigma0u->Divide(h_uall_three);
-hrpionpu->Divide(h_uall_three);
-hrpion0u->Divide(h_uall_three);
-hru5->Divide(h_uall_three);
+hrk0lu->Divide(h_uall_mod);
+hrk0su->Divide(h_uall_mod);
+hrkpu->Divide(h_uall_mod);
+//hrk0u->Divide(h_uall_mod);
+hrlambdau->Divide(h_uall_mod);
+hrsigma0u->Divide(h_uall_mod);
+hrpionpu->Divide(h_uall_mod);
+hrpion0u->Divide(h_uall_mod);
+hrprotonu->Divide(h_uall_mod);
+hrneutronu->Divide(h_uall_mod);
+hru5->Divide(h_uall_mod);
 
-hrk0ld->Divide(h_dall_three);
-hrk0sd->Divide(h_dall_three);
-hrkpd->Divide(h_dall_three);
-//hrk0d->Divide(h_dall_three);
-hrlambdad->Divide(h_dall_three);
-hrsigma0d->Divide(h_dall_three);
-hrpionpd->Divide(h_dall_three);
-hrpion0d->Divide(h_dall_three);
-hrd5->Divide(h_dall_three);
+hrk0ld->Divide(h_dall_mod);
+hrk0sd->Divide(h_dall_mod);
+hrkpd->Divide(h_dall_mod);
+//hrk0d->Divide(h_dall_mod);
+hrlambdad->Divide(h_dall_mod);
+hrsigma0d->Divide(h_dall_mod);
+hrpionpd->Divide(h_dall_mod);
+hrpion0d->Divide(h_dall_mod);
+hrprotond->Divide(h_dall_mod);
+hrneutrond->Divide(h_dall_mod);
+hrd5->Divide(h_dall_mod);
 
-hrk0ldu->Divide(h_duall_three);
-hrk0sdu->Divide(h_duall_three);
-hrkpdu->Divide(h_duall_three);
-//hrk0du->Divide(h_duall_three);
-hrlambdadu->Divide(h_duall_three);
-hrsigma0du->Divide(h_duall_three);
-hrpionpdu->Divide(h_duall_three);
-hrpion0du->Divide(h_duall_three);
-hrdu5->Divide(h_duall_three);
+hrk0ldu->Divide(h_duall_mod);
+hrk0sdu->Divide(h_duall_mod);
+hrkpdu->Divide(h_duall_mod);
+//hrk0du->Divide(h_duall_mod);
+hrlambdadu->Divide(h_duall_mod);
+hrsigma0du->Divide(h_duall_mod);
+hrpionpdu->Divide(h_duall_mod);
+hrpion0du->Divide(h_duall_mod);
+hrprotondu->Divide(h_duall_mod);
+hrneutrondu->Divide(h_duall_mod);
+hrdu5->Divide(h_duall_mod);
 
 // Create a stack
 //setTDRStyle();
@@ -183,8 +207,10 @@ hrkps->SetFillColor(kOrange-2);
 //hrk0s->SetFillColor(kOrange);
 hrlambdas->SetFillColor(kAzure+7);
 hrpionps->SetFillColor(kGreen-6);
-hrpion0s->SetFillColor(kViolet-4);
-hrsigma0s->SetFillColor(kPink+6);
+hrprotons->SetFillColor(kViolet-4);
+hrneutrons->SetFillColor(kPink+6);
+//hrpion0s->SetFillColor(kViolet-4);
+//hrsigma0s->SetFillColor(kPink+6);
 
 
 // Add histograms to the stack
@@ -194,9 +220,12 @@ hs->Add(hrkps);
 //hs->Add(hrk0s);
 hs->Add(hrpionps);
 hs->Add(hrlambdas);
-hs->Add(hrpion0s);
-hs->Add(hrsigma0s);
+//hs->Add(hrpion0s);
+//hs->Add(hrsigma0s);
 hs->Add(hrs5);
+hs->Add(hrprotons);
+hs->Add(hrneutrons);
+
 
 // Draw the stack
 TCanvas *c1 = new TCanvas("c1", "Pt fractions for S", 800, 600);
@@ -215,6 +244,8 @@ h->GetYaxis()->SetLabelSize(0.05);
 
 // Create legend
 TLegend *leg = tdrLeg(0.9,0.79-0.025*8,1.1,0.9);
+leg->AddEntry(hrneutrons, "p", "f");
+leg->AddEntry(hrprotons, "n", "f");
 leg->AddEntry(hrs5, "#gamma", "f");
 leg->AddEntry(hrlambdas, "#Lambda", "f");
 leg->AddEntry(hrpionps, "#pi^{+/-}", "f");
@@ -222,8 +253,8 @@ leg->AddEntry(hrkps, "K^{+/-}", "f");
 leg->AddEntry(hrk0ls, "K^{0}_{L}", "f");
 leg->AddEntry(hrk0ss, "K^{0}_{S}", "f");
 //leg->AddEntry(hrk0s, "K^0", "f");
-leg->AddEntry(hrsigma0s, "#Sigma^{0}", "f");
-leg->AddEntry(hrpion0s, "#pi^{0}", "f");
+//leg->AddEntry(hrsigma0s, "#Sigma^{0}", "f");
+//leg->AddEntry(hrpion0s, "#pi^{0}", "f");
 leg->SetTextFont(132);
 leg->SetTextSize(0.03);
 leg->Draw();
@@ -287,8 +318,10 @@ hrkpdu->SetFillColor(kOrange-2);
 //hrk0du->SetFillColor(kOrange);
 hrlambdadu->SetFillColor(kAzure+7);
 hrpionpdu->SetFillColor(kGreen-6);
-hrpion0du->SetFillColor(kViolet-4);
-hrsigma0du->SetFillColor(kPink+6);
+hrprotondu->SetFillColor(kViolet-4);
+hrneutrondu->SetFillColor(kPink+6);
+//hrpion0du->SetFillColor(kViolet-4);
+//hrsigma0du->SetFillColor(kPink+6);
 
 
 // Add histograms to the stack
@@ -298,9 +331,11 @@ hdu->Add(hrkpdu);
 //hdu->Add(hrk0du);
 hdu->Add(hrpionpdu);
 hdu->Add(hrlambdadu);
-hdu->Add(hrpion0du);
-hdu->Add(hrsigma0du);
+//hdu->Add(hrpion0du);
+//hdu->Add(hrsigma0du);
 hdu->Add(hrdu5);
+hdu->Add(hrprotondu);
+hdu->Add(hrneutrondu);
 
 // Draw the stack
 TCanvas *c2 = new TCanvas("c2", "Pt fractions for S", 800, 600);
@@ -319,6 +354,8 @@ h2->GetYaxis()->SetLabelSize(0.05);
 
 // Create legend
 TLegend *leg2 = tdrLeg(0.9,0.79-0.025*8,1.1,0.9);
+leg2->AddEntry(hrneutrondu, "p", "f");
+leg2->AddEntry(hrprotondu, "n", "f");
 leg2->AddEntry(hrdu5, "#gamma", "f");
 leg2->AddEntry(hrlambdadu, "#Lambda", "f");
 leg2->AddEntry(hrpionpdu, "#pi^{+/-}", "f");
@@ -381,8 +418,10 @@ hrkpu->SetFillColor(kOrange-2);
 //hrk0u->SetFillColor(kOrange);
 hrlambdau->SetFillColor(kAzure+7);
 hrpionpu->SetFillColor(kGreen-6);
-hrpion0u->SetFillColor(kViolet-4);
-hrsigma0u->SetFillColor(kPink+6);
+hrprotonu->SetFillColor(kViolet-4);
+hrneutronu->SetFillColor(kPink+6);
+//hrpion0u->SetFillColor(kViolet-4);
+//hrsigma0u->SetFillColor(kPink+6);
 
 
 // Add histograms to the stack
@@ -392,9 +431,11 @@ hu->Add(hrkpu);
 //hu->Add(hrk0u);
 hu->Add(hrpionpu);
 hu->Add(hrlambdau);
-hu->Add(hrpion0u);
-hu->Add(hrsigma0u);
+//hu->Add(hrpion0u);
+//hu->Add(hrsigma0u);
 hu->Add(hru5);
+hu->Add(hrprotonu);
+hu->Add(hrneutronu);
 
 // Draw the stack
 TCanvas *c3 = new TCanvas("c3", "Pt fractions for S", 800, 600);
@@ -413,6 +454,8 @@ h3->GetYaxis()->SetLabelSize(0.05);
 
 // Create legend
 TLegend *leg3 = tdrLeg(0.9,0.79-0.025*8,1.1,0.9);
+leg3->AddEntry(hrneutronu, "p", "f");
+leg3->AddEntry(hrprotonu, "n", "f");
 leg3->AddEntry(hru5, "#gamma", "f");
 leg3->AddEntry(hrlambdau, "#Lambda", "f");
 leg3->AddEntry(hrpionpu, "#pi^{+/-}", "f");
@@ -476,8 +519,10 @@ hrkpd->SetFillColor(kOrange-2);
 //hrk0d->SetFillColor(kOrange);
 hrlambdad->SetFillColor(kAzure+7);
 hrpionpd->SetFillColor(kGreen-6);
-hrpion0d->SetFillColor(kViolet-4);
-hrsigma0d->SetFillColor(kPink+6);
+hrprotond->SetFillColor(kViolet-4);
+hrneutrond->SetFillColor(kPink+6);
+//hrpion0d->SetFillColor(kViolet-4);
+//hrsigma0d->SetFillColor(kPink+6);
 
 
 // Add histograms to the stack
@@ -487,9 +532,11 @@ hd->Add(hrkpd);
 //hd->Add(hrk0d);
 hd->Add(hrpionpd);
 hd->Add(hrlambdad);
-hd->Add(hrpion0d);
-hd->Add(hrsigma0d);
+//hd->Add(hrpion0d);
+//hd->Add(hrsigma0d);
 hd->Add(hrd5);
+hd->Add(hrprotond);
+hd->Add(hrneutrond);
 
 // Draw the stack
 TCanvas *c4 = new TCanvas("c4", "Pt fractions for S", 800, 600);
@@ -508,6 +555,8 @@ h4->GetYaxis()->SetLabelSize(0.05);
 
 // Create legend
 TLegend *leg4 = tdrLeg(0.9,0.79-0.025*8,1.1,0.9);
+leg4->AddEntry(hrneutrond, "p", "f");
+leg4->AddEntry(hrprotond, "n", "f");
 leg4->AddEntry(hrd5, "#gamma", "f");
 leg4->AddEntry(hrlambdad, "#Lambda", "f");
 leg4->AddEntry(hrpionpd, "#pi^{+/-}", "f");
