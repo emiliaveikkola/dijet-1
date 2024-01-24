@@ -9,27 +9,27 @@ void fraction() {
 // Open the ROOT file containing the histograms
 TFile *file = new TFile("output.root", "READ");
 // Retrieve the histograms
-TH1D *h_s_three = (TH1D*)file->Get("h_s_three");
-TH1D *h_s3_three = (TH1D*)file->Get("h_s3_three");
-TH1D *h_s5_three = (TH1D*)file->Get("h_s5_three");
-TH1D *h_sall_three = (TH1D*)file->Get("h_sall_three");
+TH1D *h_s_mod = (TH1D*)file->Get("h_s_mod");
+TH1D *h_s3_mod = (TH1D*)file->Get("h_s3_mod");
+TH1D *h_s5_mod = (TH1D*)file->Get("h_s5_mod");
+TH1D *h_sall_mod = (TH1D*)file->Get("h_sall_mod");
 
-TH1D *h_d_three = (TH1D*)file->Get("h_d_three");
-TH1D *h_d3_three = (TH1D*)file->Get("h_d3_three");
-TH1D *h_d5_three = (TH1D*)file->Get("h_d5_three");
-TH1D *h_dall_three = (TH1D*)file->Get("h_dall_three");
+TH1D *h_d_mod = (TH1D*)file->Get("h_d_mod");
+TH1D *h_d3_mod = (TH1D*)file->Get("h_d3_mod");
+TH1D *h_d5_mod = (TH1D*)file->Get("h_d5_mod");
+TH1D *h_dall_mod = (TH1D*)file->Get("h_dall_mod");
 
-TH1D *h_u_three = (TH1D*)file->Get("h_u_three");
-TH1D *h_u3_three = (TH1D*)file->Get("h_u3_three");
-TH1D *h_u5_three = (TH1D*)file->Get("h_u5_three");
-TH1D *h_uall_three = (TH1D*)file->Get("h_uall_three");
+TH1D *h_u_mod = (TH1D*)file->Get("h_u_mod");
+TH1D *h_u3_mod = (TH1D*)file->Get("h_u3_mod");
+TH1D *h_u5_mod = (TH1D*)file->Get("h_u5_mod");
+TH1D *h_uall_mod = (TH1D*)file->Get("h_uall_mod");
 
 
 // Normalize the histograms to percentages
-/*int nSjet = h_s_three->GetEntries();
-int nS3jet = h_s3_three->GetEntries();
-int nS5jet = h_s5_three->GetEntries();
-int nSall = h_sall_three->GetEntries();
+/*int nSjet = h_s_mod->GetEntries();
+int nS3jet = h_s3_mod->GetEntries();
+int nS5jet = h_s5_mod->GetEntries();
+int nSall = h_sall_mod->GetEntries();
 
 h_s->Scale(1./nSjet);
 h_s3->Scale(1./nS3jet);
@@ -41,35 +41,42 @@ h_s3->Scale(1,"width");
 h_s5->Scale(1,"width");
 h_sall->Scale(1,"width");*/
 
-TH1D *hrs = (TH1D*)h_s_three->Clone("hrs");
-TH1D *hrs3 = (TH1D*)h_s3_three->Clone("hrs3");
-TH1D *hrs5 = (TH1D*)h_s5_three->Clone("hrs5");
+TH1D *hrs = (TH1D*)h_s_mod->Clone("hrs");
+TH1D *hrs3 = (TH1D*)h_s3_mod->Clone("hrs3");
+TH1D *hrs5 = (TH1D*)h_s5_mod->Clone("hrs5");
 
-TH1D *hru = (TH1D*)h_u_three->Clone("hru");
-TH1D *hru3 = (TH1D*)h_u3_three->Clone("hru3");
-TH1D *hru5 = (TH1D*)h_u5_three->Clone("hru5");
+TH1D *hru = (TH1D*)h_u_mod->Clone("hru");
+TH1D *hru3 = (TH1D*)h_u3_mod->Clone("hru3");
+TH1D *hru5 = (TH1D*)h_u5_mod->Clone("hru5");
 
-TH1D *hrd = (TH1D*)h_d_three->Clone("hrd");
-TH1D *hrd3 = (TH1D*)h_d3_three->Clone("hrd3");
-TH1D *hrd5 = (TH1D*)h_d5_three->Clone("hrd5");
+TH1D *hrd = (TH1D*)h_d_mod->Clone("hrd");
+TH1D *hrd3 = (TH1D*)h_d3_mod->Clone("hrd3");
+TH1D *hrd5 = (TH1D*)h_d5_mod->Clone("hrd5");
 
 /*hrs->Sumw2();
 hrs3->Sumw2();
 hrs5->Sumw2();*/
 
-hrs->Divide(h_s_three,h_sall_three,1,1,"b");
-hrs3->Divide(h_s3_three,h_sall_three,1,1,"b");
-hrs5->Divide(h_s5_three,h_sall_three,1,1,"b");
+hrs->Divide(h_s_mod,h_sall_mod,1,1,"b");
+hrs3->Divide(h_s3_mod,h_sall_mod,1,1,"b");
+hrs5->Divide(h_s5_mod,h_sall_mod,1,1,"b");
 
-hru->Divide(h_u_three,h_uall_three,1,1,"b");
-hru3->Divide(h_u3_three,h_uall_three,1,1,"b");
-hru5->Divide(h_u5_three,h_uall_three,1,1,"b");
+hru->Divide(h_u_mod,h_uall_mod,1,1,"b");
+hru3->Divide(h_u3_mod,h_uall_mod,1,1,"b");
+hru5->Divide(h_u5_mod,h_uall_mod,1,1,"b");
 
-hrd->Divide(h_d_three,h_dall_three,1,1,"b");
-hrd3->Divide(h_d3_three,h_dall_three,1,1,"b");
-hrd5->Divide(h_d5_three,h_dall_three,1,1,"b");
+hrd->Divide(h_d_mod,h_dall_mod,1,1,"b");
+hrd3->Divide(h_d3_mod,h_dall_mod,1,1,"b");
+hrd5->Divide(h_d5_mod,h_dall_mod,1,1,"b");
 
 // Create a stack
+setTDRStyle();
+lumi_136TeV = "Run3";
+extraText = "Private";
+TH1D *h_1 = tdrHist("h_1","U Jet energy fraction",0,1,"p_{T,genjet} (GeV)",0.1,100);
+TCanvas *c1 = tdrCanvas("c1",h_1,8,kSquare);
+c1->SetLogx();
+
 THStack *hs = new THStack("hs", "; p_{T,cand}; S N fraction");
 
 // Set histogram fill colors and add to stack
@@ -82,11 +89,7 @@ hs->Add(hrs);
 hs->Add(hrs3);
 hs->Add(hrs5);
 
-// Draw the stack
-// Draw the stack
-TCanvas *c1 = new TCanvas("c1", "p_{T} fractions", 800, 600);
-c1->SetLogx();
-hs->Draw("hist");
+hs->Draw("hist same");
 
 gPad->SetBottomMargin(0.14);
 gPad->SetRightMargin(0.17);
@@ -113,7 +116,7 @@ tex1->SetNDC(); tex1->SetTextSize(0.035);
 tex1->DrawLatex(0.15,0.77,"|#eta| < 1.3");
 tex1->DrawLatex(0.15,0.72,"60 < p_{T,jet} < 140 GeV");
 
-TLatex *tex2 = new TLatex();
+/*TLatex *tex2 = new TLatex();
 tex2->SetNDC(); tex2->SetTextSize(0.065);
 tex2->DrawLatex(0.1,0.92,"CMS");
 
@@ -125,7 +128,7 @@ tex3->DrawLatex(0.61,0.92,"Run3 (13.6 TeV)");
 TLatex *tex4 = new TLatex();
 tex4->SetNDC(); tex4->SetTextSize(0.045);
 tex4->SetTextFont(52);
-tex4->DrawLatex(0.15,0.83,"Private");
+tex4->DrawLatex(0.15,0.83,"Private");*/
 
 // Update the canvas to reflect changes
 c1->RedrawAxis();
