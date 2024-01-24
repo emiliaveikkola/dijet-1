@@ -39,6 +39,20 @@ void StrangeJet::Loop()
 //    fChain->GetEntry(jentry);       //read all branches
 //by  b_branchname->GetEntry(ientry); //read only this branch
   if (fChain == 0) return;
+
+    fChain->SetBranchStatus("*",0);  // disable all branches
+    fChain->SetBranchStatus("GenJet_partonFlavour",1);  // activate branchname
+    fChain->SetBranchStatus("nGenJetGenPartCand",1);  // activate branchname
+    fChain->SetBranchStatus("GenJetGenPartCand_genJetIdx",1);  // activate branchname
+    fChain->SetBranchStatus("GenJetGenPartCand_GenPartCandIdx",1);  // activate branchname
+    fChain->SetBranchStatus("GenPartCand_pdgId",1);  // activate branchname
+    fChain->SetBranchStatus("GenJet_pt",1);  // activate branchname
+    fChain->SetBranchStatus("nGenJet",1);  // activate branchname
+    fChain->SetBranchStatus("GenJet_eta",1);  // activate branchname
+    fChain->SetBranchStatus("GenPartCand_pt",1);  // activate branchname
+    fChain->SetBranchStatus("GenPartCand_mass",1);  // activate branchname
+    fChain->SetBranchStatus("GenPartCand_charge",1);  // activate branchname
+    
    
   cout << "Hello World!" << endl;
 
@@ -91,6 +105,8 @@ void StrangeJet::Loop()
   TProfile *psch = new TProfile("psch",";PtSjet;CH energy fraction",nptd,vptd);
   TProfile *psnh = new TProfile("psnh",";PtSjet;NH energy fraction",nptd,vptd);
   TProfile *psne = new TProfile("psne",";PtSjet;NE energy fraction",nptd,vptd);
+  TProfile *pu0 = new TProfile("pu0",";Ptjet;has non-zero energysum",nptd,vptd);
+
 
 
   
@@ -261,7 +277,7 @@ void StrangeJet::Loop()
 
       h->Fill(GenPartCand_pt[iCand]);
 
-// All DUS jets
+// All UDS jets
       if (isSjet || isUjet || isDjet) {
             h_dusall->Fill(GenPartCand_pt[iCand]);
       }
@@ -658,7 +674,8 @@ void StrangeJet::Loop()
 	}
       }
       //cout << endl;
-      if (fabs(GenJet_eta[i] < 1.3)){
+      if (fabs(GenJet_eta[i] < 1.3)&& esum>0){
+        pu0->Fill(GenJet_pt[i],esum ? 1 : 0);
         if (isUjet) {
           puch->Fill(GenJet_pt[i],esumch/esum);
           punh->Fill(GenJet_pt[i],esumnh/esum);
