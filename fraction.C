@@ -70,7 +70,7 @@ hrd3->Divide(h_d3_three,h_dall_three,1,1,"b");
 hrd5->Divide(h_d5_three,h_dall_three,1,1,"b");
 
 // Create a stack
-THStack *hs = new THStack("hs", "; p_{T,cand}; S Jet p_{T} fraction");
+THStack *hs = new THStack("hs", "; p_{T,cand}; S N fraction");
 
 // Set histogram fill colors and add to stack
 hrs->SetFillColor(625);
@@ -135,7 +135,7 @@ c1->SaveAs("pdf/fractionsS.pdf");
 
 
 // Create a stack
-THStack *hu = new THStack("hu", "; p_{T,cand}; U Jet p_{T} fraction");
+THStack *hu = new THStack("hu", "; p_{T,cand}; U Jet N fraction");
 
 // Set histogram fill colors and add to stack
 hru->SetFillColor(625);
@@ -198,7 +198,7 @@ c2->SaveAs("pdf/fractionsU.pdf");
 
 
 // Create a stack
-THStack *hd = new THStack("hd", "; p_{T,cand}; D Jet p_{T} fraction");
+THStack *hd = new THStack("hd", "; p_{T,cand}; D Jet N fraction");
 
 // Set histogram fill colors and add to stack
 hrd->SetFillColor(625);
