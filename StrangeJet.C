@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <TLegend.h>
 #include <TColor.h>
+#include <TStopwatch.h>
 #include "tdrstyle_mod22.C"
 
 
@@ -42,6 +43,9 @@ void StrangeJet::Loop()
   if (fChain == 0) return;
 
     fChain->SetBranchStatus("*",0);  // disable all branches
+    
+    fChain->SetBranchStatus("genWeight",1);  // activate branchname
+
     fChain->SetBranchStatus("GenJet_partonFlavour",1);  // activate branchname
     fChain->SetBranchStatus("nGenJetGenPartCand",1);  // activate branchname
     fChain->SetBranchStatus("GenJetGenPartCand_genJetIdx",1);  // activate branchname
@@ -95,14 +99,20 @@ void StrangeJet::Loop()
   double nptd = sizeof(vptd) / sizeof(vptd[0]) - 1;
 
   //Bins
-  Double_t xbins_three[] = {0.1,1.05,3.55,100}; // Adjust the bin edges as needed
+  Double_t xbins_three[] = {0.1,1.05,3.55,100};
   int nxbins_three = sizeof(xbins_three) / sizeof(xbins_three[0]) - 1;
 
-  Double_t xbins_mod[] = {0.1,0.25,0.55,0.85,1.35,1.95,2.75,3.95,5.95,10.25,100}; // Adjust the bin edges as needed
+  Double_t xbins_mod[] = {0.1,0.25,0.55,0.85,1.35,1.95,2.75,3.95,5.95,10.25,100};
   int nxbins_mod = sizeof(xbins_mod) / sizeof(xbins_mod[0]) - 1;
 
+  Double_t xbins_cand[] = {0.1,0.15,0.3,0.6,1,1.5,2,3,4,6,10,20,35,60,100};
+  int nxbins_cand = sizeof(xbins_cand) / sizeof(xbins_cand[0]) - 1;
+
+  Double_t xbins_jet[] = {0.1,0.15,0.3,0.6,1,1.5,2,3,4,6,10,20,35,60,100};
+  int nxbins_jet = sizeof(xbins_jet) / sizeof(xbins_jet[0]) - 1;
+
   // Bins
-  Double_t xbins_one[] = {0.1,100}; // Adjust the bin edges as needed
+  Double_t xbins_one[] = {0.1,100}; 
   int nxbins_one = sizeof(xbins_one) / sizeof(xbins_one[0]) - 1;
 
   TDirectory *curdir = gDirectory;
@@ -133,26 +143,26 @@ void StrangeJet::Loop()
   TH1D *h_s2 = new TH1D("h_s2",";PtCand, CH energy S;N", nxbins, xbins);
   TH1D *h_dus2 = new TH1D("h_dus2",";PtCand, CH energy DUS;N", nxbins, xbins);
 
-  TH1D *h_d_mod = new TH1D("h_d_mod",";PtCand CH D;N", nxbins_mod, xbins_mod);
-  TH1D *h_u_mod = new TH1D("h_u_mod",";PtCand CH U;N", nxbins_mod, xbins_mod);
-  TH1D *h_s_mod = new TH1D("h_s_mod",";PtCand CH S;N", nxbins_mod, xbins_mod);
+  TH1D *h_d_cand = new TH1D("h_d_cand",";PtCand CH D;N", nxbins_cand, xbins_cand);
+  TH1D *h_u_cand = new TH1D("h_u_cand",";PtCand CH U;N", nxbins_cand, xbins_cand);
+  TH1D *h_s_cand = new TH1D("h_s_cand",";PtCand CH S;N", nxbins_cand, xbins_cand);
 
   TH1D *h_d_one = new TH1D("h_d_one",";PtCand CH D;N", nxbins_one, xbins_one);
   TH1D *h_u_one = new TH1D("h_u_one",";PtCand CH U;N", nxbins_one, xbins_one);
   TH1D *h_s_one = new TH1D("h_s_one",";PtCand CH S;N", nxbins_one, xbins_one);
 
-  TH1D *h_du_mod = new TH1D("h_du_mod",";PtCand CH S;N", nxbins_mod, xbins_mod);
+  TH1D *h_du_cand = new TH1D("h_du_cand",";PtCand CH S;N", nxbins_cand, xbins_cand);
 
   TH1D *h_dusall = new TH1D("h_dusall",";PtCand, all DUS ;N", nxbins, xbins);
   TH1D *h_sall = new TH1D("h_sall",";PtCand, all S;N", nxbins, xbins);
   TH1D *h_uall = new TH1D("h_uall",";PtCand, all U;N", nxbins, xbins);
   TH1D *h_dall = new TH1D("h_dall",";PtCand, all D;N", nxbins, xbins);
 
-  TH1D *h_sall_mod = new TH1D("h_sall_mod",";PtCand, all S;N", nxbins_mod, xbins_mod);
-  TH1D *h_uall_mod = new TH1D("h_uall_mod",";PtCand, all U;N", nxbins_mod, xbins_mod);
-  TH1D *h_dall_mod = new TH1D("h_dall_mod",";PtCand, all D;N", nxbins_mod, xbins_mod);
+  TH1D *h_sall_cand = new TH1D("h_sall_cand",";PtCand, all S;N", nxbins_cand, xbins_cand);
+  TH1D *h_uall_cand = new TH1D("h_uall_cand",";PtCand, all U;N", nxbins_cand, xbins_cand);
+  TH1D *h_dall_cand = new TH1D("h_dall_cand",";PtCand, all D;N", nxbins_cand, xbins_cand);
 
-  TH1D *h_duall_mod = new TH1D("h_duall_mod",";PtCand ch S;N", nxbins_mod, xbins_mod);
+  TH1D *h_duall_cand = new TH1D("h_duall_cand",";PtCand ch S;N", nxbins_cand, xbins_cand);
 
   TH1D *h_dall_one = new TH1D("h_dall_one",";PtCand all D;N", nxbins_one, xbins_one);
   TH1D *h_uall_one = new TH1D("h_uall_one",";PtCand all U;N", nxbins_one, xbins_one);
@@ -167,15 +177,15 @@ void StrangeJet::Loop()
   TH1D *h_s4 = new TH1D("h_s4",";PtCand, energy nh S;N", nxbins, xbins);
   TH1D *h_dus4 = new TH1D("h_dus4",";PtCand, energy nh DUS;N", nxbins, xbins);
 
-  TH1D *h_d3_mod = new TH1D("h_d3_mod",";PtCand, nh D;N", nxbins_mod, xbins_mod);
-  TH1D *h_u3_mod = new TH1D("h_u3_mod",";PtCand, nh U;N", nxbins_mod, xbins_mod);
-  TH1D *h_s3_mod = new TH1D("h_s3_mod",";PtCand, nh S;N", nxbins_mod, xbins_mod);
+  TH1D *h_d3_cand = new TH1D("h_d3_cand",";PtCand, nh D;N", nxbins_cand, xbins_cand);
+  TH1D *h_u3_cand = new TH1D("h_u3_cand",";PtCand, nh U;N", nxbins_cand, xbins_cand);
+  TH1D *h_s3_cand = new TH1D("h_s3_cand",";PtCand, nh S;N", nxbins_cand, xbins_cand);
 
   TH1D *h_d3_one = new TH1D("h_d3_one",";PtCand nh D;N", nxbins_one, xbins_one);
   TH1D *h_u3_one = new TH1D("h_u3_one",";PtCand nh U;N", nxbins_one, xbins_one);
   TH1D *h_s3_one = new TH1D("h_s3_one",";PtCand nh S;N", nxbins_one, xbins_one);
 
-  TH1D *h_du3_mod = new TH1D("h_du3_mod",";PtCand ch S;N", nxbins_mod, xbins_mod);
+  TH1D *h_du3_cand = new TH1D("h_du3_cand",";PtCand ch S;N", nxbins_cand, xbins_cand);
 
 
   TH1D *h_d5 = new TH1D("h_d5",";PtCand, photon D;N", nxbins, xbins);
@@ -187,57 +197,218 @@ void StrangeJet::Loop()
   TH1D *h_s6 = new TH1D("h_s6",";PtCand, energy, photon S;N", nxbins, xbins);
   TH1D *h_dus6 = new TH1D("h_dus6",";PtCand, energy, photon DUS;N", nxbins, xbins);
 
-  TH1D *h_d5_mod = new TH1D("h_d5_mod",";PtCand, photon D;N", nxbins_mod, xbins_mod);
-  TH1D *h_u5_mod = new TH1D("h_u5_mod",";PtCand, photon U;N", nxbins_mod, xbins_mod);
-  TH1D *h_s5_mod = new TH1D("h_s5_mod",";PtCand, photon S;N", nxbins_mod, xbins_mod);
+  TH1D *h_d5_cand = new TH1D("h_d5_cand",";PtCand, photon D;N", nxbins_cand, xbins_cand);
+  TH1D *h_u5_cand = new TH1D("h_u5_cand",";PtCand, photon U;N", nxbins_cand, xbins_cand);
+  TH1D *h_s5_cand = new TH1D("h_s5_cand",";PtCand, photon S;N", nxbins_cand, xbins_cand);
 
   TH1D *h_d5_one = new TH1D("h_d5_one",";PtCand photon D;N", nxbins_one, xbins_one);
   TH1D *h_u5_one = new TH1D("h_u5_one",";PtCand photon U;N", nxbins_one, xbins_one);
   TH1D *h_s5_one = new TH1D("h_s5_one",";PtCand photon S;N", nxbins_one, xbins_one);
 
-  TH1D *h_du5_mod = new TH1D("h_du5_mod",";PtCand ch S;N", nxbins_mod, xbins_mod);
+  TH1D *h_du5_cand = new TH1D("h_du5_cand",";PtCand ch S;N", nxbins_cand, xbins_cand);
 
 
-  TH1D *h_k0ls = new TH1D("h_k0ls",";PtCand K^0_L;N", nxbins_mod, xbins_mod);
-  TH1D *h_k0ss = new TH1D("h_k0ss",";PtCand K^0_S;N", nxbins_mod, xbins_mod);
-  TH1D *h_kps = new TH1D("h_kps",";PtCand K^+;N", nxbins_mod, xbins_mod);
-  TH1D *h_k0s = new TH1D("h_k0s",";PtCand K^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_lambdas = new TH1D("h_lambdas",";PtCand Lambda;N", nxbins_mod, xbins_mod);
-  TH1D *h_sigma0s = new TH1D("h_sigma0s",";PtCand Sigma^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_pion0s = new TH1D("h_pion0s",";PtCand Pi^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_pionps = new TH1D("h_pionps",";PtCand Pi^+/-;N", nxbins_mod, xbins_mod);
-  TH1D *h_protons = new TH1D("h_protons",";PtCand p N", nxbins_mod, xbins_mod);
-  TH1D *h_neutrons = new TH1D("h_neutrons",";PtCand n N", nxbins_mod, xbins_mod);
+  string vpid[] = {"kaon0l", "kaon0s", "kaonp", "kaonm", "kaon0", "lambdap", "lambdam",
+                   "sigma0", "sigmap", "sigmam", "pion0", "pionp", "pionm",
+                   "proton", "antiproton", "neutron", "antineutron","electron", "muon"};
+  int npid = sizeof(vpid) / sizeof(vpid[0]);
+
+  //cout << npid << endl;
+  
+  string vpid2[] = {"K^0_L", "K^0_S", "K^+", "K^-", "K^0", "Lambda^+", "Lambda^-",
+                    "Sigma^0", "Sigma^+", "Sigma^-", "Pi^0", "Pi^+", "Pi^-",
+                    "p", "-p", "n", "-n", "e", "mu"};
+  int npid2 = sizeof(vpid2) / sizeof(vpid2[0]);
+
+  std::map < string, int > mid;
+  mid["kaon0l"] = 130;
+  mid["kaon0s"] = 310;
+  mid["kaonp"] = 321;
+  mid["kaonm"] = -321;
+  mid["kaon0"] = 311;
+  mid["lambdap"] = 3122;
+  mid["lambdam"] = -3122;
+  mid["sigma0"] = 3212;
+  mid["sigmap"] = 3222;
+  mid["sigmam"] = 3112;
+  mid["pion0"] = 111;
+  mid["pionp"] = 211;
+  mid["pionm"] = -211;
+  mid["proton"] = 2212;
+  mid["antiproton"] = -2212;
+  mid["neutron"] = 2112;
+  mid["antineutron"] = -2112;
+  mid["electron"] = 11;
+  mid["muon"] = 13;
+
+   std::map < string, int > mq;
+  mq["s"] = 3;
+  mq["u"] = 2;
+  mq["d"] = 1;
 
 
-  TH1D *h_k0lu = new TH1D("h_k0lu",";PtCand K^0_L;N", nxbins_mod, xbins_mod);
-  TH1D *h_k0su = new TH1D("h_k0su",";PtCand K^0_S;N", nxbins_mod, xbins_mod);
-  TH1D *h_kpu = new TH1D("h_kpu",";PtCand K^+;N", nxbins_mod, xbins_mod);
-  TH1D *h_k0u = new TH1D("h_k0u",";PtCand K^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_lambdau = new TH1D("h_lambdau",";PtCand Lambda;N", nxbins_mod, xbins_mod);
-  TH1D *h_sigma0u = new TH1D("h_sigma0u",";PtCand Sigma^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_pion0u = new TH1D("h_pion0u",";PtCand Pi^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_pionpu = new TH1D("h_pionpu",";PtCand Pi^+/-;N", nxbins_mod, xbins_mod);
-  TH1D *h_protonu = new TH1D("h_protonu",";PtCand p;N", nxbins_mod, xbins_mod);
-  TH1D *h_neutronu = new TH1D("h_neutronu",";PtCand n;N", nxbins_mod, xbins_mod);
+  int vpid3[] = {130, 310, 321, -321, 311, 3122, -3122,
+                   3212, 3222, 3112, 111, 211, -211,
+                   2212, -2212, 2112, -2112,11, 13};
+  int npid3 = sizeof(vpid3) / sizeof(vpid3[0]);
 
-  TH1D *h_k0ld = new TH1D("h_k0ld",";PtCand K^0_L;N", nxbins_mod, xbins_mod);
-  TH1D *h_k0sd = new TH1D("h_k0sd",";PtCand K^0_S;N", nxbins_mod, xbins_mod);
-  TH1D *h_kpd = new TH1D("h_kpd",";PtCand K^+;N", nxbins_mod, xbins_mod);
-  TH1D *h_k0d = new TH1D("h_k0d",";PtCand K^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_lambdad = new TH1D("h_lambdad",";PtCand Lambda;N", nxbins_mod, xbins_mod);
-  TH1D *h_sigma0d = new TH1D("h_sigma0d",";PtCand Sigma^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_pion0d = new TH1D("h_pion0d",";PtCand Pi^0;N", nxbins_mod, xbins_mod);
-  TH1D *h_pionpd = new TH1D("h_pionpd",";PtCand Pi^+/-;N", nxbins_mod, xbins_mod);
-  TH1D *h_protond = new TH1D("h_protond",";PtCand p;N", nxbins_mod, xbins_mod);
-  TH1D *h_neutrond = new TH1D("h_neutrond",";PtCand n;N", nxbins_mod, xbins_mod);
+
+  string vq[] = {"s", "u", "d"};
+  int nq = sizeof(vq) / sizeof(vq[0]);
+
+  string vq2[] = {"3", "2", "1"};
+  int nq2 = sizeof(vq2) / sizeof(vq2[0]);
+
+  string vxvar[] = {"ptcand", "ptjet"};
+  int nxvar = sizeof(vxvar) / sizeof(vxvar[0]);
+
+  string vyvar[] = {"fl", "fh"};
+  int nyvar = sizeof(vyvar) / sizeof(vyvar[0]);
+
+  assert(npid == npid2); //+g
+  
+  std::map < string, TH1D* > mh;
+
+  std::map < string, TProfile* > mp;
+
+  for (int i = 0; i != npid; ++ i) {
+    for (int iq = 0; iq != nq; ++ iq) {
+      for (int ix = 0; ix != nxvar; ++ ix) {
+          const char *pid = vpid[i].c_str();
+          const char *pid2 = vpid2[i].c_str();
+          const char *cx = vxvar[ix].c_str();
+          const char *cq = vq[iq].c_str();
+          Double_t *x = xbins_cand; // &xbins_cand[0]
+          int nx = nxbins_cand;
+          if (vxvar[ix] == "ptjet") { //swap if doesn't work
+            x = xbins_jet;
+            nx = nxbins_jet;
+          }
+          const char *hname = Form("h_%s_%s_vs_%s", pid, cq, cx);
+          const char *htitle = Form(";E_{T,%s}, %s;%s N", cx, pid2, cq);
+          mh[hname] = new TH1D(hname, htitle, nx, x);
+          for (int iy = 0; iy != ny; ++ iy) {
+            const char *cy = vyvar[iy].c_str();
+            const char *pname = Form("h_%s_%s_%s_vs_%s", pid, cq, cy, cx);
+            const char *ptitle = Form(";E_{T,%s}, %s;%s %s", cx, pid2, cq, cy);
+            mp[pname] = new TProfile(pname, ptitle, nx, x); 
+          } // for iy
+      } // for ix
+    } // for iq
+  } // for i
+
+/*
+int z = 0;
+  for (const auto& pair : mh) {
+        std::cout << pair.first<< std::endl;
+        z++;
+    }
+    cout << z << endl;*/
+
+/*
+  TH1D *h_kaon0ls = new TH1D("h_kaon0ls",";PtCand K^0_L;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaon0ss = new TH1D("h_kaon0ss",";PtCand K^0_S;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaonps = new TH1D("h_kaonps",";PtCand K^+;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaonms = new TH1D("h_kaonms",";PtCand K^-;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaon0s = new TH1D("h_kaon0s",";PtCand K^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_lambdas = new TH1D("h_lambdas",";PtCand Lambda;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigma0s = new TH1D("h_sigma0s",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigmaps = new TH1D("h_sigmaps",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigmams = new TH1D("h_sigmams",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_pion0s = new TH1D("h_pion0s",";PtCand Pi^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_pionps = new TH1D("h_pionps",";PtCand Pi^+/-;N", nxbins_cand, xbins_cand);
+  TH1D *h_pionms = new TH1D("h_pionms",";PtCand Pi^-;N", nxbins_cand, xbins_cand);
+  TH1D *h_protons = new TH1D("h_protons",";PtCand p N", nxbins_cand, xbins_cand);
+  TH1D *h_neutrons = new TH1D("h_neutrons",";PtCand n N", nxbins_cand, xbins_cand);
+  TH1D *h_antiprotons = new TH1D("h_antiprotons",";PtCand p N", nxbins_cand, xbins_cand);
+  TH1D *h_antineutrons = new TH1D("h_antineutrons",";PtCand n N", nxbins_cand, xbins_cand);
+  TH1D *h_electrons = new TH1D("h_electrons",";PtCand p;N", nxbins_cand, xbins_cand);
+  TH1D *h_muons = new TH1D("h_muons",";PtCand n;N", nxbins_cand, xbins_cand);
+
+
+  TH1D *h_kaon0lu = new TH1D("h_kaon0lu",";PtCand K^0_L;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaon0su = new TH1D("h_kaon0su",";PtCand K^0_S;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaonpu = new TH1D("h_kaonpu",";PtCand K^+;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaonmu = new TH1D("h_kaonmu",";PtCand K^-;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaon0u = new TH1D("h_kaon0u",";PtCand K^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_lambdau = new TH1D("h_lambdau",";PtCand Lambda;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigma0u = new TH1D("h_sigma0u",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigmapu = new TH1D("h_sigmapu",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigmamu = new TH1D("h_sigmamu",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_pion0u = new TH1D("h_pion0u",";PtCand Pi^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_pionpu = new TH1D("h_pionpu",";PtCand Pi^+;N", nxbins_cand, xbins_cand);
+  TH1D *h_pionmu = new TH1D("h_pionmu",";PtCand Pi^-;N", nxbins_cand, xbins_cand);
+  TH1D *h_protonu = new TH1D("h_protonu",";PtCand p;N", nxbins_cand, xbins_cand);
+  TH1D *h_neutronu = new TH1D("h_neutronu",";PtCand n;N", nxbins_cand, xbins_cand);
+  TH1D *h_antiprotonu = new TH1D("h_antiprotonu",";PtCand p;N", nxbins_cand, xbins_cand);
+  TH1D *h_antineutronu = new TH1D("h_antineutronu",";PtCand n;N", nxbins_cand, xbins_cand);
+  TH1D *h_electronu = new TH1D("h_electronu",";PtCand p;N", nxbins_cand, xbins_cand);
+  TH1D *h_muonu = new TH1D("h_muonu",";PtCand n;N", nxbins_cand, xbins_cand);
+
+  TH1D *h_kaon0lujet = new TH1D("h_kaon0lujet",";PtCand K^0_L;N", nxbins_jet, xbins_jet);
+  TH1D *h_kaon0sujet = new TH1D("h_kaon0sujet",";PtCand K^0_S;N", nxbins_jet, xbins_jet);
+  TH1D *h_kaonpujet = new TH1D("h_kaonpujet",";PtCand K^+;N", nxbins_jet, xbins_jet);
+  TH1D *h_kaonmujet = new TH1D("h_kaonmujet",";PtCand K^-;N", nxbins_jet, xbins_jet);
+  TH1D *h_kaon0ujet = new TH1D("h_kaon0ujet",";PtCand K^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_lambdaujet = new TH1D("h_lambdaujet",";PtCand Lambda;N", nxbins_jet, xbins_jet);
+  TH1D *h_sigma0ujet = new TH1D("h_sigma0ujet",";PtCand Sigma^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_sigmapujet = new TH1D("h_sigmapujet",";PtCand Sigma^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_sigmamujet = new TH1D("h_sigmamujet",";PtCand Sigma^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_pion0ujet = new TH1D("h_pion0ujet",";PtCand Pi^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_pionpujet = new TH1D("h_pionpujet",";PtCand Pi^+;N", nxbins_jet, xbins_jet);
+  TH1D *h_pionmujet = new TH1D("h_pionmujet",";PtCand Pi^-;N", nxbins_jet, xbins_jet);
+  TH1D *h_protonujet = new TH1D("h_protonujet",";PtCand p;N", nxbins_jet, xbins_jet);
+  TH1D *h_neutronujet = new TH1D("h_neutronujet",";PtCand n;N", nxbins_jet, xbins_jet);
+  TH1D *h_antiprotonujet = new TH1D("h_antiprotonujet",";PtCand p;N", nxbins_jet, xbins_jet);
+  TH1D *h_antineutronujet = new TH1D("h_antineutronujet",";PtCand n;N", nxbins_jet, xbins_jet);
+  TH1D *h_electronujet = new TH1D("h_electronujet",";PtCand p;N", nxbins_jet, xbins_jet);
+  TH1D *h_muonujet = new TH1D("h_muonujet",";PtCand n;N", nxbins_jet, xbins_jet);
+
+
+  TH1D *h_kaon0ld = new TH1D("h_kaon0ld",";PtCand K^0_L;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaon0sd = new TH1D("h_kaon0sd",";PtCand K^0_S;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaonpd = new TH1D("h_kaonpd",";PtCand K^+;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaonmd = new TH1D("h_kaonmd",";PtCand K^-;N", nxbins_cand, xbins_cand);
+  TH1D *h_kaon0d = new TH1D("h_kaon0d",";PtCand K^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_lambdad = new TH1D("h_lambdad",";PtCand Lambda;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigma0d = new TH1D("h_sigma0d",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigmapd = new TH1D("h_sigmapd",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_sigmamd = new TH1D("h_sigmamd",";PtCand Sigma^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_pion0d = new TH1D("h_pion0d",";PtCand Pi^0;N", nxbins_cand, xbins_cand);
+  TH1D *h_pionpd = new TH1D("h_pionpd",";PtCand Pi^+;N", nxbins_cand, xbins_cand);
+  TH1D *h_pionmd = new TH1D("h_pionmd",";PtCand Pi^-;N", nxbins_cand, xbins_cand);
+  TH1D *h_protond = new TH1D("h_protond",";PtCand p;N", nxbins_cand, xbins_cand);
+  TH1D *h_neutrond = new TH1D("h_neutrond",";PtCand n;N", nxbins_cand, xbins_cand);
+  TH1D *h_antiprotond = new TH1D("h_antiprotond",";PtCand p;N", nxbins_cand, xbins_cand);
+  TH1D *h_antineutrond = new TH1D("h_antineutrond",";PtCand n;N", nxbins_cand, xbins_cand);
+  TH1D *h_electrond = new TH1D("h_electrond",";PtCand p;N", nxbins_cand, xbins_cand);
+  TH1D *h_muond = new TH1D("h_muond",";PtCand n;N", nxbins_cand, xbins_cand);
+
+  TH1D *h_kaon0ldjet = new TH1D("h_kaon0ldjet",";PtCand K^0_L;N", nxbins_jet, xbins_jet);
+  TH1D *h_kaon0sdjet = new TH1D("h_kaon0sdjet",";PtCand K^0_S;N", nxbins_jet, xbins_jet);
+  TH1D *h_kaonpdjet = new TH1D("h_kaonpdjet",";PtCand K^+;N", nxbins_jet, xbins_jet);
+  TH1D *h_kaonmdjet = new TH1D("h_kaonmdjet",";PtCand K^-;N", nxbins_jet, xbins_jet);
+  TH1D *h_kaon0djet = new TH1D("h_kaon0djet",";PtCand K^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_lambdadjet = new TH1D("h_lambdadjet",";PtCand Lambda;N", nxbins_jet, xbins_jet);
+  TH1D *h_sigma0djet = new TH1D("h_sigma0djet",";PtCand Sigma^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_sigmapdjet = new TH1D("h_sigmapdjet",";PtCand Sigma^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_sigmamdjet = new TH1D("h_sigmamdjet",";PtCand Sigma^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_pion0djet = new TH1D("h_pion0djet",";PtCand Pi^0;N", nxbins_jet, xbins_jet);
+  TH1D *h_pionpdjet = new TH1D("h_pionpdjet",";PtCand Pi^+;N", nxbins_jet, xbins_jet);
+  TH1D *h_pionmdjet = new TH1D("h_pionmdjet",";PtCand Pi^-;N", nxbins_jet, xbins_jet);
+  TH1D *h_protondjet = new TH1D("h_protondjet",";PtCand p;N", nxbins_jet, xbins_jet);
+  TH1D *h_neutrondjet = new TH1D("h_neutrondjet",";PtCand n;N", nxbins_jet, xbins_jet);
+  TH1D *h_antiprotondjet = new TH1D("h_antiprotondjet",";PtCand p;N", nxbins_jet, xbins_jet);
+  TH1D *h_antineutrondjet = new TH1D("h_antineutrondjet",";PtCand n;N", nxbins_jet, xbins_jet);
+  TH1D *h_electrondjet = new TH1D("h_electrondjet",";PtCand p;N", nxbins_jet, xbins_jet);
+  TH1D *h_muondjet = new TH1D("h_muondjet",";PtCand n;N", nxbins_jet, xbins_jet);*/
 
   TH1D *h = new TH1D("h",";PtCand, All jets;N", nxbins_max, xbins_max);
   TH1D *hperp = new TH1D("hperp",";PtCand, No jets;N", nxbins_max, xbins_max);
   TH1D *hjet = new TH1D("hjet",";PtCand, All jets;N", nxbins_max, xbins_max);
 
 
-  TLorentzVector p4jet, p4cand, p4perp;
+  TLorentzVector p4jet, p4cand, p4perp, p4sum;
 
   
   curdir->cd();
@@ -247,16 +418,23 @@ void StrangeJet::Loop()
   cout << "Looping over " << nentries << " events" << endl << flush;
 
   Long64_t nbytes = 0, nb = 0;
+  TStopwatch t;
+  t.Start();
   for (Long64_t jentry=0; jentry<nentries;jentry++) {
     Long64_t ientry = LoadTree(jentry);
     if (ientry < 0) break;
     nb = fChain->GetEntry(jentry);   nbytes += nb;
     // if (Cut(ientry) < 0) continue;
     
-    if (jentry % 100000 == 0) cout << "." << flush;
+    if (jentry % 100000 == 0) {
+      double sec = t.RealTime();
+      t.Reset();
+      t.Start();
+      cout << 100000/sec << ", " << flush;
+      }
     //      cout << "Processing Event " << event << endl;
-    
-    for (int i = 0; i != nGenJet; ++i) {
+    double w = genWeight;
+    for (int i = 0; i != min(2,nGenJet); ++i) {
       //cout << "  GenJet " << i << ":" << GenJet_pt[i] << ", " << endl;
 
  /*    for (int k = 0; k != nPhoton; ++k) {
@@ -274,12 +452,15 @@ void StrangeJet::Loop()
       }*/
       bool isSjet = (abs(GenJet_partonFlavour[i]) == 3);
 	    bool isDjet = (abs(GenJet_partonFlavour[i]) == 1);
-	    bool isUjet = (abs(GenJet_partonFlavour[i]) == 2 );
+	    bool isUjet = (abs(GenJet_partonFlavour[i]) == 2);
+
+      double p3 = p4jet.E();
 
       double pt = GenJet_pt[i];
 
       p4jet.SetPtEtaPhiM(GenJet_pt[i], GenJet_eta[i], GenJet_phi[i], GenJet_mass[i]);
       p4perp.SetPtEtaPhiM(GenJet_pt[i], -GenJet_eta[i], GenJet_phi[i]+TMath::Pi()/2, GenJet_mass[i]);
+      p4sum.SetPtEtaPhiM(0,0,0,0);
 
       double esum(0), esumch(0), esumnh(0), esumne(0);
       for (int j = 0; j != nGenJetGenPartCand; ++j) {
@@ -288,37 +469,51 @@ void StrangeJet::Loop()
 
       p4cand.SetPtEtaPhiM(GenPartCand_pt[iCand], GenPartCand_eta[iCand], GenPartCand_phi[iCand], GenPartCand_mass[iCand]);
 
-	
+
   bool isPhoton = (GenPartCand_pdgId[iCand] == 22);
-  bool isKaonp = (abs(GenPartCand_pdgId[iCand]) == 321);
-  bool isKaon0 = (abs(GenPartCand_pdgId[iCand]) == 311);
-  bool isKaonL = (abs(GenPartCand_pdgId[iCand]) == 130);
-  bool isKaonS = (abs(GenPartCand_pdgId[iCand]) == 310);
+  /*
+  bool isKaonp = (GenPartCand_pdgId[iCand] == 321);
+  bool isKaonm = (GenPartCand_pdgId[iCand] == -321);
+  bool isKaon0 = (GenPartCand_pdgId[iCand] == 311);
+  bool isKaonL = (GenPartCand_pdgId[iCand] == 130);
+  bool isKaonS = (GenPartCand_pdgId[iCand] == 310);
   bool isLambda = (abs(GenPartCand_pdgId[iCand]) == 3122);
-  bool isSigma = (abs(GenPartCand_pdgId[iCand]) == 3212);
-  bool isPion0 = (abs(GenPartCand_pdgId[iCand]) == 111);
-  bool isPionp = (abs(GenPartCand_pdgId[iCand]) == 211);
-  bool isProton =(abs(GenPartCand_pdgId[iCand]) == 2212);
-  bool isNeutron =(abs(GenPartCand_pdgId[iCand]) == 2112);
+  bool isSigma0 = (GenPartCand_pdgId[iCand] == 3212);
+  bool isSigmap =(GenPartCand_pdgId[iCand] == 3222);
+  bool isSigmam =(GenPartCand_pdgId[iCand] == 3112);
+  bool isPion0 = (GenPartCand_pdgId[iCand] == 111);
+  bool isPionp = (GenPartCand_pdgId[iCand] == 211);
+  bool isPionm = (GenPartCand_pdgId[iCand] == -211);
+
+  bool isProton = (GenPartCand_pdgId[iCand] == 2212);
+  bool isAntiProton =(GenPartCand_pdgId[iCand] == -2212);
+  bool isNeutron =(GenPartCand_pdgId[iCand] == 2112);
+  bool isAntiNeutron =(GenPartCand_pdgId[iCand] == -2112);
+
+  bool isElectron =(abs(GenPartCand_pdgId[iCand]) == 11);
+  bool isMuon =(abs(GenPartCand_pdgId[iCand]) == 13);
+*/
 
 if (p4perp.DeltaR(p4cand) < 0.4){
   	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 80 && pt < 100) {
-      hperp->Fill(GenPartCand_pt[iCand]);
+      hperp->Fill(GenPartCand_pt[iCand], w);
       }
 }
 if (p4jet.DeltaR(p4cand) < 0.4){
   	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 80 && pt < 100) {
-      hjet->Fill(GenPartCand_pt[iCand]);
+      hjet->Fill(GenPartCand_pt[iCand], w);
       }
 }
+
 	if (i == iJet) {
 	  // cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
-    double p2 = sqrt(pow(GenPartCand_pt[iCand],2)+pow(GenPartCand_mass[iCand],2));
+    double p2 = p4cand.E();
     
     bool isCH = (GenPartCand_charge[iCand] != 0);
     bool isNH = (GenPartCand_charge[iCand] == 0 && !isPhoton);
     bool isNE = (GenPartCand_charge[iCand] == 0 && isPhoton);
 
+    p4sum += p4cand;
     esum += p2;
     if (isCH) { esumch += p2; }
     if (isNH) { esumnh += p2; }
@@ -326,258 +521,356 @@ if (p4jet.DeltaR(p4cand) < 0.4){
 
 	  if (fabs(GenJet_eta[iJet]) < 1.3 && pt > 80 && pt < 100) {
 
-      h->Fill(GenPartCand_pt[iCand]);
+      h->Fill(GenPartCand_pt[iCand], w);
 
+      for (int id = 0; id != npid; ++ id) {
+        bool isId = (GenPartCand_pdgId[iCand] == vpid3[i]);
+        //bool isId = (GenPartCand_pdgId[iCand] == mid[pid]);
+        for (int iq = 0; iq != nq && isId; ++ iq) {
+          bool isQ = (abs(GenJet_partonFlavour[i]) == vq2[i]);
+          //bool isQ = (abs(GenJet_partonFlavour[i]) == mq[cq]);
+          for (int ix = 0; ix != nxvar && isQ; ++ ix) {
+              const char *pid = vpid[id].c_str();
+              const char *cx = vxvar[ix].c_str();
+              const char *cq = vq[iq].c_str();
+              double x = GenPartCand_pt[iCand];
+              if (vxvar[ix] == "ptjet") { //swap if doesn't work
+                x = GenJet_pt[iJet]; 
+              }
+              const char *hname = Form("h_%s_%s_vs_%s", pid, cq, cx);
+              mh[hname]->Fill(x, w);
+          } // for ix
+        } // for iq
+      } // for i
+/*
 // All UDS jets
+
       if (isSjet || isUjet || isDjet) {
-            h_dusall->Fill(GenPartCand_pt[iCand]);
+            h_dusall->Fill(GenPartCand_pt[iCand], w);
       }
 
       if (isSjet) {
-        h_sall->Fill(GenPartCand_pt[iCand]);
-        h_sall_mod->Fill(GenPartCand_pt[iCand]);
-        h_sall_one->Fill(GenPartCand_pt[iCand]);
+        h_sall->Fill(GenPartCand_pt[iCand], w);
+        h_sall_cand->Fill(GenPartCand_pt[iCand], w);
+        h_sall_one->Fill(GenPartCand_pt[iCand], w);
 
           if (isKaonL) {
-            h_k0ls->Fill(GenPartCand_pt[iCand]);
+            h_kaon0ls->Fill(GenPartCand_pt[iCand], w);
           }
-
           if (isKaonS) {
-            h_k0ss->Fill(GenPartCand_pt[iCand]);
+            h_kaon0ss->Fill(GenPartCand_pt[iCand], w);
           }
-
           if (isKaonp) {
-            h_kps->Fill(GenPartCand_pt[iCand]);
+            h_kaonps->Fill(GenPartCand_pt[iCand], w);
           }
-
+          if (isKaonm) {
+            h_kaonms->Fill(GenPartCand_pt[iCand], w);
+          }
           if (isKaon0) {
-            h_k0s->Fill(GenPartCand_pt[iCand]);
+            h_kaon0s->Fill(GenPartCand_pt[iCand], w);
           }
-
-          if (isSigma) {
-            h_sigma0s->Fill(GenPartCand_pt[iCand]); 
+          if (isSigma0) {
+            h_sigma0s->Fill(GenPartCand_pt[iCand], w); 
           }
-
+          if (isSigmap) {
+            h_sigmaps->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isSigmam) {
+            h_sigmams->Fill(GenPartCand_pt[iCand], w); 
+          }
           if (isLambda) {
-            h_lambdas->Fill(GenPartCand_pt[iCand]); 
+            h_lambdas->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isPion0) {
-            h_pion0s->Fill(GenPartCand_pt[iCand]); 
+            h_pion0s->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isPionp) {
-            h_pionps->Fill(GenPartCand_pt[iCand]); 
+            h_pionps->Fill(GenPartCand_pt[iCand], w); 
           }
+          if (isPionm) {
+            h_pionms->Fill(GenPartCand_pt[iCand], w); 
+          }          
           if (isProton) {
-            h_protons->Fill(GenPartCand_pt[iCand]); 
+            h_protons->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isAntiProton) {
+            h_antiprotons->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isNeutron) {
-            h_neutrons->Fill(GenPartCand_pt[iCand]); 
+            h_neutrons->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isAntiNeutron) {
+            h_antineutrons->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isElectron) {
+            h_electrons->Fill(GenPartCand_pt[iCand], w);
+          }
+          if (isMuon) {
+            h_muons->Fill(GenPartCand_pt[iCand], w);
           }
       }
 
       if (isUjet) {
-        h_uall->Fill(GenPartCand_pt[iCand]);
-        h_uall_mod->Fill(GenPartCand_pt[iCand]);
-        h_uall_one->Fill(GenPartCand_pt[iCand]);
-
+        h_uall->Fill(GenPartCand_pt[iCand], w);
+        h_uall_cand->Fill(GenPartCand_pt[iCand], w);
+        h_uall_one->Fill(GenPartCand_pt[iCand], w);
           if (isKaonL) {
-            h_k0lu->Fill(GenPartCand_pt[iCand]);
+            h_kaon0lu->Fill(GenPartCand_pt[iCand], w);
           }
-
           if (isKaonS) {
-            h_k0su->Fill(GenPartCand_pt[iCand]);
+            h_kaon0su->Fill(GenPartCand_pt[iCand], w);
           }
-
           if (isKaonp) {
-            h_kpu->Fill(GenPartCand_pt[iCand]);
+            h_kaonpu->Fill(GenPartCand_pt[iCand], w);
           }
-
+          if (isKaonm) {
+            h_kaonmu->Fill(GenPartCand_pt[iCand], w);
+          }
           if (isKaon0) {
-            h_k0u->Fill(GenPartCand_pt[iCand]);
+            h_kaon0u->Fill(GenPartCand_pt[iCand], w);
           }
-
-          if (isSigma) {
-            h_sigma0u->Fill(GenPartCand_pt[iCand]); 
+          if (isSigma0) {
+            h_sigma0u->Fill(GenPartCand_pt[iCand], w); 
           }
-
+          if (isSigmap) {
+            h_sigmapu->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isSigmam) {
+            h_sigmamu->Fill(GenPartCand_pt[iCand], w); 
+          }
           if (isLambda) {
-            h_lambdau->Fill(GenPartCand_pt[iCand]); 
+            h_lambdau->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isPion0) {
-            h_pion0u->Fill(GenPartCand_pt[iCand]); 
+            h_pion0u->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isPionp) {
-            h_pionpu->Fill(GenPartCand_pt[iCand]); 
+            h_pionpu->Fill(GenPartCand_pt[iCand], w); 
           }
+          if (isPionm) {
+            h_pionmu->Fill(GenPartCand_pt[iCand], w); 
+          }          
           if (isProton) {
-            h_protonu->Fill(GenPartCand_pt[iCand]); 
+            h_protonu->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isAntiProton) {
+            h_antiprotonu->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isNeutron) {
-            h_neutronu->Fill(GenPartCand_pt[iCand]); 
+            h_neutronu->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isAntiNeutron) {
+            h_antineutronu->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isElectron) {
+            h_electronu->Fill(GenPartCand_pt[iCand], w);
+          }
+          if (isMuon) {
+            h_muonu->Fill(GenPartCand_pt[iCand], w);
           }
       }
 
        if (isDjet) {
-        h_dall->Fill(GenPartCand_pt[iCand]);
-        h_dall_mod->Fill(GenPartCand_pt[iCand]);
-        h_dall_one->Fill(GenPartCand_pt[iCand]);
-
-
+        h_dall->Fill(GenPartCand_pt[iCand], w);
+        h_dall_cand->Fill(GenPartCand_pt[iCand], w);
+        h_dall_one->Fill(GenPartCand_pt[iCand], w);
           if (isKaonL) {
-            h_k0ld->Fill(GenPartCand_pt[iCand]);
+            h_kaon0ld->Fill(GenPartCand_pt[iCand], w);
           }
-
           if (isKaonS) {
-            h_k0sd->Fill(GenPartCand_pt[iCand]);
+            h_kaon0sd->Fill(GenPartCand_pt[iCand], w);
           }
-
           if (isKaonp) {
-            h_kpd->Fill(GenPartCand_pt[iCand]);
+            h_kaonpd->Fill(GenPartCand_pt[iCand], w);
           }
-
+          if (isKaonm) {
+            h_kaonmd->Fill(GenPartCand_pt[iCand], w);
+          }
           if (isKaon0) {
-            h_k0d->Fill(GenPartCand_pt[iCand]);
+            h_kaon0d->Fill(GenPartCand_pt[iCand], w);
           }
-
-          if (isSigma) {
-            h_sigma0d->Fill(GenPartCand_pt[iCand]); 
+          if (isSigma0) {
+            h_sigma0d->Fill(GenPartCand_pt[iCand], w); 
           }
-
+          if (isSigmap) {
+            h_sigmapd->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isSigmam) {
+            h_sigmamd->Fill(GenPartCand_pt[iCand], w); 
+          }
           if (isLambda) {
-            h_lambdad->Fill(GenPartCand_pt[iCand]); 
+            h_lambdad->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isPion0) {
-            h_pion0d->Fill(GenPartCand_pt[iCand]); 
+            h_pion0d->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isPionp) {
-            h_pionpd->Fill(GenPartCand_pt[iCand]); 
+            h_pionpd->Fill(GenPartCand_pt[iCand], w); 
           }
+          if (isPionm) {
+            h_pionmd->Fill(GenPartCand_pt[iCand], w); 
+          }          
           if (isProton) {
-            h_protond->Fill(GenPartCand_pt[iCand]); 
+            h_protond->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isAntiProton) {
+            h_antiprotond->Fill(GenPartCand_pt[iCand], w); 
           }
           if (isNeutron) {
-            h_neutrond->Fill(GenPartCand_pt[iCand]); 
+            h_neutrond->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isAntiNeutron) {
+            h_antineutrond->Fill(GenPartCand_pt[iCand], w); 
+          }
+          if (isElectron) {
+            h_electrond->Fill(GenPartCand_pt[iCand], w);
+          }
+          if (isMuon) {
+            h_muond->Fill(GenPartCand_pt[iCand], w);
           }
       }
 
-      if (isDjet || isUjet){
-      h_duall_mod->Fill(GenPartCand_pt[iCand]);
-
-      }
-
+       if (isDjet || isUjet){
+         h_duall_cand->Fill(GenPartCand_pt[iCand], w);
+          }
+*/
 // Neutral hadrons
-      if (GenPartCand_charge[iCand] == 0 && !isPhoton){
+      if (isNH){
 
         if (isSjet || isUjet || isDjet) {
-          h_dus3->Fill(GenPartCand_pt[iCand]);
-          h_dus4->Fill(p2);
+          h_dus3->Fill(GenPartCand_pt[iCand], w);
+          h_dus4->Fill(p2, w);
         }
 
         if (isSjet) {
-          h_s3->Fill(GenPartCand_pt[iCand]);
-          h_s3_mod->Fill(GenPartCand_pt[iCand]);
-          h_s3_one->Fill(GenPartCand_pt[iCand]);
-          h_s4->Fill(p2);
+          h_s3->Fill(GenPartCand_pt[iCand], w);
+          h_s3_cand->Fill(GenPartCand_pt[iCand], w);
+          h_s3_one->Fill(GenPartCand_pt[iCand], w);
+          h_s4->Fill(p2, w);
         }
 
         if (isDjet) {
-          h_d3->Fill(GenPartCand_pt[iCand]);
-          h_d3_mod->Fill(GenPartCand_pt[iCand]);
-          h_d3_one->Fill(GenPartCand_pt[iCand]);
-          h_d4->Fill(p2);
+          h_d3->Fill(GenPartCand_pt[iCand], w);
+          h_d3_cand->Fill(GenPartCand_pt[iCand], w);
+          h_d3_one->Fill(GenPartCand_pt[iCand], w);
+          h_d4->Fill(p2, w);
         }
 
         if (isUjet) {
-          h_u3->Fill(GenPartCand_pt[iCand]);
-          h_u3_mod->Fill(GenPartCand_pt[iCand]);
-          h_u3_one->Fill(GenPartCand_pt[iCand]);
-          h_u4->Fill(p2);
+          h_u3->Fill(GenPartCand_pt[iCand], w);
+          h_u3_cand->Fill(GenPartCand_pt[iCand], w);
+          h_u3_one->Fill(GenPartCand_pt[iCand], w);
+          h_u4->Fill(p2, w);
         }
         if (isUjet || isDjet){
-          h_du3_mod->Fill(GenPartCand_pt[iCand]);
+          h_du3_cand->Fill(GenPartCand_pt[iCand], w);
         }
 
       }
 
  // Photons
-      if (GenPartCand_charge[iCand] == 0 && isPhoton){
+      if (isNE){
 
         if (isSjet || isUjet || isDjet) {
-          h_dus5->Fill(GenPartCand_pt[iCand]);
-          h_dus6->Fill(p2);
+          h_dus5->Fill(GenPartCand_pt[iCand], w);
+          h_dus6->Fill(p2, w);
         }
         if (isSjet) {
-          h_s5->Fill(GenPartCand_pt[iCand]);
-          h_s5_mod->Fill(GenPartCand_pt[iCand]);
-          h_s5_one->Fill(GenPartCand_pt[iCand]);
-          h_s6->Fill(p2);
+          h_s5->Fill(GenPartCand_pt[iCand], w);
+          h_s5_cand->Fill(GenPartCand_pt[iCand], w);
+          h_s5_one->Fill(GenPartCand_pt[iCand], w);
+          h_s6->Fill(p2, w);
         }
         if (isDjet) {
-          h_d5->Fill(GenPartCand_pt[iCand]);
-          h_d5_mod->Fill(GenPartCand_pt[iCand]);
-          h_d5_one->Fill(GenPartCand_pt[iCand]);
-          h_d6->Fill(p2);
+          h_d5->Fill(GenPartCand_pt[iCand], w);
+          h_d5_cand->Fill(GenPartCand_pt[iCand], w);
+          h_d5_one->Fill(GenPartCand_pt[iCand], w);
+          h_d6->Fill(p2, w);
         }
         if (isUjet) {
-          h_u5->Fill(GenPartCand_pt[iCand]);
-          h_u5_mod->Fill(GenPartCand_pt[iCand]);
-          h_u5_one->Fill(GenPartCand_pt[iCand]);
-          h_u6->Fill(p2);
+          h_u5->Fill(GenPartCand_pt[iCand], w);
+          h_u5_cand->Fill(GenPartCand_pt[iCand], w);
+          h_u5_one->Fill(GenPartCand_pt[iCand], w);
+          h_u6->Fill(p2, w);
         }
         if (isUjet || isDjet){
-          h_du5_mod->Fill(GenPartCand_pt[iCand]);
+          h_du5_cand->Fill(GenPartCand_pt[iCand], w);
         }
       }
 
 // Charged hadrons
-      if (GenPartCand_charge[iCand] != 0){
+      if (isCH){
 
         if (isSjet || isUjet || isDjet) {
-          h_dus->Fill(GenPartCand_pt[iCand]);
-          h_dus2->Fill(p2);
+          h_dus->Fill(GenPartCand_pt[iCand], w);
+          h_dus2->Fill(p2, w);
         }
         if (isSjet) {
-          h_s->Fill(GenPartCand_pt[iCand]);
-          h_s_mod->Fill(GenPartCand_pt[iCand]);
-          h_s_one->Fill(GenPartCand_pt[iCand]);
-          h_s2->Fill(p2);
+          h_s->Fill(GenPartCand_pt[iCand], w);
+          h_s_cand->Fill(GenPartCand_pt[iCand], w);
+          h_s_one->Fill(GenPartCand_pt[iCand], w);
+          h_s2->Fill(p2, w);
         }
         if (isDjet) {
-          h_d->Fill(GenPartCand_pt[iCand]);
-          h_d_mod->Fill(GenPartCand_pt[iCand]);
-          h_d_one->Fill(GenPartCand_pt[iCand]);
-          h_d2->Fill(p2);
+          h_d->Fill(GenPartCand_pt[iCand], w);
+          h_d_cand->Fill(GenPartCand_pt[iCand], w);
+          h_d_one->Fill(GenPartCand_pt[iCand], w);
+          h_d2->Fill(p2, w);
         }
         if (isUjet) {
-          h_u->Fill(GenPartCand_pt[iCand]);
-          h_u_mod->Fill(GenPartCand_pt[iCand]);
-          h_u_one->Fill(GenPartCand_pt[iCand]);
-          h_u2->Fill(p2);
+          h_u->Fill(GenPartCand_pt[iCand], w);
+          h_u_cand->Fill(GenPartCand_pt[iCand], w);
+          h_u_one->Fill(GenPartCand_pt[iCand], w);
+          h_u2->Fill(p2, w);
         }
         if (isUjet || isDjet){
-            h_du_mod->Fill(GenPartCand_pt[iCand]);
+            h_du_cand->Fill(GenPartCand_pt[iCand], w);
           }
     }
     }
 	}
       }
+      if (fabs(GenJet_eta[i] < 1.3) && esum > 0){
+          pu0->Fill(GenJet_pt[i], esum ? 1 : 0);
+            for (int id = 0; id != npid; ++ id) {
+        bool isId = (GenPartCand_pdgId[iCand] == vpid3[i]);
+        //bool isId = (GenPartCand_pdgId[iCand] == mid[pid]);
+        for (int iq = 0; iq != nq && isId; ++ iq) {
+          bool isQ = (abs(GenJet_partonFlavour[i]) == vq2[i]);
+          //bool isQ = (abs(GenJet_partonFlavour[i]) == mq[cq]);
+          for (int ix = 0; ix != nxvar && isQ; ++ ix) {
+              const char *pid = vpid[id].c_str();
+              const char *cx = vxvar[ix].c_str();
+              const char *cq = vq[iq].c_str();
+              double x = GenPartCand_pt[iCand];
+              if (vxvar[ix] == "ptjet") { //swap if doesn't work
+                x = GenJet_pt[iJet]; 
+              }
+              for (int iy = 0; iy != nyvar; ++ iy) {
+                double y(0);
+                if (iy == 0){y = esumch/esum};
+                const char *cy = vyvar[ix].c_str();
+                const char *pname = Form("h_%s_%s_%s_vs_%s", pid, cq, cy, cx);
+              mp[pname]->Fill(x, y, w);
+          } // for ix
+        } // for iq
+      } // for i
+
       //cout << endl;
-      if (fabs(GenJet_eta[i] < 1.3)&& esum>0){
-        pu0->Fill(GenJet_pt[i],esum ? 1 : 0);
         if (isUjet) {
-          puch->Fill(GenJet_pt[i],esumch/esum);
-          punh->Fill(GenJet_pt[i],esumnh/esum);
-          pune->Fill(GenJet_pt[i],esumne/esum);
+          puch->Fill(GenJet_pt[i], esumch/esum, w);
+          punh->Fill(GenJet_pt[i], esumnh/esum, w);
+          pune->Fill(GenJet_pt[i], esumne/esum, w);
           }
         if (isDjet) {
-          pdch->Fill(GenJet_pt[i],esumch/esum);
-          pdnh->Fill(GenJet_pt[i],esumnh/esum);
-          pdne->Fill(GenJet_pt[i],esumne/esum);
+          pdch->Fill(GenJet_pt[i], esumch/esum, w);
+          pdnh->Fill(GenJet_pt[i], esumnh/esum, w);
+          pdne->Fill(GenJet_pt[i], esumne/esum, w);
           }
         if (isSjet) {
-        psch->Fill(GenJet_pt[i],esumch/esum);
-        psnh->Fill(GenJet_pt[i],esumnh/esum);
-        psne->Fill(GenJet_pt[i],esumne/esum);
+        psch->Fill(GenJet_pt[i], esumch/esum, w);
+        psnh->Fill(GenJet_pt[i], esumnh/esum, w);
+        psne->Fill(GenJet_pt[i], esumne/esum, w);
         }
       }
     }
