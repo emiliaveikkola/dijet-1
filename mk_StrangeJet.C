@@ -1,4 +1,5 @@
 #include "StrangeJet.h"
+#include <fstream>
 R__LOAD_LIBRARY(StrangeJet_C.so);
 
 void mk_StrangeJet(){
