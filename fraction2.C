@@ -3,41 +3,247 @@
 #include <TCanvas.h>
 #include <TLegend.h>
 #include <TFile.h>
+#include <TList.h>
 #include "tdrstyle_mod22.C"
+
+bool    debug = true;
+
+void reverseLegend(TLegend *leg) {
+    if (!leg) return; // Check for null pointer
+
+    TList *list = leg->GetListOfPrimitives();
+    if (!list) return; // Check if the list is valid
+
+    // Create a new TList to hold the reversed order temporarily
+    TList *reversedList = new TList();
+
+    for (auto obj : *list) {
+    reversedList->AddFirst(obj);
+    }
+
+    // Clear the original list without deleting the objects (now owned by reversedList)
+    list->Clear();
+
+    // Move items back from the reversed list to the original list, now in reversed order
+    for (auto obj : *reversedList) {
+        list->Add(obj);
+    }
+
+    // Cleanup: delete the temporary reversed list, but do not delete the objects it contains
+    delete reversedList;
+}
 
 void fraction2() {
 // Open the ROOT file containing the histograms
 TFile *file = new TFile("output.root", "READ");
 // Retrieve the histograms
 
+  string vpid[] = {"pionp", "pionm", "kaonp", "kaonm",//"lambdap", "lambdam","kaon0"
+                   "sigmapm",//"sigma0", "sigmap", "sigmam", "sigmaantip", "sigmaantim",
+                    //"pion0","xi0","xim","antixi0","antixim","omegam","antiomegam",
+                   "proton", "antiproton", "neutron", "antineutron","kaon0l", "kaon0s", "lambdapm","xiomega",
+                   "photon","electron", "muon"}; //,"positron", "antimuon"
+  int npid = sizeof(vpid) / sizeof(vpid[0]);
+
+string vq[] = {"d", "u", "s", "c", "b"};
+int nq = sizeof(vq) / sizeof(vq[0]);
+
+string vxvar[] = {"ptcand", "ptjet"};
+int nxvar = sizeof(vxvar) / sizeof(vxvar[0]);
+
+string vyvar[] = {"flc", "fln", "fle", "fhc", "fhn", "fhe"};
+int nyvar = sizeof(vyvar) / sizeof(vyvar[0]);
+
+std::map < string, int > mcolor;
+
+mcolor["kaon0l"] = kGreen-6;
+mcolor["kaon0s"] = kGreen-7;
+mcolor["kaonp"] = kRed-7;
+mcolor["kaonm"] = kRed-6;
+mcolor["lambdapm"] = kTeal-9;
+//mcolor["lambdam"] = kTeal-9;
+mcolor["sigmapm"] = kMagenta-10;
+//mcolor["sigmam"] = kMagenta-10;
+//mcolor["sigmaantip"] = kMagenta-10;
+//mcolor["sigmaantim"] = kMagenta-10;
+mcolor["pionp"] = kRed-10;
+mcolor["pionm"] = kRed-9;
+mcolor["xiomega"] = kAzure+8;
+//mcolor["xim"] = kRed-9;
+//mcolor["antixi0"] = kRed-10;
+//mcolor["antixim"] = kRed-9;
+//mcolor["omegam"] = kRed-10;
+//mcolor["antiomegam"] = kRed-9;
+mcolor["proton"] = kMagenta-9;
+mcolor["antiproton"] = kMagenta-7;
+mcolor["neutron"] = kGreen-10;
+mcolor["antineutron"] = kGreen-9;
+mcolor["electron"] = kCyan-9;
+mcolor["muon"] = kOrange-9;
+//mcolor["positron"] = kCyan-9;
+//mcolor["antimuon"] = kCyan-9;
+mcolor["photon"] = kBlue-9;
+
+std::map < string, string > mleg;
+
+mleg["kaon0l"] = "K^{0}_{L}";
+mleg["kaon0s"] = "K^{0}_{S}";
+mleg["kaonp"] = "K^{+}";
+mleg["kaonm"] = "K^{-}";
+mleg["lambdapm"] = "#Lambda^{#pm}";
+//mleg["lambdam"] = "#Lambda^{-}";
+mleg["sigmapm"] = "#Sigma^{#pm}";
+//mleg["sigmam"] = "#Sigma^{-}";
+//mleg["sigmaantip"] = "#bar{#Sigma}^{+}";
+//mleg["sigmaantim"] = "#bar{#Sigma}^{-}";
+mleg["pionp"] = "#pi^{+}";
+mleg["pionm"] = "#pi^{-}";
+mleg["xiomega"] = "#Xi, #Omega";
+//mleg["xim"] = "#Xi^{-}";
+//mleg["antixi0"] = "#bar{#Xi}^{0}";
+//mleg["antixim"] = "#bar{#Xi}^{-}";
+//mleg["omegam"] = "#Omega^{-}";
+//mleg["antiomegam"] = "#bar{#Omega}^{-}";
+mleg["proton"] = "p";
+mleg["antiproton"] = "#bar{p}";
+mleg["neutron"] = "n";
+mleg["antineutron"] = "#bar{n}";
+mleg["electron"] = "e, e^{+}";
+mleg["muon"] = "#mu, #mu^{-}";
+//mleg["positron"] = "e^{+}";
+//mleg["antimuon"] = "#mu^{+}";
+mleg["photon"] = "#gamma";
+
+
+std::map < string, TH1D* > mh;
+std::map< string, TH1D*> mhclone;
+
+/*for (int iq = 0; iq !=nq; ++iq){
+    const char *cq = vq[iq].c_str();
+    string s = Form("h_%sall_cand",cq);
+    TH1D *h = (TH1D*)file->Get(s.c_str()); assert(h);
+    mhclone[s] = (TH1D*)h->Clone(Form("%s",s.c_str()));
+}
+*/
+setTDRStyle();
+lumi_136TeV = "Run3";
+extraText = "Private";
+
+for (int iq = 0; iq != nq; ++ iq) {
+    for (int ix = 0; ix != nxvar; ++ ix) {
+        if (vxvar[ix] == "ptcand"){
+        const char *cq = vq[iq].c_str();
+        const char *cx = vxvar[ix].c_str();
+        TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s jet N fraction",cq),0 + 1e-4,1,"p_{T,cand} (GeV)",0.1,100);
+        TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,kSquare);
+        c->SetLogx();
+        TLegend *leg = tdrLeg(0.89,0.9,1.1,0.92);
+        THStack *hs = new THStack(Form("hs_%s%s",cq,cx), "; p_{T,cand} (GeV); Jet N fraction");
+
+        for (int id = 0; id != npid; ++ id) {
+            const char *pid = vpid[id].c_str();
+            string hname = Form("h_%s_%s_vs_%s", pid, cq, cx);
+            TH1D *h = (TH1D*)file->Get(hname.c_str()); assert(h);
+            mh[hname] = h;
+            string hname_all = Form("h_all_%s_vs_%s", cq, cx);
+            TH1D *h_all = (TH1D*)file->Get(hname_all.c_str()); assert(h);
+            mh[hname_all] = h_all;
+            string hrname = Form("hr_%s_%s_vs_%s", pid, cq, cx);
+            TH1D *hc = (TH1D*)h->Clone(Form("%s",hrname.c_str()));
+            mhclone[hrname] = hc;
+            /*
+            if (id == npid-1) {
+                TH1D *hemu = (TH1D*)h->Clone(Form("%s_%s","emu",cq));
+                hemu->Reset();
+                TH1D *hsigma = (TH1D*)h->Clone(Form("%s_%s","sigma",cq));
+                hsigma->Reset();
+                TH1D *hlambda = (TH1D*)h->Clone(Form("%s_%s","lambda",cq));
+                hlambda->Reset();
+                string hrelectron = Form("hr_electron_%s_vs_ptcand", cq);
+                string hrmuon = Form("hr_muon_%s_vs_ptcand", cq);
+                string hrsigmap = Form("hr_sigmap_%s_vs_ptcand", cq);
+                string hrsigmam = Form("hr_sigmam_%s_vs_ptcand", cq);
+                string hrlambdap = Form("hr_lambdap_%s_vs_ptcand", cq);
+                string hrlambdam = Form("hr_lambdam_%s_vs_ptcand", cq);
+                string hrall = Form("hr%sall_cand", cq);
+                TH1D *hmu = mhclone[hrmuon]; assert(hmu);
+                TH1D *he = mhclone[hrelectron]; assert(he);
+                TH1D *hsigmap = mhclone[hrsigmap]; assert(hsigmap);
+                TH1D *hsigmam = mhclone[hrsigmam]; assert(hsigmam);
+                TH1D *hlambdap = mhclone[hrlambdap]; assert(hlambdap);
+                TH1D *hlambdam = mhclone[hrlambdam]; assert(hlambdam);
+                hemu->Add(hmu);
+                hemu->Add(he);
+                mhclone["hrelectron"] = hemu;
+                hsigma->Add(hsigmam);
+                hsigma->Add(hsigmap);
+                mhclone["hrsigmap"] = hsigma;
+                hlambda->Add(hlambdam);
+                hlambda->Add(hlambdap);
+                mhclone["hrlambdap"] = hlambda;
+            } //id == npid-1
+            */
+            //string hrefname = Form("h_all_%s_%s",cq,cx);
+            //TH1D *h_all =  mhclone[hrefname]; assert(h_all);
+            hc->Divide(h_all);
+            
+            hc->SetFillColor(mcolor[pid]);
+            hs->Add(hc);
+            hs->Draw("hist same");
+
+
+            leg->AddEntry(mhclone[hrname], mleg[pid].c_str(), "f");
+            leg->SetY1NDC(leg->GetY1NDC()-0.05);
+            leg->SetTextSize(0.035);
+
+            gPad->SetBottomMargin(0.14);
+            gPad->SetRightMargin(0.12);
+            gPad->Update();
+
+            TLatex *tex1 = new TLatex();
+            tex1->SetNDC(); tex1->SetTextSize(0.045);
+            tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
+            tex1->DrawLatex(0.17,0.75,"80 < p_{T,jet} < 100 GeV");
+        } // for id
+        reverseLegend(leg);
+        c->RedrawAxis();
+        c->Modified();
+        c->Update();
+        c->SaveAs(Form("pdf/fractions2_%s_%s.pdf",cq,cx));
+        } //for ptcand
+    } // for ix
+  } // for iq
+} // void fraction2
+  
+/*
 // S jets
-TH1D *h_k0ls = (TH1D*)file->Get("h_k0ls");
-TH1D *h_k0ss = (TH1D*)file->Get("h_k0ss");
-TH1D *h_kps = (TH1D*)file->Get("h_kps");
-TH1D *h_kms = (TH1D*)file->Get("h_kms");
-//TH1D *h_k0s = (TH1D*)file->Get("h_k0s");
-TH1D *h_pionps = (TH1D*)file->Get("h_pionps");
-TH1D *h_pionms = (TH1D*)file->Get("h_pionms");
-TH1D *h_pion0s = (TH1D*)file->Get("h_pion0s");
-TH1D *h_lambdas = (TH1D*)file->Get("h_lambdas");
-TH1D *h_sigma0s = (TH1D*)file->Get("h_sigma0s");
-TH1D *h_sigmaps = (TH1D*)file->Get("h_sigmaps");
-TH1D *h_sigmams = (TH1D*)file->Get("h_sigmams");
-TH1D *h_protons = (TH1D*)file->Get("h_protons");
-TH1D *h_antiprotons = (TH1D*)file->Get("h_antiprotons");
-TH1D *h_neutrons = (TH1D*)file->Get("h_neutrons");
-TH1D *h_antineutrons = (TH1D*)file->Get("h_antineutrons");
-TH1D *h_muons = (TH1D*)file->Get("h_muons");
-TH1D *h_electrons = (TH1D*)file->Get("h_electrons");
-TH1D *h_sall_round = (TH1D*)file->Get("h_sall_round");
-TH1D *h_s5_round = (TH1D*)file->Get("h_s5_round");
+TH1D *h_kaon0l_s_vs_ptcand = (TH1D*)file->Get("h_kaon0l_s_vs_cand");
+TH1D *h_kaon0s_s_vs_cand = (TH1D*)file->Get("h_kaon0s_s_vs_cand");
+TH1D *h_kaonp_s_vs_cand = (TH1D*)file->Get("h_kaonp_s_vs_cand");
+TH1D *h_kaonm_s_vs_cand = (TH1D*)file->Get("h_kaonm_s_vs_cand");
+//TH1D *h_kaon0_s_vs_cand = (TH1D*)file->Get("h_kaon0_s_vs_cand");
+TH1D *h_pionp_s_vs_cand = (TH1D*)file->Get("h_pionp_s_vs_cand");
+TH1D *h_pionm_s_vs_cand = (TH1D*)file->Get("h_pionm_s_vs_cand");
+TH1D *h_pion0_s_vs_cand = (TH1D*)file->Get("h_pion0_s_vs_cand");
+TH1D *h_lambda_s_vs_cand = (TH1D*)file->Get("h_lambda_s_vs_cand");
+TH1D *h_sigma0_s_vs_cand = (TH1D*)file->Get("h_sigma0_s_vs_cand");
+TH1D *h_sigmap_s_vs_cand = (TH1D*)file->Get("h_sigmap_s_vs_cand");
+TH1D *h_sigmam_s_vs_cand = (TH1D*)file->Get("h_sigmam_s_vs_cand");
+TH1D *h_proton_s_vs_cand = (TH1D*)file->Get("h_proton_s_vs_cand");
+TH1D *h_antiproton_s_vs_cand = (TH1D*)file->Get("h_antiproton_s_vs_cand");
+TH1D *h_neutron_s_vs_cand = (TH1D*)file->Get("h_neutron_s_vs_cand");
+TH1D *h_antineutron_s_vs_cand = (TH1D*)file->Get("h_antineutron_s_vs_cand");
+TH1D *h_muon_s_vs_cand = (TH1D*)file->Get("h_muon_s_vs_cand");
+TH1D *h_electron_s_vs_cand = (TH1D*)file->Get("h_electron_s_vs_cand");
+TH1D *h_sall_cand = (TH1D*)file->Get("h_sall_cand");
+TH1D *h_s5_cand = (TH1D*)file->Get("h_s5_cand");
 
 // U jets
-TH1D *h_k0lu = (TH1D*)file->Get("h_k0lu");
-TH1D *h_k0su = (TH1D*)file->Get("h_k0su");
-TH1D *h_kpu = (TH1D*)file->Get("h_kpu");
-TH1D *h_kmu = (TH1D*)file->Get("h_kmu");
-//TH1D *h_k0u = (TH1D*)file->Get("h_k0u");
+TH1D *h_kaon0lu = (TH1D*)file->Get("h_kaon0lu");
+TH1D *h_kaon0su = (TH1D*)file->Get("h_kaon0su");
+TH1D *h_kaonpu = (TH1D*)file->Get("h_kaonpu");
+TH1D *h_kaonmu = (TH1D*)file->Get("h_kaonmu");
+//TH1D *h_kaon0u = (TH1D*)file->Get("h_kaon0u");
 TH1D *h_pionpu = (TH1D*)file->Get("h_pionpu");
 TH1D *h_pionmu = (TH1D*)file->Get("h_pionmu");
 TH1D *h_pion0u = (TH1D*)file->Get("h_pion0u");
@@ -51,15 +257,15 @@ TH1D *h_neutronu = (TH1D*)file->Get("h_neutronu");
 TH1D *h_antineutronu = (TH1D*)file->Get("h_antineutronu");
 TH1D *h_muonu = (TH1D*)file->Get("h_muonu");
 TH1D *h_electronu = (TH1D*)file->Get("h_electronu");
-TH1D *h_uall_round = (TH1D*)file->Get("h_uall_round");
-TH1D *h_u5_round = (TH1D*)file->Get("h_u5_round");
+TH1D *h_uall_cand = (TH1D*)file->Get("h_uall_cand");
+TH1D *h_u5_cand = (TH1D*)file->Get("h_u5_cand");
 
 // D jets
-TH1D *h_k0ld = (TH1D*)file->Get("h_k0ld");
-TH1D *h_k0sd = (TH1D*)file->Get("h_k0sd");
-TH1D *h_kpd = (TH1D*)file->Get("h_kpd");
-TH1D *h_kmd = (TH1D*)file->Get("h_kmd");
-//TH1D *h_k0d = (TH1D*)file->Get("h_k0d");
+TH1D *h_kaon0ld = (TH1D*)file->Get("h_kaon0ld");
+TH1D *h_kaon0sd = (TH1D*)file->Get("h_kaon0sd");
+TH1D *h_kaonpd = (TH1D*)file->Get("h_kaonpd");
+TH1D *h_kaonmd = (TH1D*)file->Get("h_kaonmd");
+//TH1D *h_kaon0d = (TH1D*)file->Get("h_kaon0d");
 TH1D *h_pionpd = (TH1D*)file->Get("h_pionpd");
 TH1D *h_pionmd = (TH1D*)file->Get("h_pionmd");
 TH1D *h_pion0d = (TH1D*)file->Get("h_pion0d");
@@ -73,34 +279,34 @@ TH1D *h_neutrond = (TH1D*)file->Get("h_neutrond");
 TH1D *h_antineutrond = (TH1D*)file->Get("h_antineutrond");
 TH1D *h_muond = (TH1D*)file->Get("h_muond");
 TH1D *h_electrond = (TH1D*)file->Get("h_electrond");
-TH1D *h_dall_round = (TH1D*)file->Get("h_dall_round");
-TH1D *h_d5_round = (TH1D*)file->Get("h_d5_round");
+TH1D *h_dall_cand = (TH1D*)file->Get("h_dall_cand");
+TH1D *h_d5_cand = (TH1D*)file->Get("h_d5_cand");
 
-TH1D *hrk0ls = (TH1D*)h_k0ls->Clone("hrk0ls");
-TH1D *hrk0ss = (TH1D*)h_k0ss->Clone("hrk0ss");
-TH1D *hrkps = (TH1D*)h_kps->Clone("hrkps");
-TH1D *hrkms = (TH1D*)h_kms->Clone("hrkms");
-//TH1D *hrk0s = (TH1D*)h_k0->Clone("hrk0s");
-TH1D *hrlambdas = (TH1D*)h_lambdas->Clone("hrlambdas");
-TH1D *hrsigma0s = (TH1D*)h_sigma0s->Clone("hrsigma0s");
-TH1D *hrsigmaps = (TH1D*)h_sigmaps->Clone("hrsigmaps");
-TH1D *hrsigmams = (TH1D*)h_sigmams->Clone("hrsigmams");
-TH1D *hrpionps = (TH1D*)h_pionps->Clone("hrpionps");
-TH1D *hrpionms = (TH1D*)h_pionms->Clone("hrpionms");
-TH1D *hrpion0s = (TH1D*)h_pion0s->Clone("hrpion0s");
-TH1D *hrprotons = (TH1D*)h_protons->Clone("hrprotons");
-TH1D *hrantiprotons = (TH1D*)h_antiprotons->Clone("hrantiprotons");
-TH1D *hrneutrons = (TH1D*)h_neutrons->Clone("hrneutrons");
-TH1D *hrantineutrons = (TH1D*)h_antineutrons->Clone("hrantineutrons");
-TH1D *hrelectrons = (TH1D*)h_electrons->Clone("hrelectrons");
-TH1D *hrmuons = (TH1D*)h_muons->Clone("hrmuons");
-TH1D *hrs5 = (TH1D*)h_s5_round->Clone("hrs5");
+TH1D *hr_kaon0l_s_vs_ptcand = (TH1D*)h_kaon0l_s_vs_ptcand->Clone("hr_kaon0l_s_vs_ptcand");
+TH1D *hr_kaon0s_s_vs_ptcand = (TH1D*)h_kaon0s_s_vs_ptcand->Clone("hr_kaon0s_s_vs_ptcand");
+TH1D *hr_kaonp_s_vs_ptcand = (TH1D*)h_kaonp_s_vs_ptcand->Clone("hr_kaonp_s_vs_ptcand");
+TH1D *hr_kaonm_s_vs_ptcand = (TH1D*)h_kaonm_s_vs_ptcand->Clone("hr_kaonm_s_vs_ptcand");
+//TH1D *hr_kaon0_s_vs_ptcand = (TH1D*)h_kaon0->Clone("hr_kaon0_s_vs_ptcand");
+TH1D *hrlambda_s_vs_ptcand = (TH1D*)h_lambda_s_vs_ptcand->Clone("hrlambda_s_vs_ptcand");
+TH1D *hrsigma0_s_vs_ptcand = (TH1D*)h_sigma0_s_vs_ptcand->Clone("hrsigma0_s_vs_ptcand");
+TH1D *hrsigmap_s_vs_ptcand = (TH1D*)h_sigmap_s_vs_ptcand->Clone("hrsigmap_s_vs_ptcand");
+TH1D *hrsigmam_s_vs_ptcand = (TH1D*)h_sigmam_s_vs_ptcand->Clone("hrsigmam_s_vs_ptcand");
+TH1D *hrpionp_s_vs_ptcand = (TH1D*)h_pionp_s_vs_ptcand->Clone("hrpionp_s_vs_ptcand");
+TH1D *hrpionm_s_vs_ptcand = (TH1D*)h_pionm_s_vs_ptcand->Clone("hrpionm_s_vs_ptcand");
+TH1D *hrpion0_s_vs_ptcand = (TH1D*)h_pion0_s_vs_ptcand->Clone("hrpion0_s_vs_ptcand");
+TH1D *hrproton_s_vs_ptcand = (TH1D*)h_proton_s_vs_ptcand->Clone("hrproton_s_vs_ptcand");
+TH1D *hrantiproton_s_vs_ptcand = (TH1D*)h_antiproton_s_vs_ptcand->Clone("hrantiproton_s_vs_ptcand");
+TH1D *hrneutron_s_vs_ptcand = (TH1D*)h_neutron_s_vs_ptcand->Clone("hrneutron_s_vs_ptcand");
+TH1D *hrantineutron_s_vs_ptcand = (TH1D*)h_antineutron_s_vs_ptcand->Clone("hrantineutron_s_vs_ptcand");
+TH1D *hrelectron_s_vs_ptcand = (TH1D*)h_electron_s_vs_ptcand->Clone("hrelectron_s_vs_ptcand");
+TH1D *hrmuon_s_vs_ptcand = (TH1D*)h_muon_s_vs_ptcand->Clone("hrmuon_s_vs_ptcand");
+TH1D *hrs5 = (TH1D*)h_s5_cand->Clone("hrs5");
 
-TH1D *hrk0lu = (TH1D*)h_k0lu->Clone("hrk0lu");
-TH1D *hrk0su = (TH1D*)h_k0su->Clone("hrk0su");
-TH1D *hrkpu = (TH1D*)h_kpu->Clone("hrkpu");
-TH1D *hrkmu = (TH1D*)h_kmu->Clone("hrkmu");
-//TH1D *hrk0u = (TH1D*)h_k0u->Clone("hrk0u");
+TH1D *hrk0lu = (TH1D*)h_kaon0lu->Clone("hrk0lu");
+TH1D *hrk0su = (TH1D*)h_kaon0su->Clone("hrk0su");
+TH1D *hrkpu = (TH1D*)h_kaonpu->Clone("hrkpu");
+TH1D *hrkmu = (TH1D*)h_kaonmu->Clone("hrkmu");
+//TH1D *hrk0u = (TH1D*)h_kaon0u->Clone("hrk0u");
 TH1D *hrlambdau = (TH1D*)h_lambdau->Clone("hrlambdau");
 TH1D *hrsigma0u = (TH1D*)h_sigma0u->Clone("hrsigma0u");
 TH1D *hrsigmapu = (TH1D*)h_sigmapu->Clone("hrsigmapu");
@@ -114,13 +320,13 @@ TH1D *hrneutronu = (TH1D*)h_neutronu->Clone("hrneutronu");
 TH1D *hrantineutronu = (TH1D*)h_antineutronu->Clone("hrantineutronu");
 TH1D *hrelectronu = (TH1D*)h_electronu->Clone("hrelectronu");
 TH1D *hrmuonu = (TH1D*)h_muonu->Clone("hrmuonu");
-TH1D *hru5 = (TH1D*)h_u5_round->Clone("hru5");
+TH1D *hru5 = (TH1D*)h_u5_cand->Clone("hru5");
 
-TH1D *hrk0ld = (TH1D*)h_k0ld->Clone("hrk0ld");
-TH1D *hrk0sd = (TH1D*)h_k0sd->Clone("hrk0sd");
-TH1D *hrkpd = (TH1D*)h_kpd->Clone("hrkpd");
-TH1D *hrkmd = (TH1D*)h_kmd->Clone("hrkmd");
-//TH1D *hrk0d = (TH1D*)h_k0d->Clone("hrk0d");
+TH1D *hrk0ld = (TH1D*)h_kaon0ld->Clone("hrk0ld");
+TH1D *hrk0sd = (TH1D*)h_kaon0sd->Clone("hrk0sd");
+TH1D *hrkpd = (TH1D*)h_kaonpd->Clone("hrkpd");
+TH1D *hrkmd = (TH1D*)h_kaonmd->Clone("hrkmd");
+//TH1D *hrk0d = (TH1D*)h_kaon0d->Clone("hrk0d");
 TH1D *hrlambdad = (TH1D*)h_lambdad->Clone("hrlambdad");
 TH1D *hrsigma0d = (TH1D*)h_sigma0d->Clone("hrsigma0d");
 TH1D *hrsigmapd = (TH1D*)h_sigmapd->Clone("hrsigmapd");
@@ -134,13 +340,13 @@ TH1D *hrneutrond = (TH1D*)h_neutrond->Clone("hrneutrond");
 TH1D *hrantineutrond = (TH1D*)h_antineutrond->Clone("hrantineutrond");
 TH1D *hrelectrond = (TH1D*)h_electrond->Clone("hrelectrond");
 TH1D *hrmuond = (TH1D*)h_muond->Clone("hrmuond");
-TH1D *hrd5 = (TH1D*)h_d5_round->Clone("hrd5");
+TH1D *hrd5 = (TH1D*)h_d5_cand->Clone("hrd5");
 
-TH1D *hrk0ldu = (TH1D*)h_k0lu->Clone("hrk0ldu");
-TH1D *hrk0sdu = (TH1D*)h_k0su->Clone("hrk0sdu");
-TH1D *hrkpdu = (TH1D*)h_kpu->Clone("hrkpdu");
-TH1D *hrkmdu = (TH1D*)h_kmu->Clone("hrkmdu");
-//TH1D *hrk0du = (TH1D*)h_k0u->Clone("hrk0du");
+TH1D *hrk0ldu = (TH1D*)h_kaon0lu->Clone("hrk0ldu");
+TH1D *hrk0sdu = (TH1D*)h_kaon0su->Clone("hrk0sdu");
+TH1D *hrkpdu = (TH1D*)h_kaonpu->Clone("hrkpdu");
+TH1D *hrkmdu = (TH1D*)h_kaonmu->Clone("hrkmdu");
+//TH1D *hrk0du = (TH1D*)h_kaon0u->Clone("hrk0du");
 TH1D *hrlambdadu = (TH1D*)h_lambdau->Clone("hrlambdadu");
 TH1D *hrsigma0du = (TH1D*)h_sigma0u->Clone("hrsigma0du");
 TH1D *hrsigmapdu = (TH1D*)h_sigmapu->Clone("hrsigmapdu");
@@ -148,7 +354,7 @@ TH1D *hrsigmamdu = (TH1D*)h_sigmamu->Clone("hrsigmamdu");
 TH1D *hrpionpdu = (TH1D*)h_pionpu->Clone("hrpionpdu");
 TH1D *hrpionmdu = (TH1D*)h_pionmu->Clone("hrpionmdu");
 TH1D *hrpion0du = (TH1D*)h_pion0u->Clone("hrpion0du");
-TH1D *hrdu5 = (TH1D*)h_u5_round->Clone("hrdu5");
+TH1D *hrdu5 = (TH1D*)h_u5_cand->Clone("hrdu5");
 
 TH1D *hrprotondu = (TH1D*)h_protonu->Clone("hrprotondu");
 TH1D *hrantiprotondu = (TH1D*)h_antiprotonu->Clone("hrantiprotondu");
@@ -156,7 +362,7 @@ TH1D *hrneutrondu = (TH1D*)h_neutronu->Clone("hrneutrondu");
 TH1D *hrantineutrondu = (TH1D*)h_antineutronu->Clone("hrantineutrondu");
 TH1D *hrelectrondu = (TH1D*)h_electronu->Clone("hrelectrondu");
 TH1D *hrmuondu = (TH1D*)h_muonu->Clone("hrmuondu");
-TH1D *h_duall_round = (TH1D*)h_uall_round->Clone("h_duall_round");
+TH1D *h_duall_cand = (TH1D*)h_uall_cand->Clone("h_duall_cand");
 
 hrprotondu->Add(h_protond);
 hrneutrondu->Add(h_neutrond);
@@ -164,7 +370,7 @@ hrantiprotondu->Add(h_antiprotond);
 hrantineutrondu->Add(h_antineutrond);
 hrelectrondu->Add(h_electrond);
 hrmuondu->Add(h_muond);
-h_duall_round->Add(h_dall_round);
+h_duall_cand->Add(h_dall_cand);
 
 hrk0ldu->Add(hrk0ld);
 hrk0sdu->Add(hrk0sd);
@@ -181,110 +387,110 @@ hrpion0du->Add(hrpion0d);
 hrdu5->Add(hrd5);
 
 
-hrk0ls->Divide(h_sall_round);
-hrk0ss->Divide(h_sall_round);
-hrkps->Divide(h_sall_round);
-hrkms->Divide(h_sall_round);
-//hrk0s->Divide(h_sall);
-hrlambdas->Divide(h_sall_round);
-hrsigma0s->Divide(h_sall_round);
+hr_kaon0l_s_vs_ptcand->Divide(h_sall_cand);
+hr_kaon0s_s_vs_ptcand->Divide(h_sall_cand);
+hr_kaonp_s_vs_ptcand->Divide(h_sall_cand);
+hr_kaonm_s_vs_ptcand->Divide(h_sall_cand);
+//hr_kaon0_s_vs_ptcand->Divide(h_sall);
+hrlambda_s_vs_ptcand->Divide(h_sall_cand);
+hrsigma0s->Divide(h_sall_cand);
 
 hrsigmaps->Add(hrsigmams);
 
-hrsigmaps->Divide(h_sall_round);
-//hrsigmams->Divide(h_sall_round);
-hrpionps->Divide(h_sall_round);
-hrpionms->Divide(h_sall_round);
-hrpion0s->Divide(h_sall_round);
-hrprotons->Divide(h_sall_round);
-hrneutrons->Divide(h_sall_round);
-hrantiprotons->Divide(h_sall_round);
-hrantineutrons->Divide(h_sall_round);
+hrsigmaps->Divide(h_sall_cand);
+//hrsigmams->Divide(h_sall_cand);
+hrpionps->Divide(h_sall_cand);
+hrpionms->Divide(h_sall_cand);
+hrpion0s->Divide(h_sall_cand);
+hrprotons->Divide(h_sall_cand);
+hrneutrons->Divide(h_sall_cand);
+hrantiprotons->Divide(h_sall_cand);
+hrantineutrons->Divide(h_sall_cand);
 
 hrelectrons->Add(hrmuons);
 
-hrelectrons->Divide(h_sall_round);
-//hrmuons->Divide(h_sall_round);
-hrs5->Divide(h_sall_round);
+hrelectrons->Divide(h_sall_cand);
+//hrmuons->Divide(h_sall_cand);
+hrs5->Divide(h_sall_cand);
 
-hrk0lu->Divide(h_uall_round);
-hrk0su->Divide(h_uall_round);
-hrkpu->Divide(h_uall_round);
-hrkmu->Divide(h_uall_round);
-//hrk0u->Divide(h_uall_round);
-hrlambdau->Divide(h_uall_round);
-hrsigma0u->Divide(h_uall_round);
+hrk0lu->Divide(h_uall_cand);
+hrk0su->Divide(h_uall_cand);
+hrkpu->Divide(h_uall_cand);
+hrkmu->Divide(h_uall_cand);
+//hrk0u->Divide(h_uall_cand);
+hrlambdau->Divide(h_uall_cand);
+hrsigma0u->Divide(h_uall_cand);
 
 hrsigmapu->Add(hrsigmamu);
 
-hrsigmapu->Divide(h_uall_round);
-//hrsigmamu->Divide(h_uall_round);
-hrpionpu->Divide(h_uall_round);
-hrpionmu->Divide(h_uall_round);
-hrpion0u->Divide(h_uall_round);
-hrprotonu->Divide(h_uall_round);
-hrneutronu->Divide(h_uall_round);
-hrantiprotonu->Divide(h_uall_round);
-hrantineutronu->Divide(h_uall_round);
+hrsigmapu->Divide(h_uall_cand);
+//hrsigmamu->Divide(h_uall_cand);
+hrpionpu->Divide(h_uall_cand);
+hrpionmu->Divide(h_uall_cand);
+hrpion0u->Divide(h_uall_cand);
+hrprotonu->Divide(h_uall_cand);
+hrneutronu->Divide(h_uall_cand);
+hrantiprotonu->Divide(h_uall_cand);
+hrantineutronu->Divide(h_uall_cand);
 
 hrelectronu->Add(hrmuonu);
 
-hrelectronu->Divide(h_uall_round);
-//hrmuonu->Divide(h_uall_round);
-hru5->Divide(h_uall_round);
+hrelectronu->Divide(h_uall_cand);
+//hrmuonu->Divide(h_uall_cand);
+hru5->Divide(h_uall_cand);
 
-hrk0ld->Divide(h_dall_round);
-hrk0sd->Divide(h_dall_round);
-hrkpd->Divide(h_dall_round);
-hrkmd->Divide(h_dall_round);
-//hrk0d->Divide(h_dall_round);
-hrlambdad->Divide(h_dall_round);
-hrsigma0d->Divide(h_dall_round);
+hrk0ld->Divide(h_dall_cand);
+hrk0sd->Divide(h_dall_cand);
+hrkpd->Divide(h_dall_cand);
+hrkmd->Divide(h_dall_cand);
+//hrk0d->Divide(h_dall_cand);
+hrlambdad->Divide(h_dall_cand);
+hrsigma0d->Divide(h_dall_cand);
 
 hrsigmapd->Add(hrsigmamd);
 
-hrsigmapd->Divide(h_dall_round);
-//hrsigmamd->Divide(h_dall_round);
-hrpionpd->Divide(h_dall_round);
-hrpionmd->Divide(h_dall_round);
-hrpion0d->Divide(h_dall_round);
-hrprotond->Divide(h_dall_round);
-hrneutrond->Divide(h_dall_round);
-hrantiprotond->Divide(h_dall_round);
-hrantineutrond->Divide(h_dall_round);
+hrsigmapd->Divide(h_dall_cand);
+//hrsigmamd->Divide(h_dall_cand);
+hrpionpd->Divide(h_dall_cand);
+hrpionmd->Divide(h_dall_cand);
+hrpion0d->Divide(h_dall_cand);
+hrprotond->Divide(h_dall_cand);
+hrneutrond->Divide(h_dall_cand);
+hrantiprotond->Divide(h_dall_cand);
+hrantineutrond->Divide(h_dall_cand);
 
 hrelectrond->Add(hrmuond);
 
-hrelectrond->Divide(h_dall_round);
-//hrmuond->Divide(h_dall_round);
-hrd5->Divide(h_dall_round);
+hrelectrond->Divide(h_dall_cand);
+//hrmuond->Divide(h_dall_cand);
+hrd5->Divide(h_dall_cand);
 
-hrk0ldu->Divide(h_duall_round);
-hrk0sdu->Divide(h_duall_round);
-hrkpdu->Divide(h_duall_round);
-hrkmdu->Divide(h_duall_round);
-//hrk0du->Divide(h_duall_round);
-hrlambdadu->Divide(h_duall_round);
-hrsigma0du->Divide(h_duall_round);
+hrk0ldu->Divide(h_duall_cand);
+hrk0sdu->Divide(h_duall_cand);
+hrkpdu->Divide(h_duall_cand);
+hrkmdu->Divide(h_duall_cand);
+//hrk0du->Divide(h_duall_cand);
+hrlambdadu->Divide(h_duall_cand);
+hrsigma0du->Divide(h_duall_cand);
 
 hrsigmapdu->Add(hrsigmamdu);
 
-hrsigmapdu->Divide(h_duall_round);
-//hrsigmamdu->Divide(h_duall_round);
-hrpionpdu->Divide(h_duall_round);
-hrpionmdu->Divide(h_duall_round);
-hrpion0du->Divide(h_duall_round);
-hrprotondu->Divide(h_duall_round);
-hrneutrondu->Divide(h_duall_round);
-hrantiprotondu->Divide(h_duall_round);
-hrantineutrondu->Divide(h_duall_round);
+hrsigmapdu->Divide(h_duall_cand);
+//hrsigmamdu->Divide(h_duall_cand);
+hrpionpdu->Divide(h_duall_cand);
+hrpionmdu->Divide(h_duall_cand);
+hrpion0du->Divide(h_duall_cand);
+hrprotondu->Divide(h_duall_cand);
+hrneutrondu->Divide(h_duall_cand);
+hrantiprotondu->Divide(h_duall_cand);
+hrantineutrondu->Divide(h_duall_cand);
 
 hrelectrondu->Add(hrmuondu);
 
-hrelectrondu->Divide(h_duall_round);
-//hrmuondu->Divide(h_duall_round);
-hrdu5->Divide(h_duall_round);
-
+hrelectrondu->Divide(h_duall_cand);
+//hrmuondu->Divide(h_duall_cand);
+hrdu5->Divide(h_duall_cand);*/
+/*
 // Create a stack
 setTDRStyle();
 lumi_136TeV = "Run3";
@@ -296,7 +502,7 @@ c1->SetLogx();
 THStack *hs = new THStack("hs", "; p_{T,cand} (GeV); S Jet N fraction");
 
 // Set histogram fill colors and add to stack
-hrelectrons->SetFillColor(kCyan-9);
+hr_electron_s_vs_ptcand->SetFillColor(kCyan-9);
 hrs5->SetFillColor(kBlue-9);
 hrlambdas->SetFillColor(kTeal-9);
 hrk0ls->SetFillColor(kGreen-6);
@@ -373,7 +579,7 @@ tex1->SetNDC(); tex1->SetTextSize(0.045);
 tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
 tex1->DrawLatex(0.17,0.75,"80 < p_{T,jet} < 100 GeV");
 
-/*TLatex *tex2 = new TLatex();
+TLatex *tex2 = new TLatex();
 tex2->SetNDC(); tex2->SetTextSize(0.065);
 tex2->DrawLatex(0.1,0.92,"CMS");
 
@@ -385,7 +591,7 @@ tex3->DrawLatex(0.65,0.92,"Run3 (13.6 TeV)");
 TLatex *tex4 = new TLatex();
 tex4->SetNDC(); tex4->SetTextSize(0.045);
 tex4->SetTextFont(52);
-tex4->DrawLatex(0.15,0.83,"Private");*/
+tex4->DrawLatex(0.15,0.83,"Private");
 
 // Update the canvas to reflect changes
 c1->RedrawAxis();
@@ -708,3 +914,4 @@ c4->SaveAs("pdf/fractions2D.pdf");
 // Do not close the file if you want to interact with the histograms further
 // file->Close(); // Uncomment this if you're done with the file
 }
+*/
