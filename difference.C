@@ -3,314 +3,196 @@
 #include <TCanvas.h>
 #include <TLegend.h>
 #include <TFile.h>
-#include <TColor.h>
+#include <TList.h>
 #include "tdrstyle_mod22.C"
+
+bool    debug = true;
+
+void reverseLegend(TLegend *leg) {
+    if (!leg) return; // Check for null pointer
+
+    TList *list = leg->GetListOfPrimitives();
+    if (!list) return; // Check if the list is valid
+
+    // Create a new TList to hold the reversed order temporarily
+    TList *reversedList = new TList();
+
+    for (auto obj : *list) {
+    reversedList->AddFirst(obj);
+    }
+
+    // Clear the original list without deleting the objects (now owned by reversedList)
+    list->Clear();
+
+    // Move items back from the reversed list to the original list, now in reversed order
+    for (auto obj : *reversedList) {
+        list->Add(obj);
+    }
+
+    // Cleanup: delete the temporary reversed list, but do not delete the objects it contains
+    delete reversedList;
+}
 
 void difference() {
 // Open the ROOT file containing the histograms
 TFile *file = new TFile("output.root", "READ");
 // Retrieve the histograms
-TH1D *h_u_mod = (TH1D*)file->Get("h_u_mod");
-TH1D *h_u3_mod = (TH1D*)file->Get("h_u3_mod");
-TH1D *h_u5_mod = (TH1D*)file->Get("h_u5_mod");
-TH1D *h_uall_mod = (TH1D*)file->Get("h_uall_mod");
 
-TH1D *h_s_mod = (TH1D*)file->Get("h_s_mod");
-TH1D *h_s3_mod = (TH1D*)file->Get("h_s3_mod");
-TH1D *h_s5_mod = (TH1D*)file->Get("h_s5_mod");
-TH1D *h_sall_mod = (TH1D*)file->Get("h_sall_mod");
+string vq[] = {"d", "u", "s", "c", "b", "g"};
+int nq = sizeof(vq) / sizeof(vq[0]);
 
-TH1D *h_d_mod = (TH1D*)file->Get("h_d_mod");
-TH1D *h_d3_mod = (TH1D*)file->Get("h_d3_mod");
-TH1D *h_d5_mod = (TH1D*)file->Get("h_d5_mod");
-TH1D *h_dall_mod = (TH1D*)file->Get("h_dall_mod");
+string vc[] = {"ch", "nh", "ne"};
+int nc = sizeof(vc) / sizeof(vc[0]);
 
-TH1D *h_du_mod = (TH1D*)file->Get("h_du_mod");
-TH1D *h_du3_mod = (TH1D*)file->Get("h_du3_mod");
-TH1D *h_du5_mod = (TH1D*)file->Get("h_du5_mod");
-TH1D *h_duall_mod = (TH1D*)file->Get("h_duall_mod");
+string vxvar[] = {"ptcand", "ptjet"};
+int nxvar = sizeof(vxvar) / sizeof(vxvar[0]);
 
-// Normalize the histograms to percentages
-/*int nUjet = h_u_mod->GetEntries();
-int nU3jet = h_u3_mod->GetEntries();
-int nU5jet = h_u5_mod->GetEntries();
-int nUall = h_uall_mod->GetEntries();
+string vyvar[] = {"flc", "fln", "fle", "fhc", "fhn", "fhe"};
+int nyvar = sizeof(vyvar) / sizeof(vyvar[0]);
 
-h_s->Scale(1./nSjet);
-h_s3->Scale(1./nS3jet);
-h_s5->Scale(1./nS5jet);
-h_sall->Scale(1./nSall);
+std::map < string, int > mcolor;
 
-h_s->Scale(1,"width");
-h_s3->Scale(1,"width");
-h_s5->Scale(1,"width");
-h_sall->Scale(1,"width");*/
+mcolor["ch"] = kRed-7;
+mcolor["nh"] = kGreen-6;
+mcolor["ne"] = kBlue-6;
 
-TH1D *hru = (TH1D*)h_u_mod->Clone("hru");
-TH1D *hru3 = (TH1D*)h_u3_mod->Clone("hru3");
-TH1D *hru5 = (TH1D*)h_u5_mod->Clone("hru5");
+std::map < string, string > mleg;
 
-TH1D *hrs = (TH1D*)h_s_mod->Clone("hrs");
-TH1D *hrs3 = (TH1D*)h_s3_mod->Clone("hrs3");
-TH1D *hrs5 = (TH1D*)h_s5_mod->Clone("hrs5");
+mleg["ch"] = "#splitline{Charged}{Hadrons}";
+mleg["nh"] = "#splitline{Neutral}{Hadrons}";
+mleg["ne"] = "Photons";
 
-TH1D *hrd = (TH1D*)h_d_mod->Clone("hrd");
-TH1D *hrd3 = (TH1D*)h_d3_mod->Clone("hrd3");
-TH1D *hrd5 = (TH1D*)h_d5_mod->Clone("hrd5");
 
-TH1D *hrdu = (TH1D*)h_du_mod->Clone("hrdu");
-TH1D *hrdu3 = (TH1D*)h_du3_mod->Clone("hrdu3");
-TH1D *hrdu5 = (TH1D*)h_du5_mod->Clone("hrdu5");
+std::map < string, TH1D* > mh;
+std::map< string, TH1D*> mhclone;
+std::map< string, TH1D*> mhsubtract;
 
-hru->Divide(h_u_mod,h_uall_mod,1,1,"b");
-hru3->Divide(h_u3_mod,h_uall_mod,1,1,"b");
-hru5->Divide(h_u5_mod,h_uall_mod,1,1,"b");
-
-hrs->Divide(h_s_mod,h_sall_mod,1,1,"b");
-hrs3->Divide(h_s3_mod,h_sall_mod,1,1,"b");
-hrs5->Divide(h_s5_mod,h_sall_mod,1,1,"b");
-
-hrd->Divide(h_d_mod,h_dall_mod,1,1,"b");
-hrd3->Divide(h_d3_mod,h_dall_mod,1,1,"b");
-hrd5->Divide(h_d5_mod,h_dall_mod,1,1,"b");
-
-hrdu->Divide(h_du_mod,h_duall_mod,1,1,"b");
-hrdu3->Divide(h_du3_mod,h_duall_mod,1,1,"b");
-hrdu5->Divide(h_du5_mod,h_duall_mod,1,1,"b");
-
-// Set histogram fill colors and add to stack
-/* hru->SetFillColor(625);
-hru5->SetFillColor(410);
-hru3->SetFillColor(593);
-
-hrs->SetFillColor(625);
-hrs5->SetFillColor(410);
-hrs3->SetFillColor(593);*/
-
-TH1D *hrsd = (TH1D*)hrs->Clone("hrsd");
-TH1D *hrsd3 = (TH1D*)hrs3->Clone("hrsd3");
-TH1D *hrsd5 = (TH1D*)hrs5->Clone("hrsd5");
-
-TH1D *hrsdu = (TH1D*)hrs->Clone("hrsdu");
-TH1D *hrsdu3 = (TH1D*)hrs3->Clone("hrsdu3");
-TH1D *hrsdu5 = (TH1D*)hrs5->Clone("hrsdu5");
-
-TH1D *hrdd = (TH1D*)hrd->Clone("hrdd");
-TH1D *hrdd3 = (TH1D*)hrd3->Clone("hrdd3");
-TH1D *hrdd5 = (TH1D*)hrd5->Clone("hrdd5");
-
-// Substrations
-hrs->Add(hru, -1);
-hrs3->Add(hru3, -1);
-hrs5->Add(hru5, -1);
-
-hrd->Add(hru, -1);
-hrd3->Add(hru3, -1);
-hrd5->Add(hru5, -1);
-
-hrsd->Add(hrdd, -1);
-hrsd3->Add(hrdd3, -1);
-hrsd5->Add(hrdd5, -1);
-
-hrsdu->Add(hrdu, -1);
-hrsdu3->Add(hrdu3, -1);
-hrsdu5->Add(hrdu5, -1);
-
-/*// Create a stack
-THStack *hs_u = new THStack("hs_u", "Pt fraction for S-U; PtCand; Jet pt fraction");
-
-hs_u->Add(hrs);
-hs_u->Add(hrs3);
-hs_u->Add(hrs5);*/
-
-// Draw the stack
-//TCanvas *c1 = new TCanvas("c1", "Pt fractions", 800, 600);
 setTDRStyle();
 lumi_136TeV = "Run3";
 extraText = "Private";
-TH1D *h1 = tdrHist("h1","Jet N fraction (S-U)",-0.1 + 1e-4,0.14 -1e-4,"p_{T,cand} (GeV)",0.1,100);
-TCanvas *c1 = tdrCanvas("c1",h1,8,kSquare);
-c1->SetLogx();
-//hrs->SetFillStyle(kNone);
-//hrs->Draw("histe");
-tdrDraw(hrs,"histe",kFullSquare,kRed,kSolid,-1,kNone);
-hrs->SetMarkerSize(1.5);
-//hrs3->SetFillStyle(kNone);
-//hrs3->Draw("histe same");
-tdrDraw(hrs3,"histe",kFullCircle,kGreen+2,kSolid,-1,kNone);
-hrs3->SetMarkerSize(1.5);
-//hrs5->SetFillStyle(kNone);
-//hrs5->Draw("histe same");
-tdrDraw(hrs5,"histe",kFullDiamond,kBlue,kSolid,-1,kNone);
-hrs5->SetMarkerSize(1.75);
 
+for (int iq1 = 0; iq1 != nq; ++ iq1) {
+    const char *cq1 = vq[iq1].c_str();
+    for (int iq2 = 0; iq2 != nq; ++iq2) {
+        if (iq2 != iq1) {
+        const char *cq2 = vq[iq2].c_str(); // Ensures unique pairs without repetition
+        for (int ix = 0; ix != nxvar; ++ ix) {
+            const char *cx = vxvar[ix].c_str();
+            if (vxvar[ix] == "ptcand"){
+                TH1D *h = tdrHist(Form("h1_%s-%s%s",cq1,cq2,cx),Form("%s-%s jet N fraction",cq1,cq2),-0.15 + 1e-4,0.2 -1e-4,"p_{T} (GeV)",0.1,100);
+                TCanvas *c = tdrCanvas(Form("c1_%s-%s%s",cq1,cq2,cx),h,8,kSquare);
+                c->SetLogx();
+                TLegend *leg = tdrLeg(0.83,0.9-0.1*3,1.1,0.9);
 
-// Create legend
-//TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-TLegend *leg1 = tdrLeg(0.5,0.9-0.05*3,0.75,0.9);
-leg1->AddEntry(hrs5, "Photons", "ple");
-leg1->AddEntry(hrs3, "Neutral Hadrons", "ple");
-leg1->AddEntry(hrs, "Charged Hadrons", "ple");
-leg1->Draw();
+                //if (debug){cout << "ixloop" << ix << endl << flush;}
+                
+                for (int ic = 0; ic != nc; ++ ic) {
+                    const char *cv = vc[ic].c_str();
 
-TLatex *tex1 = new TLatex();
-tex1->SetNDC(); tex1->SetTextSize(0.045);
-tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
-tex1->DrawLatex(0.17,0.75,"60 < p_{T,jet} < 140 GeV");
-// Assuming the x-axis categories are correctly set when histograms were created
-// If you need to set labels for the x-axis categories, do it here
+                    string hname = Form("h_%s_%s_vs_%s", cq1, cv, cx);
+                    TH1D *h = (TH1D*)file->Get(hname.c_str()); assert(h);
+                    mh[hname] = h;
+                    string hname_all = Form("h_all_%s_vs_%s", cq1, cx);
+                    TH1D *h_all = (TH1D*)file->Get(hname_all.c_str()); assert(h_all);
+                    mh[hname_all] = h_all;
+                    string hrname = Form("hr_%s_%s_vs_%s", cq1, cv, cx);
+                    TH1D *hc = (TH1D*)h->Clone(Form("%s",hrname.c_str()));
+                    hc->Divide(hc,h_all,1,1,"b");
+                    mhclone[hrname] = hc;
 
-// Update the canvas to reflect changes
-c1->RedrawAxis();
-c1->Modified();
-c1->Update();
-c1->SaveAs("pdf/differenceSU.pdf");
+                    string hname2 = Form("h_%s_%s_vs_%s", cq2, cv, cx);
+                    TH1D *h2 = (TH1D*)file->Get(hname2.c_str()); assert(h2);
+                    mh[hname2] = h2;
+                    string hname_all2 = Form("h_all_%s_vs_%s", cq2, cx);
+                    TH1D *h_all2 = (TH1D*)file->Get(hname_all2.c_str()); assert(h_all2);
+                    mh[hname_all2] = h_all2;
+                    string hrname2 = Form("hr_%s_%s_vs_%s", cq2, cv, cx);
+                    TH1D *hc2 = (TH1D*)h2->Clone(Form("%s",hrname2.c_str()));
+                    hc2->Divide(hc2,h_all2,1,1,"b");
+                    mhclone[hrname2] = hc2;
 
-TH1D *h2 = tdrHist("h2","Jet N fraction (D-U)",-0.02 + 1e-4,0.03 -1e-4,"p_{T,cand} (GeV)",0.1,100);
-TCanvas *c2 = tdrCanvas("c1",h2,8,kSquare);
-c2->SetLogx();
+                    hc->Add(hc2, -1);
+                    vector<int> draw;
+                    vector<float> size;
+                    if (vc[ic] == "ch"){draw = {kFullSquare,kRed};size = {1.5};}
+                    if (vc[ic] == "nh"){draw = {kFullCircle,kGreen+2};size = {1.5};}
+                    if (vc[ic] == "ne"){draw = {kFullDiamond,kBlue};size = {1.75};}
 
-tdrDraw(hrd,"histe",kFullSquare,kRed,kSolid,-1,kNone);
-hrd->SetMarkerSize(1.5);
-tdrDraw(hrd3,"histe",kFullCircle,kGreen+2,kSolid,-1,kNone);
-hrd3->SetMarkerSize(1.5);
-tdrDraw(hrd5,"histe",kFullDiamond,kBlue,kSolid,-1,kNone);
-hrd5->SetMarkerSize(1.75);
+                    tdrDraw(hc,"histe", draw[0],draw[1],kSolid,-1,kNone);
+                    hc->SetMarkerSize(size[0]);
+                    leg->AddEntry(mhclone[hrname], mleg[cv].c_str(), "ple");
+                    //leg->SetY1NDC(leg->GetY1NDC()-0.07);
+                    leg->SetTextSize(0.035);
+                }
 
+                string hname = Form("h_%s_vs_%s", cq1, cx);
+                string hname2 = Form("h_%s_vs_%s", cq2, cx);
 
-// Create legend
-//TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-TLegend *leg2 = tdrLeg(0.5,0.9-0.05*3,0.75,0.9);
-leg2->AddEntry(hrd5, "Photons", "ple");
-leg2->AddEntry(hrd3, "Neutral Hadrons", "ple");
-leg2->AddEntry(hrd, "Charged Hadrons", "ple");
-leg2->Draw();
+                gPad->SetBottomMargin(0.14);
+                gPad->SetRightMargin(0.175);
+                gPad->Update();
 
-TLatex *tex2 = new TLatex();
-tex2->SetNDC(); tex2->SetTextSize(0.045);
-tex2->DrawLatex(0.17,0.8,"|#eta| < 1.3");
-tex2->DrawLatex(0.17,0.75,"60 < p_{T,jet} < 140 GeV");
-// Assuming the x-axis categories are correctly set when histograms were created
-// If you need to set labels for the x-axis categories, do it here
-
-// Update the canvas to reflect changes
-c2->RedrawAxis();
-c2->Modified();
-c2->Update();
-c2->SaveAs("pdf/differenceDU.pdf");
-
-TH1D *h3 = tdrHist("h3","Jet N fraction (S-D)",-0.1 + 1e-4,0.14 -1e-4,"p_{T,cand} (GeV)",0.1,100);
-TCanvas *c3 = tdrCanvas("c1",h3,8,kSquare);
-c3->SetLogx();
-
-tdrDraw(hrsd,"histe",kFullSquare,kRed,kSolid,-1,kNone);
-hrsd->SetMarkerSize(1.5);
-tdrDraw(hrsd3,"histe",kFullCircle,kGreen+2,kSolid,-1,kNone);
-hrsd3->SetMarkerSize(1.5);
-tdrDraw(hrsd5,"histe",kFullDiamond,kBlue,kSolid,-1,kNone);
-hrsd5->SetMarkerSize(1.75);
-
-
-// Create legend
-//TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-TLegend *leg3 = tdrLeg(0.5,0.9-0.05*3,0.75,0.9);
-leg3->AddEntry(hrsd5, "Photons", "ple");
-leg3->AddEntry(hrsd3, "Neutral Hadrons", "ple");
-leg3->AddEntry(hrsd, "Charged Hadrons", "ple");
-leg3->Draw();
-
-TLatex *tex3 = new TLatex();
-tex3->SetNDC(); tex3->SetTextSize(0.045);
-tex3->DrawLatex(0.17,0.8,"|#eta| < 1.3");
-tex3->DrawLatex(0.17,0.75,"60 < p_{T,jet} < 140 GeV");
-// Assuming the x-axis categories are correctly set when histograms were created
-// If you need to set labels for the x-axis categories, do it here
-
-// Update the canvas to reflect changes
-c3->RedrawAxis();
-c3->Modified();
-c3->Update();
-c3->SaveAs("pdf/differenceSD.pdf");
-
-TH1D *h4 = tdrHist("h4","Jet N fraction (S-DU)",-0.1 + 1e-4,0.14 -1e-4,"p_{T,cand} (GeV)",0.1,100);
-TCanvas *c4 = tdrCanvas("c4",h4,8,kSquare);
-c4->SetLogx();
-//hrs->SetFillStyle(kNone);
-//hrs->Draw("histe");
-tdrDraw(hrsdu,"histe",kFullSquare,kRed,kSolid,-1,kNone);
-hrsdu->SetMarkerSize(1.5);
-//hrs3->SetFillStyle(kNone);
-//hrs3->Draw("histe same");
-tdrDraw(hrsdu3,"histe",kFullCircle,kGreen+2,kSolid,-1,kNone);
-hrsdu3->SetMarkerSize(1.5);
-//hrs5->SetFillStyle(kNone);
-//hrs5->Draw("histe same");
-tdrDraw(hrsdu5,"histe",kFullDiamond,kBlue,kSolid,-1,kNone);
-hrsdu5->SetMarkerSize(1.75);
-
-
-// Create legend
-//TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-TLegend *leg4 = tdrLeg(0.5,0.9-0.05*3,0.75,0.9);
-leg4->AddEntry(hrsdu5, "Photons", "ple");
-leg4->AddEntry(hrsdu3, "Neutral Hadrons", "ple");
-leg4->AddEntry(hrsdu, "Charged Hadrons", "ple");
-leg4->Draw();
-
-TLatex *tex4 = new TLatex();
-tex4->SetNDC(); tex4->SetTextSize(0.045);
-tex4->DrawLatex(0.17,0.8,"|#eta| < 1.3");
-tex4->DrawLatex(0.17,0.75,"60 < p_{T,jet} < 140 GeV");
-// Assuming the x-axis categories are correctly set when histograms were created
-// If you need to set labels for the x-axis categories, do it here
-
-// Update the canvas to reflect changes
-c4->RedrawAxis();
-c4->Modified();
-c4->Update();
-c4->SaveAs("pdf/differenceSDU.pdf");
-
-TH1D *h5 = tdrHist("h5","Jet N fraction (S-U & D-U)",-0.1 + 1e-4,0.21 -1e-4,"p_{T,cand} (GeV)",0.1,100);
-TCanvas *c5 = tdrCanvas("c5",h5,8,kSquare);
-c5->SetLogx();
-
-tdrDraw(hrs,"histe",kFullSquare,kRed,kSolid,-1,kNone);
-hrs->SetMarkerSize(1.5);
-tdrDraw(hrs3,"histe",kFullCircle,kGreen+2,kSolid,-1,kNone);
-hrs3->SetMarkerSize(1.5);
-tdrDraw(hrs5,"histe",kFullDiamond,kBlue,kSolid,-1,kNone);
-hrs5->SetMarkerSize(1.75);
-tdrDraw(hrd,"histe",kSquare,kRed,kDashed,-1,kNone);
-hrd->SetMarkerSize(1.5);
-tdrDraw(hrd3,"histe",kCircle,kGreen+2,kDashed,-1,kNone);
-hrd3->SetMarkerSize(1.5);
-tdrDraw(hrd5,"histe",kOpenDiamond,kBlue,kDashed,-1,kNone);
-hrd5->SetMarkerSize(1.75);
-
-
-// Create legend
-//TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-TLegend *leg5 = tdrLeg(0.5,0.9-0.05*6,0.75,0.9);
-leg5->AddEntry(hrs5, "Photons S-U", "ple");
-leg5->AddEntry(hrs3, "Neutral Hadron S-U", "ple");
-leg5->AddEntry(hrs, "Charged Hadrons S-U", "ple");
-leg5->AddEntry(hrd5, "Photons D-U", "ple");
-leg5->AddEntry(hrd3, "Neutral Hadrons D-U", "ple");
-leg5->AddEntry(hrd, "Charged Hadrons D-U", "ple");
-leg5->Draw();
-
-TLatex *tex5 = new TLatex();
-tex5->SetNDC(); tex5->SetTextSize(0.045);
-tex5->DrawLatex(0.17,0.8,"|#eta| < 1.3");
-tex5->DrawLatex(0.17,0.75,"60 < p_{T,jet} < 140 GeV");
-// Assuming the x-axis categories are correctly set when histograms were created
-// If you need to set labels for the x-axis categories, do it here
-
-// Update the canvas to reflect changes
-c5->RedrawAxis();
-c5->Modified();
-c5->Update();
-c5->SaveAs("pdf/differenceSU&DU.pdf");
-// Do not close the file if you want to interact with the histograms further
-// file->Close(); // Uncomment this if you're done with the file
+                TLatex *tex1 = new TLatex();
+                tex1->SetNDC(); tex1->SetTextSize(0.045);
+                tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
+                tex1->DrawLatex(0.17,0.75,"80 < p_{T,jet} < 100 GeV");
+                reverseLegend(leg);
+                c->RedrawAxis();
+                c->Modified();
+                c->Update();
+                c->SaveAs(Form("pdf/difference_%s-%s.pdf",hname.c_str(),hname2.c_str()));
+            }
+        }
+        }
+    }
 }
+/*
+for (int ix = 0; ix != nxvar; ++ ix) {
+    if (vxvar[ix] == "ptcand") {
+    for (int iq = 0; iq != nq; ++ iq) {
+        const char *cq = vq[iq].c_str();
+        const char *cx = vxvar[ix].c_str();
+
+        TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s jet N fraction",cq),0 + 1e-4,1,"p_{T} (GeV)",0.1,100);
+        TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,kSquare);
+        c->SetLogx();
+        TLegend *leg = tdrLeg(0.83,0.77,1.1,0.9);
+
+        string hsname = Form("%s", cq);
+        for (int iq = 0; iq != nq; ++ iq) {
+            const char *cq = vq[iq].c_str();
+            for (int ic = 0; ic != nc; ++ ic) {
+                const char *cv = vc[ic].c_str();
+                string hname = Form("h_%s_%s_vs_%s", cq, cv, cx);
+                string hrname = Form("hr_%s_%s_vs_%s", cq, cv, cx);
+                TH1D *hs = (TH1D*)mhclone[hrname]->Clone(Form("hs_%s-%s_%s_vs_%s",hsname.c_str(), cq, cv, cx));
+                TH1D *hc = (TH1D*)mh[hname]->Clone(Form("%s",hrname.c_str()));
+                hs->Add(hc, -1);
+                mhsubtract[hsname] = hs;
+
+                tdrDraw(hs,"histe",kFullSquare,kRed,kSolid,-1,kNone);
+                hs->SetMarkerSize(1.5);
+            }
+        leg->AddEntry(mhsubtract[hsname], "nh", "f");
+        leg->SetY1NDC(leg->GetY1NDC()-0.07);
+        leg->SetTextSize(0.035);
+
+        gPad->SetBottomMargin(0.14);
+        gPad->SetRightMargin(0.175);
+        gPad->Update();
+
+        TLatex *tex1 = new TLatex();
+        tex1->SetNDC(); tex1->SetTextSize(0.045);
+        tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
+        tex1->DrawLatex(0.17,0.75,"80 < p_{T,jet} < 100 GeV");
+        reverseLegend(leg);
+        c->RedrawAxis();
+        c->Modified();
+        c->Update();
+        c->SaveAs(Form("pdf/difference_%s-%s_%s.pdf",hsname.c_str(),cq,cx));
+        }
+    }
+}
+}*/
+
+} // void fraction

@@ -33,12 +33,12 @@ void reverseLegend(TLegend *leg) {
     delete reversedList;
 }
 
-void fraction_x() {
+void fraction() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output.root", "READ");
+TFile *file = new TFile("output_x.root", "READ");
 // Retrieve the histograms
 
-string vq[] = {"d", "u", "s", "c", "b"};
+string vq[] = {"d", "u", "s", "c", "b", "g"};
 int nq = sizeof(vq) / sizeof(vq[0]);
 
 string vc[] = {"ch", "nh", "ne"};
