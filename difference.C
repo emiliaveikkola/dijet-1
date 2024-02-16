@@ -78,8 +78,11 @@ for (int iq1 = 0; iq1 != nq; ++ iq1) {
         const char *cq2 = vq[iq2].c_str(); // Ensures unique pairs without repetition
         for (int ix = 0; ix != nxvar; ++ ix) {
             const char *cx = vxvar[ix].c_str();
-            if (vxvar[ix] == "ptcand"){
-                TH1D *h = tdrHist(Form("h1_%s-%s%s",cq1,cq2,cx),Form("%s-%s jet N fraction",cq1,cq2),-0.15 + 1e-4,0.2 -1e-4,"p_{T} (GeV)",0.1,100);
+            //if (vxvar[ix] == "ptcand"){
+            vector<float> range;
+            if (vxvar[ix] == "ptjet"){range = {10, 5300};}
+            if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
+                TH1D *h = tdrHist(Form("h1_%s-%s%s",cq1,cq2,cx),Form("%s-%s %s N fraction",cq1,cq2,cx),-0.15 + 1e-4,0.2 -1e-4,"p_{T} (GeV)",range[0],range[1]);
                 TCanvas *c = tdrCanvas(Form("c1_%s-%s%s",cq1,cq2,cx),h,8,kSquare);
                 c->SetLogx();
                 TLegend *leg = tdrLeg(0.83,0.9-0.1*3,1.1,0.9);
@@ -141,7 +144,7 @@ for (int iq1 = 0; iq1 != nq; ++ iq1) {
                 c->Modified();
                 c->Update();
                 c->SaveAs(Form("pdf/difference_%s-%s.pdf",hname.c_str(),hname2.c_str()));
-            }
+            //}
         }
         }
     }

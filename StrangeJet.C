@@ -135,7 +135,7 @@ void StrangeJet::Loop(){
   int nxbins_one = sizeof(xbins_one) / sizeof(xbins_one[0]) - 1;
   
   TDirectory *curdir = gDirectory;
-  TFile *fout = new TFile("output_x.root","recreate");
+  TFile *fout = new TFile("output.root","recreate");
   
   TProfile *pu0 = new TProfile("pu0",";Ptjet;has non-zero energysum",nptd,vptd);
   
@@ -217,7 +217,7 @@ void StrangeJet::Loop(){
   string vxvar[] = {"ptcand", "ptjet"};
   int nxvar = sizeof(vxvar) / sizeof(vxvar[0]);
   
-  string vyvar[] = {"flc", "fln", "fle", "fhc", "fhn", "fhe"};
+  string vyvar[] = {"flch", "flnh", "flne", "fhch", "fhnh", "fhne"};
   int nyvar = sizeof(vyvar) / sizeof(vyvar[0]);
   
   assert(npid == npid2); //+g
@@ -425,11 +425,12 @@ void StrangeJet::Loop(){
 
       //bool pass = (p4j.Pt()>84 && p4j.Pt()<153 && fabs(p4j.Eta())<1.3)
       bool pass = (p4jet.Pt()>84 && p4jet.Pt()<114 && fabs(p4jet.Eta())<1.3);
-	    if (!pass) continue;
-
-      // Pre-loop to find leading candidate in jet
       double ptlead(0.);
 	    int iLeadGenCand(-1);
+	    if (pass) {
+        //continue;
+
+      // Pre-loop to find leading candidate in jet
       for (int k = 0; k != nGenJetGenPartCand; ++k) {
 
       if (GenJetGenPartCand_genJetIdx[k]==i) {
@@ -456,33 +457,33 @@ void StrangeJet::Loop(){
 	if (f==21)
 	  hfg->Fill(fi);
 
-      
+      }
       double esum(0), esumch(0), esumnh(0), esumne(0);
       double elead(0), eleadch(0), eleadnh(0), eleadne(0);
       // Loop over candidates in these jets
-      for (int j = 0; j != nGenJetGenPartCand; ++j) {
-        int iGenJet = GenJetGenPartCand_genJetIdx[j];
-        int iCand = GenJetGenPartCand_GenPartCandIdx[j];
+      for (int k = 0; k != nGenJetGenPartCand; ++k) {
+        int iGenJet = GenJetGenPartCand_genJetIdx[k];
+        int iGenCand = GenJetGenPartCand_GenPartCandIdx[k];
 	
-        bool isPhoton = (GenPartCand_pdgId[iCand] == 22);
+        bool isPhoton = (GenPartCand_pdgId[iGenCand] == 22);
 	
         if (p4perp.DeltaR(p4cand) < 0.4){
           if (fabs(GenJet_eta[iGenJet]) < 1.3 && ptjet > 80 && ptjet < 100) {
-            hperp->Fill(GenPartCand_pt[iCand], w);
+            hperp->Fill(GenPartCand_pt[iGenCand], w);
           }
         }
         if (p4jet.DeltaR(p4cand) < 0.4){
           if (fabs(GenJet_eta[iGenJet]) < 1.3 && ptjet > 80 && ptjet < 100) {
-            hjet->Fill(GenPartCand_pt[iCand], w);
+            hjet->Fill(GenPartCand_pt[iGenCand], w);
           }
         }
 	
         if (i == iGenJet) {
-          // cout << "Cand" << iCand << ":" << GenPartCand_pt[iCand] << ", " ;
-          p4cand.SetPtEtaPhiM(GenPartCand_pt[iCand], GenPartCand_eta[iCand], GenPartCand_phi[iCand], GenPartCand_mass[iCand]);
+          // cout << "Cand" << iGenCand << ":" << GenPartCand_pt[iGenCand] << ", " ;
+          p4cand.SetPtEtaPhiM(GenPartCand_pt[iGenCand], GenPartCand_eta[iGenCand], GenPartCand_phi[iGenCand], GenPartCand_mass[iGenCand]);
+          if (pass) {
           double dr = p4jet.DeltaR(p4cand);
-        //double dr = p4lead.DeltaR(p4cand);
-          double ecand = p4cand.E();
+          //double dr = p4lead.DeltaR(p4cand);
           Short_t f = GenJet_partonFlavour[i];
 	    if (abs(f)==1|| abs(f)==2)
 	      hdrq->Fill(dr);
@@ -516,28 +517,29 @@ void StrangeJet::Loop(){
 	    if (f==21)
 	      hffg->Fill(fi);
 
-	    if (j != iLeadGenCand) {
+	    if (iGenCand != iLeadGenCand) {
 	      if (abs(f)==1|| abs(f)==2)
-		hf2q->Fill(fi);
+		    hf2q->Fill(fi);
 	      if (abs(f)==1) hf2d->Fill(fi);
 	      if (abs(f)==2) hf2u->Fill(fi);
 	      if (abs(f)==3) hf2s->Fill(fi);
 	      if (abs(f)==4) hf2c->Fill(fi);
 	      if (abs(f)==5) hf2b->Fill(fi);
 	      if (f==21)
-		hf2g->Fill(fi);
+		    hf2g->Fill(fi);
 	    } // lead cand
-          
+          }    
           //if (debug){cout << "jetloop" << endl;}
           
-          bool isCH = (GenPartCand_charge[iCand] != 0);
-          bool isNH = (GenPartCand_charge[iCand] == 0 && !isPhoton);
-          bool isNE = (GenPartCand_charge[iCand] == 0 && isPhoton);
+          bool isCH = (GenPartCand_charge[iGenCand] != 0);
+          bool isNH = (GenPartCand_charge[iGenCand] == 0 && !isPhoton);
+          bool isNE = (GenPartCand_charge[iGenCand] == 0 && isPhoton);
 	  
           visc[0] = isCH;
           visc[1] = isNH;
           visc[2] = isNE;
-	  
+
+	        double ecand = p4cand.E();
           if (ecand > elead) { 
             p4lead = p4cand; 
             elead = ecand;
@@ -560,16 +562,16 @@ void StrangeJet::Loop(){
             
             if (fabs(GenJet_eta[iGenJet]) < 1.3) {
               
-            h->Fill(GenPartCand_pt[iCand], w);
+            h->Fill(GenPartCand_pt[iGenCand], w);
             
-            //if (debug) { cout << "isId=" << isId << ", GenPartCand_pdgId[iCand]=" << GenPartCand_pdgId[iCand] << ", vpid3[id]=" << vpid3[id] << endl; }
-            //bool isId = (GenPartCand_pdgId[iCand] == mid[pid]);
-
+            //if (debug) { cout << "isId=" << isId << ", GenPartCand_pdgId[iGenCand]=" << GenPartCand_pdgId[iGenCand] << ", vpid3[id]=" << vpid3[id] << endl; }
+            //bool isId = (GenPartCand_pdgId[iGenCand] == mid[pid]);
+/*
             bool isId2(false);
-            // Check if GenPartCand_pdgId[iCand] is in any of the vpid3 vectors
+            // Check if GenPartCand_pdgId[iGenCand] is in any of the vpid3 vectors
             for (std::size_t id = 0; id < vpid3.size() && !isId2; ++id) { // Iterate over vpid3 vectors
                 for (std::size_t elem = 0; elem < vpid3[id].size(); ++elem) { // Iterate over elements within a vector
-                    if (GenPartCand_pdgId[iCand] == vpid3[id][elem]) {
+                    if (GenPartCand_pdgId[iGenCand] == vpid3[id][elem]) {
                         isId2 = true; // Found a match, set isId2 to true
                         break; // No need to continue checking this vector
                     }
@@ -577,16 +579,16 @@ void StrangeJet::Loop(){
                 if (isId2) break; // Found a match, no need to check further vectors
             }
 
-            // If GenPartCand_pdgId[iCand] is not found in any vector, print the details
+            // If GenPartCand_pdgId[iGenCand] is not found in any vector, print the details
             if (!isId2) {
-                cout << "Unmatched id: " << GenPartCand_pdgId[iCand]
-                    << ", cand_pt: " << GenPartCand_pt[iCand]
+                cout << "Unmatched id: " << GenPartCand_pdgId[iGenCand]
+                    << ", cand_pt: " << GenPartCand_pt[iGenCand]
                     << ", jet_pt: " << GenJet_pt[iGenJet]
                     << ", entry: " << jentry // Print the entry number
                     << endl << flush;
             }
 
-
+*/
             for (int iq = 0; iq != nq; ++ iq) {
               //if (debug){cout << "iqloop" << endl;}
               bool isQ = (abs(GenJet_partonFlavour[iGenJet]) == vq2[iq]);
@@ -602,7 +604,7 @@ void StrangeJet::Loop(){
                   mh[hname_all]->Fill(x, w);
                 }
                 if (vxvar[ix] == "ptcand" && ptjet > 80 && ptjet < 100) {
-                  x = GenPartCand_pt[iCand];
+                  x = GenPartCand_pt[iGenCand];
                   mh[hname_all]->Fill(x, w);
                 }
                 bool isId(false);
@@ -611,7 +613,7 @@ void StrangeJet::Loop(){
                   bool isMatchFound = false;
                   for (std::size_t elem = 0; elem < vpid3[id].size() && !isMatchFound; ++elem) { // Iterate over elements in a vector
                     //if (vpid3[id][elem] == 0) continue; // Skip zeros
-                    if (GenPartCand_pdgId[iCand] == vpid3[id][elem]) {
+                    if (GenPartCand_pdgId[iGenCand] == vpid3[id][elem]) {
                       isMatchFound = true;
 		                }
 		              }
@@ -624,19 +626,19 @@ void StrangeJet::Loop(){
                       mh[hname]->Fill(x, w);
                     }
                     if (vxvar[ix] == "ptcand" && ptjet > 80 && ptjet < 100) {
-                      x = GenPartCand_pt[iCand];
+                      x = GenPartCand_pt[iGenCand];
                       mh[hname]->Fill(x, w);
                     } // No need to check other vectors if a match is already found for this particle
 		              }
 		            }
                 
                     //if (!isId){
-                    //cout << "id: " << GenPartCand_pdgId[iCand] << " cand_pt: "<< GenPartCand_pt[iCand] << " jet_pt: "<< GenJet_pt[iGenJet] <<endl << flush;
+                    //cout << "id: " << GenPartCand_pdgId[iGenCand] << " cand_pt: "<< GenPartCand_pt[iGenCand] << " jet_pt: "<< GenJet_pt[iGenJet] <<endl << flush;
                     //}
                     /*
                     for (int id = 0; id != npid; ++ id) {
                       //if (debug){cout << "idloop" << endl;}
-                        if (GenPartCand_pdgId[iCand] == vpid3[id]){
+                        if (GenPartCand_pdgId[iGenCand] == vpid3[id]){
                           //isId = true;
                           const char *pid = vpid[id].c_str();
                           const char *hname = Form("h_%s_%s_vs_%s", pid, cq, cx);
@@ -645,7 +647,7 @@ void StrangeJet::Loop(){
                             mh[hname]->Fill(x, w);
                           }
                           if (vxvar[ix] == "ptcand" && pt > 80 && pt < 100) {
-                            x = GenPartCand_pt[iCand];
+                            x = GenPartCand_pt[iGenCand];
                             mh[hname]->Fill(x, w);
                           }
                         }
@@ -653,7 +655,7 @@ void StrangeJet::Loop(){
                         }  //for id
                       */
                       //if (!isId){
-                      //cout << "id " << GenPartCand_pdgId[iCand] << endl << flush;
+                      //cout << "id " << GenPartCand_pdgId[iGenCand] << endl << flush;
                       //}
               } // for ix
 	          } // for iq
@@ -679,7 +681,7 @@ void StrangeJet::Loop(){
                   }
                   if (vxvar[ix] == "ptcand" && ptjet > 80 && ptjet < 100) {
                     if (debug){cout << "ptcand" << endl;}
-                    x = GenPartCand_pt[iCand];
+                    x = GenPartCand_pt[iGenCand];
                     mhc[hname]->Fill(x, w);
                   }
                 }
@@ -719,8 +721,8 @@ void StrangeJet::Loop(){
 
       //for (int j = 0; j != nGenJetGenPartCand; ++j) {
         //int iGenJet = GenJetGenPartCand_genJetIdx[j];
-        //int iCand = GenJetGenPartCand_GenPartCandIdx[j];
-        //p4cand.SetPtEtaPhiM(GenPartCand_pt[iCand], GenPartCand_eta[iCand], GenPartCand_phi[iCand], GenPartCand_mass[iCand]);
+        //int iGenCand = GenJetGenPartCand_GenPartCandIdx[j];
+        //p4cand.SetPtEtaPhiM(GenPartCand_pt[iGenCand], GenPartCand_eta[iGenCand], GenPartCand_phi[iGenCand], GenPartCand_mass[iGenCand]);
         //if (i == iGenJet) {
           //double ecand = p4cand.E();
           //if (ecand > elead) { 
@@ -736,8 +738,8 @@ void StrangeJet::Loop(){
       if (fabs(GenJet_eta[i] < 1.3) && esum > 0){
 	      pu0->Fill(GenJet_pt[i], esum ? 1 : 0);
 	      //for (int id = 0; id != npid; ++ id) {
-        //bool isId = (GenPartCand_pdgId[iCand] == vpid3[i]);
-        //bool isId = (GenPartCand_pdgId[iCand] == mid[pid]);
+        //bool isId = (GenPartCand_pdgId[iGenCand] == vpid3[i]);
+        //bool isId = (GenPartCand_pdgId[iGenCand] == mid[pid]);
         for (int iq = 0; iq != nq ; ++ iq) { // &&isId
           bool isQ = (abs(GenJet_partonFlavour[i]) == vq2[iq]);
           //bool isQ = (abs(GenJet_partonFlavour[i]) == mq[cq]);

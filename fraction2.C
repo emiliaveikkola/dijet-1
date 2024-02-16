@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void fraction2() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_x.root", "READ");
+TFile *file = new TFile("output.root", "READ");
 // Retrieve the histograms
 
   string vpid[] = {"pionp", "pionm", "kaonp", "kaonm",//"lambdap", "lambdam","kaon0"
@@ -134,11 +134,14 @@ for (int iq = 0; iq != nq; ++ iq) {
         //if (vxvar[ix] == "ptcand"){
         const char *cq = vq[iq].c_str();
         const char *cx = vxvar[ix].c_str();
-        TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s jet N fraction",cq),0 + 1e-4,1,"p_{T,cand} (GeV)",0.1,100);
+        vector<float> range;
+        if (vxvar[ix] == "ptjet"){range = {10, 5300};}
+        if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
+        TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s %s N fraction",cq, cx),0 + 1e-4,1,"p_{T} (GeV)",range[0],range[1]);
         TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,kSquare);
         c->SetLogx();
         TLegend *leg = tdrLeg(0.89,0.9,1.1,0.92);
-        THStack *hs = new THStack(Form("hs_%s%s",cq,cx), "; p_{T,cand} (GeV); Jet N fraction");
+        THStack *hs = new THStack(Form("hs_%s%s",cq,cx), "; p_{T} (GeV); Jet N fraction");
 
         for (int id = 0; id != npid; ++ id) {
             const char *pid = vpid[id].c_str();
