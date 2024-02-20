@@ -135,7 +135,7 @@ void StrangeJet::Loop(){
   int nxbins_one = sizeof(xbins_one) / sizeof(xbins_one[0]) - 1;
   
   TDirectory *curdir = gDirectory;
-  TFile *fout = new TFile("output.root","recreate");
+  TFile *fout = new TFile("output_x.root","recreate");
   
   TProfile *pu0 = new TProfile("pu0",";Ptjet;has non-zero energysum",nptd,vptd);
   
@@ -388,14 +388,17 @@ void StrangeJet::Loop(){
     Long64_t ientry = LoadTree(jentry);
     if (ientry < 0) break;
     nb = fChain->GetEntry(jentry);   nbytes += nb;
+    TChain* chain = dynamic_cast<TChain*>(fChain);
+    TFile* currentFile = chain->GetFile();
+ 
     // if (Cut(ientry) < 0) continue;
     
       if (jentry%nlap==0) {
-	cout << "." << flush;
+	//cout << "." << flush;
       }
       if (jentry%nlap2==0 && jentry!=0) {
 	double time = t.RealTime();
-	if (time>0) cout << Form("\n\%1.0f ev/s\n",nlap2/time) << flush;
+	//if (time>0) cout << Form("\n\%1.0f ev/s\n",nlap2/time) << flush;
 	t.Reset();
 	t.Start();
       }
@@ -581,13 +584,23 @@ void StrangeJet::Loop(){
 
             // If GenPartCand_pdgId[iGenCand] is not found in any vector, print the details
             if (!isId2) {
-                cout << "Unmatched id: " << GenPartCand_pdgId[iGenCand]
-                    << ", cand_pt: " << GenPartCand_pt[iGenCand]
-                    << ", jet_pt: " << GenJet_pt[iGenJet]
-                    << ", entry: " << jentry // Print the entry number
+              if (currentFile != nullptr) {
+                std::string fullPath(currentFile->GetName());
+                std::size_t lastSlashPos = fullPath.find_last_of("/\\"); // Handles both forward and backward slashes
+                std::string fileName = fullPath.substr(lastSlashPos + 1); // Extracts the filename
+                cout << "File: " << fileName << "," << endl
+                    << "run: " << run // The run number
+                    << ", event: " << event // The event number
+                    << ", jentry: " << jentry // The jentry number
+                    << ", ientry: " << ientry // The jentry number
+                    << ", GenJet index: " << iGenJet // Print the GenJet index
+                    << ", GenPartCand index: " << iGenCand // Print the GenPartCand index
+                    << ", GenPartCand_pdgId: " << GenPartCand_pdgId[iGenCand]
+                    << ", GenPartCand_pt: " << GenPartCand_pt[iGenCand]
+                    << ", GenJet_pt: " << GenJet_pt[iGenJet]
                     << endl << flush;
+              }
             }
-
 */
             for (int iq = 0; iq != nq; ++ iq) {
               //if (debug){cout << "iqloop" << endl;}
