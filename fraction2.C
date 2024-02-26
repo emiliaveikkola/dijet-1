@@ -210,7 +210,9 @@ for (int iq = 0; iq != nq; ++ iq) {
             TLatex *tex1 = new TLatex();
             tex1->SetNDC(); tex1->SetTextSize(0.045);
             tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
-            tex1->DrawLatex(0.17,0.75,"80 < p_{T,jet} < 100 GeV");
+            if (vxvar[ix] == "ptcand"){
+                tex1->DrawLatex(0.17,0.75,"80 < p_{T,genjet} < 100 GeV");
+            }
         } // for id
         reverseLegend(leg);
         c->RedrawAxis();
