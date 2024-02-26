@@ -1,5 +1,5 @@
-#define StrangeJet_cxx
-#include "StrangeJet.h"
+#define skimslim_cxx
+#include "skimslim.h"
 #include <TH2.h>
 #include <TH1.h>
 #include <TStyle.h>
@@ -17,10 +17,10 @@
 bool    debug = false;
 
 
-void StrangeJet::Loop(){
+void skimslim::Loop(){
   //   In a ROOT session, you can do:
-  //      root> .L StrangeJet.C
-  //      root> StrangeJet t
+  //      root> .L skimslim.C
+  //      root> skimslim t
   //      root> t.GetEntry(12); // Fill t data members with entry number 12
   //      root> t.Show();       // Show values of entry 12
   //      root> t.Show(16);     // Read and show values of entry 16
@@ -149,7 +149,7 @@ for (const auto& branchName : branchNames) {
   int nxbins_one = sizeof(xbins_one) / sizeof(xbins_one[0]) - 1;
   
   TDirectory *curdir = gDirectory;
-  TFile *fout = new TFile("output_x.root","recreate");
+  TFile *fout = new TFile("output_x_skimmedandslimmed.root","recreate");
   
   TProfile *pu0 = new TProfile("pu0",";Ptjet;has non-zero energysum",nptd,vptd);
   
@@ -228,7 +228,7 @@ for (const auto& branchName : branchNames) {
   bool visc[] = {false, false, false};
   int nisc = sizeof(visc) / sizeof(visc[0]);
   
-  string vxvar[] = {"ptcand", "ptjet", "ptlead"};
+  string vxvar[] = {"ptcand", "ptjet"};
   int nxvar = sizeof(vxvar) / sizeof(vxvar[0]);
   
   string vyvar[] = {"flch", "flnh", "flne", "fhch", "fhnh", "fhne"};
@@ -247,7 +247,7 @@ for (const auto& branchName : branchNames) {
       const char *cq = vq[iq].c_str();
       Double_t *x = xbins_cand; // &xbins_cand[0]
       int nx = nxbins_cand;
-      if (vxvar[ix] == "ptjet"|| vxvar[ix] == "ptlead") { //swap if doesn't work
+      if (vxvar[ix] == "ptjet") { //swap if doesn't work
 	      x = vptd;
 	      nx = nptd;
       }
@@ -257,7 +257,7 @@ for (const auto& branchName : branchNames) {
       for (int id = 0; id != npid; ++ id) {
 	      const char *pid = vpid[id].c_str();
 	      const char *pid2 = vpid2[id].c_str();
-	      if (vxvar[ix] == "ptjet" || vxvar[ix] == "ptlead") { //swap if doesn't work
+	      if (vxvar[ix] == "ptjet") { //swap if doesn't work
 	        x = vptd;
 	        nx = nptd;
 	      }
@@ -270,33 +270,6 @@ for (const auto& branchName : branchNames) {
           const char *ptitle = Form(";E_{%s}, %s;%s %s", cx, "all", cq, cy);
           mp[pname] = new TProfile(pname, ptitle, nx, x); 
         } // for iy
-      } // for id
-    } // for ix
-  } // for iq
-
-for (int iq = 0; iq != nq; ++ iq) {
-    for (int ix = 0; ix != nxvar; ++ ix) {
-      const char *cx = vxvar[ix].c_str();
-      const char *cq = vq[iq].c_str();
-      Double_t *x = xbins_cand; // &xbins_cand[0]
-      int nx = nxbins_cand;
-      if (vxvar[ix] == "ptjet") { //swap if doesn't work
-	      x = vptd;
-	      nx = nptd;
-      }
-      const char *hname_all = Form("h_all_sanslead_%s_vs_%s", cq, cx);
-      const char *htitle_all = Form(";E_{T,%s}, all sans lead;%s N", cx, cq);
-      mh[hname_all] = new TH1D(hname_all, htitle_all, nx, x);
-      for (int id = 0; id != npid; ++ id) {
-	      const char *pid = vpid[id].c_str();
-	      const char *pid2 = vpid2[id].c_str();
-	      if (vxvar[ix] == "ptjet") { //swap if doesn't work
-	        x = vptd;
-	        nx = nptd;
-	      }
-        const char *hname = Form("h_sanslead_%s_%s_vs_%s", pid, cq, cx);
-        const char *htitle = Form(";p_{T,%s}, %s sans lead;%s N", cx, pid2, cq);
-        mh[hname] = new TH1D(hname, htitle, nx, x);
       } // for id
     } // for ix
   } // for iq
@@ -571,7 +544,6 @@ for (int iq = 0; iq != nq; ++ iq) {
 	      if (abs(f)==5) hf2b->Fill(fi);
 	      if (f==21)
 		    hf2g->Fill(fi);
-
 	    } // lead cand
           }    
           //if (debug){cout << "jetloop" << endl;}
@@ -588,21 +560,9 @@ for (int iq = 0; iq != nq; ++ iq) {
           if (ecand > elead) { 
             p4lead = p4cand; 
             elead = ecand;
-            if (isCH) {
-              eleadch = ecand;
-              eleadnh = 0;
-              eleadne = 0;
-             }
-            if (isNH) {
-              eleadnh = ecand;
-              eleadch = 0;
-              eleadne = 0;
-            }
-            if (isNE) { 
-              eleadne = ecand;
-              eleadch = 0;
-              eleadnh = 0;
-            }
+            if (isCH) { eleadch = ecand; }
+            if (isNH) { eleadnh = ecand; }
+            if (isNE) { eleadne = ecand; }
           }
 	  
             p4sum += p4cand;
@@ -674,10 +634,6 @@ for (int iq = 0; iq != nq; ++ iq) {
                   x = GenPartCand_pt[iGenCand];
                   mh[hname_all]->Fill(x, w);
                 }
-                if (vxvar[ix] == "ptlead") { //swap if doesn't work
-                  x = ptlead; 
-                  mh[hname_all]->Fill(x, w);
-                }
                 bool isId(false);
                 //if (debug){cout << "ixloop" << endl;}
                 for (std::size_t id = 0; id < vpid3.size() && !isId; ++id) { // Iterate over vectors
@@ -700,10 +656,6 @@ for (int iq = 0; iq != nq; ++ iq) {
                       x = GenPartCand_pt[iGenCand];
                       mh[hname]->Fill(x, w);
                     } // No need to check other vectors if a match is already found for this particle
-                    if (vxvar[ix] == "ptlead") {
-                      x = ptlead;
-                      mh[hname]->Fill(x, w);
-                    }
 		              }
 		            }
                 
@@ -735,97 +687,6 @@ for (int iq = 0; iq != nq; ++ iq) {
               } // for ix
 	          } // for iq
 
-            if (iGenCand != iLeadGenCand) {
-              for (int iq = 0; iq != nq; ++ iq) {
-                //if (debug){cout << "iqloop" << endl;}
-                bool isQ = (abs(GenJet_partonFlavour[iGenJet]) == vq2[iq]);
-                //if (debug && isQ) { cout << "isQ=" << isQ << ", GenJet_partonFlavour[i]=" << GenJet_partonFlavour[iGenJet] << ", vq2[iq]=" << vq2[iq] << endl; }
-                //bool isQ = (abs(GenJet_partonFlavour[i]) == mq[cq]);
-                for (int ix = 0; ix != nxvar && isQ; ++ ix) {
-                  const char *cx = vxvar[ix].c_str();
-                  const char *cq = vq[iq].c_str();
-                  double x(0);
-                  const char *hname_all = Form("h_all_sanslead_%s_vs_%s", cq, cx);
-                  if (vxvar[ix] == "ptjet") { //swap if doesn't work
-                    x = GenJet_pt[iGenJet]; 
-                    mh[hname_all]->Fill(x, w);
-                  }
-                  if (vxvar[ix] == "ptcand" && ptjet > 80 && ptjet < 100) {
-                    x = GenPartCand_pt[iGenCand];
-                    mh[hname_all]->Fill(x, w);
-                  }
-                  bool isId(false);
-                  //if (debug){cout << "ixloop" << endl;}
-                  for (std::size_t id = 0; id < vpid3.size() && !isId; ++id) { // Iterate over vectors
-                    bool isMatchFound = false;
-                    for (std::size_t elem = 0; elem < vpid3[id].size() && !isMatchFound; ++elem) { // Iterate over elements in a vector
-                      //if (vpid3[id][elem] == 0) continue; // Skip zeros
-                      if (GenPartCand_pdgId[iGenCand] == vpid3[id][elem]) {
-                        isMatchFound = true;
-                      }
-                    }
-                    if (isMatchFound) {
-                      isId = true;
-                      const char *pid = vpid[id].c_str();
-                      const char *hname = Form("h_sanslead_%s_%s_vs_%s", pid, cq, cx);
-                      if (vxvar[ix] == "ptjet") {
-                        x = GenJet_pt[iGenJet];
-                        mh[hname]->Fill(x, w);
-                      }
-                      if (vxvar[ix] == "ptcand" && ptjet > 80 && ptjet < 100) {
-                        x = GenPartCand_pt[iGenCand];
-                        mh[hname]->Fill(x, w);
-                      } // No need to check other vectors if a match is already found for this particle
-                    }
-		              }
-                }
-              }
-            }
-
-            for (int iq = 0; iq != nq; ++ iq) {
-              //if (debug){cout << "iqloop" << endl;}
-              bool isQ = (abs(GenJet_partonFlavour[iGenJet]) == vq2[iq]);
-              //if (debug && isQ) { cout << "isQ=" << isQ << ", GenJet_partonFlavour[i]=" << GenJet_partonFlavour[iGenJet] << ", vq2[iq]=" << vq2[iq] << endl; }
-              //bool isQ = (abs(GenJet_partonFlavour[i]) == mq[cq]);
-              for (int ix = 0; ix != nxvar && isQ; ++ ix) {
-                const char *cx = vxvar[ix].c_str();
-                const char *cq = vq[iq].c_str();
-                double x(0);
-                const char *hname_all = Form("h_all_sanslead_%s_vs_%s", cq, cx);
-                if (vxvar[ix] == "ptjet") { //swap if doesn't work
-                  x = ptlead; 
-                  mh[hname_all]->Fill(x, w);
-                }
-                if (vxvar[ix] == "ptcand" && ptjet > 80 && ptjet < 100) {
-                  x = GenPartCand_pt[iGenCand];
-                  mh[hname_all]->Fill(x, w);
-                }
-                bool isId(false);
-                //if (debug){cout << "ixloop" << endl;}
-                for (std::size_t id = 0; id < vpid3.size() && !isId; ++id) { // Iterate over vectors
-                  bool isMatchFound = false;
-                  for (std::size_t elem = 0; elem < vpid3[id].size() && !isMatchFound; ++elem) { // Iterate over elements in a vector
-                    //if (vpid3[id][elem] == 0) continue; // Skip zeros
-                    if (GenPartCand_pdgId[iGenCand] == vpid3[id][elem]) {
-                      isMatchFound = true;
-		                }
-		              }
-                  if (isMatchFound) {
-                    isId = true;
-                    const char *pid = vpid[id].c_str();
-                    const char *hname = Form("h_sanslead_%s_%s_vs_%s", pid, cq, cx);
-                    if (vxvar[ix] == "ptjet") {
-                      x = GenJet_pt[iGenJet];
-                      mh[hname]->Fill(x, w);
-                    }
-                    if (vxvar[ix] == "ptcand" && ptjet > 80 && ptjet < 100) {
-                      x = GenPartCand_pt[iGenCand];
-                      mh[hname]->Fill(x, w);
-                    } // No need to check other vectors if a match is already found for this particle
-		              }
-		            }
-              }
-            }
             for (int ic = 0; ic != nc ; ++ ic) {
               bool isT = visc[ic];
               for (int iq = 0; iq != nq && isT; ++ iq) {
@@ -942,7 +803,7 @@ for (int iq = 0; iq != nq; ++ iq) {
     bool pass = (fabs(p4jet.Eta())<1.3);
     if (!pass) continue;
 	
-    // Loop over matching reco jets
+    // Loop over matching reco jetes
     for (int j = 0; j != nJet; ++j) {
 	  
 	  p4reco.SetPtEtaPhiM(Jet_pt[j],Jet_eta[j],Jet_phi[j],

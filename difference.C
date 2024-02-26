@@ -47,6 +47,9 @@ int nc = sizeof(vc) / sizeof(vc[0]);
 string vxvar[] = {"ptcand", "ptjet"};
 int nxvar = sizeof(vxvar) / sizeof(vxvar[0]);
 
+string vxvar_name[] = {"gencand", "genjet"};
+int nxvar_name = sizeof(vxvar_name) / sizeof(vxvar_name[0]);
+
 string vyvar[] = {"flc", "fln", "fle", "fhc", "fhn", "fhe"};
 int nyvar = sizeof(vyvar) / sizeof(vyvar[0]);
 
@@ -78,11 +81,12 @@ for (int iq1 = 0; iq1 != nq; ++ iq1) {
         const char *cq2 = vq[iq2].c_str(); // Ensures unique pairs without repetition
         for (int ix = 0; ix != nxvar; ++ ix) {
             const char *cx = vxvar[ix].c_str();
+            const char *cx_name = vxvar_name[ix].c_str();
             //if (vxvar[ix] == "ptcand"){
             vector<float> range;
             if (vxvar[ix] == "ptjet"){range = {10, 5300};}
             if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
-                TH1D *h = tdrHist(Form("h1_%s-%s%s",cq1,cq2,cx),Form("%s-%s %s N fraction",cq1,cq2,cx),-0.15 + 1e-4,0.2 -1e-4,"p_{T} (GeV)",range[0],range[1]);
+                TH1D *h = tdrHist(Form("h1_%s-%s%s",cq1,cq2,cx),Form("%s-%s N fraction",cq1,cq2),-0.15 + 1e-4,0.2 -1e-4,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
                 TCanvas *c = tdrCanvas(Form("c1_%s-%s%s",cq1,cq2,cx),h,8,kSquare);
                 c->SetLogx();
                 TLegend *leg = tdrLeg(0.83,0.9-0.1*3,1.1,0.9);

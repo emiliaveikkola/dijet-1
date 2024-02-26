@@ -33,7 +33,7 @@ void reverseLegend(TLegend *leg) {
     delete reversedList;
 }
 
-void fraction2() {
+void fraction2_sanslead() {
 // Open the ROOT file containing the histograms
 TFile *file = new TFile("output.root", "READ");
 // Retrieve the histograms
@@ -149,13 +149,13 @@ for (int iq = 0; iq != nq; ++ iq) {
 
         for (int id = 0; id != npid; ++ id) {
             const char *pid = vpid[id].c_str();
-            string hname = Form("h_%s_%s_vs_%s", pid, cq, cx);
+            string hname = Form("h_sanslead_%s_%s_vs_%s", pid, cq, cx);
             TH1D *h = (TH1D*)file->Get(hname.c_str()); assert(h);
             mh[hname] = h;
-            string hname_all = Form("h_all_%s_vs_%s", cq, cx);
+            string hname_all = Form("h_all_sanslead_%s_vs_%s", cq, cx);
             TH1D *h_all = (TH1D*)file->Get(hname_all.c_str()); assert(h);
             mh[hname_all] = h_all;
-            string hrname = Form("hr_%s_%s_vs_%s", pid, cq, cx);
+            string hrname = Form("hr_sanslead_%s_%s_vs_%s", pid, cq, cx);
             TH1D *hc = (TH1D*)h->Clone(Form("%s",hrname.c_str()));
             mhclone[hrname] = hc;
             /*
@@ -216,7 +216,7 @@ for (int iq = 0; iq != nq; ++ iq) {
         c->RedrawAxis();
         c->Modified();
         c->Update();
-        c->SaveAs(Form("pdf/fractions2_%s_%s.pdf",cq,cx));
+        c->SaveAs(Form("pdf/fractions2_sanslead_%s_%s.pdf",cq,cx));
         //} //for ptcand
     } // for ix
   } // for iq

@@ -83,8 +83,8 @@ public :
    Float_t         CorrT1METJet_phi[11];   //[nCorrT1METJet]
    Float_t         CorrT1METJet_rawPt[11];   //[nCorrT1METJet]
    Int_t           nGenJetGenPartCand;
-   Int_t           GenJetGenPartCand_GenPartCandIdx[458];   //[nGenJetGenPartCand]
-   Int_t           GenJetGenPartCand_genJetIdx[458];   //[nGenJetGenPartCand]
+   Int_t           GenJetGenPartCand_GenPartCandIdx[700];   //[nGenJetGenPartCand] //changed since 458 resulted problems
+   Int_t           GenJetGenPartCand_genJetIdx[700];   //[nGenJetGenPartCand] //changed since 458 resulted problems
    Int_t           nJetPFCand;
    Int_t           JetPFCand_PFCandIdx[302];   //[nJetPFCand]
    Int_t           JetPFCand_jetIdx[302];   //[nJetPFCand]
@@ -95,12 +95,12 @@ public :
    Int_t           GenJetAK8GenPartCand_GenPartCandIdx[444];   //[nGenJetAK8GenPartCand]
    Int_t           GenJetAK8GenPartCand_genJetIdx[444];   //[nGenJetAK8GenPartCand]
    Int_t           nGenPartCand;
-   Int_t           GenPartCand_charge[532];   //[nGenPartCand]
-   Int_t           GenPartCand_pdgId[532];   //[nGenPartCand]
-   Float_t         GenPartCand_eta[532];   //[nGenPartCand]
-   Float_t         GenPartCand_mass[532];   //[nGenPartCand]
-   Float_t         GenPartCand_phi[532];   //[nGenPartCand]
-   Float_t         GenPartCand_pt[532];   //[nGenPartCand]
+   Int_t           GenPartCand_charge[700];   //[nGenPartCand] //changed since 532 resulted problems
+   Int_t           GenPartCand_pdgId[700];   //[nGenPartCand] //changed since 532 resulted problems
+   Float_t         GenPartCand_eta[700];   //[nGenPartCand] //changed since 532 resulted problems
+   Float_t         GenPartCand_mass[700];   //[nGenPartCand] //changed since 532 resulted problems
+   Float_t         GenPartCand_phi[700];   //[nGenPartCand] //changed since 532 resulted problems
+   Float_t         GenPartCand_pt[700];   //[nGenPartCand] //changed since 532 resulted problems
    Int_t           nPFCand;
    Bool_t          PFCand_isIsolatedChargedHadron[327];   //[nPFCand]
    Bool_t          PFCand_passCHS[327];   //[nPFCand]

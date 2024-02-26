@@ -9,7 +9,7 @@ void drawPFNano() {
   setTDRStyle();
   TDirectory *curdir = gDirectory;
   
-  TFile *f = new TFile("output_x.root","READ");
+  TFile *f = new TFile("output.root","READ");
   //TFile *f = new TFile("pfnano_v3.root","READ");
   assert(f && !f->IsZombie());
   
@@ -119,7 +119,7 @@ void drawPFNano() {
   tdrDraw(hrb,"Pz",kNone,kRed);
   tdrDraw(hrg,"Pz",kNone,kBlue);
   
-
+/*
   // Some testing: shift ud response by constant to match with g
   TH1D *hrgsim = (TH1D*)hrq->Clone("hrgsim");
   TH1D *hrgsimb = (TH1D*)hrq->Clone("hrgsimb");
@@ -139,7 +139,7 @@ void drawPFNano() {
   tdrDraw(hrgsim2,"HIST",kNone,kCyan+3,kSolid,-1,kNone);
   //
   tdrDraw(hrssim,"HIST",kNone,kOrange+2,kSolid,-1,kNone);
-
+*/
   leg1->AddEntry(hrq,"ud jets","PLE");
   leg1->AddEntry(hru,"u jets","PLE");
   leg1->AddEntry(hrd,"d jets","PLE");
