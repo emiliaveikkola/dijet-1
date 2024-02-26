@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void difference() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output.root", "READ");
+TFile *file = new TFile("output_x.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};

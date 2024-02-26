@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void fraction2_sanslead() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output.root", "READ");
+TFile *file = new TFile("output_x.root", "READ");
 // Retrieve the histograms
 
   string vpid[] = {"pionp", "pionm", "kaonp", "kaonm",//"lambdap", "lambdam","kaon0"
