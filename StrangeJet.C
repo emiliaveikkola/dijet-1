@@ -43,20 +43,20 @@ void StrangeJet::Loop(){
   //by  b_branchname->GetEntry(ientry); //read only this branch
   if (fChain == 0) return;
 
-fChain->SetBranchStatus("*",0);  // disable all branches
+  fChain->SetBranchStatus("*",0);  // disable all branches
 
-std::vector<std::string> branchNames = {"genWeight",
-"GenJet_partonFlavour", "GenJetGenPartCand_genJetIdx", "GenJetGenPartCand_GenPartCandIdx","GenPartCand_pdgId",
-"nGenJet", "GenJet_pt", "GenJet_eta", "GenJet_phi", "GenJet_mass",
-"nJet", "Jet_pt", "Jet_eta", "Jet_phi", "Jet_mass",
-"Jet_rawFactor",
-"GenPartCand_pt", "GenPartCand_eta", "GenPartCand_phi",  "GenPartCand_mass", "GenPartCand_charge"};
+  std::vector<std::string> branchNames = {"genWeight",
+  "GenJet_partonFlavour", "GenJetGenPartCand_genJetIdx", "GenJetGenPartCand_GenPartCandIdx","GenPartCand_pdgId",
+  "nGenJet", "GenJet_pt", "GenJet_eta", "GenJet_phi", "GenJet_mass",
+  "nJet", "Jet_pt", "Jet_eta", "Jet_phi", "Jet_mass",
+  "Jet_rawFactor",
+  "GenPartCand_pt", "GenPartCand_eta", "GenPartCand_phi",  "GenPartCand_mass", "GenPartCand_charge"};
 
-for (const auto& branchName : branchNames) {
-    if (fChain->GetBranch(branchName.c_str())) {
-        fChain->SetBranchStatus(branchName.c_str(), 1);
-    }
-}
+  for (const auto& branchName : branchNames) {
+      if (fChain->GetBranch(branchName.c_str())) {
+          fChain->SetBranchStatus(branchName.c_str(), 1);
+      }
+  }
   
   /*
   fChain->SetBranchStatus("genWeight",1);  // activate branchname
