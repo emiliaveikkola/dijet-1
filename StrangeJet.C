@@ -353,64 +353,64 @@ for (int iq = 0; iq != nq; ++ iq) {
   //TH1D *h_ejet = new TH1D("h_ejet",";E_{jet};N",100,0,1);
 
   TProfile *prq = new TProfile("prq",";p_{T,genjet};Response (ud)",nx,vx);
-   TProfile *pru = new TProfile("pru",";p_{T,genjet};Response (u)",nx,vx);
-   TProfile *prd = new TProfile("prd",";p_{T,genjet};Response (d)",nx,vx);
-   TProfile *prs = new TProfile("prs",";p_{T,genjet};Response (s)",nx,vx);
-   TProfile *prc = new TProfile("prc",";p_{T,genjet};Response (c)",nx,vx);
-   TProfile *prb = new TProfile("prb",";p_{T,genjet};Response (b)",nx,vx);
-   TProfile *prg = new TProfile("prg",";p_{T,genjet};Response (g)",nx,vx);
+  TProfile *pru = new TProfile("pru",";p_{T,genjet};Response (u)",nx,vx);
+  TProfile *prd = new TProfile("prd",";p_{T,genjet};Response (d)",nx,vx);
+  TProfile *prs = new TProfile("prs",";p_{T,genjet};Response (s)",nx,vx);
+  TProfile *prc = new TProfile("prc",";p_{T,genjet};Response (c)",nx,vx);
+  TProfile *prb = new TProfile("prb",";p_{T,genjet};Response (b)",nx,vx);
+  TProfile *prg = new TProfile("prg",";p_{T,genjet};Response (g)",nx,vx);
 
-   TProfile *pcq = new TProfile("pcq",";p_{T,genjet};Response (ud)",nx,vx);
-   TProfile *pcu = new TProfile("pcu",";p_{T,genjet};Response (u)",nx,vx);
-   TProfile *pcd = new TProfile("pcd",";p_{T,genjet};Response (d)",nx,vx);
-   TProfile *pcs = new TProfile("pcs",";p_{T,genjet};Response (s)",nx,vx);
-   TProfile *pcc = new TProfile("pcc",";p_{T,genjet};Response (c)",nx,vx);
-   TProfile *pcb = new TProfile("pcb",";p_{T,genjet};Response (b)",nx,vx);
-   TProfile *pcg = new TProfile("pcg",";p_{T,genjet};Response (g)",nx,vx);
+  TProfile *pcq = new TProfile("pcq",";p_{T,genjet};Response (ud)",nx,vx);
+  TProfile *pcu = new TProfile("pcu",";p_{T,genjet};Response (u)",nx,vx);
+  TProfile *pcd = new TProfile("pcd",";p_{T,genjet};Response (d)",nx,vx);
+  TProfile *pcs = new TProfile("pcs",";p_{T,genjet};Response (s)",nx,vx);
+  TProfile *pcc = new TProfile("pcc",";p_{T,genjet};Response (c)",nx,vx);
+  TProfile *pcb = new TProfile("pcb",";p_{T,genjet};Response (b)",nx,vx);
+  TProfile *pcg = new TProfile("pcg",";p_{T,genjet};Response (g)",nx,vx);
 
-   // Bin width 1./4. of ECAL crystal (2pi/(72.*5))
-   TH1D *hdrq = new TH1D("hdrq",";#DeltaR(ud-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hdru = new TH1D("hdru",";#DeltaR(u-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hdrd = new TH1D("hdrd",";#DeltaR(d-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hdrs = new TH1D("hdrs",";#DeltaR(s-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hdrc = new TH1D("hdrc",";#DeltaR(c-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hdrb = new TH1D("hdrb",";#DeltaR(b-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hdrg = new TH1D("hdrg",";#DeltaR(g-jet,cand);N_{cand}",200,0,0.8727);
+  // Bin width 1./4. of ECAL crystal (2pi/(72.*5))
+  TH1D *hdrq = new TH1D("hdrq",";#DeltaR(ud-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hdru = new TH1D("hdru",";#DeltaR(u-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hdrd = new TH1D("hdrd",";#DeltaR(d-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hdrs = new TH1D("hdrs",";#DeltaR(s-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hdrc = new TH1D("hdrc",";#DeltaR(c-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hdrb = new TH1D("hdrb",";#DeltaR(b-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hdrg = new TH1D("hdrg",";#DeltaR(g-jet,cand);N_{cand}",200,0,0.8727);
 
-   TH1D *hrwq = new TH1D("hrwq",";#DeltaR(ud-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hrwu = new TH1D("hrwu",";#DeltaR(u-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hrwd = new TH1D("hrwd",";#DeltaR(d-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hrws = new TH1D("hrws",";#DeltaR(s-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hrwc = new TH1D("hrwc",";#DeltaR(c-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hrwb = new TH1D("hrwb",";#DeltaR(b-jet,cand);N_{cand}",200,0,0.8727);
-   TH1D *hrwg = new TH1D("hrwg",";#DeltaR(g-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hrwq = new TH1D("hrwq",";#DeltaR(ud-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hrwu = new TH1D("hrwu",";#DeltaR(u-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hrwd = new TH1D("hrwd",";#DeltaR(d-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hrws = new TH1D("hrws",";#DeltaR(s-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hrwc = new TH1D("hrwc",";#DeltaR(c-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hrwb = new TH1D("hrwb",";#DeltaR(b-jet,cand);N_{cand}",200,0,0.8727);
+  TH1D *hrwg = new TH1D("hrwg",";#DeltaR(g-jet,cand);N_{cand}",200,0,0.8727);
 
-   // Fraction of energy carried by the leading particle
-   TH1D *hfq = new TH1D("hfq",";p_{T,lead}/p_{T,jet};N_{ud-jet}",100,0,1);
-   TH1D *hfu = new TH1D("hfu",";p_{T,lead}/p_{T,jet};N_{u-jet}",100,0,1);
-   TH1D *hfd = new TH1D("hfd",";p_{T,lead}/p_{T,jet};N_{d-jet}",100,0,1);
-   TH1D *hfs = new TH1D("hfs",";p_{T,lead}/p_{T,jet};N_{s-jet}",100,0,1);
-   TH1D *hfc = new TH1D("hfc",";p_{T,lead}/p_{T,jet};N_{c-jet}",100,0,1);
-   TH1D *hfb = new TH1D("hfb",";p_{T,lead}/p_{T,jet};N_{b-jet}",100,0,1);
-   TH1D *hfg = new TH1D("hfg",";p_{T,lead}/p_{T,jet};N_{g-jet}",100,0,1);
+  // Fraction of energy carried by the leading particle
+  TH1D *hfq = new TH1D("hfq",";p_{T,lead}/p_{T,jet};N_{ud-jet}",100,0,1);
+  TH1D *hfu = new TH1D("hfu",";p_{T,lead}/p_{T,jet};N_{u-jet}",100,0,1);
+  TH1D *hfd = new TH1D("hfd",";p_{T,lead}/p_{T,jet};N_{d-jet}",100,0,1);
+  TH1D *hfs = new TH1D("hfs",";p_{T,lead}/p_{T,jet};N_{s-jet}",100,0,1);
+  TH1D *hfc = new TH1D("hfc",";p_{T,lead}/p_{T,jet};N_{c-jet}",100,0,1);
+  TH1D *hfb = new TH1D("hfb",";p_{T,lead}/p_{T,jet};N_{b-jet}",100,0,1);
+  TH1D *hfg = new TH1D("hfg",";p_{T,lead}/p_{T,jet};N_{g-jet}",100,0,1);
 
-   // Fragmentation function
-   TH1D *hffq = new TH1D("hffq",";p_{T,cand}/p_{T,jet};N_{ud-jet}",100,0,1);
-   TH1D *hffu = new TH1D("hffu",";p_{T,cand}/p_{T,jet};N_{u-jet}",100,0,1);
-   TH1D *hffd = new TH1D("hffd",";p_{T,cand}/p_{T,jet};N_{d-jet}",100,0,1);
-   TH1D *hffs = new TH1D("hffs",";p_{T,cand}/p_{T,jet};N_{s-jet}",100,0,1);
-   TH1D *hffc = new TH1D("hffc",";p_{T,cand}/p_{T,jet};N_{c-jet}",100,0,1);
-   TH1D *hffb = new TH1D("hffb",";p_{T,cand}/p_{T,jet};N_{b-jet}",100,0,1);
-   TH1D *hffg = new TH1D("hffg",";p_{T,cand}/p_{T,jet};N_{g-jet}",100,0,1);
+  // Fragmentation function
+  TH1D *hffq = new TH1D("hffq",";p_{T,cand}/p_{T,jet};N_{ud-jet}",100,0,1);
+  TH1D *hffu = new TH1D("hffu",";p_{T,cand}/p_{T,jet};N_{u-jet}",100,0,1);
+  TH1D *hffd = new TH1D("hffd",";p_{T,cand}/p_{T,jet};N_{d-jet}",100,0,1);
+  TH1D *hffs = new TH1D("hffs",";p_{T,cand}/p_{T,jet};N_{s-jet}",100,0,1);
+  TH1D *hffc = new TH1D("hffc",";p_{T,cand}/p_{T,jet};N_{c-jet}",100,0,1);
+  TH1D *hffb = new TH1D("hffb",";p_{T,cand}/p_{T,jet};N_{b-jet}",100,0,1);
+  TH1D *hffg = new TH1D("hffg",";p_{T,cand}/p_{T,jet};N_{g-jet}",100,0,1);
 
-   // Fragmentation function sans leading particle
-   TH1D *hf2q = new TH1D("hf2q",";p_{T,cand}/p_{T,jet};N_{ud-jet}",100,0,1);
-   TH1D *hf2u = new TH1D("hf2u",";p_{T,cand}/p_{T,jet};N_{u-jet}",100,0,1);
-   TH1D *hf2d = new TH1D("hf2d",";p_{T,cand}/p_{T,jet};N_{d-jet}",100,0,1);
-   TH1D *hf2s = new TH1D("hf2s",";p_{T,cand}/p_{T,jet};N_{s-jet}",100,0,1);
-   TH1D *hf2c = new TH1D("hf2c",";p_{T,cand}/p_{T,jet};N_{c-jet}",100,0,1);
-   TH1D *hf2b = new TH1D("hf2b",";p_{T,cand}/p_{T,jet};N_{b-jet}",100,0,1);
-   TH1D *hf2g = new TH1D("hf2g",";p_{T,cand}/p_{T,jet};N_{g-jet}",100,0,1);
+  // Fragmentation function sans leading particle
+  TH1D *hf2q = new TH1D("hf2q",";p_{T,cand}/p_{T,jet};N_{ud-jet}",100,0,1);
+  TH1D *hf2u = new TH1D("hf2u",";p_{T,cand}/p_{T,jet};N_{u-jet}",100,0,1);
+  TH1D *hf2d = new TH1D("hf2d",";p_{T,cand}/p_{T,jet};N_{d-jet}",100,0,1);
+  TH1D *hf2s = new TH1D("hf2s",";p_{T,cand}/p_{T,jet};N_{s-jet}",100,0,1);
+  TH1D *hf2c = new TH1D("hf2c",";p_{T,cand}/p_{T,jet};N_{c-jet}",100,0,1);
+  TH1D *hf2b = new TH1D("hf2b",";p_{T,cand}/p_{T,jet};N_{b-jet}",100,0,1);
+  TH1D *hf2g = new TH1D("hf2g",";p_{T,cand}/p_{T,jet};N_{g-jet}",100,0,1);
    
   
   
@@ -474,34 +474,35 @@ for (int iq = 0; iq != nq; ++ iq) {
 	    if (pass) {
         //continue;
 
-      // Pre-loop to find leading candidate in jet
-      for (int k = 0; k != nGenJetGenPartCand; ++k) {
+        // Pre-loop to find leading candidate in jet
+        for (int k = 0; k != nGenJetGenPartCand; ++k) {
 
-      if (GenJetGenPartCand_genJetIdx[k]==i) {
-        int j = GenJetGenPartCand_GenPartCandIdx[k];
-        double pt = GenPartCand_pt[j];
-        if (pt>ptlead) {
-          p4lead.SetPtEtaPhiM(GenPartCand_pt[j],GenPartCand_eta[j],
-              GenPartCand_phi[j],GenPartCand_mass[j]);
-          ptlead = pt;
-          iLeadGenCand = j;
-        }
-      }
-    } // for k
+          if (GenJetGenPartCand_genJetIdx[k]==i) {
+            int j = GenJetGenPartCand_GenPartCandIdx[k];
+            double pt = GenPartCand_pt[j];
+            if (pt>ptlead) {
+              p4lead.SetPtEtaPhiM(GenPartCand_pt[j],GenPartCand_eta[j],
+                  GenPartCand_phi[j],GenPartCand_mass[j]);
+              ptlead = pt;
+              iLeadGenCand = j;
+            } //if pt>ptlead
+          } // if GenJetGenPartCand_genJetIdx[k]==i
+        } // for k
 
-    Short_t f = GenJet_partonFlavour[i];
-    double fi = ptlead / p4jet.Pt();
-    if (abs(f)==1|| abs(f)==2)
-      hfq->Fill(fi);
-    if (abs(f)==1) hfd->Fill(fi);
-    if (abs(f)==2) hfu->Fill(fi);
-    if (abs(f)==3) hfs->Fill(fi);
-    if (abs(f)==4) hfc->Fill(fi);
-    if (abs(f)==5) hfb->Fill(fi);
-    if (f==21)
-    hfg->Fill(fi);
+        Short_t f = GenJet_partonFlavour[i];
+        double fi = ptlead / p4jet.Pt();
+        if (abs(f)==1|| abs(f)==2)
+          hfq->Fill(fi);
+        if (abs(f)==1) hfd->Fill(fi);
+        if (abs(f)==2) hfu->Fill(fi);
+        if (abs(f)==3) hfs->Fill(fi);
+        if (abs(f)==4) hfc->Fill(fi);
+        if (abs(f)==5) hfb->Fill(fi);
+        if (f==21)
+        hfg->Fill(fi);
+      
+      } // if pass
 
-      }
       double esum(0), esumch(0), esumnh(0), esumne(0);
       double elead(0), eleadch(0), eleadnh(0), eleadne(0);
       // Loop over candidates in these jets
@@ -686,8 +687,8 @@ for (int iq = 0; iq != nq; ++ iq) {
                     //if (vpid3[id][elem] == 0) continue; // Skip zeros
                     if (GenPartCand_pdgId[iGenCand] == vpid3[id][elem]) {
                       isMatchFound = true;
-		                }
-		              }
+                    }
+                  }
                   if (isMatchFound) {
                     isId = true;
                     const char *pid = vpid[id].c_str();
@@ -700,14 +701,14 @@ for (int iq = 0; iq != nq; ++ iq) {
                       x = GenPartCand_pt[iGenCand];
                       mh[hname]->Fill(x, w);
                     } // No need to check other vectors if a match is already found for this particle
-                    if (vxvar[ix] == "ptlead") {
-                      x = ptlead;
-                      mh[hname]->Fill(x, w);
-                    }
-		              }
-		            }
+                    //if (vxvar[ix] == "ptlead") {
+                      //x = ptlead;
+                      //mh[hname]->Fill(x, w);
+                    //}
+                  } // if match found
+                } // for id
               } // for ix
-	          } // for iq
+            } // for iq
 
             if (iGenCand != iLeadGenCand) {
               for (int iq = 0; iq != nq; ++ iq) {
@@ -750,11 +751,11 @@ for (int iq = 0; iq != nq; ++ iq) {
                         x = GenPartCand_pt[iGenCand];
                         mh[hname]->Fill(x, w);
                       } // No need to check other vectors if a match is already found for this particle
-                    }
-		              }
-                }
-              }
-            }
+                    } // if match found
+                  } // for id
+                } // for ix
+              } // for iq
+            } // if iGenCand != iLeadGenCand
 
             for (int ic = 0; ic != nc ; ++ ic) {
               bool isT = visc[ic];
@@ -780,11 +781,11 @@ for (int iq = 0; iq != nq; ++ iq) {
                     x = GenPartCand_pt[iGenCand];
                     mhc[hname]->Fill(x, w);
                   }
-                }
-              }
-            }
-	        } //eta loop
-	      } // i = iGenJet
+                } // for ix
+              } // for iq
+            } // for ic
+          } //eta loop
+        } // i = iGenJet
       } // candloop for j
 
       if (fabs(GenJet_eta[i]) < 1.3 && ptjet > 80 && ptjet < 100) {
@@ -868,8 +869,7 @@ for (int iq = 0; iq != nq; ++ iq) {
           if (abs(f)==3) prs->Fill(pt, r);
           if (abs(f)==4) prc->Fill(pt, r);
           if (abs(f)==5) prb->Fill(pt, r);
-          if (f==21)
-            prg->Fill(pt, r);
+          if (f==21) prg->Fill(pt, r);
 
           // Corrected response
           double c = p4reco.Pt() / pt;
@@ -880,9 +880,8 @@ for (int iq = 0; iq != nq; ++ iq) {
           if (abs(f)==3) pcs->Fill(pt, c);
           if (abs(f)==4) pcc->Fill(pt, c);
           if (abs(f)==5) pcb->Fill(pt, c);
-          if (f==21)
-            pcg->Fill(pt, c);
-          
+          if (f==21) pcg->Fill(pt, c);  
+
         } // dR<0.2
       } // for j
     } // for i
