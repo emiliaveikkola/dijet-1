@@ -470,8 +470,8 @@ for (int iq = 0; iq != nq; ++ iq) {
       //bool pass = (p4j.Pt()>84 && p4j.Pt()<153 && fabs(p4j.Eta())<1.3)
       bool pass = (p4jet.Pt()>84 && p4jet.Pt()<114 && fabs(p4jet.Eta())<1.3);
       double ptlead(0.);
-	    int iLeadGenCand(-1);
-	    if (pass) {
+      int iLeadGenCand(-1);
+      if (pass) {
         //continue;
 
         // Pre-loop to find leading candidate in jet
@@ -527,54 +527,53 @@ for (int iq = 0; iq != nq; ++ iq) {
           // cout << "Cand" << iGenCand << ":" << GenPartCand_pt[iGenCand] << ", " ;
           p4cand.SetPtEtaPhiM(GenPartCand_pt[iGenCand], GenPartCand_eta[iGenCand], GenPartCand_phi[iGenCand], GenPartCand_mass[iGenCand]);
           if (pass) {
-          double dr = p4jet.DeltaR(p4cand);
-          //double dr = p4lead.DeltaR(p4cand);
-          Short_t f = GenJet_partonFlavour[i];
-	    if (abs(f)==1|| abs(f)==2)
-	      hdrq->Fill(dr);
-	    if (abs(f)==1) hdrd->Fill(dr);
-	    if (abs(f)==2) hdru->Fill(dr);
-	    if (abs(f)==3) hdrs->Fill(dr);
-	    if (abs(f)==4) hdrc->Fill(dr);
-	    if (abs(f)==5) hdrb->Fill(dr);
-	    if (f==21)
-	      hdrg->Fill(dr);
+            double dr = p4jet.DeltaR(p4cand);
+            //double dr = p4lead.DeltaR(p4cand);
+            Short_t f = GenJet_partonFlavour[i];
+            if (abs(f)==1|| abs(f)==2)
+              hdrq->Fill(dr);
+            if (abs(f)==1) hdrd->Fill(dr);
+            if (abs(f)==2) hdru->Fill(dr);
+            if (abs(f)==3) hdrs->Fill(dr);
+            if (abs(f)==4) hdrc->Fill(dr);
+            if (abs(f)==5) hdrb->Fill(dr);
+            if (f==21)
+              hdrg->Fill(dr);
 
-	    double w = p4cand.Pt() / p4jet.Pt();
-	    if (abs(f)==1|| abs(f)==2)
-	      hrwq->Fill(dr, w);
-	    if (abs(f)==1) hrwd->Fill(dr, w);
-	    if (abs(f)==2) hrwu->Fill(dr, w);
-	    if (abs(f)==3) hrws->Fill(dr, w);
-	    if (abs(f)==4) hrwc->Fill(dr, w);
-	    if (abs(f)==5) hrwb->Fill(dr, w);
-	    if (f==21)
-	      hrwg->Fill(dr, w);
+            double w = p4cand.Pt() / p4jet.Pt();
+            if (abs(f)==1|| abs(f)==2)
+              hrwq->Fill(dr, w);
+            if (abs(f)==1) hrwd->Fill(dr, w);
+            if (abs(f)==2) hrwu->Fill(dr, w);
+            if (abs(f)==3) hrws->Fill(dr, w);
+            if (abs(f)==4) hrwc->Fill(dr, w);
+            if (abs(f)==5) hrwb->Fill(dr, w);
+            if (f==21)
+              hrwg->Fill(dr, w);
 
-	    double fi = p4cand.Pt() / p4jet.Pt();
-	    if (abs(f)==1|| abs(f)==2)
-	      hffq->Fill(fi);
-	    if (abs(f)==1) hffd->Fill(fi);
-	    if (abs(f)==2) hffu->Fill(fi);
-	    if (abs(f)==3) hffs->Fill(fi);
-	    if (abs(f)==4) hffc->Fill(fi);
-	    if (abs(f)==5) hffb->Fill(fi);
-	    if (f==21)
-	      hffg->Fill(fi);
+            double fi = p4cand.Pt() / p4jet.Pt();
+            if (abs(f)==1|| abs(f)==2)
+              hffq->Fill(fi);
+            if (abs(f)==1) hffd->Fill(fi);
+            if (abs(f)==2) hffu->Fill(fi);
+            if (abs(f)==3) hffs->Fill(fi);
+            if (abs(f)==4) hffc->Fill(fi);
+            if (abs(f)==5) hffb->Fill(fi);
+            if (f==21)
+              hffg->Fill(fi);
 
-	    if (iGenCand != iLeadGenCand) {
-	      if (abs(f)==1|| abs(f)==2)
-		    hf2q->Fill(fi);
-	      if (abs(f)==1) hf2d->Fill(fi);
-	      if (abs(f)==2) hf2u->Fill(fi);
-	      if (abs(f)==3) hf2s->Fill(fi);
-	      if (abs(f)==4) hf2c->Fill(fi);
-	      if (abs(f)==5) hf2b->Fill(fi);
-	      if (f==21)
-		    hf2g->Fill(fi);
-
-	    } // lead cand
-          }    
+            if (iGenCand != iLeadGenCand) {
+              if (abs(f)==1|| abs(f)==2)
+              hf2q->Fill(fi);
+              if (abs(f)==1) hf2d->Fill(fi);
+              if (abs(f)==2) hf2u->Fill(fi);
+              if (abs(f)==3) hf2s->Fill(fi);
+              if (abs(f)==4) hf2c->Fill(fi);
+              if (abs(f)==5) hf2b->Fill(fi);
+              if (f==21)
+              hf2g->Fill(fi);
+            } // lead cand
+          } // if pass    
           //if (debug){cout << "jetloop" << endl;}
           
           bool isCH = (GenPartCand_charge[iGenCand] != 0);
@@ -604,19 +603,13 @@ for (int iq = 0; iq != nq; ++ iq) {
               eleadch = 0;
               eleadnh = 0;
             }
-          }
+          } // if ecand > elead
 	  
             p4sum += p4cand;
             esum += ecand;
             if (isCH) { esumch += ecand; }
             if (isNH) { esumnh += ecand; }
             if (isNE) { esumne += ecand; }
-
-            //if (i == 0 && pt > 1){
-                //dRlead = 
-            //}
-            //dRjet = 
-            //if (dR < dRmin){dR == dRmin};
             
             if (fabs(GenJet_eta[iGenJet]) < 1.3) {
               
@@ -644,16 +637,16 @@ for (int iq = 0; iq != nq; ++ iq) {
                 std::size_t lastSlashPos = fullPath.find_last_of("/\\"); // Handles both forward and backward slashes
                 std::string fileName = fullPath.substr(lastSlashPos + 1); // Extracts the filename
                 cout << "File: " << fileName << "," << endl
-                    << "run: " << run // The run number
-                    << ", event: " << event // The event number
-                    << ", jentry: " << jentry // The jentry number
-                    << ", ientry: " << ientry // The jentry number
-                    << ", GenJet index: " << iGenJet // Print the GenJet index
-                    << ", GenPartCand index: " << iGenCand // Print the GenPartCand index
-                    << ", GenPartCand_pdgId: " << GenPartCand_pdgId[iGenCand]
-                    << ", GenPartCand_pt: " << GenPartCand_pt[iGenCand]
-                    << ", GenJet_pt: " << GenJet_pt[iGenJet]
-                    << endl << flush;
+                << "run: " << run // The run number
+                << ", event: " << event // The event number
+                << ", jentry: " << jentry // The jentry number
+                << ", ientry: " << ientry // The jentry number
+                << ", GenJet index: " << iGenJet // Print the GenJet index
+                << ", GenPartCand index: " << iGenCand // Print the GenPartCand index
+                << ", GenPartCand_pdgId: " << GenPartCand_pdgId[iGenCand]
+                << ", GenPartCand_pt: " << GenPartCand_pt[iGenCand]
+                << ", GenJet_pt: " << GenJet_pt[iGenJet]
+                << endl << flush;
               }
             }
 
