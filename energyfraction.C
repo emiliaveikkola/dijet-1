@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void energyfraction() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_x.root", "READ");
+TFile *file = new TFile("output_y.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};
@@ -44,10 +44,10 @@ int nq = sizeof(vq) / sizeof(vq[0]);
 string vc[] = {"ch", "nh", "ne"};
 int nc = sizeof(vc) / sizeof(vc[0]);
 
-string vxvar[] = {"ptcand", "ptjet"};
+string vxvar[] = {"ptcand", "ptjet", "ptlead"};
 int nxvar = sizeof(vxvar) / sizeof(vxvar[0]);
 
-string vxvar_name[] = {"gencand", "genjet"};
+string vxvar_name[] = {"gencand", "genjet", "genleadcand"};
 int nxvar_name = sizeof(vxvar_name) / sizeof(vxvar_name[0]);
 
 string vyvar[] = {"fl", "fh"};

@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void difference() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_x.root", "READ");
+TFile *file = new TFile("output_y.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};
@@ -44,10 +44,10 @@ int nq = sizeof(vq) / sizeof(vq[0]);
 string vc[] = {"ch", "nh", "ne"};
 int nc = sizeof(vc) / sizeof(vc[0]);
 
-string vxvar[] = {"ptcand", "ptjet"};
+string vxvar[] = {"ptcand", "ptjet", "ptlead"};
 int nxvar = sizeof(vxvar) / sizeof(vxvar[0]);
 
-string vxvar_name[] = {"gencand", "genjet"};
+string vxvar_name[] = {"gencand", "genjet", "genleadcand"};
 int nxvar_name = sizeof(vxvar_name) / sizeof(vxvar_name[0]);
 
 string vyvar[] = {"flc", "fln", "fle", "fhc", "fhn", "fhe"};
@@ -85,7 +85,7 @@ for (int iq1 = 0; iq1 != nq; ++ iq1) {
             //if (vxvar[ix] == "ptcand"){
             vector<float> range;
             if (vxvar[ix] == "ptjet"){range = {10, 5300};}
-            if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
+            if (vxvar[ix] == "ptcand" || vxvar[ix] == "ptlead"){range = {0.1, 100};}
                 TH1D *h = tdrHist(Form("h1_%s-%s%s",cq1,cq2,cx),Form("%s-%s N fraction",cq1,cq2),-0.15 + 1e-4,0.2 -1e-4,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
                 TCanvas *c = tdrCanvas(Form("c1_%s-%s%s",cq1,cq2,cx),h,8,kSquare);
                 c->SetLogx();
