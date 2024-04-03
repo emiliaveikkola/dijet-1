@@ -495,7 +495,6 @@ for (int iq = 0; iq != nq; ++ iq) {
       double ptlead(0.);
       double ptslead(0.);
       int iLeadGenCand(-1);
-      bool isSLead = false;
 
       
         //continue;
@@ -514,9 +513,7 @@ for (int iq = 0; iq != nq; ++ iq) {
               p4lead = p4cand; 
               iLeadGenCand = j;
             } //if pt>ptlead
-            isSLead = false;
             if (isSjet && pt > ptslead){
-              isSLead = true;
               ptslead = pt;
             }
           } // if GenJetGenPartCand_genJetIdx[k]==i
@@ -723,7 +720,7 @@ for (int iq = 0; iq != nq; ++ iq) {
               } // for ix
             } // for iq
 
-            if (isSLead && ptjet>80 && ptjet<100) {
+            if (isSjet && ptjet>80 && ptjet<100) {
               double x(0);
               const char *hsname_all = Form("h_all_%s_vs_ptslead", "s");
               x = ptslead; 
@@ -828,7 +825,7 @@ for (int iq = 0; iq != nq; ++ iq) {
               } // for iq
             } // for ic
 
-            if (isSLead && ptjet > 80 && ptjet < 100) {
+            if (isSjet && ptjet > 80 && ptjet < 100) {
               double x(0);
               for (int ic = 0; ic != nc ; ++ ic) {
                 bool isT = visc[ic];
