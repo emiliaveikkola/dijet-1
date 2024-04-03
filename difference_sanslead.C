@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void difference_sanslead() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_y.root", "READ");
+TFile *file = new TFile("output_z.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};
@@ -84,7 +84,7 @@ for (int iq = 0; iq != nq; ++ iq) {
                 const char *cx_name = vxvar_name[ix1].c_str();
                 //if (vxvar[ix] == "ptcand"){
                 vector<float> range;
-                    TH1D *h = tdrHist(Form("h1_%s,%s-%s",cq,cx1,cx2),Form("%s N fraction %s-%s",cq,cx1,cx2),-0.5 + 1e-4,1.15 -1e-4,Form("p_{T, %s} (GeV)",cx_name),4,100);
+                    TH1D *h = tdrHist(Form("h1_%s,%s-%s",cq,cx1,cx2),Form("%s N fraction %s-%s",cq,cx1,cx2),-0.12 + 1e-4,0.18 -1e-4,Form("p_{T, %s} (GeV)",cx_name),6-1e-4,100);
                     TCanvas *c = tdrCanvas(Form("c1_%s,%s-%s",cq,cx1,cx2),h,8,kSquare);
                     c->SetLogx();
                     TLegend *leg = tdrLeg(0.83,0.9-0.1*3,1.1,0.9);

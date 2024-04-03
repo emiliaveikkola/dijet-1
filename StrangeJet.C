@@ -149,7 +149,7 @@ void StrangeJet::Loop(){
   int nxbins_one = sizeof(xbins_one) / sizeof(xbins_one[0]) - 1;
   
   TDirectory *curdir = gDirectory;
-  TFile *fout = new TFile("output_y.root","recreate");
+  TFile *fout = new TFile("output_x.root","recreate");
   
   TProfile *pu0 = new TProfile("pu0",";Ptjet;has non-zero energysum",nptd,vptd);
   
@@ -252,7 +252,7 @@ void StrangeJet::Loop(){
 	      nx = nptd;
       }
       const char *hname_all = Form("h_all_%s_vs_%s", cq, cx);
-      const char *htitle_all = Form(";E_{T,%s}, all;%s N", cx, cq);
+      const char *htitle_all = Form(";p_{T,%s}, all;%s N", cx, cq);
       mh[hname_all] = new TH1D(hname_all, htitle_all, nx, x);
       for (int id = 0; id != npid; ++ id) {
 	      const char *pid = vpid[id].c_str();
@@ -273,6 +273,16 @@ void StrangeJet::Loop(){
       } // for id
     } // for ix
   } // for iq
+  const char *hsname_all = Form("h_all_%s_vs_ptslead", "s");
+  const char *hstitle_all = Form(";p_{T,ptslead}, all;%s N", "s");
+  mh[hsname_all] = new TH1D(hsname_all, hstitle_all, nxbins_cand, xbins_cand);
+  for (int id = 0; id != npid; ++ id) {
+    const char *pid = vpid[id].c_str();
+    const char *pid2 = vpid2[id].c_str();
+    const char *hsname = Form("h_%s_s_vs_ptslead", pid);
+    const char *hstitle = Form(";p_{T,ptslead}, %s;s N", pid2);
+    mh[hsname] = new TH1D(hsname, hstitle, nxbins_cand, xbins_cand);
+  }
 /*
 for (int iq = 0; iq != nq; ++ iq) {
     for (int ix = 0; ix != nxvar; ++ ix) {
@@ -316,13 +326,19 @@ for (int iq = 0; iq != nq; ++ iq) {
           nx = nptd;
         }
         const char *hname = Form("h_%s_%s_vs_%s", cq, cc ,cx);
-        const char *htitle = Form(";E_{T,%s}, %s;%s N", cx, cq, cc);
+        const char *htitle = Form(";p_{T,%s}, %s;%s N", cx, cq, cc);
         //if (debug) {cout << hname << endl << flush;}
         mhc[hname] = new TH1D(hname, htitle, nx, x);
       } // for ix
     } // for ic
   } // for iq
 
+  for (int ic = 0; ic != nc; ++ ic) {
+    const char *cc = vc[ic].c_str();
+    const char *hsname = Form("h_s_%s_vs_ptslead", cc);
+    const char *hstitle = Form(";p_{T,ptslead}, s; %s N", cc);
+    mhc[hsname] = new TH1D(hsname, hstitle, nxbins_cand, xbins_cand);
+  }
    std::map < string, TH1D* > mhe;
 
   for (int iq = 0; iq != nq; ++ iq) {
@@ -343,7 +359,10 @@ for (int iq = 0; iq != nq; ++ iq) {
   } // for iq
   
   
-  TH1D *h = new TH1D("h",";PtCand, All jets;N", nxbins_max, xbins_max);
+  TH1D *h_all = new TH1D("h_all",";PtCand, All candidates;N", nxbins_cand, xbins_cand);
+  TH1D *h_all_lead = new TH1D("h_all_lead",";PtCand, All lead candidates;N", nxbins_cand, xbins_cand);
+  TH1D *h_s_lead = new TH1D("h_s_lead",";PtCand, From lead all S candidates;N", nxbins_cand, xbins_cand);
+
   TH1D *hperp = new TH1D("hperp",";PtCand, No jets;N", nxbins_max, xbins_max);
   TH1D *hjet = new TH1D("hjet",";PtCand, All jets;N", nxbins_max, xbins_max);
   //TH1D *h_elead_vs_ejet = new TH1D("h_elead_vs_ejet",";p_{T,jet}; lead/jet energyfraction",100,0,1);
@@ -425,6 +444,7 @@ for (int iq = 0; iq != nq; ++ iq) {
   t.Start();
   const int nlap = 1000;
   const int nlap2 = 80000;
+  //nentries = 100000;
   for (Long64_t jentry=0; jentry<nentries;jentry++) {
     Long64_t ientry = LoadTree(jentry);
     if (ientry < 0) break;
@@ -459,23 +479,25 @@ for (int iq = 0; iq != nq; ++ iq) {
       bool isDjet = (abs(GenJet_partonFlavour[i]) == 1);
       bool isUjet = (abs(GenJet_partonFlavour[i]) == 2);
       
-      double ptjet = GenJet_pt[i];
-      double ejet = p4jet.E();
-      
       p4jet.SetPtEtaPhiM(GenJet_pt[i], GenJet_eta[i], GenJet_phi[i], GenJet_mass[i]);
       p4perp.SetPtEtaPhiM(GenJet_pt[i], -GenJet_eta[i], GenJet_phi[i]+TMath::Pi()/2, GenJet_mass[i]);
       p4sum.SetPtEtaPhiM(0,0,0,0);
       p4lead.SetPtEtaPhiM(0,0,0,0);
 
+      double ptjet = GenJet_pt[i];
+      double ejet = p4jet.E();
+
       //bool pass = (p4j.Pt()>84 && p4j.Pt()<153 && fabs(p4j.Eta())<1.3)
-      bool pass = (p4jet.Pt()>84 && p4jet.Pt()<114 && fabs(p4jet.Eta())<1.3);
+      bool pass = (p4jet.Pt()>80 && p4jet.Pt()<100 && fabs(p4jet.Eta())<1.3);
 
       double esum(0), esumch(0), esumnh(0), esumne(0);
       double elead(0), eleadch(0), eleadnh(0), eleadne(0);
       double ptlead(0.);
+      double ptslead(0.);
       int iLeadGenCand(-1);
+      bool isSLead = false;
 
-      if (pass) {
+      
         //continue;
 
         // Pre-loop to find leading candidate in jet
@@ -488,12 +510,19 @@ for (int iq = 0; iq != nq; ++ iq) {
               p4lead.SetPtEtaPhiM(GenPartCand_pt[j],GenPartCand_eta[j],
                   GenPartCand_phi[j],GenPartCand_mass[j]);
               ptlead = pt;
-              elead = p4lead.E();
+              elead = p4lead.E(); //leading pt particle energy != leading energy particle
+              p4lead = p4cand; 
               iLeadGenCand = j;
             } //if pt>ptlead
+            isSLead = false;
+            if (isSjet && pt > ptslead){
+              isSLead = true;
+              ptslead = pt;
+            }
           } // if GenJetGenPartCand_genJetIdx[k]==i
         } // for k
 
+      if (pass) {
         Short_t f = GenJet_partonFlavour[i];
         double fi = ptlead / p4jet.Pt();
         if (abs(f)==1|| abs(f)==2)
@@ -533,48 +562,40 @@ for (int iq = 0; iq != nq; ++ iq) {
             double dr = p4jet.DeltaR(p4cand);
             //double dr = p4lead.DeltaR(p4cand);
             Short_t f = GenJet_partonFlavour[i];
-            if (abs(f)==1|| abs(f)==2)
-              hdrq->Fill(dr);
+            if (abs(f)==1|| abs(f)==2) hdrq->Fill(dr);
             if (abs(f)==1) hdrd->Fill(dr);
             if (abs(f)==2) hdru->Fill(dr);
             if (abs(f)==3) hdrs->Fill(dr);
             if (abs(f)==4) hdrc->Fill(dr);
             if (abs(f)==5) hdrb->Fill(dr);
-            if (f==21)
-              hdrg->Fill(dr);
+            if (f==21) hdrg->Fill(dr);
 
             double w = p4cand.Pt() / p4jet.Pt();
-            if (abs(f)==1|| abs(f)==2)
-              hrwq->Fill(dr, w);
+            if (abs(f)==1|| abs(f)==2) hrwq->Fill(dr, w);
             if (abs(f)==1) hrwd->Fill(dr, w);
             if (abs(f)==2) hrwu->Fill(dr, w);
             if (abs(f)==3) hrws->Fill(dr, w);
             if (abs(f)==4) hrwc->Fill(dr, w);
             if (abs(f)==5) hrwb->Fill(dr, w);
-            if (f==21)
-              hrwg->Fill(dr, w);
+            if (f==21) hrwg->Fill(dr, w);
 
             double fi = p4cand.Pt() / p4jet.Pt();
-            if (abs(f)==1|| abs(f)==2)
-              hffq->Fill(fi);
+            if (abs(f)==1|| abs(f)==2) hffq->Fill(fi);
             if (abs(f)==1) hffd->Fill(fi);
             if (abs(f)==2) hffu->Fill(fi);
             if (abs(f)==3) hffs->Fill(fi);
             if (abs(f)==4) hffc->Fill(fi);
             if (abs(f)==5) hffb->Fill(fi);
-            if (f==21)
-              hffg->Fill(fi);
+            if (f==21) hffg->Fill(fi);
 
             if (iGenCand != iLeadGenCand) {
-              if (abs(f)==1|| abs(f)==2)
-              hf2q->Fill(fi);
+              if (abs(f)==1|| abs(f)==2) hf2q->Fill(fi);
               if (abs(f)==1) hf2d->Fill(fi);
               if (abs(f)==2) hf2u->Fill(fi);
               if (abs(f)==3) hf2s->Fill(fi);
               if (abs(f)==4) hf2c->Fill(fi);
               if (abs(f)==5) hf2b->Fill(fi);
-              if (f==21)
-              hf2g->Fill(fi);
+              if (f==21) hf2g->Fill(fi);
             } // lead cand
           } // if pass    
           //if (debug){cout << "jetloop" << endl;}
@@ -588,25 +609,17 @@ for (int iq = 0; iq != nq; ++ iq) {
           visc[2] = isNE;
 
 	        double ecand = p4cand.E();
-          if (ecand > elead) { 
-            p4lead = p4cand; 
-            //elead = ecand;
+          if (iGenCand == iLeadGenCand) { 
             if (isCH) {
               eleadch = ecand;
-              eleadnh = 0;
-              eleadne = 0;
              }
             if (isNH) {
               eleadnh = ecand;
-              eleadch = 0;
-              eleadne = 0;
             }
             if (isNE) { 
               eleadne = ecand;
-              eleadch = 0;
-              eleadnh = 0;
             }
-          } // if ecand > elead
+          } // if iGenCand == iLeadGenCand
 	  
             p4sum += p4cand;
             esum += ecand;
@@ -616,7 +629,11 @@ for (int iq = 0; iq != nq; ++ iq) {
             
             if (fabs(GenJet_eta[iGenJet]) < 1.3) {
               
-            h->Fill(GenPartCand_pt[iGenCand], w);
+            if (ptjet > 80 && ptjet < 100) {
+              h_all->Fill(GenPartCand_pt[iGenCand], w);
+              if (iLeadGenCand == iGenCand) {h_all_lead->Fill(ptlead, w);}
+              if (iLeadGenCand == iGenCand && isSjet) {h_s_lead->Fill(ptslead, w);}
+            }
             
             //if (debug) { cout << "isId=" << isId << ", GenPartCand_pdgId[iGenCand]=" << GenPartCand_pdgId[iGenCand] << ", vpid3[id]=" << vpid3[id] << endl; }
             //bool isId = (GenPartCand_pdgId[iGenCand] == mid[pid]);
@@ -671,7 +688,7 @@ for (int iq = 0; iq != nq; ++ iq) {
                   x = GenPartCand_pt[iGenCand];
                   mh[hname_all]->Fill(x, w);
                 }
-                if (vxvar[ix] == "ptlead" && p4jet.Pt()>84 && p4jet.Pt()<114) { //swap if doesn't work
+                if (iLeadGenCand == iGenCand && vxvar[ix] == "ptlead" && p4jet.Pt()>80 && p4jet.Pt()<100) { //swap if doesn't work
                   x = ptlead; 
                   mh[hname_all]->Fill(x, w);
                 }
@@ -697,7 +714,7 @@ for (int iq = 0; iq != nq; ++ iq) {
                       x = GenPartCand_pt[iGenCand];
                       mh[hname]->Fill(x, w);
                     } // No need to check other vectors if a match is already found for this particle
-                    if (vxvar[ix] == "ptlead" && p4jet.Pt()>84 && p4jet.Pt()<114) {
+                    if (iLeadGenCand == iGenCand && vxvar[ix] == "ptlead" && p4jet.Pt()>80 && p4jet.Pt()<100) {
                       x = ptlead;
                       mh[hname]->Fill(x, w);
                     }
@@ -705,7 +722,32 @@ for (int iq = 0; iq != nq; ++ iq) {
                 } // for id
               } // for ix
             } // for iq
-/*
+
+            if (isSLead && ptjet>80 && ptjet<100) {
+              double x(0);
+              const char *hsname_all = Form("h_all_%s_vs_ptslead", "s");
+              x = ptslead; 
+              mh[hsname_all]->Fill(x, w);
+            
+              bool isSId(false);
+              for (std::size_t id = 0; id < vpid3.size() && !isSId; ++id) { // Iterate over vectors
+                bool isSMatchFound = false;
+                for (std::size_t elem = 0; elem < vpid3[id].size() && !isSMatchFound; ++elem) { // Iterate over elements in a vector
+                  //if (vpid3[id][elem] == 0) continue; // Skip zeros
+                  if (GenPartCand_pdgId[iGenCand] == vpid3[id][elem]) {
+                    isSMatchFound = true;
+                  }
+                }
+                if (isSMatchFound) {
+                  isSId = true;
+                  const char *pid = vpid[id].c_str();
+                  const char *hsname = Form("h_%s_s_vs_ptslead", pid);
+                  x = ptslead;
+                  mh[hsname]->Fill(x, w);
+                }
+              }
+            }
+            /*
             if (iGenCand != iLeadGenCand) {
               for (int iq = 0; iq != nq; ++ iq) {
                 //if (debug){cout << "iqloop" << endl;}
@@ -752,7 +794,7 @@ for (int iq = 0; iq != nq; ++ iq) {
                 } // for ix
               } // for iq
             } // if iGenCand != iLeadGenCand
-*/
+            */
             // Particle type loop for each flavour
             for (int ic = 0; ic != nc ; ++ ic) {
               bool isT = visc[ic];
@@ -778,13 +820,26 @@ for (int iq = 0; iq != nq; ++ iq) {
                     x = GenPartCand_pt[iGenCand];
                     mhc[hname]->Fill(x, w);
                   }
-                  if (vxvar[ix] == "ptlead" && p4jet.Pt()>84 && p4jet.Pt()<114) {
+                  if (iLeadGenCand == iGenCand && vxvar[ix] == "ptlead" && p4jet.Pt()>80 && p4jet.Pt()<100) {
                       x = ptlead;
                       mhc[hname]->Fill(x, w);
                     }
                 } // for ix
               } // for iq
             } // for ic
+
+            if (isSLead && ptjet > 80 && ptjet < 100) {
+              double x(0);
+              for (int ic = 0; ic != nc ; ++ ic) {
+                bool isT = visc[ic];
+                if (isT){
+                  const char *cc = vc[ic].c_str();
+                  const char *hsname = Form("h_s_%s_vs_ptslead",cc);
+                  x = ptslead;
+                  mhc[hsname]->Fill(x, w);
+                }
+              }
+            }  
           } //eta loop
         } // i = iGenJet
       } // candloop for j
@@ -842,16 +897,16 @@ for (int iq = 0; iq != nq; ++ iq) {
           } // for ix
         } // for iq
       } // for i
-    } //jetloop for i
+      //} //jetloop for i
 
-    // Loop over two leading jets
-    for (int i = 0; i != min(nGenJet,2); ++i) {
+      // Loop over two leading jets
+      //for (int i = 0; i != min(nGenJet,2); ++i) {
 
       p4jet.SetPtEtaPhiM(GenJet_pt[i],GenJet_eta[i],GenJet_phi[i],
         GenJet_mass[i]);
     
-      bool pass = (fabs(p4jet.Eta())<1.3);
-      if (!pass) continue;
+      bool pass2 = (fabs(p4jet.Eta())<1.3);
+      if (!pass2) continue;
     
       // Loop over matching reco jets
       for (int j = 0; j != nJet; ++j) {
@@ -887,7 +942,7 @@ for (int iq = 0; iq != nq; ++ iq) {
 
         } // dR<0.2
       } // for j
-    } // for i
+    } // for jetloop i
   } // for jentry
   fout->Write();
   fout->Close();

@@ -9,7 +9,7 @@ void drawPFNano() {
   setTDRStyle();
   TDirectory *curdir = gDirectory;
   
-  TFile *f = new TFile("output_x.root","READ");
+  TFile *f = new TFile("output_y.root","READ");
   //TFile *f = new TFile("pfnano_v3.root","READ");
   assert(f && !f->IsZombie());
   

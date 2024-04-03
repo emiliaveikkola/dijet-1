@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void fraction2() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_y.root", "READ");
+TFile *file = new TFile("output_z.root", "READ");
 // Retrieve the histograms
 
   string vpid[] = {"pionp", "pionm", "kaonp", "kaonm",//"lambdap", "lambdam","kaon0"
@@ -140,8 +140,8 @@ for (int iq = 0; iq != nq; ++ iq) {
         const char *cx_name = vxvar_name[ix].c_str();
         vector<float> range;
         if (vxvar[ix] == "ptjet"){range = {10, 5300};}
-        if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
-        if (vxvar[ix] == "ptlead"){range = {4, 100};}
+        if (vxvar[ix] == "ptcand"){range = {6, 100};}
+        if (vxvar[ix] == "ptlead"){range = {6, 100};}
         TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s N fraction",cq),0 + 1e-4,1,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
         TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,kSquare);
         c->SetLogx();

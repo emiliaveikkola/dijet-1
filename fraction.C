@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void fraction() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_y.root", "READ");
+TFile *file = new TFile("output_z.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};
@@ -81,7 +81,8 @@ for (int iq = 0; iq != nq; ++ iq) {
         const char *cx_name = vxvar_name[ix].c_str();
         vector<float> range;
         if (vxvar[ix] == "ptjet"){range = {10, 5300};}
-        if (vxvar[ix] == "ptcand" || vxvar[ix] == "ptlead"){range = {0.1, 100};}
+        if (vxvar[ix] == "ptcand"){range = {6, 100};}
+        if (vxvar[ix] == "ptlead"){range = {6, 100};}
         TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s N fraction",cq),0 + 1e-4,1,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
         TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,kSquare);
         c->SetLogx();
@@ -121,6 +122,9 @@ for (int iq = 0; iq != nq; ++ iq) {
             tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
             if (vxvar[ix] == "ptcand"){
                 tex1->DrawLatex(0.17,0.75,"80 < p_{T,genjet} < 100 GeV");
+            }
+            if (vxvar[ix] == "ptlead"){
+                tex1->DrawLatex(0.17,0.75,"84 < p_{T,leadjet} < 114 GeV");
             }
             TLatex *tex2 = new TLatex();
             tex2->SetNDC(); tex2->SetTextSize(0.035); tex2->SetTextFont(52);

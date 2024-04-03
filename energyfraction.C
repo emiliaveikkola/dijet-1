@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void energyfraction() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_y.root", "READ");
+TFile *file = new TFile("output_test.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};
