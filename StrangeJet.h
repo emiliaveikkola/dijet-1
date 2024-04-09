@@ -700,8 +700,8 @@ public :
    Short_t         FatJet_genJetAK8Idx[5];   //[nFatJet]
    UChar_t         GenJetAK8_hadronFlavour[7];   //[nGenJetAK8]
    Short_t         GenJetAK8_partonFlavour[7];   //[nGenJetAK8]
-   UChar_t         GenJet_hadronFlavour[19];   //[nGenJet]
-   Short_t         GenJet_partonFlavour[19];   //[nGenJet]
+   UChar_t         GenJet_hadronFlavour[19];   //[nGenJet] //was19
+   Short_t         GenJet_partonFlavour[19];   //[nGenJet] //was19
    Float_t         GenVtx_t0;
    UChar_t         Jet_hadronFlavour[14];   //[nJet]
    Short_t         Jet_genJetIdx[14];   //[nJet]
