@@ -101,7 +101,7 @@ mleg["sigmapm"] = "#Sigma^{#pm}";
 //mleg["sigmaantim"] = "#bar{#Sigma}^{-}";
 mleg["pionp"] = "#pi^{+}";
 mleg["pionm"] = "#pi^{-}";
-mleg["xiomega"] = "#Xi, #Omega";
+mleg["xiomega"] = "#Xi,#Omega";
 //mleg["xim"] = "#Xi^{-}";
 //mleg["antixi0"] = "#bar{#Xi}^{0}";
 //mleg["antixim"] = "#bar{#Xi}^{-}";
@@ -111,8 +111,8 @@ mleg["proton"] = "p";
 mleg["antiproton"] = "#bar{p}";
 mleg["neutron"] = "n";
 mleg["antineutron"] = "#bar{n}";
-mleg["electron"] = "e, e^{+}";
-mleg["muon"] = "#mu, #mu^{-}";
+mleg["electron"] = "e,e^{+}";
+mleg["muon"] = "#mu,#mu^{-}";
 //mleg["positron"] = "e^{+}";
 //mleg["antimuon"] = "#mu^{+}";
 mleg["photon"] = "#gamma";
@@ -129,7 +129,7 @@ std::map< string, TH1D*> mhclone;
 }
 */
 setTDRStyle();
-lumi_136TeV = "Run3";
+lumi_136TeV = "Run3 simulation";
 extraText = "Private";
 
 for (int iq = 0; iq != nq; ++ iq) {
@@ -140,10 +140,10 @@ for (int iq = 0; iq != nq; ++ iq) {
         const char *cx_name = vxvar_name[ix].c_str();
         vector<float> range;
         if (vxvar[ix] == "ptjet"){range = {10, 5300};}
-        if (vxvar[ix] == "ptcand"){range = {6, 100};}
+        if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
         if (vxvar[ix] == "ptlead"){range = {6, 100};}
         TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s N fraction",cq),0 + 1e-4,1,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
-        TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,kSquare);
+        TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,11,kSquare);
         c->SetLogx();
         TLegend *leg = tdrLeg(0.89,0.9,1.1,0.92);
         THStack *hs = new THStack(Form("hs_%s%s",cq,cx), "; p_{T} (GeV); Jet N fraction");
@@ -203,27 +203,29 @@ for (int iq = 0; iq != nq; ++ iq) {
             leg->AddEntry(mhclone[hrname], mleg[pid].c_str(), "f");
             leg->SetY1NDC(leg->GetY1NDC()-0.05);
             leg->SetTextSize(0.035);
+            leg->Draw();
 
-            gPad->SetBottomMargin(0.14);
-            gPad->SetRightMargin(0.12);
+           
             gPad->Update();
 
             TLatex *tex1 = new TLatex();
-            tex1->SetNDC(); tex1->SetTextSize(0.045);
-            tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
+            tex1->SetNDC(); tex1->SetTextSize(0.035);
+            tex1->DrawLatex(0.35,0.86,"|#eta| < 1.3");
             if (vxvar[ix] == "ptcand"){
-                tex1->DrawLatex(0.17,0.75,"80 < p_{T,genjet} < 100 GeV");
+                tex1->DrawLatex(0.35,0.82,"80 < p_{T,genjet} < 100 GeV");
             }
             if (vxvar[ix] == "ptlead"){
-                tex1->DrawLatex(0.17,0.75,"84 < p_{T,leadjet} < 114 GeV");
+                tex1->DrawLatex(0.35,0.82,"84 < p_{T,leadjet} < 114 GeV");
             }
             
-                TLatex *tex2 = new TLatex();
-                tex2->SetNDC(); tex2->SetTextSize(0.045); tex2->SetTextFont(52);
-                tex2->DrawLatex(0.155,0.86,"Private");
+                //TLatex *tex2 = new TLatex();
+                //tex2->SetNDC(); tex2->SetTextSize(0.045); tex2->SetTextFont(52);
+                //tex2->DrawLatex(0.155,0.86,"Private");
             
         } // for id
         reverseLegend(leg);
+        CMS_lumi(c, 8, 11);
+        gPad->SetRightMargin(0.11);
         c->RedrawAxis();
         c->Modified();
         c->Update();
