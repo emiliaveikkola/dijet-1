@@ -210,12 +210,12 @@ for (int iq = 0; iq != nq; ++ iq) {
 
             TLatex *tex1 = new TLatex();
             tex1->SetNDC(); tex1->SetTextSize(0.035);
-            tex1->DrawLatex(0.35,0.86,"|#eta| < 1.3");
+            tex1->DrawLatex(0.19,0.75,"|#eta| < 1.3");
             if (vxvar[ix] == "ptcand"){
-                tex1->DrawLatex(0.35,0.82,"80 < p_{T,genjet} < 100 GeV");
+                tex1->DrawLatex(0.19,0.7,"80 < p_{T,genjet} < 100 GeV");
             }
             if (vxvar[ix] == "ptlead"){
-                tex1->DrawLatex(0.35,0.82,"84 < p_{T,leadjet} < 114 GeV");
+                tex1->DrawLatex(0.19,0.7,"84 < p_{T,leadjet} < 114 GeV");
             }
             
                 //TLatex *tex2 = new TLatex();
