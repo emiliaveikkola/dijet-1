@@ -9,7 +9,7 @@ void drawPFNano() {
   setTDRStyle();
   TDirectory *curdir = gDirectory;
   
-  TFile *f = new TFile("output_y.root","READ");
+  TFile *f = new TFile("output_z.root","READ");
   //TFile *f = new TFile("pfnano_v3.root","READ");
   assert(f && !f->IsZombie());
   
@@ -84,15 +84,15 @@ void drawPFNano() {
   lumi_136TeV = "PFNano";
   //TH1D *h = tdrHist("h","Response over ud",0.87,1.05,//0.92,1.02,//0.95,1.05,
 		    //TH1D *h = tdrHist("h","Raw response",0.80,1.10,
-  TH1D *h = tdrHist("h","Raw response over ud",0.92,1.02,
+  TH1D *h = tdrHist("h","Raw response over ud",0.90,1.04,
 		    "p_{T,genjet} (GeV)",15,3500);
   TCanvas *c1 = tdrCanvas("c1",h,8,11,kSquare);
   gPad->SetLogx();
 
   //TLegend *leg1 = tdrLeg(0.65,0.90-0.045*7,0.90,0.90);
   TLegend *leg1 = tdrLeg(0.65,0.20,0.90,0.20+0.045*7);
-  tex->DrawLatex(0.33,0.86,"|#eta|<1.3, AK4PFPUPPI");
-  tex->DrawLatex(0.33,0.81,"Pythia8 CP5, QCDFlat MC");
+  tex->DrawLatex(0.33,0.86,"|#eta|<1.3"); //AK4PFPUPPI
+  tex->DrawLatex(0.33,0.81,"80 < p_{T,genjet} < 100 GeV"); //Pythia8 CP5, QCDFlat MC");
   
   TH1D *href = prq->ProjectionX("href");
   TH1D *hrq = prq->ProjectionX("hrq"); 
