@@ -109,7 +109,7 @@ void JetPairs() {
 
     // Create a legend
     TLegend *leg = tdrLeg(0.5,0.8-0.05*1,0.7,0.82);
-    leg->AddEntry(hJetPairs, "Scaled jet pairs", "FPLE");
+    leg->AddEntry(hJetPairs, "Jet pairs", "FPLE");
     
     //leg->Draw();
 
@@ -143,7 +143,7 @@ void JetPairs() {
 
     // Scale each bin by the sum of bins from 1 to 6
     for (int i = 1; i <= 7; ++i) {
-        double originalContent2 = hJetPairs->GetBinContent(i);
+        double originalContent2 = hJetPairs_scaled->GetBinContent(i);
         double scaledContent2 = originalContent2 / sumOfBins2;
         hJetPairs_scaled->SetBinContent(i, scaledContent2);
     }
@@ -156,7 +156,7 @@ void JetPairs() {
 
     // Create a legend
     TLegend *leg12 = tdrLeg(0.5,0.8-0.05*1,0.7,0.82);
-    leg12->AddEntry(hJetPairs_scaled, "Scaled jet pairs without fitprob", "FPLE");
+    leg12->AddEntry(hJetPairs_scaled, "Scaled jet pairs", "FPLE");
     
     //leg->Draw();
 
