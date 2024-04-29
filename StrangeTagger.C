@@ -176,7 +176,7 @@ void StrangeTagger::Loop()
    if (fChain == 0) return;
 
    TDirectory *curdir = gDirectory;
-   TFile *fout = new TFile("output_stag.root","recreate");
+   TFile *fout = new TFile("output_stag2.root","recreate");
 
    // Create a 2D histogram
    TH2D *hJetFlavours = new TH2D("hJetFlavours", ";Jet1 Flavour;Jet2 Flavour; N",7,0,7,7,0,7);
@@ -194,13 +194,13 @@ void StrangeTagger::Loop()
 
    TH1D *hAverageMass_loop_gen = new TH1D("hAverageMass_loop_gen", ";Jet pair;Average Mass (GeV)", 7, 1, 8);
 
-   TH1D *h_cs_gen = new TH1D("h_cs_gen", ";Mass;N",200,0,200);
-   TH1D *h_ud_gen = new TH1D("h_ud_gen", ";Mass;N",200,0,200);
-   TH1D *h_cd_gen = new TH1D("h_cd_gen", ";Mass;N",200,0,200);
-   TH1D *h_us_gen = new TH1D("h_us_gen", ";Mass;N",200,0,200);
-   TH1D *h_cb_gen = new TH1D("h_cb_gen", ";Mass;N",200,0,200);
-   TH1D *h_ub_gen = new TH1D("h_ub_gen", ";Mass;N",200,0,200);
-   TH1D *h_x_gen = new TH1D("h_x_gen", ";Mass;N",200,0,200);
+   TH1D *h_cs_gen = new TH1D("h_cs_gen", ";Mass;N",200,0,1);
+   TH1D *h_ud_gen = new TH1D("h_ud_gen", ";Mass;N",200,0,1);
+   TH1D *h_cd_gen = new TH1D("h_cd_gen", ";Mass;N",200,0,1);
+   TH1D *h_us_gen = new TH1D("h_us_gen", ";Mass;N",200,0,1);
+   TH1D *h_cb_gen = new TH1D("h_cb_gen", ";Mass;N",200,0,1);
+   TH1D *h_ub_gen = new TH1D("h_ub_gen", ";Mass;N",200,0,1);
+   TH1D *h_x_gen = new TH1D("h_x_gen", ";Mass;N",200,0,1);
 
    TH1D *h_cs_reco = new TH1D("h_cs_reco", ";Mass;N",200,0,200);
    TH1D *h_ud_reco = new TH1D("h_ud_reco", ";Mass;N",200,0,200);
@@ -769,14 +769,14 @@ std::map<std::string, int&> counters = {
             }
 
             if (genmass > 30) {
-               hMassFlavorPairs_gen->Fill(binIndex,genmass);
-               if (binIndex == 1) {h_cs_gen->Fill(genmass);}
-               if (binIndex == 2) {h_ud_gen->Fill(genmass);}
-               if (binIndex == 3) {h_cd_gen->Fill(genmass);}          
-               if (binIndex == 4) {h_us_gen->Fill(genmass);}
-               if (binIndex == 5) {h_cb_gen->Fill(genmass);}
-               if (binIndex == 6) {h_ub_gen->Fill(genmass);}
-               if (binIndex == 7) {h_x_gen->Fill(genmass);}
+               hMassFlavorPairs_gen->Fill(binIndex,recomass/genmass);
+               if (binIndex == 1) {h_cs_gen->Fill(recomass/genmass);}
+               if (binIndex == 2) {h_ud_gen->Fill(recomass/genmass);}
+               if (binIndex == 3) {h_cd_gen->Fill(recomass/genmass);}          
+               if (binIndex == 4) {h_us_gen->Fill(recomass/genmass);}
+               if (binIndex == 5) {h_cb_gen->Fill(recomass/genmass);}
+               if (binIndex == 6) {h_ub_gen->Fill(recomass/genmass);}
+               if (binIndex == 7) {h_x_gen->Fill(recomass/genmass);}
             }
 
             if (recomass > 30) {

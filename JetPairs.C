@@ -13,7 +13,7 @@
 void JetPairs() {
     setTDRStyle();
     // Open the ROOT file and get the histogram
-    TFile *file = new TFile("output_stag.root", "READ");
+    TFile *file = new TFile("output_stag2.root", "READ");
 
     TH1D *hJetPairs = (TH1D*)file->Get("hJetPairs");
     TH1D *hJetPairs_scaled = (TH1D*)file->Get("hJetPairs_scaled");
@@ -135,17 +135,30 @@ void JetPairs() {
     h12->GetXaxis()->SetBinLabel(6, "ub");
     h12->GetXaxis()->SetBinLabel(7, "x");
 
-    // Calculate the sum of bins up to the 6th bin
-    double sumOfBins2 = 0;
-    for (int i = 1; i <= 6; ++i) {  // bins are indexed from 1
-        sumOfBins2 += hJetPairs_scaled->GetBinContent(i);
+    // Calculate the sum of bins from 1 to 7
+    double sumOfBins1to7 = 0;
+    for (int i = 1; i <= 7; ++i) {  // Bins are indexed from 1
+        sumOfBins1to7 += hJetPairs_scaled->GetBinContent(i);
     }
 
-    // Scale each bin by the sum of bins from 1 to 6
+    // Scale each bin by the sum of bins from 1 to 7
     for (int i = 1; i <= 7; ++i) {
-        double originalContent2 = hJetPairs_scaled->GetBinContent(i);
-        double scaledContent2 = originalContent2 / sumOfBins2;
-        hJetPairs_scaled->SetBinContent(i, scaledContent2);
+        double originalContent = hJetPairs_scaled->GetBinContent(i);
+        double scaledContent = originalContent / sumOfBins1to7;
+        hJetPairs_scaled->SetBinContent(i, scaledContent);
+    }
+
+    // Recalculate the sum for bins 1 to 6 after initial scaling
+    double sumOfBins1to6 = 0;
+    for (int i = 1; i <= 6; ++i) {
+        sumOfBins1to6 += hJetPairs_scaled->GetBinContent(i);
+    }
+
+    // Rescale each bin by the new sum of bins from 1 to 6
+    for (int i = 1; i <= 7; ++i) {
+        double originalContent = hJetPairs_scaled->GetBinContent(i);
+        double rescaledContent = originalContent / sumOfBins1to6; // Handle division by zero if needed
+        hJetPairs_scaled->SetBinContent(i, rescaledContent);
     }
 
     // Draw the histogram
