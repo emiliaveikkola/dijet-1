@@ -152,7 +152,7 @@ void StrangeJet::Loop(){
   int nxbins_one = sizeof(xbins_one) / sizeof(xbins_one[0]) - 1;
   
   TDirectory *curdir = gDirectory;
-  TFile *fout = new TFile("output_z.root","recreate");
+  TFile *fout = new TFile("output_z2.root","recreate");
   
   TProfile *pu0 = new TProfile("pu0",";Ptjet;has non-zero energysum",nptd,vptd);
   
@@ -516,6 +516,20 @@ for (int iq = 0; iq != nq; ++ iq) {
   TH1D *hf2c = new TH1D("hf2c",";p_{T,cand}/p_{T,jet};N_{c-jet}",100,0,1);
   TH1D *hf2b = new TH1D("hf2b",";p_{T,cand}/p_{T,jet};N_{b-jet}",100,0,1);
   TH1D *hf2g = new TH1D("hf2g",";p_{T,cand}/p_{T,jet};N_{g-jet}",100,0,1);
+
+
+
+
+  TH1D *h_c_ctag30 = new TH1D("h_c_ctag30", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
+  TH1D *h_c_udstag30 = new TH1D("h_c_udstag30", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
+
+  TH1D *h_c_ctag60 = new TH1D("h_c_ctag60", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
+  TH1D *h_c_udstag60 = new TH1D("h_c_udstag60", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
+  
+  TH1D *h_c_ctag80 = new TH1D("h_c_ctag80", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
+  TH1D *h_c_udstag80 = new TH1D("h_c_udstag80", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
+  
+   
    
   
   
@@ -988,6 +1002,37 @@ for (int iq = 0; iq != nq; ++ iq) {
           } //eta loop
         } // i = iGenJet
       } // candloop for j
+
+
+      if (fabs(GenJet_eta[i]) < 2.5){
+        if (ptjet > 30) {
+          if(abs(GenJet_partonFlavour[i]) == 4){
+            h_c_ctag30->Fill(Jet_btagDeepFlavCvL[i]);
+          }
+          if(abs(GenJet_partonFlavour[i]) == 1 || abs(GenJet_partonFlavour[i]) == 2 
+          || abs(GenJet_partonFlavour[i]) == 3){
+            h_c_udstag30->Fill(Jet_btagDeepFlavCvL[i]);
+          }
+        }
+        if (ptjet > 60) {
+          if(abs(GenJet_partonFlavour[i]) == 4){
+            h_c_ctag60->Fill(Jet_btagDeepFlavCvL[i]);
+          }
+          if(abs(GenJet_partonFlavour[i]) == 1 || abs(GenJet_partonFlavour[i]) == 2 
+          || abs(GenJet_partonFlavour[i]) == 3){
+            h_c_udstag60->Fill(Jet_btagDeepFlavCvL[i]);
+          }
+        }
+        if (ptjet > 80) {
+          if(abs(GenJet_partonFlavour[i]) == 4){
+            h_c_ctag80->Fill(Jet_btagDeepFlavCvL[i]);
+          }
+          if(abs(GenJet_partonFlavour[i]) == 1 || abs(GenJet_partonFlavour[i]) == 2 
+          || abs(GenJet_partonFlavour[i]) == 3){
+            h_c_udstag80->Fill(Jet_btagDeepFlavCvL[i]);
+          }
+        }
+      }
 
       // Leading vs jet energy for each flavour
       if (fabs(GenJet_eta[i]) < 1.3 && ptjet > 80 && ptjet < 100) {

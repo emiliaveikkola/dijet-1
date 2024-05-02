@@ -28,212 +28,26 @@
     return 0; // In case of some unexpected error
 }
 
-void ROCS() {
+void ROCS_PFNano() {
     setTDRStyle();
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
 
-    // Open the ROOT file and get the histogram
-    TFile *file = new TFile("/Users/macbookpro/Downloads/data/W/Muo16_MC.root", "READ");
-    TTree *tree = nullptr;
-    file->GetObject("tree", tree);
+    TFile *file = new TFile("output_z2.root", "READ");
 
-    //TH1D *ctag1 = (TH1D*)file->Get("ctag1");
-
-    // Create histograms
-    TH1D *h1 = tdrHist("h1","Fraction",0 + 1e-7,5,"ctag",0,1);
-    TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
-    c1->SetLogy();
-
-    TH1D *h0 = new TH1D("h0", "nhf1 distribution; nhf1; Fraction", 100, 0, 1);
-
-    TH1D *h_s_nhf1 = new TH1D("h_s_nhf1", "nhf1 for abs(flav1)==3; nhf1; Fraction", 100, 0, 1);
-    TH1D *h_c_nhf1 = new TH1D("h_c_nhf1", "nhf1 for abs(flav1)==3; nhf1; Fraction", 100, 0, 1);
-    TH1D *h_ud_nhf1 = new TH1D("h_ud_nhf1", "nhf1 for abs(flav1)==1 && abs(flav1)==2; nhf1; Fraction", 100, 0, 1);
-    TH1D *h_xs_nhf1 = new TH1D("h_xs_nhf1", "nhf1 for abs(flav1)!=3; nhf1; Fraction", 100, 0, 1);
-
-    TH1D *h_s_nhf2 = new TH1D("h_s_nhf2", "nhf2 for abs(flav2)==3; nhf1; Fraction", 100, 0, 1);
-    TH1D *h_c_nhf2 = new TH1D("h_c_nhf2", "nhf2 for abs(flav2)==3; nhf1; Fraction", 100, 0, 1);
-    TH1D *h_ud_nhf2 = new TH1D("h_ud_nhf2", "nhf2 for abs(flav2)==1 && abs(flav2)==2; nhf1; Fraction", 100, 0, 1);
-    TH1D *h_xs_nhf2 = new TH1D("h_xs_nhf2", "nhf2 for abs(flav2)!=3; nhf1; Fraction", 100, 0, 1);
-
-    TH1D *h_c_ctag0 = new TH1D("h_c_ctag0", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
-    TH1D *h_c_ctag = new TH1D("h_c_ctag", "ctag2 for abs(flav2)==4; ctag2; Fraction", 100, 0, 1);
-
-    TH1D *h_c_ctag1 = new TH1D("h_c_ctag1", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
-    TH1D *h_s_ctag1 = new TH1D("h_s_ctag1", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
-    TH1D *h_uds_ctag1 = new TH1D("h_uds_ctag1", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
-    TH1D *h_g_ctag1 = new TH1D("h_g_ctag1", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
-
-    TH1D *h_c_ctag2 = new TH1D("h_c_ctag2", "ctag1 for abs(flav1)==4; ctag2; Fraction", 100, 0, 1);
-    TH1D *h_s_ctag2 = new TH1D("h_s_ctag2", "ctag1 for abs(flav1)==4; ctag2; Fraction", 100, 0, 1);
-    TH1D *h_uds_ctag2 = new TH1D("h_uds_ctag2", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
-    TH1D *h_g_ctag2 = new TH1D("h_g_ctag2", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
-
-    TH1D *h_xc_ctag0 = new TH1D("h_xc_ctag0", "ctag1 for abs(flav1)!=4; ctag1; Fraction", 100, 0, 1);
-    TH1D *h_xc_ctag = new TH1D("h_xc_ctag", "ctag2 for abs(flav2)!=4; ctag1; Fraction", 100, 0, 1);
-   
-    TH1D *h_xc_ctag1 = new TH1D("h_xc_ctag1", "ctag1 for abs(flav1)!=4; ctag1; Fraction", 100, 0, 1);
-    TH1D *h_xc_ctag2 = new TH1D("h_xc_ctag2", "ctag2 for abs(flav2)!=4; ctag1; Fraction", 100, 0, 1);
+    TH1D *h_c_ctag60 = (TH1D*)file->Get("h_c_ctag60");
+    TH1D *h_c_udstag60 = (TH1D*)file->Get("h_c_udstag60");
 
 
 
+    TH1D *h_c_ctag3 = (TH1D*)h_c_ctag60->Clone("h_c_ctag3");
+    TH1D *h_c_udstag3 = (TH1D*)h_c_udstag60->Clone("h_c_udstag3");
 
-
-    // Fill histograms
-    //tree->Draw("ctag1>>h0tree");
-    //tree->Draw("ctag1>>hctree", "abs(flav1)==3");
-    //tree->Draw("ctag1>>hxtree", "abs(flav1)!=3");
-
-    tree->Project("h0", "nhf1");
-
-    tree->Project("h_s_nhf1", "nhf1", "abs(flav1)==3");
-    tree->Project("h_c_nhf1", "nhf1", "abs(flav1)==4");
-    tree->Project("h_ud_nhf1", "nhf1", "abs(flav1)==1 || abs(flav1)==2");
-    tree->Project("h_xs_nhf1", "nhf1", "abs(flav1)!=3");
-
-    tree->Project("h_s_nhf2", "nhf2", "abs(flav2)==3");
-    tree->Project("h_c_nhf2", "nhf2", "abs(flav2)==4");
-    tree->Project("h_ud_nhf2", "nhf2", "abs(flav2)==1 || abs(flav2)==2");
-    tree->Project("h_xs_nhf2", "nhf2", "abs(flav2)!=3");
-
-    tree->Project("h_c_ctag0", "ctag1", "abs(flav1)==4");
-    tree->Project("h_c_ctag", "ctag2", "abs(flav2)==4");
-
-    tree->Project("h_c_ctag1", "ctag1/(udstag1+gtag1+ctag1)", "abs(flav1)==4");
-    tree->Project("h_s_ctag1", "ctag1/(udstag1+gtag1+ctag1)", "abs(flav1)==3");
-    tree->Project("h_uds_ctag1", "ctag1/(udstag1+gtag1+ctag1)", "abs(flav1)==1 || abs(flav1)==2 || abs(flav1)==3");
-    tree->Project("h_g_ctag1", "ctag1/(udstag1+gtag1+ctag1)", "abs(flav1)==21");
-
-    tree->Project("h_c_ctag2", "ctag2/(udstag2+gtag2+ctag2)", "abs(flav2)==4");
-    tree->Project("h_s_ctag2", "ctag2/(udstag2+gtag2+ctag2)", "abs(flav2)==3");
-    tree->Project("h_uds_ctag2", "ctag2/(udstag2+gtag2+ctag2)", "abs(flav2)==1 || abs(flav2)==2 || abs(flav2)==3");
-    tree->Project("h_g_ctag2", "ctag2/(udstag2+gtag2+ctag2)", "abs(flav2)==21");
-
-    tree->Project("h_xc_ctag0", "ctag1", "abs(flav1)!=4");
-    tree->Project("h_xc_ctag", "ctag2", "abs(flav1)!=4");
-
-    tree->Project("h_xc_ctag1", "ctag1/(udstag1+gtag1+ctag1)", "abs(flav1)!=4");
-    tree->Project("h_xc_ctag2", "ctag2/(udstag2+gtag2+ctag2)", "abs(flav1)!=4");
-
-    
-
-    TH1D *h03 = (TH1D*)h0->Clone("h03");
-
-    TH1D *h_s_nhf3 = (TH1D*)h_s_nhf1->Clone("h_s_nhf3");
-    TH1D *h_c_nhf3 = (TH1D*)h_c_nhf1->Clone("h_c_nhf3");
-    TH1D *h_ud_nhf3 = (TH1D*)h_ud_nhf1->Clone("h_ud_nhf3");
-    TH1D *h_xs_nhf3 = (TH1D*)h_xs_nhf1->Clone("h_xs_nhf3");
-
-    TH1D *h_s_nhf4 = (TH1D*)h_s_nhf2->Clone("h_s_nhf4");
-    TH1D *h_c_nhf4 = (TH1D*)h_c_nhf2->Clone("h_c_nhf4");
-    TH1D *h_ud_nhf4 = (TH1D*)h_ud_nhf2->Clone("h_ud_nhf4");
-    TH1D *h_xs_nhf4 = (TH1D*)h_xs_nhf2->Clone("h_xs_nhf4");
-
-    TH1D *h_c_ctag00 = (TH1D*)h_c_ctag0->Clone("h_c_ctag00");
-    TH1D *h_c_ctag11 = (TH1D*)h_c_ctag->Clone("h_c_ctag11");
-
-    TH1D *h_c_ctag3 = (TH1D*)h_c_ctag1->Clone("h_c_ctag3");
-    TH1D *h_s_ctag3 = (TH1D*)h_s_ctag1->Clone("h_s_ctag3");
-    TH1D *h_uds_ctag3 = (TH1D*)h_uds_ctag1->Clone("h_uds_ctag3");
-    TH1D *h_g_ctag3 = (TH1D*)h_g_ctag1->Clone("h_g_ctag3");
-
-    TH1D *h_c_ctag4 = (TH1D*)h_c_ctag2->Clone("h_c_ctag4");
-    TH1D *h_s_ctag4 = (TH1D*)h_s_ctag2->Clone("h_s_ctag4");
-    TH1D *h_uds_ctag4 = (TH1D*)h_uds_ctag2->Clone("h_uds_ctag4");
-    TH1D *h_g_ctag4 = (TH1D*)h_g_ctag2->Clone("h_g_ctag4");
-
-    TH1D *h_xc_ctag00 = (TH1D*)h_xc_ctag0->Clone("h_xc_ctag00");
-    TH1D *h_xc_ctag11 = (TH1D*)h_xc_ctag->Clone("h_xc_ctag11");
-
-    TH1D *h_xc_ctag3 = (TH1D*)h_xc_ctag1->Clone("h_xc_ctag3");
-    TH1D *h_xc_ctag4 = (TH1D*)h_xc_ctag2->Clone("h_xc_ctag4");
-
-    // add 2 to 1
-
-    h_s_nhf3->Add(h_s_nhf4);
-    h_c_nhf3->Add(h_c_nhf4);
-    h_ud_nhf3->Add(h_ud_nhf4);
-    h_xs_nhf3->Add(h_xs_nhf4);
-
-    h_c_ctag00->Add(h_c_ctag11);
-
-    h_c_ctag3->Add(h_c_ctag4);
-    h_s_ctag3->Add(h_s_ctag4);
-    h_uds_ctag3->Add(h_uds_ctag4);
-    h_g_ctag3->Add(h_g_ctag4);
-
-    h_xc_ctag00->Add(h_xc_ctag11);
-
-    h_xc_ctag3->Add(h_xc_ctag4);
-
- 
 
     // Scale histograms
-    h_s_nhf3->Scale(1. / h_s_nhf3->Integral());
-    h_c_nhf3->Scale(1. / h_c_nhf3->Integral());
-    h_ud_nhf3->Scale(1. / h_ud_nhf3->Integral());
-
-    h_xs_nhf3->Scale(1. / h_xs_nhf3->Integral());
-
-
-    h_c_ctag00->Scale(1. / h_c_ctag00->Integral());
-
     h_c_ctag3->Scale(1. / h_c_ctag3->Integral());
-    h_s_ctag3->Scale(1. / h_s_ctag3->Integral());
-    h_uds_ctag3->Scale(1. / h_uds_ctag3->Integral());
-    h_g_ctag3->Scale(1. / h_g_ctag3->Integral());
+    h_c_udstag3->Scale(1. / h_c_udstag3->Integral());
 
-    h_xc_ctag00->Scale(1. / h_xc_ctag00->Integral());
-    h_xc_ctag3->Scale(1. / h_xc_ctag3->Integral());
-
-
-
-
-
-
-
-    tdrDraw(h_s_nhf3,"Pz",kFullCircle,kOrange+7);
-    h_s_nhf3->SetMarkerSize(0.5);
-
-    tdrDraw(h_c_nhf3,"Pz",kFullCircle,kGreen+2);
-    h_c_nhf3->SetMarkerSize(0.5);
-    
-    tdrDraw(h_ud_nhf3,"Pz",kFullCircle,kPink-9);
-    h_ud_nhf3->SetMarkerSize(0.5);
-    
-    tdrDraw(h_c_ctag3,"Pz",kFullCircle,kGreen-7);
-    h_c_ctag3->SetMarkerSize(0.5);
-
-    tdrDraw(h_s_ctag3,"Pz",kFullCircle,kOrange-2);
-    h_s_ctag3->SetMarkerSize(0.5);
-
-    tdrDraw(h_uds_ctag3,"Pz",kFullCircle,kGreen+4);
-    h_uds_ctag3->SetMarkerSize(0.5);
-
-    tdrDraw(h_xs_nhf3,"Pz",kFullCircle,kBlue);
-    h_xs_nhf3->SetMarkerSize(0.5);
-
-    tdrDraw(h_xc_ctag3,"Pz",kFullCircle,kViolet);
-    h_xc_ctag3->SetMarkerSize(0.5);
-
-    // Create a legend
-    TLegend *leg = tdrLeg(0.2,0.55-0.05*7,0.4,0.6);
-    leg->AddEntry(h_s_nhf3, "s", "PLE");
-    leg->AddEntry(h_c_ctag3, "c", "PLE");
-    leg->AddEntry(h_ud_nhf3, "ud nhf", "PLE");
-    leg->AddEntry(h_uds_ctag3, "uds ctag", "PLE");
-    leg->AddEntry(h_xs_nhf3, "x-s", "PLE");
-    leg->AddEntry(h_xc_ctag3, "x-c", "PLE");
- 
-    
-    leg->Draw();
-
-    // Update the canvas to reflect the changes
-    gPad->Update();
-
-    // Save the canvas as a .pdf file
-    c1->SaveAs("pdf/ROC1S.pdf");
 
 
     TH1D *h2 = tdrHist("h2","mis-id rate ",1e-3-5e-4,1,"jet efficiency",0.079,1);
@@ -280,37 +94,14 @@ void ROCS() {
 
     // Create ROC curve data
 
-    TGraph *rocCurveSX = new TGraph(100);
-    TGraph *rocCurveSUD = new TGraph(100);
-    TGraph *rocCurveSC = new TGraph(100);
 
-    TGraph *rocCurveCX = new TGraph(100);
     TGraph *rocCurveCUDS = new TGraph(100);
-    TGraph *rocCurveCS = new TGraph(100);
-    TGraph *rocCurveCG = new TGraph(100);
 
-    TGraph *rocCurveCX_old = new TGraph(100);
 
     double dx5_min(1), x5_020(1), x5_cut_020(1), y5_020(1);
     double dx5_min2(1), x5_080(1), x5_cut_080(1), y5_080(1);
     for (int i = 0; i < 100; ++i) {
-        double y1 = h_xs_nhf3->Integral(i + 1, 100);
-        double x1 = h_s_nhf3->Integral(i + 1, 100);
-        rocCurveSX->SetPoint(i, x1, y1);
-
-        double y2 = h_ud_nhf3->Integral(i, 100);
-        double x2 = h_s_nhf3->Integral(i, 100);
-        rocCurveSUD->SetPoint(i, x2, y2);
-        
-        double y3 = h_c_nhf3->Integral(i, 100);
-        double x3 = h_s_nhf3->Integral(i, 100);
-        rocCurveSC->SetPoint(i, x3, y3);
-
-        double y4 = h_xc_ctag3->Integral(i, 100);
-        double x4 = h_c_ctag3->Integral(i, 100);
-        rocCurveCX->SetPoint(i, x4, y4);
-
-        double y5 = h_uds_ctag3->Integral(i, 100);
+        double y5 = h_c_udstag3->Integral(i, 100);
         double x5 = h_c_ctag3->Integral(i, 100);
         rocCurveCUDS->SetPoint(i, x5, y5);
 
@@ -327,53 +118,18 @@ void ROCS() {
             dx5_min2 = fabs(x5 - 0.8);
             y5_080 = y5;
         }
-
-        double y6 = h_s_ctag3->Integral(i + 1, 100);
-        double x6 = h_c_ctag3->Integral(i + 1, 100);
-        rocCurveCS->SetPoint(i, x6, y6);
-
-        double y7 = h_xc_ctag00->Integral(i + 1, 100);
-        double x7 = h_c_ctag00->Integral(i + 1, 100);
-        rocCurveCX_old->SetPoint(i, x7, y7);
-
-        double y8 = h_g_ctag3->Integral(i + 1, 100);
-        double x8 = h_c_ctag3->Integral(i + 1, 100);
-        rocCurveCG->SetPoint(i, x8, y8);
-
     }
     cout << "for ctag > " << x5_cut_020 << " ctag_eff = " << x5_020 << " (target = 0.20)"
          << " mis-tag = "<< y5_020 << " (target = 0.01)" << endl << flush; 
 
     cout << "for ctag > " << x5_cut_080 << " ctag_eff = " << x5_080 << " (target = 0.80)"
          << " mis-tag = "<< y5_080 << " (target = 0.60)" << endl << flush;
-    rocCurveSX->SetLineColor(kOrange+7);
-    rocCurveSUD->SetLineColor(kGreen+1);
-    rocCurveSC->SetLineColor(kBlue-4);
 
-    rocCurveCX->SetLineColor(kViolet+2);
-    rocCurveCX_old->SetLineColor(kGreen+1);
+
     rocCurveCUDS->SetLineColor(kBlue);
-    rocCurveCS->SetLineColor(kOrange-3);
-    rocCurveCG->SetLineColor(kOrange);
-
-    //rocCurveSX->SetLineWidth(5);
-    rocCurveSUD->SetLineWidth(2);
-    //rocCurveSC->SetLineWidth(5);
-    //rocCurveCX->SetLineWidth(5);
     rocCurveCUDS->SetLineWidth(2);
-    //rocCurveCS->SetLineWidth(3);
-    //rocCurveCG->SetLineWidth(3);
-    //rocCurveCX_old->SetLineWidth(2);
-    //rocCurveSX->Draw("same");
-    rocCurveSUD->Draw("same");
-    //rocCurveSC->Draw("same");
-    //rocCurveCX->Draw("same");
-    //rocCurveCX_old->Draw("same");
     rocCurveCUDS->Draw("same");
-    //rocCurveCS->Draw("same");
-    //rocCurveCG->Draw("same");
-    //TLine *l = new TLine();
-    //l->DrawLine(0,0,1,1);
+
     TF1 *l = new TF1("l", "x",0.08,1);
     l->SetLineColor(kBlack);
     l->Draw("same");
@@ -616,16 +372,8 @@ graphAvg->SetLineWidth(2);
 graphAvg->Draw("same"); // Draw with markers and lines
 
     TLegend *leg2 = tdrLeg(0.65,0.25-0.04*2,0.8,0.35);
-    //leg2->AddEntry(rocCurveSX, "s vs x", "PLE");
-    leg2->AddEntry(rocCurveSUD, "s vs ud", "L");
-    leg2->AddEntry(graphAvg, "s vs ud (ref)", "L");
-    //leg2->AddEntry(rocCurveSC, "s vs c", "PLE");
-    //leg2->AddEntry(rocCurveCX, "c vs x", "L");
-    //leg2->AddEntry(rocCurveCX_old, "c vs x, old", "L");
     leg2->AddEntry(rocCurveCUDS, "c vs uds", "L");
     leg2->AddEntry(graph1, "c vs uds (ref)", "L");
-    //leg2->AddEntry(rocCurveCS, "c vs s", "L");
-    //leg2->AddEntry(rocCurveCG, "c vs g", "L");
     leg2->SetTextSize(0.035);
 
     leg2->Draw();
@@ -645,5 +393,5 @@ graphAvg->Draw("same"); // Draw with markers and lines
     c2->Modified();
     c2->Update();
        // Save the canvas
-    c2->SaveAs("pdf/ROC_Curvesall.pdf");
+    c2->SaveAs("pdf/ROC_PFNAno_Curvesall.pdf");
 }

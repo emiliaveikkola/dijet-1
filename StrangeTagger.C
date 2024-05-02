@@ -176,7 +176,7 @@ void StrangeTagger::Loop()
    if (fChain == 0) return;
 
    TDirectory *curdir = gDirectory;
-   TFile *fout = new TFile("output_stag2.root","recreate");
+   TFile *fout = new TFile("output_stag3.root","recreate");
 
    // Create a 2D histogram
    TH2D *hJetFlavours = new TH2D("hJetFlavours", ";Jet1 Flavour;Jet2 Flavour; N",7,0,7,7,0,7);
@@ -539,7 +539,7 @@ std::map<std::string, int&> counters = {
 
          double recomass_scaled = (p4recojet_scaled1 + p4recojet_scaled2).M();
 
-         if (fitProb > 0.002){
+         if (fitProb > 0.2){
             if (binIndex == 1){
                h_cs->Fill(0);
             }
