@@ -41,7 +41,7 @@ void JetPairs_cs_vs_ud() {
     h1->GetXaxis()->SetBinLabel(4, "us");
     h1->GetXaxis()->SetBinLabel(5, "cb");
     h1->GetXaxis()->SetBinLabel(6, "ub");
-    h1->GetXaxis()->SetBinLabel(7, "x*");
+    h1->GetXaxis()->SetBinLabel(7, "x/all");
 
     // Calculate the sum of bins from 1 to 7
     double sumOfBins1to7 = 0;
@@ -172,7 +172,7 @@ void JetPairs_cs_vs_ud() {
     h3->GetXaxis()->SetBinLabel(4, "us");
     h3->GetXaxis()->SetBinLabel(5, "cb");
     h3->GetXaxis()->SetBinLabel(6, "ub");
-    h3->GetXaxis()->SetBinLabel(7, "x*");
+    h3->GetXaxis()->SetBinLabel(7, "x/all");
 
 
 
@@ -222,7 +222,7 @@ void JetPairs_cs_vs_ud() {
     h2->GetXaxis()->SetBinLabel(4, "us");
     h2->GetXaxis()->SetBinLabel(5, "cb");
     h2->GetXaxis()->SetBinLabel(6, "ub");
-    h2->GetXaxis()->SetBinLabel(7, "x*");
+    h2->GetXaxis()->SetBinLabel(7, "x/all");
 
     // Calculate the sum2 of bins from 1 to 7
     double sum2OfBins1to7 = 0;
@@ -350,7 +350,7 @@ void JetPairs_cs_vs_ud() {
     h4->GetXaxis()->SetBinLabel(4, "us");
     h4->GetXaxis()->SetBinLabel(5, "cb");
     h4->GetXaxis()->SetBinLabel(6, "ub");
-    h4->GetXaxis()->SetBinLabel(7, "x*");
+    h4->GetXaxis()->SetBinLabel(7, "x/all");
 
 
 

@@ -52,6 +52,9 @@ void StrangeJet::Loop(){
   "nGenJet", "GenJet_pt", "GenJet_eta", "GenJet_phi", "GenJet_mass",
   "nJet", "Jet_pt", "Jet_eta", "Jet_phi", "Jet_mass",
   "Jet_rawFactor",
+  "Jet_btagDeepFlavCvL", "Jet_btagDeepFlavCvB","Jet_btagDeepFlavB",
+  "Jet_btagPNetCvL", "Jet_btagPNetCvB", "Jet_btagPNetB",
+  "Jet_partonFlavour","Jet_hadronFlavour",
   "GenPartCand_pt", "GenPartCand_eta", "GenPartCand_phi",  "GenPartCand_mass", "GenPartCand_charge"};
 
   for (const auto& branchName : branchNames) {
@@ -520,15 +523,53 @@ for (int iq = 0; iq != nq; ++ iq) {
 
 
 
-  TH1D *h_c_ctag30 = new TH1D("h_c_ctag30", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
-  TH1D *h_c_udstag30 = new TH1D("h_c_udstag30", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
+  // Histograms for Jet pt > 30 GeV
+TH1D *h_c_ctag_cvl_df30 = new TH1D("h_c_ctag_cvl_df30", "CvL tag for c-jets at pt>30; CvL; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvl_pn30 = new TH1D("h_c_ctag_cvl_pn30", "CvL PNet for c-jets at pt>30; CvL PNet; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvb_df30 = new TH1D("h_c_ctag_cvb_df30", "CvB tag for c-jets at pt>30; CvB; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvb_pn30 = new TH1D("h_c_ctag_cvb_pn30", "CvB PNet for c-jets at pt>30; CvB PNet; Fraction", 100, 0, 1);
+TH1D *h_b_ctag_b_df30 = new TH1D("h_b_ctag_b_df30", "DeepFlavB for b-jets at pt>30; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_ctag_b_pn30 = new TH1D("h_b_ctag_b_pn30", "PNetB for b-jets at pt>30; PNetB; Fraction", 100, 0, 1);
+TH1D *h_c_udstag_cvl_df30 = new TH1D("h_c_udstag_cvl_df30", "CvL for uds-jets at pt>30; CvL; Fraction", 100, 0, 1);
+TH1D *h_c_udstag_cvl_pn30 = new TH1D("h_c_udstag_cvl_pn30", "CvL PNet for uds-jets at pt>30; CvL PNet; Fraction", 100, 0, 1);
+TH1D *h_b_udstag_b_df30 = new TH1D("h_b_udstag_b_df30", "DeepFlavB for uds-jets at pt>30; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_udstag_b_pn30 = new TH1D("h_b_udstag_b_pn30", "PNetB for uds-jets at pt>30; PNetB; Fraction", 100, 0, 1);
+TH1D *h_b_btag_b_df30 = new TH1D("h_b_btag_b_df30", "DeepFlavB for b-jets in b-jets at pt>30; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_btag_b_pn30 = new TH1D("h_b_btag_b_pn30", "PNetB for b-jets in b-jets at pt>30; PNetB; Fraction", 100, 0, 1);
+TH1D *h_c_btag_cvb_df30 = new TH1D("h_c_btag_cvb_df30", "CvB for c-jets in b-jets at pt>30; CvB; Fraction", 100, 0, 1);
+TH1D *h_c_btag_cvb_pn30 = new TH1D("h_c_btag_cvb_pn30", "CvB PNet for c-jets in b-jets at pt>30; CvB PNet; Fraction", 100, 0, 1);
 
-  TH1D *h_c_ctag60 = new TH1D("h_c_ctag60", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
-  TH1D *h_c_udstag60 = new TH1D("h_c_udstag60", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
-  
-  TH1D *h_c_ctag80 = new TH1D("h_c_ctag80", "ctag1 for abs(flav1)==4; ctag1; Fraction", 100, 0, 1);
-  TH1D *h_c_udstag80 = new TH1D("h_c_udstag80", "ctag1 for abs(flav1)==1 && abs(flav1)==2; ctag1; Fraction", 100, 0, 1);
-  
+// Histograms for Jet pt > 60 GeV
+TH1D *h_c_ctag_cvl_df60 = new TH1D("h_c_ctag_cvl_df60", "CvL tag for c-jets at pt>60; CvL; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvl_pn60 = new TH1D("h_c_ctag_cvl_pn60", "CvL PNet for c-jets at pt>60; CvL PNet; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvb_df60 = new TH1D("h_c_ctag_cvb_df60", "CvB tag for c-jets at pt>60; CvB; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvb_pn60 = new TH1D("h_c_ctag_cvb_pn60", "CvB PNet for c-jets at pt>60; CvB PNet; Fraction", 100, 0, 1);
+TH1D *h_b_ctag_b_df60 = new TH1D("h_b_ctag_b_df60", "DeepFlavB for b-jets at pt>60; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_ctag_b_pn60 = new TH1D("h_b_ctag_b_pn60", "PNetB for b-jets at pt>60; PNetB; Fraction", 100, 0, 1);
+TH1D *h_c_udstag_cvl_df60 = new TH1D("h_c_udstag_cvl_df60", "CvL for uds-jets at pt>60; CvL; Fraction", 100, 0, 1);
+TH1D *h_c_udstag_cvl_pn60 = new TH1D("h_c_udstag_cvl_pn60", "CvL PNet for uds-jets at pt>60; CvL PNet; Fraction", 100, 0, 1);
+TH1D *h_b_udstag_b_df60 = new TH1D("h_b_udstag_b_df60", "DeepFlavB for uds-jets at pt>60; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_udstag_b_pn60 = new TH1D("h_b_udstag_b_pn60", "PNetB for uds-jets at pt>60; PNetB; Fraction", 100, 0, 1);
+TH1D *h_b_btag_b_df60 = new TH1D("h_b_btag_b_df60", "DeepFlavB for b-jets in b-jets at pt>60; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_btag_b_pn60 = new TH1D("h_b_btag_b_pn60", "PNetB for b-jets in b-jets at pt>60; PNetB; Fraction", 100, 0, 1);
+TH1D *h_c_btag_cvb_df60 = new TH1D("h_c_btag_cvb_df60", "CvB for c-jets in b-jets at pt>60; CvB; Fraction", 100, 0, 1);
+TH1D *h_c_btag_cvb_pn60 = new TH1D("h_c_btag_cvb_pn60", "CvB PNet for c-jets in b-jets at pt>60; CvB PNet; Fraction", 100, 0, 1);
+
+// Histograms for Jet pt > 80 GeV
+TH1D *h_c_ctag_cvl_df80 = new TH1D("h_c_ctag_cvl_df80", "CvL tag for c-jets at pt>80; CvL; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvl_pn80 = new TH1D("h_c_ctag_cvl_pn80", "CvL PNet for c-jets at pt>80; CvL PNet; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvb_df80 = new TH1D("h_c_ctag_cvb_df80", "CvB tag for c-jets at pt>80; CvB; Fraction", 100, 0, 1);
+TH1D *h_c_ctag_cvb_pn80 = new TH1D("h_c_ctag_cvb_pn80", "CvB PNet for c-jets at pt>80; CvB PNet; Fraction", 100, 0, 1);
+TH1D *h_b_ctag_b_df80 = new TH1D("h_b_ctag_b_df80", "DeepFlavB for b-jets at pt>80; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_ctag_b_pn80 = new TH1D("h_b_ctag_b_pn80", "PNetB for b-jets at pt>80; PNetB; Fraction", 100, 0, 1);
+TH1D *h_c_udstag_cvl_df80 = new TH1D("h_c_udstag_cvl_df80", "CvL for uds-jets at pt>80; CvL; Fraction", 100, 0, 1);
+TH1D *h_c_udstag_cvl_pn80 = new TH1D("h_c_udstag_cvl_pn80", "CvL PNet for uds-jets at pt>80; CvL PNet; Fraction", 100, 0, 1);
+TH1D *h_b_udstag_b_df80 = new TH1D("h_b_udstag_b_df80", "DeepFlavB for uds-jets at pt>80; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_udstag_b_pn80 = new TH1D("h_b_udstag_b_pn80", "PNetB for uds-jets at pt>80; PNetB; Fraction", 100, 0, 1);
+TH1D *h_b_btag_b_df80 = new TH1D("h_b_btag_b_df80", "DeepFlavB for b-jets in b-jets at pt>80; DeepFlavB; Fraction", 100, 0, 1);
+TH1D *h_b_btag_b_pn80 = new TH1D("h_b_btag_b_pn80", "PNetB for b-jets in b-jets at pt>80; PNetB; Fraction", 100, 0, 1);
+TH1D *h_c_btag_cvb_df80 = new TH1D("h_c_btag_cvb_df80", "CvB for c-jets in b-jets at pt>80; CvB; Fraction", 100, 0, 1);
+TH1D *h_c_btag_cvb_pn80 = new TH1D("h_c_btag_cvb_pn80", "CvB PNet for c-jets in b-jets at pt>80; CvB PNet; Fraction", 100, 0, 1);
    
    
   
@@ -1004,35 +1045,6 @@ for (int iq = 0; iq != nq; ++ iq) {
       } // candloop for j
 
 
-      if (fabs(GenJet_eta[i]) < 2.5){
-        if (ptjet > 30) {
-          if(abs(GenJet_partonFlavour[i]) == 4){
-            h_c_ctag30->Fill(Jet_btagDeepFlavCvL[i]);
-          }
-          if(abs(GenJet_partonFlavour[i]) == 1 || abs(GenJet_partonFlavour[i]) == 2 
-          || abs(GenJet_partonFlavour[i]) == 3){
-            h_c_udstag30->Fill(Jet_btagDeepFlavCvL[i]);
-          }
-        }
-        if (ptjet > 60) {
-          if(abs(GenJet_partonFlavour[i]) == 4){
-            h_c_ctag60->Fill(Jet_btagDeepFlavCvL[i]);
-          }
-          if(abs(GenJet_partonFlavour[i]) == 1 || abs(GenJet_partonFlavour[i]) == 2 
-          || abs(GenJet_partonFlavour[i]) == 3){
-            h_c_udstag60->Fill(Jet_btagDeepFlavCvL[i]);
-          }
-        }
-        if (ptjet > 80) {
-          if(abs(GenJet_partonFlavour[i]) == 4){
-            h_c_ctag80->Fill(Jet_btagDeepFlavCvL[i]);
-          }
-          if(abs(GenJet_partonFlavour[i]) == 1 || abs(GenJet_partonFlavour[i]) == 2 
-          || abs(GenJet_partonFlavour[i]) == 3){
-            h_c_udstag80->Fill(Jet_btagDeepFlavCvL[i]);
-          }
-        }
-      }
 
       // Leading vs jet energy for each flavour
       if (fabs(GenJet_eta[i]) < 1.3 && ptjet > 80 && ptjet < 100) {
@@ -1100,6 +1112,123 @@ for (int iq = 0; iq != nq; ++ iq) {
     
       // Loop over matching reco jets
       for (int j = 0; j != nJet; ++j) {
+
+      if (fabs(Jet_eta[j]) < 2.5){
+        if (Jet_pt[j] > 30) {
+          if(abs(Jet_partonFlavour[j]) == 4 && Jet_hadronFlavour[j] == 4){
+            // C v UDSG
+            h_c_ctag_cvl_df30->Fill(Jet_btagDeepFlavCvL[j]);
+            h_c_ctag_cvl_pn30->Fill(Jet_btagPNetCvL[j]);
+
+            // C v B
+            h_c_ctag_cvb_df30->Fill(Jet_btagDeepFlavCvB[j]);
+            h_c_ctag_cvb_pn30->Fill(Jet_btagPNetCvB[j]);
+
+            // B v C
+            h_b_ctag_b_df30->Fill(Jet_btagDeepFlavB[j]);
+            h_b_ctag_b_pn30->Fill(Jet_btagPNetB[j]);
+
+          }
+          if((abs(Jet_partonFlavour[j]) == 1 || abs(Jet_partonFlavour[j]) == 2 
+          || abs(Jet_partonFlavour[j]) == 3 || abs(Jet_partonFlavour[j]) == 21)){
+            // C v UDSG
+            h_c_udstag_cvl_df30->Fill(Jet_btagDeepFlavCvL[j]);
+            h_c_udstag_cvl_pn30->Fill(Jet_btagPNetCvL[j]);
+
+            // B v UDSG
+            h_b_udstag_b_df30->Fill(Jet_btagDeepFlavB[j]);
+            h_b_udstag_b_pn30->Fill(Jet_btagPNetB[j]);
+          }
+
+
+          if(abs(Jet_partonFlavour[j]) == 5 && Jet_hadronFlavour[j] == 5){
+            // B v UDSG & C
+            h_b_btag_b_df30->Fill(Jet_btagDeepFlavB[j]);
+            h_b_btag_b_pn30->Fill(Jet_btagPNetB[j]);
+
+            // C v B
+            h_c_btag_cvb_df30->Fill(Jet_btagDeepFlavCvB[j]);
+            h_c_btag_cvb_pn30->Fill(Jet_btagPNetCvB[j]);
+          }
+
+        }
+        if (Jet_pt[j] > 60) {
+          if(abs(Jet_partonFlavour[j]) == 4 && Jet_hadronFlavour[j] == 4){
+            // C v UDSG
+            h_c_ctag_cvl_df60->Fill(Jet_btagDeepFlavCvL[j]);
+            h_c_ctag_cvl_pn60->Fill(Jet_btagPNetCvL[j]);
+
+            // C v B
+            h_c_ctag_cvb_df60->Fill(Jet_btagDeepFlavCvB[j]);
+            h_c_ctag_cvb_pn60->Fill(Jet_btagPNetCvB[j]);
+
+            // B v C
+            h_b_ctag_b_df60->Fill(Jet_btagDeepFlavB[j]);
+            h_b_ctag_b_pn60->Fill(Jet_btagPNetB[j]);
+
+          }
+          if((abs(Jet_partonFlavour[j]) == 1 || abs(Jet_partonFlavour[j]) == 2 
+          || abs(Jet_partonFlavour[j]) == 3 || abs(Jet_partonFlavour[j]) == 21)){
+            // C v UDSG
+            h_c_udstag_cvl_df60->Fill(Jet_btagDeepFlavCvL[j]);
+            h_c_udstag_cvl_pn60->Fill(Jet_btagPNetCvL[j]);
+
+            // B v UDSG
+            h_b_udstag_b_df60->Fill(Jet_btagDeepFlavB[j]);
+            h_b_udstag_b_pn60->Fill(Jet_btagPNetB[j]);
+          }
+
+
+          // B v UDSG & B v C
+          if(abs(Jet_partonFlavour[j]) == 5 && Jet_hadronFlavour[j] == 5){
+            // B v UDSG & C
+            h_b_btag_b_df60->Fill(Jet_btagDeepFlavB[j]);
+            h_b_btag_b_pn60->Fill(Jet_btagPNetB[j]);
+
+            // C v B
+            h_c_btag_cvb_df60->Fill(Jet_btagDeepFlavCvB[j]);
+            h_c_btag_cvb_pn60->Fill(Jet_btagPNetCvB[j]);
+          }
+        }
+        if (Jet_pt[j] > 80) {
+                    if(abs(Jet_partonFlavour[j]) == 4 && Jet_hadronFlavour[j] == 4){
+            // C v UDSG
+            h_c_ctag_cvl_df80->Fill(Jet_btagDeepFlavCvL[j]);
+            h_c_ctag_cvl_pn80->Fill(Jet_btagPNetCvL[j]);
+
+            // C v B
+            h_c_ctag_cvb_df80->Fill(Jet_btagDeepFlavCvB[j]);
+            h_c_ctag_cvb_pn80->Fill(Jet_btagPNetCvB[j]);
+
+            // B v C
+            h_b_ctag_b_df80->Fill(Jet_btagDeepFlavB[j]);
+            h_b_ctag_b_pn80->Fill(Jet_btagPNetB[j]);
+
+          }
+          if((abs(Jet_partonFlavour[j]) == 1 || abs(Jet_partonFlavour[j]) == 2 
+          || abs(Jet_partonFlavour[j]) == 3 || abs(Jet_partonFlavour[j]) == 21)){
+            // C v UDSG
+            h_c_udstag_cvl_df80->Fill(Jet_btagDeepFlavCvL[j]);
+            h_c_udstag_cvl_pn80->Fill(Jet_btagPNetCvL[j]);
+
+            // B v UDSG
+            h_b_udstag_b_df80->Fill(Jet_btagDeepFlavB[j]);
+            h_b_udstag_b_pn80->Fill(Jet_btagPNetB[j]);
+          }
+
+
+          if(abs(Jet_partonFlavour[j]) == 5 && Jet_hadronFlavour[j] == 5){
+            // B v UDSG & C
+            h_b_btag_b_df80->Fill(Jet_btagDeepFlavB[j]);
+            h_b_btag_b_pn80->Fill(Jet_btagPNetB[j]);
+
+            // C v B
+            h_c_btag_cvb_df80->Fill(Jet_btagDeepFlavCvB[j]);
+            h_c_btag_cvb_pn80->Fill(Jet_btagPNetCvB[j]);
+          }
+        }
+      }
+
       
         p4reco.SetPtEtaPhiM(Jet_pt[j],Jet_eta[j],Jet_phi[j],
             Jet_mass[j]);

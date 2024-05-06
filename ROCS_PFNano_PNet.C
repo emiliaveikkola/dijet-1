@@ -28,29 +28,50 @@
     return 0; // In case of some unexpected error
 }
 
-void ROCS_PFNano() {
+void ROCS_PFNano_PNet() {
     setTDRStyle();
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
 
     TFile *file = new TFile("output_z2.root", "READ");
 
-    TH1D *h_c_ctag60 = (TH1D*)file->Get("h_c_ctag60");
-    TH1D *h_c_udstag60 = (TH1D*)file->Get("h_c_udstag60");
+    TH1D *h_c_ctag_cvl_pn30 = (TH1D*)file->Get("h_c_ctag_cvl_pn30");
+    TH1D *h_c_udstag_cvl_pn30 = (TH1D*)file->Get("h_c_udstag_cvl_pn30");
+
+    TH1D *h_c_ctag_cvb_pn30 = (TH1D*)file->Get("h_c_ctag_cvb_pn30");
+    TH1D *h_c_btag_cvb_pn30 = (TH1D*)file->Get("h_c_btag_cvb_pn30");
+
+    TH1D *h_b_btag_b_pn30 = (TH1D*)file->Get("h_b_btag_b_pn30");
+    TH1D *h_b_udstag_b_pn30 = (TH1D*)file->Get("h_b_udstag_b_pn30");
+    TH1D *h_b_ctag_b_pn30 = (TH1D*)file->Get("h_b_ctag_b_pn30");
 
 
 
-    TH1D *h_c_ctag3 = (TH1D*)h_c_ctag60->Clone("h_c_ctag3");
-    TH1D *h_c_udstag3 = (TH1D*)h_c_udstag60->Clone("h_c_udstag3");
+
+    TH1D *h_c_ctag_cvl_pn30c = (TH1D*)h_c_ctag_cvl_pn30->Clone("h_c_ctag_cvl_pn30c");
+    TH1D *h_c_udstag_cvl_pn30c = (TH1D*)h_c_udstag_cvl_pn30->Clone("h_c_udstag_cvl_pn30c");
+
+    TH1D *h_c_ctag_cvb_pn30c = (TH1D*)h_c_ctag_cvb_pn30->Clone("h_c_ctag_cvb_pn30c");
+    TH1D *h_c_btag_cvb_pn30c = (TH1D*)h_c_btag_cvb_pn30->Clone("h_c_btag_cvb_pn30c");
+
+    TH1D *h_b_btag_b_pn30c = (TH1D*)h_b_btag_b_pn30->Clone("h_b_btag_b_pn30c");
+    TH1D *h_b_udstag_b_pn30c = (TH1D*)h_b_udstag_b_pn30->Clone("h_b_udstag_b_pn30c");
+    TH1D *h_b_ctag_b_pn30c = (TH1D*)h_b_ctag_b_pn30->Clone("h_b_ctag_b_pn30c");
 
 
     // Scale histograms
-    h_c_ctag3->Scale(1. / h_c_ctag3->Integral());
-    h_c_udstag3->Scale(1. / h_c_udstag3->Integral());
+    h_c_ctag_cvl_pn30c->Scale(1. / h_c_ctag_cvl_pn30c->Integral());
+    h_c_udstag_cvl_pn30c->Scale(1. / h_c_udstag_cvl_pn30c->Integral());
+
+    h_c_ctag_cvb_pn30c->Scale(1. / h_c_ctag_cvb_pn30c->Integral());
+    h_c_btag_cvb_pn30c->Scale(1. / h_c_btag_cvb_pn30c->Integral());
+
+    h_b_btag_b_pn30c->Scale(1. / h_b_btag_b_pn30c->Integral());
+    h_b_udstag_b_pn30c->Scale(1. / h_b_udstag_b_pn30c->Integral());
+    h_b_ctag_b_pn30c->Scale(1. / h_b_ctag_b_pn30c->Integral());
 
 
-
-    TH1D *h2 = tdrHist("h2","mis-id rate ",1e-3-5e-4,1,"jet efficiency",0.079,1);
+    TH1D *h2 = tdrHist("h2","mis-id rate ",1e-3-5e-4,1,"jet efficiency, PNet",0.079,1);
     h2->GetXaxis()->SetTitleSize(0.05);
     h2->GetYaxis()->SetTitleSize(0.05);
     TCanvas *c2 = tdrCanvas("c2",h2,8,11,kRectangular);
@@ -95,25 +116,40 @@ void ROCS_PFNano() {
     // Create ROC curve data
 
 
-    TGraph *rocCurveCUDS = new TGraph(100);
+    TGraph *rocCurveCUDS_cvl = new TGraph(100);
+    TGraph *rocCurveCB_cvb = new TGraph(100);
+    TGraph *rocCurveBUDS_b = new TGraph(100);
+    TGraph *rocCurveBC_b = new TGraph(100);
 
 
     double dx5_min(1), x5_020(1), x5_cut_020(1), y5_020(1);
     double dx5_min2(1), x5_080(1), x5_cut_080(1), y5_080(1);
     for (int i = 0; i < 100; ++i) {
-        double y5 = h_c_udstag3->Integral(i, 100);
-        double x5 = h_c_ctag3->Integral(i, 100);
-        rocCurveCUDS->SetPoint(i, x5, y5);
+        double y5 = h_c_udstag_cvl_pn30c->Integral(i, 100);
+        double x5 = h_c_ctag_cvl_pn30c->Integral(i, 100);
+        rocCurveCUDS_cvl->SetPoint(i, x5, y5);
+
+        double y6 = h_c_btag_cvb_pn30c->Integral(i, 100);
+        double x6 = h_c_ctag_cvb_pn30c->Integral(i, 100);
+        rocCurveCB_cvb->SetPoint(i, x6, y6);
+
+        double y7 = h_b_udstag_b_pn30c->Integral(i, 100);
+        double x7 = h_b_btag_b_pn30c->Integral(i, 100);
+        rocCurveBUDS_b->SetPoint(i, x7, y7);
+
+        double y8 = h_b_ctag_b_pn30c->Integral(i, 100);
+        double x8 = h_b_btag_b_pn30c->Integral(i, 100);
+        rocCurveBC_b->SetPoint(i, x8, y8);
 
         if (fabs(x5-0.2)< dx5_min){
-            x5_cut_020 = h_c_ctag3->GetBinLowEdge(i);
+            x5_cut_020 = h_c_ctag_cvl_pn30c->GetBinLowEdge(i);
             x5_020 = x5;
             dx5_min = fabs(x5 - 0.2);
             y5_020 = y5;
         }
 
         if (fabs(x5-0.8)< dx5_min2){
-            x5_cut_080 = h_c_ctag3->GetBinLowEdge(i);
+            x5_cut_080 = h_c_ctag_cvl_pn30c->GetBinLowEdge(i);
             x5_080 = x5;
             dx5_min2 = fabs(x5 - 0.8);
             y5_080 = y5;
@@ -126,9 +162,21 @@ void ROCS_PFNano() {
          << " mis-tag = "<< y5_080 << " (target = 0.60)" << endl << flush;
 
 
-    rocCurveCUDS->SetLineColor(kBlue);
-    rocCurveCUDS->SetLineWidth(2);
-    rocCurveCUDS->Draw("same");
+    rocCurveCUDS_cvl->SetLineColor(kBlue);
+    rocCurveCUDS_cvl->SetLineWidth(2);
+    rocCurveCUDS_cvl->Draw("same");
+
+    rocCurveCB_cvb->SetLineColor(kGreen+2);
+    rocCurveCB_cvb->SetLineWidth(2);
+    rocCurveCB_cvb->Draw("same");
+
+    rocCurveBUDS_b->SetLineColor(kPink+5);
+    rocCurveBUDS_b->SetLineWidth(2);
+    rocCurveBUDS_b->Draw("same");
+
+    rocCurveBC_b->SetLineColor(kOrange+7);
+    rocCurveBC_b->SetLineWidth(2);
+    rocCurveBC_b->Draw("same");
 
     TF1 *l = new TF1("l", "x",0.08,1);
     l->SetLineColor(kBlack);
@@ -350,30 +398,33 @@ void ROCS_PFNano() {
     //graph3->Draw("same");
 
 
-double xMin2 = std::min(graph2->GetX()[0], graph3->GetX()[0]);
-double xMax2 = std::max(graph2->GetX()[graph2->GetN() - 1], graph3->GetX()[graph3->GetN() - 1]);
-int numPoints = 100; // Choose an appropriate number of points
-std::vector<double> xCommon(numPoints), yAvg(numPoints);
+    double xMin2 = std::min(graph2->GetX()[0], graph3->GetX()[0]);
+    double xMax2 = std::max(graph2->GetX()[graph2->GetN() - 1], graph3->GetX()[graph3->GetN() - 1]);
+    int numPoints = 100; // Choose an appropriate number of points
+    std::vector<double> xCommon(numPoints), yAvg(numPoints);
 
-double deltaX = (xMax2 - xMin2) / (numPoints - 1);
+    double deltaX = (xMax2 - xMin2) / (numPoints - 1);
 
-for (int i = 0; i < numPoints; i++) {
-    double xValue = xMin2 + i * deltaX;
-    double y1 = interpolate(graph2, xValue);
-    double y2 = interpolate(graph3, xValue);
-    yAvg[i] = (y1 + y2) / 2.0;
-    xCommon[i] = xValue;
-}
+    for (int i = 0; i < numPoints; i++) {
+        double xValue = xMin2 + i * deltaX;
+        double y1 = interpolate(graph2, xValue);
+        double y2 = interpolate(graph3, xValue);
+        yAvg[i] = (y1 + y2) / 2.0;
+        xCommon[i] = xValue;
+    }
 
-TGraph *graphAvg = new TGraph(numPoints, &xCommon[0], &yAvg[0]);
+    TGraph *graphAvg = new TGraph(numPoints, &xCommon[0], &yAvg[0]);
 
-graphAvg->SetLineColor(kOrange+7);
-graphAvg->SetLineWidth(2);
-graphAvg->Draw("same"); // Draw with markers and lines
+    //graphAvg->SetLineColor(kOrange+7);
+    //graphAvg->SetLineWidth(2);
+    //graphAvg->Draw("same"); // Draw with markers and lines
 
-    TLegend *leg2 = tdrLeg(0.65,0.25-0.04*2,0.8,0.35);
-    leg2->AddEntry(rocCurveCUDS, "c vs uds", "L");
-    leg2->AddEntry(graph1, "c vs uds (ref)", "L");
+    TLegend *leg2 = tdrLeg(0.69,0.19-0.04*2,0.8,0.28);
+    leg2->AddEntry(rocCurveCUDS_cvl, "c vs uds", "L");
+    leg2->AddEntry(rocCurveCB_cvb, "c vs b", "L");
+    leg2->AddEntry(rocCurveBUDS_b, "b vs uds", "L");
+    leg2->AddEntry(rocCurveBC_b, "b vs c", "L");
+    leg2->AddEntry(graph1, "c vs uds (ref t#bar{t})", "L");
     leg2->SetTextSize(0.035);
 
     leg2->Draw();
@@ -393,5 +444,5 @@ graphAvg->Draw("same"); // Draw with markers and lines
     c2->Modified();
     c2->Update();
        // Save the canvas
-    c2->SaveAs("pdf/ROC_PFNAno_Curvesall.pdf");
+    c2->SaveAs("pdf/ROC_PFNAno_PNet.pdf");
 }
