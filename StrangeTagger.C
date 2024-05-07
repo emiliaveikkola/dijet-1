@@ -253,6 +253,8 @@ void StrangeTagger::Loop()
    TH1D *hAverageMasses_reco_wfp = new TH1D("hAverageMasses_reco_wfp", ";Jet pair;Average Mass (GeV)", 7, 1, 8);
 
 
+   TH1D *h_c = new TH1D("h_c", ";p_{T,gen c};N",500,0,500);
+   TH1D *h_s = new TH1D("h_s", ";p_{T,gen s};N",500,0,500);
 
    TH1D *h_c_s = new TH1D("h_c_s", ";p_{T,gen cs};N",500,0,500);
    TH1D *h_s_c = new TH1D("h_s_c", ";p_{T,gen sc};N",500,0,500);
@@ -832,6 +834,14 @@ std::map<std::string, int&> counters = {
             double res = (p4recojet1 + p4recojet2).Pt() / (p4genjet1 + p4genjet2).Pt();
             double gen_pt = (p4genjet1 + p4genjet2).Pt();
             double reco_pt = (p4recojet1 + p4recojet2).Pt();
+
+            if (flav1 == 3 || flav2 == 3){
+               h_s->Fill(gen_pt);
+            }
+            if (flav1 == 4 || flav2 == 4){
+               h_c->Fill(gen_pt);
+            }
+
             if (flav1 == 4 || flav2 == 4){
                if (flav1 == 3 && flav2 == 4) h_s_c->Fill(gen_pt);
                if (flav1 == 4 && flav2 == 3) h_c_s->Fill(gen_pt);

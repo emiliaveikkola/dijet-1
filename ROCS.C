@@ -76,6 +76,9 @@ void ROCS() {
     TH1D *h_xc_ctag1 = new TH1D("h_xc_ctag1", "ctag1 for abs(flav1)!=4; ctag1; Fraction", 100, 0, 1);
     TH1D *h_xc_ctag2 = new TH1D("h_xc_ctag2", "ctag2 for abs(flav2)!=4; ctag1; Fraction", 100, 0, 1);
 
+    TH1D *h_ud_udstag1 = new TH1D("h_ud_udstag1", "ctag1 for abs(flav1)!=4; ctag1; Fraction", 100, 0, 1);
+    TH1D *h_ud_udstag2 = new TH1D("h_ud_udstag2", "ctag2 for abs(flav2)!=4; ctag1; Fraction", 100, 0, 1);
+
 
 
 
@@ -293,6 +296,9 @@ void ROCS() {
 
     double dx5_min(1), x5_020(1), x5_cut_020(1), y5_020(1);
     double dx5_min2(1), x5_080(1), x5_cut_080(1), y5_080(1);
+
+    double dx9_min(1), x9_020(1), x9_cut_020(1), y9_020(1);
+    double dx9_min2(1), x9_080(1), x9_cut_080(1), y9_080(1);
     for (int i = 0; i < 100; ++i) {
         double y1 = h_xs_nhf3->Integral(i + 1, 100);
         double x1 = h_s_nhf3->Integral(i + 1, 100);
