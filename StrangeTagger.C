@@ -1,10 +1,12 @@
 #define StrangeTagger_cxx
 #include "StrangeTagger.h"
 #include <TH2.h>
+#include <TH3.h>
 #include <TH1.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <TProfile.h>
+#include <TProfile2D.h>
 #include <TLorentzVector.h>
 
 #include <iostream>
@@ -15,6 +17,22 @@
 #include <TColor.h>
 #include <TStopwatch.h>
 #include "tdrstyle_mod22.C"
+
+
+
+   int DetermineJetPairDATA(double x, double y) {
+    if (x > 0.43 || y > 0.43) return 1;
+    if (x < 0.06 && y < 0.06) return 2;
+    return 3;
+       }
+
+   int DetermineJetPairMC(int x, int y) {
+    if (x == 3 && y == -4 || x == -3 && y == 4 ||
+    x == 4 && y == -3 || x == -4 && y == 3) return 1;
+    if (x == 1 && y == -2 || x == -1 && y == 2 ||
+    x == 2 && y == -1 || x == -2 && y == 1) return 2;
+    return 3;
+       }
 
    // Assuming udstag, ctag, btag, and gtag are member variables of StrangeTagger
    int DetermineJetType(int x, int y) {
@@ -182,11 +200,19 @@ void StrangeTagger::Loop()
    TH2D *hJetFlavours = new TH2D("hJetFlavours", ";Jet1 Flavour;Jet2 Flavour; N",7,0,7,7,0,7);
    TH1D *hJetPairs = new TH1D("hJetPairs", ";Jet pair;N",7,1,8);
 
+   TH2D *hJetFlavourPairMCDATA = new TH2D("hJetFlavourPairMCDATA", ";MC Pair;DATA Pair; N",3,1,4,3,1,4);
+
+   TH1D *hJetPairs_MC = new TH1D("hJetPairs_MC", ";Jet pair;N",3,1,4);
+
    TH1D *hJetPairs_scaled = new TH1D("hJetPairs_scaled", ";Jet pair;N",7,1,8);
 
 
    TH2D *hMassFlavorPairs_gen = new TH2D("hMassFlavorPairs_gen", ";Jet pair;Mass (GeV); N", 7, 1, 8, 200, 0, 200);
    TH2D *hMassFlavorPairs_reco = new TH2D("hMassFlavorPairs_reco", ";Jet pair;Mass (GeV); N", 7, 1, 8, 200, 0, 200);
+
+   TProfile2D *hMassFlavorPairs_DATAMC = new TProfile2D("hMassFlavorPairs_DATAMC", ";MC;DATA; Mass", 3, 1, 4, 3, 1, 4);
+
+   TH3D *h3MassFlavorPairs_DATAMC = new TH3D("h3MassFlavorPairs_DATAMC", ";MC;DATA; Mass", 3, 1, 4, 3, 1, 4,200,0,200);
 
    //without fitProb
    TH2D *hMassFlavorPairs_gen_wfp = new TH2D("hMassFlavorPairs_gen_wfp", ";Jet pair;Mass (GeV); N", 7, 1, 8, 200, 0, 200);
@@ -521,6 +547,9 @@ std::map<std::string, int&> counters = {
 
          int binIndex = DetermineJetType(flav1, flav2);
 
+         int pairIndexMC = DetermineJetPairMC(flav1,flav2);
+         int pairIndexDATA = DetermineJetPairDATA(ctag1,ctag2);
+
          p4genjet1.SetPtEtaPhiM(gen_pt1, gen_eta1, gen_phi1, gen_m1);
          p4genjet2.SetPtEtaPhiM(gen_pt2, gen_eta2, gen_phi2, gen_m2);
          p4recojet1.SetPtEtaPhiM(pt1, eta1, phi1, m1);
@@ -770,26 +799,29 @@ std::map<std::string, int&> counters = {
                //hJetPairs->Fill(binIndex);
             }
 
+            hJetFlavourPairMCDATA->Fill(pairIndexMC, pairIndexDATA);
             if (genmass > 30) {
-               hMassFlavorPairs_gen->Fill(binIndex,recomass/genmass);
-               if (binIndex == 1) {h_cs_gen->Fill(recomass/genmass);}
-               if (binIndex == 2) {h_ud_gen->Fill(recomass/genmass);}
-               if (binIndex == 3) {h_cd_gen->Fill(recomass/genmass);}          
-               if (binIndex == 4) {h_us_gen->Fill(recomass/genmass);}
-               if (binIndex == 5) {h_cb_gen->Fill(recomass/genmass);}
-               if (binIndex == 6) {h_ub_gen->Fill(recomass/genmass);}
-               if (binIndex == 7) {h_x_gen->Fill(recomass/genmass);}
+               hMassFlavorPairs_gen->Fill(binIndex,genmass);
+               if (binIndex == 1) {h_cs_gen->Fill(genmass);}
+               if (binIndex == 2) {h_ud_gen->Fill(genmass);}
+               if (binIndex == 3) {h_cd_gen->Fill(genmass);}          
+               if (binIndex == 4) {h_us_gen->Fill(genmass);}
+               if (binIndex == 5) {h_cb_gen->Fill(genmass);}
+               if (binIndex == 6) {h_ub_gen->Fill(genmass);}
+               if (binIndex == 7) {h_x_gen->Fill(genmass);}
             }
 
             if (recomass > 30) {
                hMassFlavorPairs_reco->Fill(binIndex,recomass);
-               if (binIndex == 1) {h_cs_reco->Fill(recomass);}
-               if (binIndex == 2) {h_ud_reco->Fill(recomass);}
-               if (binIndex == 3) {h_cd_reco->Fill(recomass);}          
-               if (binIndex == 4) {h_us_reco->Fill(recomass);}
-               if (binIndex == 5) {h_cb_reco->Fill(recomass);}
-               if (binIndex == 6) {h_ub_reco->Fill(recomass);}
-               if (binIndex == 7) {h_x_reco->Fill(recomass);}
+               hMassFlavorPairs_DATAMC->Fill(pairIndexMC, pairIndexDATA, recomass, weight);
+               h3MassFlavorPairs_DATAMC->Fill(pairIndexMC, pairIndexDATA, recomass, weight);
+               if (binIndex == 1) {h_cs_reco->Fill(recomass,weight);}
+               if (binIndex == 2) {h_ud_reco->Fill(recomass,weight);}
+               if (binIndex == 3) {h_cd_reco->Fill(recomass,weight);}          
+               if (binIndex == 4) {h_us_reco->Fill(recomass,weight);}
+               if (binIndex == 5) {h_cb_reco->Fill(recomass,weight);}
+               if (binIndex == 6) {h_ub_reco->Fill(recomass,weight);}
+               if (binIndex == 7) {h_x_reco->Fill(recomass,weight);}
             }
                /*
             if (scaled_reco_pt1 >= 30 && scaled_reco_pt2 >= 30 && scaled_gen_pt1 >= 30 && scaled_gen_pt2 >= 30 ){
@@ -922,6 +954,20 @@ std::map<std::string, int&> counters = {
       hJetPairs->SetBinContent(5, h_ub->GetEntries());
       hJetPairs->SetBinContent(6, h_cb->GetEntries());
       hJetPairs->SetBinContent(7, h_x->GetEntries());
+
+      // Get the contents of the specified bin from each histogram
+      double content_cd = h_cd->GetBinContent(1);
+      double content_us = h_us->GetBinContent(1);
+      double content_ub = h_ub->GetBinContent(1);
+      double content_cb = h_cb->GetBinContent(1);
+      double content_x = h_x->GetBinContent(1);
+
+      // Sum the contents
+      double totalContent = content_cd + content_us + content_ub + content_cb + content_x;
+      cout << totalContent << endl << flush;
+      hJetPairs_MC->SetBinContent(1, h_cs->GetEntries());
+      hJetPairs_MC->SetBinContent(2, h_ud->GetEntries());
+      hJetPairs_MC->SetBinContent(3, totalContent);
 
       hJetPairs_scaled->SetBinContent(1, h_cs->GetEntries()/0.5722);
       hJetPairs_scaled->SetBinContent(2, h_ud->GetEntries()/0.70812);
