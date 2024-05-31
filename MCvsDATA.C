@@ -71,7 +71,7 @@ void PrintBinContents(TH2D* h2D) {
 }
 
 void MCvsDATA() {
-    TFile *file = new TFile("output_stag3.root", "READ");
+    TFile *file = new TFile("output_stag_DATA.root", "READ");
 
     TH2D *hJetFlavourPairMCDATA = (TH2D*)file->Get("hJetFlavourPairMCDATA");
     TProfile2D *hMassFlavorPairs_DATAMC = (TProfile2D*)file->Get("hMassFlavorPairs_DATAMC");
