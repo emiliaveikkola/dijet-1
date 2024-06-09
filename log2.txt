@@ -1,0 +1,3531 @@
+
+Processing chi_squared2.C...
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       842.06
+NDf                       =           30
+Edm                       =       842.06
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.95, chi27m = 842.06
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      751.725
+NDf                       =           30
+Edm                       =      751.725
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.955, chi27m = 751.725
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      671.919
+NDf                       =           30
+Edm                       =      671.919
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.96, chi27m = 671.919
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      596.219
+NDf                       =           30
+Edm                       =      596.219
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.965, chi27m = 596.219
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      526.174
+NDf                       =           30
+Edm                       =      526.174
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.97, chi27m = 526.174
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      459.783
+NDf                       =           30
+Edm                       =      459.783
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.975, chi27m = 459.783
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      406.956
+NDf                       =           30
+Edm                       =      406.956
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.98, chi27m = 406.956
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      350.014
+NDf                       =           30
+Edm                       =      350.014
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.985, chi27m = 350.014
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      296.398
+NDf                       =           30
+Edm                       =      296.398
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.99, chi27m = 296.398
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      263.502
+NDf                       =           30
+Edm                       =      263.502
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 0.995, chi27m = 263.502
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      224.859
+NDf                       =           30
+Edm                       =      224.859
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1, chi27m = 224.859
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      197.938
+NDf                       =           30
+Edm                       =      197.938
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.005, chi27m = 197.938
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      167.262
+NDf                       =           30
+Edm                       =      167.262
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.01, chi27m = 167.262
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      145.579
+NDf                       =           30
+Edm                       =      145.579
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.015, chi27m = 145.579
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      120.091
+NDf                       =           30
+Edm                       =      120.091
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.02, chi27m = 120.091
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       97.653
+NDf                       =           30
+Edm                       =       97.653
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.025, chi27m = 97.653
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      78.6551
+NDf                       =           30
+Edm                       =      78.6551
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.03, chi27m = 78.6551
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      62.3103
+NDf                       =           30
+Edm                       =      62.3103
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.035, chi27m = 62.3103
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      49.5113
+NDf                       =           30
+Edm                       =      49.5113
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.04, chi27m = 49.5113
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      43.7868
+NDf                       =           30
+Edm                       =      43.7868
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.045, chi27m = 43.7868
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.8242
+NDf                       =           30
+Edm                       =      35.8242
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.95, scale2 = 1.05, chi27m = 35.8242
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      750.977
+NDf                       =           30
+Edm                       =      750.977
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.95, chi27m = 750.977
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      671.581
+NDf                       =           30
+Edm                       =      671.581
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.955, chi27m = 671.581
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      596.671
+NDf                       =           30
+Edm                       =      596.671
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.96, chi27m = 596.671
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      525.398
+NDf                       =           30
+Edm                       =      525.398
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.965, chi27m = 525.398
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      458.418
+NDf                       =           30
+Edm                       =      458.418
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.97, chi27m = 458.418
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      406.032
+NDf                       =           30
+Edm                       =      406.032
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.975, chi27m = 406.032
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      348.547
+NDf                       =           30
+Edm                       =      348.547
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.98, chi27m = 348.547
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      295.126
+NDf                       =           30
+Edm                       =      295.126
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.985, chi27m = 295.126
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       262.38
+NDf                       =           30
+Edm                       =       262.38
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.99, chi27m = 262.38
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      223.465
+NDf                       =           30
+Edm                       =      223.465
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 0.995, chi27m = 223.465
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      195.348
+NDf                       =           30
+Edm                       =      195.348
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1, chi27m = 195.348
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      166.021
+NDf                       =           30
+Edm                       =      166.021
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.005, chi27m = 166.021
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      143.346
+NDf                       =           30
+Edm                       =      143.346
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.01, chi27m = 143.346
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      118.562
+NDf                       =           30
+Edm                       =      118.562
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.015, chi27m = 118.562
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       95.193
+NDf                       =           30
+Edm                       =       95.193
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.02, chi27m = 95.193
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      75.9982
+NDf                       =           30
+Edm                       =      75.9982
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.025, chi27m = 75.9982
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      61.1313
+NDf                       =           30
+Edm                       =      61.1313
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.03, chi27m = 61.1313
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      49.0823
+NDf                       =           30
+Edm                       =      49.0823
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.035, chi27m = 49.0823
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      43.0501
+NDf                       =           30
+Edm                       =      43.0501
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.04, chi27m = 43.0501
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.0928
+NDf                       =           30
+Edm                       =      36.0928
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.045, chi27m = 36.0928
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      34.0885
+NDf                       =           30
+Edm                       =      34.0885
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.955, scale2 = 1.05, chi27m = 34.0885
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      671.371
+NDf                       =           30
+Edm                       =      671.371
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.95, chi27m = 671.371
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      597.813
+NDf                       =           30
+Edm                       =      597.813
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.955, chi27m = 597.813
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      524.706
+NDf                       =           30
+Edm                       =      524.706
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.96, chi27m = 524.706
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      458.862
+NDf                       =           30
+Edm                       =      458.862
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.965, chi27m = 458.862
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      406.108
+NDf                       =           30
+Edm                       =      406.108
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.97, chi27m = 406.108
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       346.94
+NDf                       =           30
+Edm                       =       346.94
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.975, chi27m = 346.94
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      294.651
+NDf                       =           30
+Edm                       =      294.651
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.98, chi27m = 294.651
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      261.034
+NDf                       =           30
+Edm                       =      261.034
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.985, chi27m = 261.034
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      222.429
+NDf                       =           30
+Edm                       =      222.429
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.99, chi27m = 222.429
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      194.076
+NDf                       =           30
+Edm                       =      194.076
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 0.995, chi27m = 194.076
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      166.047
+NDf                       =           30
+Edm                       =      166.047
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1, chi27m = 166.047
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      141.528
+NDf                       =           30
+Edm                       =      141.528
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.005, chi27m = 141.528
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      116.645
+NDf                       =           30
+Edm                       =      116.645
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.01, chi27m = 116.645
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      93.4483
+NDf                       =           30
+Edm                       =      93.4483
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.015, chi27m = 93.4483
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      75.1378
+NDf                       =           30
+Edm                       =      75.1378
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.02, chi27m = 75.1378
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      61.4824
+NDf                       =           30
+Edm                       =      61.4824
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.025, chi27m = 61.4824
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      48.4351
+NDf                       =           30
+Edm                       =      48.4351
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.03, chi27m = 48.4351
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.1786
+NDf                       =           30
+Edm                       =      42.1786
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.035, chi27m = 42.1786
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.7488
+NDf                       =           30
+Edm                       =      35.7488
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.04, chi27m = 35.7488
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      34.4014
+NDf                       =           30
+Edm                       =      34.4014
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.045, chi27m = 34.4014
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.4606
+NDf                       =           30
+Edm                       =      35.4606
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.96, scale2 = 1.05, chi27m = 35.4606
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      598.932
+NDf                       =           30
+Edm                       =      598.932
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.95, chi27m = 598.932
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      523.541
+NDf                       =           30
+Edm                       =      523.541
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.955, chi27m = 523.541
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      458.579
+NDf                       =           30
+Edm                       =      458.579
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.96, chi27m = 458.579
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      406.409
+NDf                       =           30
+Edm                       =      406.409
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.965, chi27m = 406.409
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      346.224
+NDf                       =           30
+Edm                       =      346.224
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.97, chi27m = 346.224
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      294.097
+NDf                       =           30
+Edm                       =      294.097
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.975, chi27m = 294.097
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      259.945
+NDf                       =           30
+Edm                       =      259.945
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.98, chi27m = 259.945
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      221.699
+NDf                       =           30
+Edm                       =      221.699
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.985, chi27m = 221.699
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      193.282
+NDf                       =           30
+Edm                       =      193.282
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.99, chi27m = 193.282
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      166.242
+NDf                       =           30
+Edm                       =      166.242
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 0.995, chi27m = 166.242
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       139.71
+NDf                       =           30
+Edm                       =       139.71
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1, chi27m = 139.71
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      116.408
+NDf                       =           30
+Edm                       =      116.408
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.005, chi27m = 116.408
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      92.7716
+NDf                       =           30
+Edm                       =      92.7716
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.01, chi27m = 92.7716
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       74.259
+NDf                       =           30
+Edm                       =       74.259
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.015, chi27m = 74.259
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      61.2032
+NDf                       =           30
+Edm                       =      61.2032
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.02, chi27m = 61.2032
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      47.6781
+NDf                       =           30
+Edm                       =      47.6781
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.025, chi27m = 47.6781
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.0016
+NDf                       =           30
+Edm                       =      42.0016
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.03, chi27m = 42.0016
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.5297
+NDf                       =           30
+Edm                       =      35.5297
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.035, chi27m = 35.5297
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.2753
+NDf                       =           30
+Edm                       =      35.2753
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.04, chi27m = 35.2753
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       35.392
+NDf                       =           30
+Edm                       =       35.392
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.045, chi27m = 35.392
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.3349
+NDf                       =           30
+Edm                       =      37.3349
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.965, scale2 = 1.05, chi27m = 37.3349
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      524.271
+NDf                       =           30
+Edm                       =      524.271
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.95, chi27m = 524.271
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      458.973
+NDf                       =           30
+Edm                       =      458.973
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.955, chi27m = 458.973
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      407.496
+NDf                       =           30
+Edm                       =      407.496
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.96, chi27m = 407.496
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      346.072
+NDf                       =           30
+Edm                       =      346.072
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.965, chi27m = 346.072
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      294.288
+NDf                       =           30
+Edm                       =      294.288
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.97, chi27m = 294.288
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      258.759
+NDf                       =           30
+Edm                       =      258.759
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.975, chi27m = 258.759
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      222.063
+NDf                       =           30
+Edm                       =      222.063
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.98, chi27m = 222.063
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      191.735
+NDf                       =           30
+Edm                       =      191.735
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.985, chi27m = 191.735
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      165.455
+NDf                       =           30
+Edm                       =      165.455
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.99, chi27m = 165.455
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      138.643
+NDf                       =           30
+Edm                       =      138.643
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 0.995, chi27m = 138.643
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      114.594
+NDf                       =           30
+Edm                       =      114.594
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1, chi27m = 114.594
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      91.5032
+NDf                       =           30
+Edm                       =      91.5032
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.005, chi27m = 91.5032
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      73.3984
+NDf                       =           30
+Edm                       =      73.3984
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.01, chi27m = 73.3984
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      59.9696
+NDf                       =           30
+Edm                       =      59.9696
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.015, chi27m = 59.9696
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      47.2808
+NDf                       =           30
+Edm                       =      47.2808
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.02, chi27m = 47.2808
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      41.6821
+NDf                       =           30
+Edm                       =      41.6821
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.025, chi27m = 41.6821
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.8279
+NDf                       =           30
+Edm                       =      35.8279
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.03, chi27m = 35.8279
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.1682
+NDf                       =           30
+Edm                       =      35.1682
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.035, chi27m = 35.1682
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      34.8937
+NDf                       =           30
+Edm                       =      34.8937
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.04, chi27m = 34.8937
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.5154
+NDf                       =           30
+Edm                       =      37.5154
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.045, chi27m = 37.5154
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.1698
+NDf                       =           30
+Edm                       =      42.1698
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.97, scale2 = 1.05, chi27m = 42.1698
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       460.71
+NDf                       =           30
+Edm                       =       460.71
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.95, chi27m = 460.71
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      407.949
+NDf                       =           30
+Edm                       =      407.949
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.955, chi27m = 407.949
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      346.428
+NDf                       =           30
+Edm                       =      346.428
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.96, chi27m = 346.428
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      294.213
+NDf                       =           30
+Edm                       =      294.213
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.965, chi27m = 294.213
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      258.545
+NDf                       =           30
+Edm                       =      258.545
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.97, chi27m = 258.545
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      221.603
+NDf                       =           30
+Edm                       =      221.603
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.975, chi27m = 221.603
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      191.072
+NDf                       =           30
+Edm                       =      191.072
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.98, chi27m = 191.072
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      165.049
+NDf                       =           30
+Edm                       =      165.049
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.985, chi27m = 165.049
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      137.619
+NDf                       =           30
+Edm                       =      137.619
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.99, chi27m = 137.619
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      113.492
+NDf                       =           30
+Edm                       =      113.492
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 0.995, chi27m = 113.492
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      90.5117
+NDf                       =           30
+Edm                       =      90.5117
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1, chi27m = 90.5117
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       72.694
+NDf                       =           30
+Edm                       =       72.694
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.005, chi27m = 72.694
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      59.1304
+NDf                       =           30
+Edm                       =      59.1304
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.01, chi27m = 59.1304
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       47.206
+NDf                       =           30
+Edm                       =       47.206
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.015, chi27m = 47.206
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      41.2985
+NDf                       =           30
+Edm                       =      41.2985
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.02, chi27m = 41.2985
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.8658
+NDf                       =           30
+Edm                       =      35.8658
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.025, chi27m = 35.8658
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.1665
+NDf                       =           30
+Edm                       =      35.1665
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.03, chi27m = 35.1665
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.4442
+NDf                       =           30
+Edm                       =      35.4442
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.035, chi27m = 35.4442
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.6457
+NDf                       =           30
+Edm                       =      37.6457
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.04, chi27m = 37.6457
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      43.3206
+NDf                       =           30
+Edm                       =      43.3206
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.045, chi27m = 43.3206
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      51.3769
+NDf                       =           30
+Edm                       =      51.3769
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.975, scale2 = 1.05, chi27m = 51.3769
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      407.268
+NDf                       =           30
+Edm                       =      407.268
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.95, chi27m = 407.268
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       347.98
+NDf                       =           30
+Edm                       =       347.98
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.955, chi27m = 347.98
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      295.724
+NDf                       =           30
+Edm                       =      295.724
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.96, chi27m = 295.724
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       259.19
+NDf                       =           30
+Edm                       =       259.19
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.965, chi27m = 259.19
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      222.742
+NDf                       =           30
+Edm                       =      222.742
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.97, chi27m = 222.742
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      191.222
+NDf                       =           30
+Edm                       =      191.222
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.975, chi27m = 191.222
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      165.163
+NDf                       =           30
+Edm                       =      165.163
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.98, chi27m = 165.163
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =        136.4
+NDf                       =           30
+Edm                       =        136.4
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.985, chi27m = 136.4
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      111.939
+NDf                       =           30
+Edm                       =      111.939
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.99, chi27m = 111.939
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      90.5579
+NDf                       =           30
+Edm                       =      90.5579
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 0.995, chi27m = 90.5579
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      71.9981
+NDf                       =           30
+Edm                       =      71.9981
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1, chi27m = 71.9981
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      58.6701
+NDf                       =           30
+Edm                       =      58.6701
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.005, chi27m = 58.6701
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      47.2637
+NDf                       =           30
+Edm                       =      47.2637
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.01, chi27m = 47.2637
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      40.8761
+NDf                       =           30
+Edm                       =      40.8761
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.015, chi27m = 40.8761
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.5616
+NDf                       =           30
+Edm                       =      36.5616
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.02, chi27m = 36.5616
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.2649
+NDf                       =           30
+Edm                       =      35.2649
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.025, chi27m = 35.2649
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.8191
+NDf                       =           30
+Edm                       =      35.8191
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.03, chi27m = 35.8191
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.7672
+NDf                       =           30
+Edm                       =      37.7672
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.035, chi27m = 37.7672
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      43.6165
+NDf                       =           30
+Edm                       =      43.6165
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.04, chi27m = 43.6165
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      52.1952
+NDf                       =           30
+Edm                       =      52.1952
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.045, chi27m = 52.1952
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      62.3983
+NDf                       =           30
+Edm                       =      62.3983
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.98, scale2 = 1.05, chi27m = 62.3983
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       349.86
+NDf                       =           30
+Edm                       =       349.86
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.95, chi27m = 349.86
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       297.76
+NDf                       =           30
+Edm                       =       297.76
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.955, chi27m = 297.76
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      259.024
+NDf                       =           30
+Edm                       =      259.024
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.96, chi27m = 259.024
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      223.065
+NDf                       =           30
+Edm                       =      223.065
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.965, chi27m = 223.065
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      192.015
+NDf                       =           30
+Edm                       =      192.015
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.97, chi27m = 192.015
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      165.541
+NDf                       =           30
+Edm                       =      165.541
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.975, chi27m = 165.541
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      136.485
+NDf                       =           30
+Edm                       =      136.485
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.98, chi27m = 136.485
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      111.644
+NDf                       =           30
+Edm                       =      111.644
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.985, chi27m = 111.644
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      89.9836
+NDf                       =           30
+Edm                       =      89.9836
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.99, chi27m = 89.9836
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      71.3861
+NDf                       =           30
+Edm                       =      71.3861
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 0.995, chi27m = 71.3861
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      58.2829
+NDf                       =           30
+Edm                       =      58.2829
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1, chi27m = 58.2829
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      47.1762
+NDf                       =           30
+Edm                       =      47.1762
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.005, chi27m = 47.1762
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      40.7168
+NDf                       =           30
+Edm                       =      40.7168
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.01, chi27m = 40.7168
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.9703
+NDf                       =           30
+Edm                       =      36.9703
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.015, chi27m = 36.9703
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      34.9761
+NDf                       =           30
+Edm                       =      34.9761
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.02, chi27m = 34.9761
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.8333
+NDf                       =           30
+Edm                       =      35.8333
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.025, chi27m = 35.8333
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.0682
+NDf                       =           30
+Edm                       =      38.0682
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.03, chi27m = 38.0682
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.2518
+NDf                       =           30
+Edm                       =      44.2518
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.035, chi27m = 44.2518
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      52.9426
+NDf                       =           30
+Edm                       =      52.9426
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.04, chi27m = 52.9426
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      63.5845
+NDf                       =           30
+Edm                       =      63.5845
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.045, chi27m = 63.5845
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      78.6243
+NDf                       =           30
+Edm                       =      78.6243
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.985, scale2 = 1.05, chi27m = 78.6243
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      299.413
+NDf                       =           30
+Edm                       =      299.413
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.95, chi27m = 299.413
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      260.144
+NDf                       =           30
+Edm                       =      260.144
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.955, chi27m = 260.144
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      224.167
+NDf                       =           30
+Edm                       =      224.167
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.96, chi27m = 224.167
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      192.718
+NDf                       =           30
+Edm                       =      192.718
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.965, chi27m = 192.718
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       165.21
+NDf                       =           30
+Edm                       =       165.21
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.97, chi27m = 165.21
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      136.412
+NDf                       =           30
+Edm                       =      136.412
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.975, chi27m = 136.412
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      111.341
+NDf                       =           30
+Edm                       =      111.341
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.98, chi27m = 111.341
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      89.3218
+NDf                       =           30
+Edm                       =      89.3218
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.985, chi27m = 89.3218
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      70.9227
+NDf                       =           30
+Edm                       =      70.9227
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.99, chi27m = 70.9227
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       59.168
+NDf                       =           30
+Edm                       =       59.168
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 0.995, chi27m = 59.168
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.9808
+NDf                       =           30
+Edm                       =      46.9808
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1, chi27m = 46.9808
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      40.5052
+NDf                       =           30
+Edm                       =      40.5052
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.005, chi27m = 40.5052
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       37.065
+NDf                       =           30
+Edm                       =       37.065
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.01, chi27m = 37.065
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.6549
+NDf                       =           30
+Edm                       =      35.6549
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.015, chi27m = 35.6549
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.3503
+NDf                       =           30
+Edm                       =      36.3503
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.02, chi27m = 36.3503
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.7429
+NDf                       =           30
+Edm                       =      37.7429
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.025, chi27m = 37.7429
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.4597
+NDf                       =           30
+Edm                       =      44.4597
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.03, chi27m = 44.4597
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      53.6993
+NDf                       =           30
+Edm                       =      53.6993
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.035, chi27m = 53.6993
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      64.4468
+NDf                       =           30
+Edm                       =      64.4468
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.04, chi27m = 64.4468
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      79.3688
+NDf                       =           30
+Edm                       =      79.3688
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.045, chi27m = 79.3688
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      96.1784
+NDf                       =           30
+Edm                       =      96.1784
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.99, scale2 = 1.05, chi27m = 96.1784
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      262.376
+NDf                       =           30
+Edm                       =      262.376
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.95, chi27m = 262.376
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       224.94
+NDf                       =           30
+Edm                       =       224.94
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.955, chi27m = 224.94
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      194.891
+NDf                       =           30
+Edm                       =      194.891
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.96, chi27m = 194.891
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      165.377
+NDf                       =           30
+Edm                       =      165.377
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.965, chi27m = 165.377
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      137.065
+NDf                       =           30
+Edm                       =      137.065
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.97, chi27m = 137.065
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      112.225
+NDf                       =           30
+Edm                       =      112.225
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.975, chi27m = 112.225
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      89.4254
+NDf                       =           30
+Edm                       =      89.4254
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.98, chi27m = 89.4254
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       70.972
+NDf                       =           30
+Edm                       =       70.972
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.985, chi27m = 70.972
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      58.6101
+NDf                       =           30
+Edm                       =      58.6101
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.99, chi27m = 58.6101
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.5876
+NDf                       =           30
+Edm                       =      46.5876
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 0.995, chi27m = 46.5876
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      40.8585
+NDf                       =           30
+Edm                       =      40.8585
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1, chi27m = 40.8585
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.1978
+NDf                       =           30
+Edm                       =      37.1978
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.005, chi27m = 37.1978
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =        35.67
+NDf                       =           30
+Edm                       =        35.67
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.01, chi27m = 35.67
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.1155
+NDf                       =           30
+Edm                       =      36.1155
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.015, chi27m = 36.1155
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.0495
+NDf                       =           30
+Edm                       =      38.0495
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.02, chi27m = 38.0495
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       43.963
+NDf                       =           30
+Edm                       =       43.963
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.025, chi27m = 43.963
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      53.6737
+NDf                       =           30
+Edm                       =      53.6737
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.03, chi27m = 53.6737
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      65.0092
+NDf                       =           30
+Edm                       =      65.0092
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.035, chi27m = 65.0092
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      80.0906
+NDf                       =           30
+Edm                       =      80.0906
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.04, chi27m = 80.0906
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      97.3706
+NDf                       =           30
+Edm                       =      97.3706
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.045, chi27m = 97.3706
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      115.395
+NDf                       =           30
+Edm                       =      115.395
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 0.995, scale2 = 1.05, chi27m = 115.395
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      226.767
+NDf                       =           30
+Edm                       =      226.767
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.95, chi27m = 226.767
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      194.529
+NDf                       =           30
+Edm                       =      194.529
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.955, chi27m = 194.529
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       165.03
+NDf                       =           30
+Edm                       =       165.03
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.96, chi27m = 165.03
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       138.98
+NDf                       =           30
+Edm                       =       138.98
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.965, chi27m = 138.98
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      112.457
+NDf                       =           30
+Edm                       =      112.457
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.97, chi27m = 112.457
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      89.6433
+NDf                       =           30
+Edm                       =      89.6433
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.975, chi27m = 89.6433
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      70.6352
+NDf                       =           30
+Edm                       =      70.6352
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.98, chi27m = 70.6352
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      58.6829
+NDf                       =           30
+Edm                       =      58.6829
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.985, chi27m = 58.6829
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.8178
+NDf                       =           30
+Edm                       =      46.8178
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.99, chi27m = 46.8178
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      40.6512
+NDf                       =           30
+Edm                       =      40.6512
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 0.995, chi27m = 40.6512
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.6537
+NDf                       =           30
+Edm                       =      37.6537
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1, chi27m = 37.6537
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.4388
+NDf                       =           30
+Edm                       =      35.4388
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.005, chi27m = 35.4388
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.9493
+NDf                       =           30
+Edm                       =      35.9493
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.01, chi27m = 35.9493
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.0038
+NDf                       =           30
+Edm                       =      38.0038
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.015, chi27m = 38.0038
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.0793
+NDf                       =           30
+Edm                       =      44.0793
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.02, chi27m = 44.0793
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      53.2829
+NDf                       =           30
+Edm                       =      53.2829
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.025, chi27m = 53.2829
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      65.5871
+NDf                       =           30
+Edm                       =      65.5871
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.03, chi27m = 65.5871
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      80.7434
+NDf                       =           30
+Edm                       =      80.7434
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.035, chi27m = 80.7434
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      97.8938
+NDf                       =           30
+Edm                       =      97.8938
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.04, chi27m = 97.8938
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      116.542
+NDf                       =           30
+Edm                       =      116.542
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.045, chi27m = 116.542
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      135.348
+NDf                       =           30
+Edm                       =      135.348
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1, scale2 = 1.05, chi27m = 135.348
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      195.812
+NDf                       =           30
+Edm                       =      195.812
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.95, chi27m = 195.812
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      166.977
+NDf                       =           30
+Edm                       =      166.977
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.955, chi27m = 166.977
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      140.341
+NDf                       =           30
+Edm                       =      140.341
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.96, chi27m = 140.341
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      112.699
+NDf                       =           30
+Edm                       =      112.699
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.965, chi27m = 112.699
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       90.023
+NDf                       =           30
+Edm                       =       90.023
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.97, chi27m = 90.023
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      71.5859
+NDf                       =           30
+Edm                       =      71.5859
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.975, chi27m = 71.5859
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      59.0834
+NDf                       =           30
+Edm                       =      59.0834
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.98, chi27m = 59.0834
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.6718
+NDf                       =           30
+Edm                       =      46.6718
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.985, chi27m = 46.6718
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      40.8552
+NDf                       =           30
+Edm                       =      40.8552
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.99, chi27m = 40.8552
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.4906
+NDf                       =           30
+Edm                       =      37.4906
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 0.995, chi27m = 37.4906
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      34.9944
+NDf                       =           30
+Edm                       =      34.9944
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1, chi27m = 34.9944
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.8199
+NDf                       =           30
+Edm                       =      35.8199
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.005, chi27m = 35.8199
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.9077
+NDf                       =           30
+Edm                       =      37.9077
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.01, chi27m = 37.9077
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.4732
+NDf                       =           30
+Edm                       =      44.4732
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.015, chi27m = 44.4732
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      53.2494
+NDf                       =           30
+Edm                       =      53.2494
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.02, chi27m = 53.2494
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      66.4504
+NDf                       =           30
+Edm                       =      66.4504
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.025, chi27m = 66.4504
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      80.9473
+NDf                       =           30
+Edm                       =      80.9473
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.03, chi27m = 80.9473
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      99.4343
+NDf                       =           30
+Edm                       =      99.4343
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.035, chi27m = 99.4343
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      116.296
+NDf                       =           30
+Edm                       =      116.296
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.04, chi27m = 116.296
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      137.398
+NDf                       =           30
+Edm                       =      137.398
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.045, chi27m = 137.398
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      156.097
+NDf                       =           30
+Edm                       =      156.097
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.005, scale2 = 1.05, chi27m = 156.097
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      168.345
+NDf                       =           30
+Edm                       =      168.345
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.95, chi27m = 168.345
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      142.491
+NDf                       =           30
+Edm                       =      142.491
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.955, chi27m = 142.491
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      113.969
+NDf                       =           30
+Edm                       =      113.969
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.96, chi27m = 113.969
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      91.2189
+NDf                       =           30
+Edm                       =      91.2189
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.965, chi27m = 91.2189
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      73.0241
+NDf                       =           30
+Edm                       =      73.0241
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.97, chi27m = 73.0241
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      59.1757
+NDf                       =           30
+Edm                       =      59.1757
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.975, chi27m = 59.1757
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.4814
+NDf                       =           30
+Edm                       =      46.4814
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.98, chi27m = 46.4814
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      41.2569
+NDf                       =           30
+Edm                       =      41.2569
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.985, chi27m = 41.2569
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.8308
+NDf                       =           30
+Edm                       =      37.8308
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.99, chi27m = 37.8308
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.7209
+NDf                       =           30
+Edm                       =      35.7209
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 0.995, chi27m = 35.7209
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.6177
+NDf                       =           30
+Edm                       =      35.6177
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1, chi27m = 35.6177
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.8381
+NDf                       =           30
+Edm                       =      37.8381
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.005, chi27m = 37.8381
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.7057
+NDf                       =           30
+Edm                       =      44.7057
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.01, chi27m = 44.7057
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      53.2257
+NDf                       =           30
+Edm                       =      53.2257
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.015, chi27m = 53.2257
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      66.9013
+NDf                       =           30
+Edm                       =      66.9013
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.02, chi27m = 66.9013
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      81.0231
+NDf                       =           30
+Edm                       =      81.0231
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.025, chi27m = 81.0231
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      99.5952
+NDf                       =           30
+Edm                       =      99.5952
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.03, chi27m = 99.5952
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      116.821
+NDf                       =           30
+Edm                       =      116.821
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.035, chi27m = 116.821
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      138.251
+NDf                       =           30
+Edm                       =      138.251
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.04, chi27m = 138.251
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      157.232
+NDf                       =           30
+Edm                       =      157.232
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.045, chi27m = 157.232
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      182.974
+NDf                       =           30
+Edm                       =      182.974
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.01, scale2 = 1.05, chi27m = 182.974
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      142.729
+NDf                       =           30
+Edm                       =      142.729
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.95, chi27m = 142.729
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      115.118
+NDf                       =           30
+Edm                       =      115.118
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.955, chi27m = 115.118
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      91.6933
+NDf                       =           30
+Edm                       =      91.6933
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.96, chi27m = 91.6933
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      72.9373
+NDf                       =           30
+Edm                       =      72.9373
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.965, chi27m = 72.9373
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      59.8637
+NDf                       =           30
+Edm                       =      59.8637
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.97, chi27m = 59.8637
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.4248
+NDf                       =           30
+Edm                       =      46.4248
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.975, chi27m = 46.4248
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.0511
+NDf                       =           30
+Edm                       =      42.0511
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.98, chi27m = 42.0511
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.6141
+NDf                       =           30
+Edm                       =      38.6141
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.985, chi27m = 38.6141
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.3042
+NDf                       =           30
+Edm                       =      36.3042
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.99, chi27m = 36.3042
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.9829
+NDf                       =           30
+Edm                       =      35.9829
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 0.995, chi27m = 35.9829
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.1674
+NDf                       =           30
+Edm                       =      38.1674
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1, chi27m = 38.1674
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.5905
+NDf                       =           30
+Edm                       =      44.5905
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.005, chi27m = 44.5905
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      53.0705
+NDf                       =           30
+Edm                       =      53.0705
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.01, chi27m = 53.0705
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      66.9021
+NDf                       =           30
+Edm                       =      66.9021
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.015, chi27m = 66.9021
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      81.4664
+NDf                       =           30
+Edm                       =      81.4664
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.02, chi27m = 81.4664
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      99.7943
+NDf                       =           30
+Edm                       =      99.7943
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.025, chi27m = 99.7943
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      117.211
+NDf                       =           30
+Edm                       =      117.211
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.03, chi27m = 117.211
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      138.602
+NDf                       =           30
+Edm                       =      138.602
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.035, chi27m = 138.602
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      158.111
+NDf                       =           30
+Edm                       =      158.111
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.04, chi27m = 158.111
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      183.511
+NDf                       =           30
+Edm                       =      183.511
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.045, chi27m = 183.511
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      210.134
+NDf                       =           30
+Edm                       =      210.134
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.015, scale2 = 1.05, chi27m = 210.134
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      116.571
+NDf                       =           30
+Edm                       =      116.571
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.95, chi27m = 116.571
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      94.0343
+NDf                       =           30
+Edm                       =      94.0343
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.955, chi27m = 94.0343
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      73.6415
+NDf                       =           30
+Edm                       =      73.6415
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.96, chi27m = 73.6415
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      59.8799
+NDf                       =           30
+Edm                       =      59.8799
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.965, chi27m = 59.8799
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.3181
+NDf                       =           30
+Edm                       =      46.3181
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.97, chi27m = 46.3181
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.3367
+NDf                       =           30
+Edm                       =      42.3367
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.975, chi27m = 42.3367
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.3013
+NDf                       =           30
+Edm                       =      38.3013
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.98, chi27m = 38.3013
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.1078
+NDf                       =           30
+Edm                       =      36.1078
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.985, chi27m = 36.1078
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.2369
+NDf                       =           30
+Edm                       =      36.2369
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.99, chi27m = 36.2369
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.2718
+NDf                       =           30
+Edm                       =      38.2718
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 0.995, chi27m = 38.2718
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.3525
+NDf                       =           30
+Edm                       =      44.3525
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1, chi27m = 44.3525
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      52.4806
+NDf                       =           30
+Edm                       =      52.4806
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.005, chi27m = 52.4806
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      66.5853
+NDf                       =           30
+Edm                       =      66.5853
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.01, chi27m = 66.5853
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      81.7208
+NDf                       =           30
+Edm                       =      81.7208
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.015, chi27m = 81.7208
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      99.5786
+NDf                       =           30
+Edm                       =      99.5786
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.02, chi27m = 99.5786
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      117.438
+NDf                       =           30
+Edm                       =      117.438
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.025, chi27m = 117.438
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       138.48
+NDf                       =           30
+Edm                       =       138.48
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.03, chi27m = 138.48
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      158.392
+NDf                       =           30
+Edm                       =      158.392
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.035, chi27m = 158.392
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      184.259
+NDf                       =           30
+Edm                       =      184.259
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.04, chi27m = 184.259
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      211.561
+NDf                       =           30
+Edm                       =      211.561
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.045, chi27m = 211.561
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      249.781
+NDf                       =           30
+Edm                       =      249.781
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.02, scale2 = 1.05, chi27m = 249.781
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      94.0851
+NDf                       =           30
+Edm                       =      94.0851
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.95, chi27m = 94.0851
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      74.1958
+NDf                       =           30
+Edm                       =      74.1958
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.955, chi27m = 74.1958
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      60.4706
+NDf                       =           30
+Edm                       =      60.4706
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.96, chi27m = 60.4706
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.1042
+NDf                       =           30
+Edm                       =      46.1042
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.965, chi27m = 46.1042
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.3455
+NDf                       =           30
+Edm                       =      42.3455
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.97, chi27m = 42.3455
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.7563
+NDf                       =           30
+Edm                       =      37.7563
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.975, chi27m = 37.7563
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.2371
+NDf                       =           30
+Edm                       =      36.2371
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.98, chi27m = 36.2371
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.0244
+NDf                       =           30
+Edm                       =      36.0244
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.985, chi27m = 36.0244
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.4749
+NDf                       =           30
+Edm                       =      38.4749
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.99, chi27m = 38.4749
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.2323
+NDf                       =           30
+Edm                       =      44.2323
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 0.995, chi27m = 44.2323
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      52.3012
+NDf                       =           30
+Edm                       =      52.3012
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1, chi27m = 52.3012
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       66.553
+NDf                       =           30
+Edm                       =       66.553
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.005, chi27m = 66.553
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      81.6106
+NDf                       =           30
+Edm                       =      81.6106
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.01, chi27m = 81.6106
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      99.6318
+NDf                       =           30
+Edm                       =      99.6318
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.015, chi27m = 99.6318
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      117.464
+NDf                       =           30
+Edm                       =      117.464
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.02, chi27m = 117.464
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      138.793
+NDf                       =           30
+Edm                       =      138.793
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.025, chi27m = 138.793
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      159.094
+NDf                       =           30
+Edm                       =      159.094
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.03, chi27m = 159.094
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      184.449
+NDf                       =           30
+Edm                       =      184.449
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.035, chi27m = 184.449
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      212.785
+NDf                       =           30
+Edm                       =      212.785
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.04, chi27m = 212.785
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      250.501
+NDf                       =           30
+Edm                       =      250.501
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.045, chi27m = 250.501
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      292.461
+NDf                       =           30
+Edm                       =      292.461
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.025, scale2 = 1.05, chi27m = 292.461
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       75.288
+NDf                       =           30
+Edm                       =       75.288
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.95, chi27m = 75.288
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      61.4828
+NDf                       =           30
+Edm                       =      61.4828
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.955, chi27m = 61.4828
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.9768
+NDf                       =           30
+Edm                       =      46.9768
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.96, chi27m = 46.9768
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.9624
+NDf                       =           30
+Edm                       =      42.9624
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.965, chi27m = 42.9624
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.8873
+NDf                       =           30
+Edm                       =      37.8873
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.97, chi27m = 37.8873
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.3789
+NDf                       =           30
+Edm                       =      36.3789
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.975, chi27m = 36.3789
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.7399
+NDf                       =           30
+Edm                       =      35.7399
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.98, chi27m = 35.7399
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.8008
+NDf                       =           30
+Edm                       =      38.8008
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.985, chi27m = 38.8008
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.3946
+NDf                       =           30
+Edm                       =      44.3946
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.99, chi27m = 44.3946
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      51.7876
+NDf                       =           30
+Edm                       =      51.7876
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 0.995, chi27m = 51.7876
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      65.9594
+NDf                       =           30
+Edm                       =      65.9594
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1, chi27m = 65.9594
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      80.9815
+NDf                       =           30
+Edm                       =      80.9815
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.005, chi27m = 80.9815
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      99.5465
+NDf                       =           30
+Edm                       =      99.5465
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.01, chi27m = 99.5465
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      117.471
+NDf                       =           30
+Edm                       =      117.471
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.015, chi27m = 117.471
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      138.557
+NDf                       =           30
+Edm                       =      138.557
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.02, chi27m = 138.557
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      159.387
+NDf                       =           30
+Edm                       =      159.387
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.025, chi27m = 159.387
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       184.13
+NDf                       =           30
+Edm                       =       184.13
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.03, chi27m = 184.13
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       213.21
+NDf                       =           30
+Edm                       =       213.21
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.035, chi27m = 213.21
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      250.262
+NDf                       =           30
+Edm                       =      250.262
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.04, chi27m = 250.262
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      293.909
+NDf                       =           30
+Edm                       =      293.909
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.045, chi27m = 293.909
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      344.565
+NDf                       =           30
+Edm                       =      344.565
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.03, scale2 = 1.05, chi27m = 344.565
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      61.9304
+NDf                       =           30
+Edm                       =      61.9304
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.95, chi27m = 61.9304
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      46.6196
+NDf                       =           30
+Edm                       =      46.6196
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.955, chi27m = 46.6196
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.1855
+NDf                       =           30
+Edm                       =      42.1855
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.96, chi27m = 42.1855
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.2533
+NDf                       =           30
+Edm                       =      37.2533
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.965, chi27m = 37.2533
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.5843
+NDf                       =           30
+Edm                       =      36.5843
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.97, chi27m = 36.5843
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.6099
+NDf                       =           30
+Edm                       =      35.6099
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.975, chi27m = 35.6099
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.4849
+NDf                       =           30
+Edm                       =      38.4849
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.98, chi27m = 38.4849
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      44.2441
+NDf                       =           30
+Edm                       =      44.2441
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.985, chi27m = 44.2441
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      50.7967
+NDf                       =           30
+Edm                       =      50.7967
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.99, chi27m = 50.7967
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      65.1725
+NDf                       =           30
+Edm                       =      65.1725
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 0.995, chi27m = 65.1725
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      79.9738
+NDf                       =           30
+Edm                       =      79.9738
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1, chi27m = 79.9738
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      99.1007
+NDf                       =           30
+Edm                       =      99.1007
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.005, chi27m = 99.1007
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      117.093
+NDf                       =           30
+Edm                       =      117.093
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.01, chi27m = 117.093
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      137.623
+NDf                       =           30
+Edm                       =      137.623
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.015, chi27m = 137.623
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      159.007
+NDf                       =           30
+Edm                       =      159.007
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.02, chi27m = 159.007
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      184.059
+NDf                       =           30
+Edm                       =      184.059
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.025, chi27m = 184.059
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      213.201
+NDf                       =           30
+Edm                       =      213.201
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.03, chi27m = 213.201
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      250.547
+NDf                       =           30
+Edm                       =      250.547
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.035, chi27m = 250.547
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      294.187
+NDf                       =           30
+Edm                       =      294.187
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.04, chi27m = 294.187
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      346.269
+NDf                       =           30
+Edm                       =      346.269
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.045, chi27m = 346.269
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      404.575
+NDf                       =           30
+Edm                       =      404.575
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.035, scale2 = 1.05, chi27m = 404.575
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      47.6616
+NDf                       =           30
+Edm                       =      47.6616
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.95, chi27m = 47.6616
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.4061
+NDf                       =           30
+Edm                       =      42.4061
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.955, chi27m = 42.4061
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.5994
+NDf                       =           30
+Edm                       =      37.5994
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.96, chi27m = 37.5994
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.2751
+NDf                       =           30
+Edm                       =      36.2751
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.965, chi27m = 36.2751
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.7542
+NDf                       =           30
+Edm                       =      35.7542
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.97, chi27m = 35.7542
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.6367
+NDf                       =           30
+Edm                       =      38.6367
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.975, chi27m = 38.6367
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      43.2253
+NDf                       =           30
+Edm                       =      43.2253
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.98, chi27m = 43.2253
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      50.3311
+NDf                       =           30
+Edm                       =      50.3311
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.985, chi27m = 50.3311
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      64.1866
+NDf                       =           30
+Edm                       =      64.1866
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.99, chi27m = 64.1866
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      79.3732
+NDf                       =           30
+Edm                       =      79.3732
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 0.995, chi27m = 79.3732
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      98.8836
+NDf                       =           30
+Edm                       =      98.8836
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1, chi27m = 98.8836
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      116.329
+NDf                       =           30
+Edm                       =      116.329
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.005, chi27m = 116.329
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      137.196
+NDf                       =           30
+Edm                       =      137.196
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.01, chi27m = 137.196
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      157.887
+NDf                       =           30
+Edm                       =      157.887
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.015, chi27m = 157.887
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      184.226
+NDf                       =           30
+Edm                       =      184.226
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.02, chi27m = 184.226
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      212.978
+NDf                       =           30
+Edm                       =      212.978
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.025, chi27m = 212.978
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      250.082
+NDf                       =           30
+Edm                       =      250.082
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.03, chi27m = 250.082
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      294.288
+NDf                       =           30
+Edm                       =      294.288
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.035, chi27m = 294.288
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      345.494
+NDf                       =           30
+Edm                       =      345.494
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.04, chi27m = 345.494
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      404.398
+NDf                       =           30
+Edm                       =      404.398
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.045, chi27m = 404.398
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      468.408
+NDf                       =           30
+Edm                       =      468.408
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.04, scale2 = 1.05, chi27m = 468.408
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      42.3527
+NDf                       =           30
+Edm                       =      42.3527
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.95, chi27m = 42.3527
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.9699
+NDf                       =           30
+Edm                       =      37.9699
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.955, chi27m = 37.9699
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.1259
+NDf                       =           30
+Edm                       =      36.1259
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.96, chi27m = 36.1259
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      35.9191
+NDf                       =           30
+Edm                       =      35.9191
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.965, chi27m = 35.9191
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.0118
+NDf                       =           30
+Edm                       =      38.0118
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.97, chi27m = 38.0118
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       42.341
+NDf                       =           30
+Edm                       =       42.341
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.975, chi27m = 42.341
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      49.8272
+NDf                       =           30
+Edm                       =      49.8272
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.98, chi27m = 49.8272
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      63.2953
+NDf                       =           30
+Edm                       =      63.2953
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.985, chi27m = 63.2953
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      77.5634
+NDf                       =           30
+Edm                       =      77.5634
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.99, chi27m = 77.5634
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      98.2642
+NDf                       =           30
+Edm                       =      98.2642
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 0.995, chi27m = 98.2642
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      116.159
+NDf                       =           30
+Edm                       =      116.159
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1, chi27m = 116.159
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      136.827
+NDf                       =           30
+Edm                       =      136.827
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.005, chi27m = 136.827
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      157.228
+NDf                       =           30
+Edm                       =      157.228
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.01, chi27m = 157.228
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       184.45
+NDf                       =           30
+Edm                       =       184.45
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.015, chi27m = 184.45
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      212.123
+NDf                       =           30
+Edm                       =      212.123
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.02, chi27m = 212.123
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      249.507
+NDf                       =           30
+Edm                       =      249.507
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.025, chi27m = 249.507
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      294.501
+NDf                       =           30
+Edm                       =      294.501
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.03, chi27m = 294.501
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      346.725
+NDf                       =           30
+Edm                       =      346.725
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.035, chi27m = 346.725
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      405.534
+NDf                       =           30
+Edm                       =      405.534
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.04, chi27m = 405.534
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      469.309
+NDf                       =           30
+Edm                       =      469.309
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.045, chi27m = 469.309
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      537.867
+NDf                       =           30
+Edm                       =      537.867
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.045, scale2 = 1.05, chi27m = 537.867
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      38.1659
+NDf                       =           30
+Edm                       =      38.1659
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.95, chi27m = 38.1659
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.4669
+NDf                       =           30
+Edm                       =      36.4669
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.955, chi27m = 36.4669
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      36.3356
+NDf                       =           30
+Edm                       =      36.3356
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.96, chi27m = 36.3356
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      37.4625
+NDf                       =           30
+Edm                       =      37.4625
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.965, chi27m = 37.4625
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       41.139
+NDf                       =           30
+Edm                       =       41.139
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.97, chi27m = 41.139
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      49.5914
+NDf                       =           30
+Edm                       =      49.5914
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.975, chi27m = 49.5914
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      62.4972
+NDf                       =           30
+Edm                       =      62.4972
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.98, chi27m = 62.4972
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       77.851
+NDf                       =           30
+Edm                       =       77.851
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.985, chi27m = 77.851
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      96.7384
+NDf                       =           30
+Edm                       =      96.7384
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.99, chi27m = 96.7384
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       116.44
+NDf                       =           30
+Edm                       =       116.44
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 0.995, chi27m = 116.44
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      136.447
+NDf                       =           30
+Edm                       =      136.447
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1, chi27m = 136.447
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      156.361
+NDf                       =           30
+Edm                       =      156.361
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.005, chi27m = 156.361
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      183.559
+NDf                       =           30
+Edm                       =      183.559
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.01, chi27m = 183.559
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       210.87
+NDf                       =           30
+Edm                       =       210.87
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.015, chi27m = 210.87
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      249.224
+NDf                       =           30
+Edm                       =      249.224
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.02, chi27m = 249.224
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      293.383
+NDf                       =           30
+Edm                       =      293.383
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.025, chi27m = 293.383
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      345.572
+NDf                       =           30
+Edm                       =      345.572
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.03, chi27m = 345.572
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       404.04
+NDf                       =           30
+Edm                       =       404.04
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.035, chi27m = 404.04
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      468.704
+NDf                       =           30
+Edm                       =      468.704
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.04, chi27m = 468.704
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =      538.578
+NDf                       =           30
+Edm                       =      538.578
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.045, chi27m = 538.578
+****************************************
+Minimizer is Minuit2 / Migrad
+Chi2                      =       622.17
+NDf                       =           30
+Edm                       =       622.17
+NCalls                    =            1
+p0                        =            1                      	 (fixed)
+scale1 = 1.05, scale2 = 1.05, chi27m = 622.17
+35.8199

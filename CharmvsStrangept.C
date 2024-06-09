@@ -14,6 +14,7 @@ void CharmvsStrangept() {
     // Open the ROOT file and get the histogram
     TFile *file = new TFile("output_stag3.root", "READ");
     TFile *file2 = new TFile("output_stag_DATA.root", "READ");
+    TFile *file3 = new TFile("output_stag_scaledmass.root", "READ");
 
     TH1D *h_s = (TH1D*)file->Get("h_s");
     TH1D *h_s_scaled = (TH1D*)file->Get("h_s_scaled");
@@ -149,4 +150,24 @@ void CharmvsStrangept() {
 
     // Save the canvas as a .pdf file
     c2->SaveAs("pdf/cvssprofile.pdf");
+
+
+    TH1D *hPtFlavorPairs_DATAMC = (TH1D*)file3->Get("hPtFlavorPairs_DATAMC_0.950_0.950");
+    TH1D *h3 = tdrHist("h3","N",0.1,3000,"(s-c)/(s+c)",-1,1);
+    TCanvas *c3 = tdrCanvas("c3",h3,8,11,kSquare);
+    //c3->SetLogy();
+
+    tdrDraw(hPtFlavorPairs_DATAMC,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
+    hPtFlavorPairs_DATAMC->SetFillColorAlpha(kAzure+7,0.25);
+
+    double RMS = hPtFlavorPairs_DATAMC->GetRMS();
+
+    TLegend *leg3 = tdrLeg(0.65,0.9-0.05*1,0.8,0.75);
+    leg3->AddEntry(hPtFlavorPairs_DATAMC, Form("RMS = %.3f", RMS),"PLE");
+
+    gPad->RedrawAxis();
+    gPad->Update();
+
+    // Save the canvas as a .pdf file
+    c3->SaveAs("pdf/s-cprofile.pdf");
 }
