@@ -22,7 +22,7 @@ void chi_squared2() {
     setTDRStyle();
 
     // Open the output files
-    TFile *file = new TFile("output_stag_scaledmass.root", "READ");
+    TFile *file = new TFile("output_stag_scaledmass2.root", "READ");
     TFile *file2 = new TFile("output_stag_DATA2.root", "READ");
 
     std::vector<double> scaleFactors;

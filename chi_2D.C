@@ -44,36 +44,64 @@ void chi_2D() {
 
   // Add the second histogram to the cloned one
   h2->Add(chi2_hist);
+  for (int i = 1; i <= 21; ++i) {
+        for (int j = 1; j <= 21; ++j) {
+            h2->SetBinError(i,j,sqrt(47 + 30));
+        }
+    }
 
   // Draw the combined histogram
   TCanvas *c1 = new TCanvas("c1", "Combined Histogram", 1000, 600);
   c1->SetLogz();
   c1->SetLeftMargin(0.15);
   c1->SetRightMargin(0.2);
+
   h2->Draw("colz");
   h2->GetZaxis()->SetMoreLogLabels();
   h2->GetZaxis()->SetNoExponent();
 
-TGraph *g2 = new TGraph();
+  TLine *l = new TLine();
+  l->DrawLine(0.95-0.0025,0.95-0.0025,1.05+0.0025,1.05+0.0025);
+  l->SetLineStyle(kDotted);
+  l->DrawLine(1,0.95-0.0025,1,1.05+0.0025);
+  l->DrawLine(0.95-0.0025,1.0,1.05+0.0025,1.0);;
 
-double chi2_min(99999), x_min(-1), y_min(-1);
-for (int i = 1; i != chi2_hist2->GetNbinsX()+1; ++i){
-    int j = chi2_hist2->GetNbinsY()+1-i;
-    double chi2 = chi2_hist2->GetBinContent(i,j);
-    double x = chi2_hist2->GetXaxis()->GetBinCenter(i);
-    g2->SetPoint(i-1,x,chi2);
-    if (chi2 < chi2_min){
-        chi2_min = chi2;
-        x_min = chi2_hist2->GetXaxis()->GetBinCenter(i);
-        y_min = chi2_hist2->GetYaxis()->GetBinCenter(j);
+  TLine *l2 = new TLine();
+  l2->DrawLine(0.95-0.0025,1.05+0.0025,1.05+0.0025,0.95-0.0025);
+  l2->SetLineStyle(kDotted);
+  l2->DrawLine(1,0.95-0.0025,1,1.05+0.0025);
+  l2->DrawLine(0.95-0.0025,1.0,1.05+0.0025,1.0);
+
+
+  // Find the minimum z-value and its corresponding x and y values
+  int minBinX = -1, minBinY = -1;
+  double minZ = h2->GetMinimum();
+  double minX, minY;
+  
+  for (int i = 1; i <= h2->GetNbinsX(); ++i) {
+    for (int j = 1; j <= h2->GetNbinsY(); ++j) {
+      double z = h2->GetBinContent(i, j);
+      if (z == minZ) {
+        minBinX = i;
+        minBinY = j;
+        break;
+      }
     }
-}
+  }
 
-//TEllipse *c = new TEllipse(x_min,y_min,0.0025);
-//c->Draw();
+  if (minBinX != -1 && minBinY != -1) {
+    minX = h2->GetXaxis()->GetBinCenter(minBinX);
+    minY = h2->GetYaxis()->GetBinCenter(minBinY);
+    std::cout << "Minimum Z-value: " << minZ << std::endl;
+    std::cout << "Corresponding X-value: " << minX << std::endl;
+    std::cout << "Corresponding Y-value: " << minY << std::endl;
+  } else {
+    std::cerr << "Error: Could not find the minimum z-value in the histogram." << std::endl;
+  }
+
 
 TGraph *g = new TGraph();
-g->SetPoint(0,x_min,y_min);
+g->SetPoint(0,minX,minY);
 g->SetMarkerStyle(kFullStar);
 g->SetMarkerColor(kOrange+10);
 g->SetMarkerSize(3.5);
@@ -88,6 +116,7 @@ g->Draw("same p");
   // Draw the histogram with LEGO2 option
   TCanvas *c2 = new TCanvas("c2", "LEGO2 Histogram", 1000, 600);
   c2->SetLogz();
+
   h2->Draw("lego2");
   h2->GetZaxis()->SetMoreLogLabels();
   h2->GetZaxis()->SetNoExponent();
@@ -100,7 +129,7 @@ g->Draw("same p");
 
   // Draw a marker at the minimum point using TGraph2D
   TGraph2D *minMarkerGraph = new TGraph2D();
-  minMarkerGraph->SetPoint(0, x_min, y_min, 100);
+  minMarkerGraph->SetPoint(0, minX, minY, 100);
   minMarkerGraph->SetMarkerStyle(23); // 29 is the star marker style
   minMarkerGraph->SetMarkerColor(kOrange+10);
   minMarkerGraph->SetMarkerSize(2.5);

@@ -216,6 +216,22 @@ std::vector<std::vector<TH1D*>> initializeHistograms3(const std::vector<double>&
     return histograms;
 }
 
+std::vector<std::vector<TH1D*>> initializeHistograms4(const std::vector<double>& scaleFactors, const std::string& namePrefix, const std::string& axisTitle) {
+    std::vector<std::vector<TH1D*>> histograms;
+
+    for (double scale1 : scaleFactors) {
+        std::vector<TH1D*> innerVec;
+        for (double scale2 : scaleFactors) {
+            TString histName = TString::Format("%s_%.3f_%.3f", namePrefix.c_str(), scale1, scale2);
+            TH1D* hist = new TH1D(histName, axisTitle.c_str(), 200, 0, 200);
+            innerVec.push_back(hist);
+        }
+        histograms.push_back(innerVec);
+    }
+
+    return histograms;
+}
+
 
 
 void StrangeTagger::Loop()
@@ -252,7 +268,7 @@ void StrangeTagger::Loop()
     bool DATA = false;
     bool SCALEDMASS = true;
     if (DATA) {fout = new TFile("output_stag_DATA2.root", "RECREATE");}
-    else if (SCALEDMASS) {fout = new TFile("output_stag_scaledmass.root", "RECREATE");}
+    else if (SCALEDMASS) {fout = new TFile("output_stag_scaledmass2.root", "RECREATE");}
     else {fout = new TFile("output_stag3new.root", "RECREATE");}
 
 
@@ -306,8 +322,11 @@ void StrangeTagger::Loop()
 
    TH3D *h3MassFlavorPairs_DATAMC = new TH3D("h3MassFlavorPairs_DATAMC", ";MC;DATA; Mass", 3, 1, 4, 3, 1, 4,200,0,200);
    TH3D *h3PtFlavorPairs_DATAMC = new TH3D("h3PtFlavorPairs_DATAMC", ";MC;DATA; Pt", 3, 1, 4, 3, 1, 4,67,-1,1);
-   TH1D *hPtFlavorPairs_DATAMC = new TH1D("hPtFlavorPairs_DATAMC", ";Pt;N",67,-1,1);
 
+   TH3D *h3MassFlavorPairs_DATAMC_real = new TH3D("h3MassFlavorPairs_DATAMC_real", ";MC;DATA; Mass", 3, 1, 4, 3, 1, 4,200,0,200);
+   TH3D *h3PtFlavorPairs_DATAMC_real = new TH3D("h3PtFlavorPairs_DATAMC_real", ";MC;DATA; Pt", 3, 1, 4, 3, 1, 4,67,-1,1);
+   TH1D *hPtFlavorPairs_DATAMC_real = new TH1D("hPtFlavorPairs_DATAMC_real", ";Pt;N",67,-1,1);
+   TH1D *hMassFlavorPairs_DATAMC_real = new TH1D("hMassFlavorPairs_DATAMC_real", ";Pt;N",200,0,200);
 
 
    //without fitProb
@@ -510,7 +529,7 @@ void StrangeTagger::Loop()
     std::vector<std::vector<TH3D*>> h3MassFlavorPairs_DATAMC_Vector = initializeHistograms(scaleFactors, "h3MassFlavorPairs_DATAMC", ";MC;DATA; Mass");
     std::vector<std::vector<TH3D*>> h3PtFlavorPairs_DATAMC_Vector = initializeHistograms2(scaleFactors, "h3PtFlavorPairs_DATAMC", ";MC;DATA; Pt");
     std::vector<std::vector<TH1D*>> hPtFlavorPairs_DATAMC_Vector = initializeHistograms3(scaleFactors, "hPtFlavorPairs_DATAMC", ";N; s-c/s+c");
-
+    std::vector<std::vector<TH1D*>> hMassFlavorPairs_DATAMC_Vector = initializeHistograms4(scaleFactors, "hMassFlavorPairs_DATAMC", ";N; Mass");
                                                                               
  
 
@@ -969,26 +988,56 @@ std::map<std::string, int&> counters = {
                p4recojet_S.SetPtEtaPhiM(pt1, eta1, phi1, m1);
                p4recojet_C.SetPtEtaPhiM(pt2, eta2, phi2, m2);
             }
-            TLorentzVector p4w_scaled;
+            TLorentzVector p4w_scaled, p4w_scaled_real;
             if (recomass > 30) {
                double reco_dpt = (p4recojet_S.Pt()-p4recojet_C.Pt())/(p4recojet_S.Pt()+p4recojet_C.Pt());
                if (SCALEDMASS){
+                  p4w_scaled_real.SetPxPyPzE(p4recojet_C.Px() * 0.995 + p4recojet_S.Px() * 1.015,
+                  p4recojet_C.Py() * 0.995 + p4recojet_S.Py() * 1.015,
+                  p4recojet_C.Pz() * 0.995 + p4recojet_S.Pz() * 1.015,
+                  p4recojet_C.E() * 0.995 + p4recojet_S.E() * 1.015);
+                  double scaledMass_real = p4w_scaled_real.M();
+                  double scaledpt_real = (1.015 * p4recojet_S.Pt() - 0.995 * p4recojet_C.Pt())/(1.015 * p4recojet_S.Pt() + 0.995 * p4recojet_C.Pt());
+                  hPtFlavorPairs_DATAMC_real->Fill(scaledpt_real, weight);
+                  hMassFlavorPairs_DATAMC_real->Fill(scaledMass_real, weight);
+                  if (pairIndexDATA == 1) { //ctag > 0.43
+                     if (binIndex == 1){
+                        h3MassFlavorPairs_DATAMC_real->Fill(pairIndexMC, pairIndexDATA, scaledMass_real, weight);
+                        h3PtFlavorPairs_DATAMC_real->Fill(pairIndexMC, pairIndexDATA, scaledpt_real, weight);
+                     }
+                     else {
+                        h3MassFlavorPairs_DATAMC_real->Fill(pairIndexMC, pairIndexDATA, recomass, weight);
+                        h3PtFlavorPairs_DATAMC_real->Fill(pairIndexMC, pairIndexDATA, reco_dpt, weight);
+                     }
+                  }
+                  else if (pairIndexDATA == 2 || pairIndexDATA == 3) { //udstag and xtag
+                     if (binIndex == 1){
+                           h3MassFlavorPairs_DATAMC_real->Fill(pairIndexMC, pairIndexDATA, scaledMass_real, weight);
+                           h3PtFlavorPairs_DATAMC_real->Fill(pairIndexMC, pairIndexDATA, scaledpt_real, weight);
+                        }
+                     else {
+                        h3MassFlavorPairs_DATAMC_real->Fill(pairIndexMC, pairIndexDATA, recomass, weight);
+                        h3PtFlavorPairs_DATAMC_real->Fill(pairIndexMC, pairIndexDATA, reco_dpt, weight);
+                     }
+                  }
+                  
                   for (size_t i = 0; i < scaleFactors.size(); ++i) {
                      for (size_t j = 0; j < scaleFactors.size(); ++j) {
                         double scale_C = scaleFactors[i];
                         double scale_S = scaleFactors[j];
-                        p4w_scaled.SetPxPyPzE(p4recojet_C.Px()*scale_C + p4recojet_S.Px() * scale_S,
+                        p4w_scaled.SetPxPyPzE(p4recojet_C.Px() * scale_C + p4recojet_S.Px() * scale_S,
                         p4recojet_C.Py() * scale_C + p4recojet_S.Py() * scale_S,
                         p4recojet_C.Pz() * scale_C + p4recojet_S.Pz() * scale_S,
                         p4recojet_C.E() * scale_C + p4recojet_S.E() * scale_S);
                         double scaledMass = p4w_scaled.M();
-                        double scaledPt = p4w_scaled.Pt();
-                        double scaledSPt = scale_S * p4recojet_S.Pt();
-                        double scaledCPt = scale_C * p4recojet_C.Pt();
+                        //double scaledPt = p4w_scaled.Pt();
+                        //double scaledSPt = scale_S * p4recojet_S.Pt();
+                        //double scaledCPt = scale_C * p4recojet_C.Pt();
                         //double scaledMass = (p4recojet_C*scale_C + p4recojet_S*scale_S).M();
                         //double scaledPt = (p4recojet_C*scale_C + p4recojet_S*scale_S).Pt();
                         double scaledpt = (scale_S * p4recojet_S.Pt()-scale_C * p4recojet_C.Pt())/(scale_S * p4recojet_S.Pt()+scale_C * p4recojet_C.Pt());
                         hPtFlavorPairs_DATAMC_Vector[i][j]->Fill(scaledpt, weight);
+                        hMassFlavorPairs_DATAMC_Vector[i][j]->Fill(scaledMass, weight);
                         if (pairIndexDATA == 1) { //ctag > 0.43
                            if (binIndex == 1){ //flav == 3 or flav == 4
                               h3MassFlavorPairs_DATAMC_Vector[i][j]->Fill(pairIndexMC, pairIndexDATA, scaledMass, weight);
