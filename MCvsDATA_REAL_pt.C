@@ -1152,7 +1152,7 @@ setTDRStyle();
     tdrDraw(h_tagcsvsdata_scaled,"Pz",kFullCircle,kSpring-5);
     h_tagcsvsdata_scaled->SetMarkerSize(1);
 
-    h_tagcsvsdata->GetYaxis()->SetRangeUser(0, 4.5); // Adjust the range as needed
+    h_tagcsvsdata->GetYaxis()->SetRangeUser(0, 3.5); // Adjust the range as needed
     h_tagcsvsdata->GetYaxis()->SetTitle("MC/DATA");
     h_tagcsvsdata->GetXaxis()->SetTitle("(s-c)/(s+c)");
     h_tagcsvsdata->GetYaxis()->SetTitleSize(0.045);
