@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void energyfraction() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_test.root", "READ");
+TFile *file = new TFile("output_z2.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};
@@ -53,6 +53,9 @@ int nxvar_name = sizeof(vxvar_name) / sizeof(vxvar_name[0]);
 string vyvar[] = {"fl", "fh"};
 int nyvar = sizeof(vyvar) / sizeof(vyvar[0]);
 
+string vyvar2[] = {"leading", "hadron"};
+int nyvar2 = sizeof(vyvar2) / sizeof(vyvar2[0]);
+
 std::map < string, int > mcolor;
 
 mcolor["ch"] = kRed-7;
@@ -61,9 +64,9 @@ mcolor["ne"] = kBlue-6;
 
 std::map < string, string > mleg;
 
-mleg["ch"] = "Charged Hadrons";
-mleg["nh"] = "Neutral Hadrons";
-mleg["ne"] = "Photons";
+mleg["ch"] = "CH";
+mleg["nh"] = "NH";
+mleg["ne"] = "#gamma";
 
 
 std::map < string, TH1D* > mh;
@@ -81,13 +84,21 @@ for (int iq = 0; iq != nq; ++ iq) {
             const char *cx = vxvar[ix].c_str();
             const char *cx_name = vxvar_name[ix].c_str();
             const char *cy = vyvar[iy].c_str();
+            const char *cy2 = vyvar2[iy].c_str();
             vector<float> range;
-            if (vxvar[ix] == "ptjet"){range = {10, 5300};
+            if (vxvar[ix] == "ptjet"){range = {10, 5200};
             //if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
-                TH1D *h = tdrHist(Form("h1_%s%s%s",cq,cx,cy),Form("%s %s energy fraction",cq,cy),0,1,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
-                TCanvas *c = tdrCanvas(Form("c1_%s%s%s",cq,cx,cy),h,8,kSquare);
+                TH1D *h = tdrHist(Form("h1_%s%s%s",cq,cx,cy),Form("%s %s energy fraction",cq,cy2),0,1,Form("p^{%s}_{T} (GeV)",cx_name),range[0],range[1]);
+                TCanvas *c = tdrCanvas(Form("c1_%s%s%s",cq,cx,cy),h,8,11,kSquare);
                 c->SetLogx();
-                TLegend *leg = tdrLeg(0.6,0.9-0.05*3,0.85,0.9);
+                TLegend *leg = tdrLeg(0.8,0.88-0.05*3,0.95,0.9);
+                h->GetXaxis()->SetLabelSize(0.04);
+                h->GetYaxis()->SetLabelSize(0.04);
+                h->GetXaxis()->SetTitleSize(0.045);
+                h->GetXaxis()->SetTitleOffset(1.2);
+                h->GetYaxis()->SetTitleSize(0.045);
+
+
 
                 //if (debug){cout << "ixloop" << ix << endl << flush;}
                 
@@ -100,35 +111,36 @@ for (int iq = 0; iq != nq; ++ iq) {
 
                     vector<int> draw;
                     vector<float> size;
-                    if (vc[ic] == "ch"){draw = {kFullSquare,kRed};size = {1.5};}
-                    if (vc[ic] == "nh"){draw = {kFullCircle,kGreen+2};size = {1.5};}
-                    if (vc[ic] == "ne"){draw = {kFullDiamond,kBlue};size = {1.75};}
+                    if (vc[ic] == "ch"){draw = {kFullSquare,kRed};size = {1};}
+                    if (vc[ic] == "nh"){draw = {kFullCircle,kGreen+2};size = {1};}
+                    if (vc[ic] == "ne"){draw = {kFullDiamond,kBlue};size = {1.25};}
 
                     tdrDraw(h,"histe", draw[0],draw[1],kSolid,-1,kNone);
                     h->SetMarkerSize(size[0]);
                     leg->AddEntry(mh[hname], mleg[cv].c_str(), "ple");
-                    //leg->SetY1NDC(leg->GetY1NDC()-0.07);
-                    //leg->SetTextSize(0.035);
+                    leg->SetY1NDC(leg->GetY1NDC()-0.07);
+                    leg->SetTextSize(0.035);
                 }
 
                 string hname = Form("h_all_%s_%s_vs_%s", cq, cy, cx);
 
 
-                gPad->SetBottomMargin(0.14);
+                //gPad->SetBottomMargin(0.14);
                 //gPad->SetRightMargin(0.175);
                 gPad->Update();
 
                 TLatex *tex1 = new TLatex();
-                tex1->SetNDC(); tex1->SetTextSize(0.045);
-                tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
+                tex1->SetNDC(); tex1->SetTextSize(0.04);
+                tex1->DrawLatex(0.19,0.75,"|#eta| < 1.3");
                 if (vxvar[ix] == "ptcand"){
-                    tex1->DrawLatex(0.17,0.75,"80 < p_{T,genjet} < 100 GeV");
+                    tex1->DrawLatex(0.19,0.69,"80 < p^{genjet}_{T} < 100 GeV");
                 }
                 reverseLegend(leg);
+                //CMS_lumi(c, 8, 11);
                 c->RedrawAxis();
                 c->Modified();
                 c->Update();
-                c->SaveAs(Form("pdf/energyfraction_%s.pdf",hname.c_str()));
+                c->SaveAs(Form("pdf/energyfraction_%s2.pdf",hname.c_str()));
         }
             }
         }

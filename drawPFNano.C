@@ -9,7 +9,7 @@ void drawPFNano() {
   setTDRStyle();
   TDirectory *curdir = gDirectory;
   
-  TFile *f = new TFile("output_z.root","READ");
+  TFile *f = new TFile("output_z2.root","READ");
   //TFile *f = new TFile("pfnano_v3.root","READ");
   assert(f && !f->IsZombie());
   
@@ -89,10 +89,20 @@ void drawPFNano() {
   TCanvas *c1 = tdrCanvas("c1",h,8,11,kSquare);
   gPad->SetLogx();
 
+  h->GetXaxis()->SetLabelSize(0.04);
+  h->GetYaxis()->SetLabelSize(0.04);
+  h->GetXaxis()->SetTitleSize(0.045);
+  h->GetXaxis()->SetTitleOffset(1.2);
+  h->GetYaxis()->SetTitleOffset(1.4);
+  h->GetYaxis()->SetTitleSize(0.045);
+
   //TLegend *leg1 = tdrLeg(0.65,0.90-0.045*7,0.90,0.90);
   TLegend *leg1 = tdrLeg(0.65,0.20,0.90,0.20+0.045*7);
-  tex->DrawLatex(0.33,0.86,"|#eta|<1.3"); //AK4PFPUPPI
-  tex->DrawLatex(0.33,0.81,"80 < p_{T,genjet} < 100 GeV"); //Pythia8 CP5, QCDFlat MC");
+  leg1->SetY1NDC(leg1->GetY1NDC()-0.07);
+  leg1->SetTextSize(0.035);
+  tex->SetNDC(); tex->SetTextSize(0.04);
+  tex->DrawLatex(0.33,0.86,"|#eta| < 1.3"); //AK4PFPUPPI
+  tex->DrawLatex(0.33,0.81,"80 < p^{genjet}_{T} < 100 GeV"); //Pythia8 CP5, QCDFlat MC");
   
   TH1D *href = prq->ProjectionX("href");
   TH1D *hrq = prq->ProjectionX("hrq"); 
@@ -148,7 +158,7 @@ void drawPFNano() {
   leg1->AddEntry(hrb,"b jets","PLE");
   leg1->AddEntry(hrg,"g jets","PLE");
 
-  c1->SaveAs("pdf/drawPFNano_JEC.pdf");
+  c1->SaveAs("pdf/drawPFNano_JEC2.pdf");
 
   
   //TH1D *h2 = tdrHist("h2","N_{cand} per bin (a.u.)",0.006,0.066,//0.8e-2,1e-1,
@@ -159,17 +169,25 @@ void drawPFNano() {
   h2->SetYTitle("p_{T}-weighted N_{cand} per bin (a.u.)");
   h2->GetYaxis()->SetRangeUser(1e-3,0.20);
   h2->SetXTitle("#DeltaR(cand,jet)");
-  h2->GetXaxis()->SetRangeUser(1e-3,0.40);  
+  h2->GetXaxis()->SetRangeUser(1e-3,0.40);
+
+  h2->GetXaxis()->SetLabelSize(0.04);
+  h2->GetYaxis()->SetLabelSize(0.04);
+  h2->GetXaxis()->SetTitleSize(0.045);
+  h2->GetYaxis()->SetTitleSize(0.045);
   
   TCanvas *c2 = tdrCanvas("c2",h2,8,11,kSquare);
   //gPad->SetLogx();
   //gPad->SetLogy();
   
-  TLegend *leg2 = tdrLeg(0.65,0.90-0.045*6,0.90,0.90);
-  tex->DrawLatex(0.33,0.86,"|#eta|<1.3");
-  tex->DrawLatex(0.33,0.81,"84<p_{T}<114 GeV");
+  TLegend *leg2 = tdrLeg(0.7,0.90-0.045*6,0.92,0.90);
+  leg2->SetY1NDC(leg2->GetY1NDC()-0.07);
+  leg2->SetTextSize(0.035);
+  tex->SetNDC(); tex->SetTextSize(0.04);
+  tex->DrawLatex(0.33,0.86,"|#eta| < 1.3");
+  tex->DrawLatex(0.33,0.81,"80 < p^{genjet}_{T} < 100 GeV");
   //tex->DrawLatex(0.33,0.76,"AK4PFPUPPI");
-  tex->DrawLatex(0.33,0.76,"AK4GEN");
+  //tex->DrawLatex(0.33,0.76,"AK4GEN");
  
   int nrebin = 2;//4;
   hdrq->Rebin(nrebin); hdrq->Scale(1./hdrq->Integral());
@@ -242,20 +260,32 @@ void drawPFNano() {
   fg2->SetParameter(0,0.5*(fg->GetParameter(0)+fg->GetParameter(2)));
   fg2->SetLineColor(kCyan+2);
   fg2->Draw("SAME");
+  h2->GetXaxis()->SetTitleOffset(1.1);
+  h2->GetYaxis()->SetTitleOffset(1.4);
+  //CMS_lumi(c2, 8, 11);
 
-  c2->SaveAs("pdf/drawPFNano_DeltaRa.pdf");
+  c2->SaveAs("pdf/drawPFNano_DeltaRa2.pdf");
   
   
   TH1D *h3 = tdrHist("h3","N_{jet} per bin (a.u.)",0,0.14,//1e-4,0.5,
-		     "p_{T,lead} / p_{T,jet}",0.,1.);
+		     "p^{lead}_{T} / p^{jet}_{T}",0.,1.);
   TCanvas *c3 = tdrCanvas("c3",h3,8,11,kSquare);
   //gPad->SetLogy();
+  h3->GetXaxis()->SetLabelSize(0.04);
+  h3->GetYaxis()->SetLabelSize(0.04);
+  h3->GetXaxis()->SetTitleSize(0.045);
+  h3->GetYaxis()->SetTitleSize(0.045);
+  h3->GetXaxis()->SetTitleOffset(1.1);
+  h3->GetYaxis()->SetTitleOffset(1.4);
 
-  TLegend *leg3 = tdrLeg(0.65,0.90-0.045*6,0.90,0.90);
-  tex->DrawLatex(0.33,0.86,"|#eta|<1.3");
-  tex->DrawLatex(0.33,0.81,"84<p_{T}<114 GeV");
+  TLegend *leg3 = tdrLeg(0.7,0.90-0.045*6,0.92,0.90);
+  leg3->SetY1NDC(leg3->GetY1NDC()-0.07);
+  leg3->SetTextSize(0.035);
+  tex->SetNDC(); tex->SetTextSize(0.04);
+  tex->DrawLatex(0.33,0.86,"|#eta| < 1.3");
+  tex->DrawLatex(0.33,0.81,"80 < p^{genjet}_{T} < 100 GeV");
   //tex->DrawLatex(0.33,0.76,"AK4PFPUPPI");
-  tex->DrawLatex(0.33,0.76,"AK4GEN");
+  //tex->DrawLatex(0.33,0.76,"AK4GEN");
 
   int nrebinf = 2;
   hfq->Rebin(nrebinf); hfq->Scale(1./hfq->Integral());
@@ -284,7 +314,7 @@ void drawPFNano() {
   leg3->AddEntry(hfb,Form("b  %1.3f",hfb->GetMean()),"PLE");
   leg3->AddEntry(hfg,Form("g  %1.3f",hfg->GetMean()),"FPLE");
 
-  c3->SaveAs("pdf/drawPFNano_FragLead.pdf");
+  c3->SaveAs("pdf/drawPFNano_FragLead2.pdf");
   
 
   TH1D *h4 = tdrHist("h4","N_{can} per bin (a.u.)",2e-6,9e1,
@@ -300,11 +330,14 @@ void drawPFNano() {
   gPad->SetLogy();
   gPad->SetLogx();
 
-  TLegend *leg4 = tdrLeg(0.65,0.90-0.045*6,0.90,0.90);
-  tex->DrawLatex(0.33,0.86,"|#eta|<1.3");
-  tex->DrawLatex(0.33,0.81,"84<p_{T}<114 GeV");
+  TLegend *leg4 = tdrLeg(0.7,0.90-0.045*6,0.92,0.90);
+  leg4->SetY1NDC(leg4->GetY1NDC()-0.07);
+  leg4->SetTextSize(0.035);
+  tex->SetNDC(); tex->SetTextSize(0.04);
+  tex->DrawLatex(0.33,0.86,"|#eta| < 1.3");
+  tex->DrawLatex(0.33,0.81,"80 < p^{genjet}_{T} < 100 GeV");
   //tex->DrawLatex(0.33,0.76,"AK4PFPUPPI");
-  tex->DrawLatex(0.33,0.76,"AK4GEN");
+  //tex->DrawLatex(0.33,0.76,"AK4GEN");
 
   int nrebinff = 1;
   hffq->Rebin(nrebinff); hffq->Scale(1./hffq->Integral());
@@ -362,6 +395,13 @@ void drawPFNano() {
   f1ff->Draw("SAME");
   */
 
-  c4->SaveAs("pdf/drawPFNano_FragOther.pdf");
+  h4->GetXaxis()->SetLabelSize(0.04);
+  h4->GetYaxis()->SetLabelSize(0.04);
+  h4->GetXaxis()->SetTitleSize(0.045);
+  h4->GetYaxis()->SetTitleSize(0.045);
+  h4->GetXaxis()->SetTitleOffset(1.1);
+  h4->GetYaxis()->SetTitleOffset(1.4);
+
+  c4->SaveAs("pdf/drawPFNano_FragOther2.pdf");
   
 } // drawPFNano

@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void fraction() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_z.root", "READ");
+TFile *file = new TFile("output_z2.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};
@@ -80,14 +80,20 @@ for (int iq = 0; iq != nq; ++ iq) {
         const char *cx = vxvar[ix].c_str();
         const char *cx_name = vxvar_name[ix].c_str();
         vector<float> range;
-        if (vxvar[ix] == "ptjet"){range = {10, 5300};}
+        if (vxvar[ix] == "ptjet"){range = {10, 5200};}
         if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
         if (vxvar[ix] == "ptlead"){range = {6, 100};}
-        TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s N fraction",cq),0 + 1e-4,1,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
+        TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("N_{%s} fraction",cq),0 + 1e-4,1,Form("p^{%s}_{T} (GeV)",cx_name),range[0],range[1]);
         TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,11,kSquare);
         c->SetLogx();
         TLegend *leg = tdrLeg(0.89,0.9,1.1,0.92);
         THStack *hs = new THStack(Form("hs_%s%s",cq, cx), "; p_{T} (GeV); Jet N fraction");
+
+        h->GetXaxis()->SetLabelSize(0.04);
+        h->GetYaxis()->SetLabelSize(0.04);
+        h->GetXaxis()->SetTitleSize(0.045);
+        h->GetXaxis()->SetTitleOffset(1.2);
+        h->GetYaxis()->SetTitleSize(0.045);
 
         for (int ic = 0; ic != nc; ++ ic) {
             const char *cv = vc[ic].c_str();
@@ -110,7 +116,7 @@ for (int iq = 0; iq != nq; ++ iq) {
 
             leg->AddEntry(mhclone[hrname], mleg[cv].c_str(), "f");
             leg->SetY1NDC(leg->GetY1NDC()-0.07);
-            leg->SetTextSize(0.035);
+            leg->SetTextSize(0.04);
             leg->Draw();
 
             //gPad->SetBottomMargin(0.14);
@@ -118,13 +124,13 @@ for (int iq = 0; iq != nq; ++ iq) {
             gPad->Update();
 
             TLatex *tex1 = new TLatex();
-            tex1->SetNDC(); tex1->SetTextSize(0.035);
+            tex1->SetNDC(); tex1->SetTextSize(0.04);
             tex1->DrawLatex(0.19,0.75,"|#eta| < 1.3");
             if (vxvar[ix] == "ptcand"){
-                tex1->DrawLatex(0.19,0.7,"80 < p_{T,genjet} < 100 GeV");
+                tex1->DrawLatex(0.19,0.69,"80 < p^{genjet}_{T} < 100 GeV");
             }
             if (vxvar[ix] == "ptlead"){
-                tex1->DrawLatex(0.19,0.7,"80 < p_{T,genjet} < 100 GeV");
+                tex1->DrawLatex(0.19,0.69,"80 < p^{genjet}_{T} < 100 GeV");
             }
             //TLatex *tex2 = new TLatex();
             //tex2->SetNDC(); tex2->SetTextSize(0.035); tex2->SetTextFont(52);
@@ -136,7 +142,7 @@ for (int iq = 0; iq != nq; ++ iq) {
         c->RedrawAxis();
         c->Modified();
         c->Update();
-        c->SaveAs(Form("pdf/fractions_%s_%s.pdf",cq,cx));
+        c->SaveAs(Form("pdf/fractions_%s_%s2.pdf",cq,cx));
         } //for ptcand
     //} // for ix
   } // for iq

@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void difference() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_y.root", "READ");
+TFile *file = new TFile("output_z2.root", "READ");
 // Retrieve the histograms
 
 string vq[] = {"d", "u", "s", "c", "b", "g"};
@@ -61,9 +61,9 @@ mcolor["ne"] = kBlue-6;
 
 std::map < string, string > mleg;
 
-mleg["ch"] = "#splitline{Charged}{Hadrons}";
-mleg["nh"] = "#splitline{Neutral}{Hadrons}";
-mleg["ne"] = "Photons";
+mleg["ch"] = "CH";
+mleg["nh"] = "NH";
+mleg["ne"] = "#gamma";
 
 
 std::map < string, TH1D* > mh;
@@ -86,10 +86,16 @@ for (int iq1 = 0; iq1 != nq; ++ iq1) {
             vector<float> range;
             if (vxvar[ix] == "ptjet"){range = {10, 5300};}
             if (vxvar[ix] == "ptcand" || vxvar[ix] == "ptlead"){range = {0.1, 100};}
-                TH1D *h = tdrHist(Form("h1_%s-%s%s",cq1,cq2,cx),Form("%s-%s N fraction",cq1,cq2),-0.15 + 1e-4,0.2 -1e-4,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
-                TCanvas *c = tdrCanvas(Form("c1_%s-%s%s",cq1,cq2,cx),h,8,kSquare);
+                TH1D *h = tdrHist(Form("h1_%s-%s%s",cq1,cq2,cx),Form("%s-%s N fraction",cq1,cq2),-0.15 + 1e-4,0.2 -1e-4,Form("p^{%s}_{T} (GeV)",cx_name),range[0],range[1]);
+                TCanvas *c = tdrCanvas(Form("c1_%s-%s%s",cq1,cq2,cx),h,8,11,kSquare);
                 c->SetLogx();
-                TLegend *leg = tdrLeg(0.83,0.9-0.1*3,1.1,0.9);
+                TLegend *leg = tdrLeg(0.6,0.85-0.05*3,0.75,0.9);
+                h->GetXaxis()->SetLabelSize(0.04);
+                h->GetYaxis()->SetLabelSize(0.04);
+                h->GetXaxis()->SetTitleSize(0.045);
+                h->GetXaxis()->SetTitleOffset(1.2);
+                h->GetYaxis()->SetTitleOffset(1.4);
+                h->GetYaxis()->SetTitleSize(0.045);
 
                 //if (debug){cout << "ixloop" << ix << endl << flush;}
                 
@@ -121,35 +127,35 @@ for (int iq1 = 0; iq1 != nq; ++ iq1) {
                     hc->Add(hc2, -1);
                     vector<int> draw;
                     vector<float> size;
-                    if (vc[ic] == "ch"){draw = {kFullSquare,kRed};size = {1.5};}
-                    if (vc[ic] == "nh"){draw = {kFullCircle,kGreen+2};size = {1.5};}
-                    if (vc[ic] == "ne"){draw = {kFullDiamond,kBlue};size = {1.75};}
+                    if (vc[ic] == "ch"){draw = {kFullSquare,kRed};size = {1};}
+                    if (vc[ic] == "nh"){draw = {kFullCircle,kGreen+2};size = {1};}
+                    if (vc[ic] == "ne"){draw = {kFullDiamond,kBlue};size = {1.25};}
 
                     tdrDraw(hc,"histe", draw[0],draw[1],kSolid,-1,kNone);
                     hc->SetMarkerSize(size[0]);
                     leg->AddEntry(mhclone[hrname], mleg[cv].c_str(), "ple");
-                    //leg->SetY1NDC(leg->GetY1NDC()-0.07);
+                    leg->SetY1NDC(leg->GetY1NDC()-0.07);
                     leg->SetTextSize(0.035);
                 }
 
                 string hname = Form("h_%s_vs_%s", cq1, cx);
                 string hname2 = Form("h_%s_vs_%s", cq2, cx);
 
-                gPad->SetBottomMargin(0.14);
-                gPad->SetRightMargin(0.175);
+                //gPad->SetBottomMargin(0.14);
+                //gPad->SetRightMargin(0.175);
                 gPad->Update();
 
                 TLatex *tex1 = new TLatex();
-                tex1->SetNDC(); tex1->SetTextSize(0.045);
-                tex1->DrawLatex(0.17,0.8,"|#eta| < 1.3");
+                tex1->SetNDC(); tex1->SetTextSize(0.04);
+                tex1->DrawLatex(0.19,0.75,"|#eta| < 1.3");
                 if (vxvar[ix] == "ptcand"){
-                    tex1->DrawLatex(0.17,0.75,"80 < p_{T,genjet} < 100 GeV");
+                    tex1->DrawLatex(0.19,0.69,"80 < p^{genjet}_{T} < 100 GeV");
                 }
                 reverseLegend(leg);
                 c->RedrawAxis();
                 c->Modified();
                 c->Update();
-                c->SaveAs(Form("pdf/difference_%s-%s.pdf",hname.c_str(),hname2.c_str()));
+                c->SaveAs(Form("pdf/difference_%s-%s2.pdf",hname.c_str(),hname2.c_str()));
             //}
         }
         }

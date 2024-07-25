@@ -13,7 +13,7 @@
 void allleadslead() {
     setTDRStyle();
     // Open the ROOT file and get the histogram
-    TFile *file = new TFile("output_z.root", "READ");
+    TFile *file = new TFile("output_z2.root", "READ");
 
     TH1D *h_all = (TH1D*)file->Get("h_all");
     TH1D *h_all_s = (TH1D*)file->Get("h_all_s");
@@ -97,7 +97,7 @@ void allleadslead() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c1->SaveAs("pdf/alljetslead.pdf");
+    c1->SaveAs("pdf/alljetslead2.pdf");
 
     TH1D *h2 = tdrHist("h2","S jets N",0 + 1e-2,50,"p_{T,cand} (GeV)",0.1,100);
     TCanvas *c2 = tdrCanvas("c2",h2,8,11,kSquare);
@@ -138,7 +138,7 @@ void allleadslead() {
     c2->Update();
 
     // Save the canvas as a .pdf file
-    c2->SaveAs("pdf/sjetslead.pdf");
+    c2->SaveAs("pdf/sjetslead2.pdf");
 
     TH1D *h3 = tdrHist("h3","UD jets N",0 + 1e-2,100,"p_{T,cand} (GeV)",0.1,100);
     TCanvas *c3 = tdrCanvas("c3",h3,8,11,kSquare);
@@ -179,7 +179,7 @@ void allleadslead() {
     c3->Update();
 
     // Save the canvas as a .pdf file
-    c3->SaveAs("pdf/udjetslead.pdf");
+    c3->SaveAs("pdf/udjetslead2.pdf");
 
     TH1D *h4 = tdrHist("h4","G jets N",0 + 1e-2,1000,"p_{T,cand} (GeV)",0.1,100);
     TCanvas *c4 = tdrCanvas("c4",h4,8,11,kSquare);
@@ -220,10 +220,15 @@ void allleadslead() {
     c4->Update();
 
     // Save the canvas as a .pdf file
-    c4->SaveAs("pdf/gjetslead.pdf");
+    c4->SaveAs("pdf/gjetslead2.pdf");
 
-    TH1D *h6 = tdrHist("h6","N_{cand} #times MC weight",0.0005 + 1e-5,2000,"p_{T,cand} (GeV)",0.1,100);
+    TH1D *h6 = tdrHist("h6","N_{cand} #times MC weight",0.0005 + 1e-5,2000,"p^{cand}_{T} (GeV)",0.1,100);
     TCanvas *c6 = tdrCanvas("c6",h6,8,11,kSquare);
+    h6->GetXaxis()->SetLabelSize(0.04);
+    h6->GetYaxis()->SetLabelSize(0.04);
+    h6->GetXaxis()->SetTitleSize(0.045);
+    h6->GetXaxis()->SetTitleOffset(1.2);
+    h6->GetYaxis()->SetTitleSize(0.045);
     gPad->SetLogy();
     //c6->SetLogx();
   
@@ -278,7 +283,7 @@ void allleadslead() {
     TLatex *tex1 = new TLatex();
     tex1->SetNDC(); tex1->SetTextSize(0.035);
     tex1->DrawLatex(0.32,0.84,"|#eta| < 1.3");  
-    tex1->DrawLatex(0.32,0.8,"80 < p_{T,genjet} < 100 GeV");
+    tex1->DrawLatex(0.32,0.79,"80 < p^{genjet}_{T} < 100 GeV");
     
 
     // Update the canvas to reflect the changes
@@ -287,7 +292,7 @@ void allleadslead() {
     gPad->RedrawAxis();
 
     // Save the canvas as a .pdf file
-    c6->SaveAs("pdf/slead.pdf");
+    c6->SaveAs("pdf/slead2.pdf");
 
 
 
@@ -340,5 +345,5 @@ void allleadslead() {
     c5->Update();
 
     // Save the canvas as a .pdf file
-    c5->SaveAs("pdf/allvssleadratio.pdf");
+    c5->SaveAs("pdf/allvssleadratio2.pdf");
 }

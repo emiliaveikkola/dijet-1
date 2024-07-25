@@ -35,7 +35,7 @@ void reverseLegend(TLegend *leg) {
 
 void fraction2() {
 // Open the ROOT file containing the histograms
-TFile *file = new TFile("output_z.root", "READ");
+TFile *file = new TFile("output_z2.root", "READ");
 // Retrieve the histograms
 
   string vpid[] = {"pionp", "pionm", "kaonp", "kaonm",//"lambdap", "lambdam","kaon0"
@@ -101,7 +101,7 @@ mleg["sigmapm"] = "#Sigma^{#pm}";
 //mleg["sigmaantim"] = "#bar{#Sigma}^{-}";
 mleg["pionp"] = "#pi^{+}";
 mleg["pionm"] = "#pi^{-}";
-mleg["xiomega"] = "#Xi,#Omega";
+mleg["xiomega"] = "#Xi, #Omega";
 //mleg["xim"] = "#Xi^{-}";
 //mleg["antixi0"] = "#bar{#Xi}^{0}";
 //mleg["antixim"] = "#bar{#Xi}^{-}";
@@ -111,8 +111,8 @@ mleg["proton"] = "p";
 mleg["antiproton"] = "#bar{p}";
 mleg["neutron"] = "n";
 mleg["antineutron"] = "#bar{n}";
-mleg["electron"] = "e,e^{+}";
-mleg["muon"] = "#mu,#mu^{-}";
+mleg["electron"] = "e, e^{+}";
+mleg["muon"] = "#mu, #mu^{-}";
 //mleg["positron"] = "e^{+}";
 //mleg["antimuon"] = "#mu^{+}";
 mleg["photon"] = "#gamma";
@@ -142,11 +142,17 @@ for (int iq = 0; iq != nq; ++ iq) {
         if (vxvar[ix] == "ptjet"){range = {10, 5300};}
         if (vxvar[ix] == "ptcand"){range = {0.1, 100};}
         if (vxvar[ix] == "ptlead"){range = {6, 100};}
-        TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("%s N fraction",cq),0 + 1e-4,1,Form("p_{T, %s} (GeV)",cx_name),range[0],range[1]);
+        TH1D *h = tdrHist(Form("h1_%s%s",cq,cx),Form("N_{%s} fraction",cq),0 + 1e-4,1,Form("p^{%s}_{T} (GeV)",cx_name),range[0],range[1]);
         TCanvas *c = tdrCanvas(Form("c1_%s%s",cq,cx),h,8,11,kSquare);
         c->SetLogx();
-        TLegend *leg = tdrLeg(0.89,0.9,1.1,0.92);
+        TLegend *leg = tdrLeg(0.87,0.9,1.1,0.92);
         THStack *hs = new THStack(Form("hs_%s%s",cq,cx), "; p_{T} (GeV); Jet N fraction");
+
+        h->GetXaxis()->SetLabelSize(0.04);
+        h->GetYaxis()->SetLabelSize(0.04);
+        h->GetXaxis()->SetTitleSize(0.045);
+        h->GetXaxis()->SetTitleOffset(1.2);
+        h->GetYaxis()->SetTitleSize(0.045);
 
         for (int id = 0; id != npid; ++ id) {
             const char *pid = vpid[id].c_str();
@@ -209,13 +215,13 @@ for (int iq = 0; iq != nq; ++ iq) {
             gPad->Update();
 
             TLatex *tex1 = new TLatex();
-            tex1->SetNDC(); tex1->SetTextSize(0.035);
+            tex1->SetNDC(); tex1->SetTextSize(0.04);
             tex1->DrawLatex(0.19,0.75,"|#eta| < 1.3");
             if (vxvar[ix] == "ptcand"){
-                tex1->DrawLatex(0.19,0.7,"80 < p_{T,genjet} < 100 GeV");
+                tex1->DrawLatex(0.19,0.69,"80 < p^{genjet}_{T} < 100 GeV");
             }
             if (vxvar[ix] == "ptlead"){
-                tex1->DrawLatex(0.19,0.7,"84 < p_{T,leadjet} < 114 GeV");
+                tex1->DrawLatex(0.19,0.69,"84 < p^{genjet}_{T} < 114 GeV");
             }
             
                 //TLatex *tex2 = new TLatex();
@@ -225,11 +231,11 @@ for (int iq = 0; iq != nq; ++ iq) {
         } // for id
         reverseLegend(leg);
         CMS_lumi(c, 8, 11);
-        gPad->SetRightMargin(0.11);
+        gPad->SetRightMargin(0.13);
         c->RedrawAxis();
         c->Modified();
         c->Update();
-        c->SaveAs(Form("pdf/fractions2_%s_%s.pdf",cq,cx));
+        c->SaveAs(Form("pdf/fractions2_%s_%s2.pdf",cq,cx));
         //} //for ptcand
     } // for ix
   } // for iq
