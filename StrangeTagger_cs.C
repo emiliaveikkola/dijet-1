@@ -176,7 +176,7 @@ void StrangeTagger::Loop()
    if (fChain == 0) return;
 
    TDirectory *curdir = gDirectory;
-   TFile *fout = new TFile("output_stag_cs_0.002.root","recreate");
+   TFile *fout = new TFile("output_stag_cs_0.2.root","recreate");
 
    // Create a 2D cs_histogram
    TH1D *cs_hJetPairs = new TH1D("cs_hJetPairs", ";Jet pair;N",7,1,8);

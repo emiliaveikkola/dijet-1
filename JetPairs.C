@@ -13,7 +13,7 @@
 void JetPairs() {
     setTDRStyle();
     // Open the ROOT file and get the histogram
-    TFile *file = new TFile("output_stag2.root", "READ");
+    TFile *file = new TFile("output_stag3new2.root", "READ");
 
     TH1D *hJetPairs = (TH1D*)file->Get("hJetPairs");
     TH1D *hJetPairs_scaled = (TH1D*)file->Get("hJetPairs_scaled");
@@ -76,7 +76,7 @@ void JetPairs() {
     
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
-    TH1D *h1 = tdrHist("h1","N fraction",0,1,"Jet pair",1,8);
+    TH1D *h1 = tdrHist("h1","N_{reco} fraction",0,1,"Jet pair",1,8);
     TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
@@ -87,6 +87,13 @@ void JetPairs() {
     h1->GetXaxis()->SetBinLabel(5, "cb");
     h1->GetXaxis()->SetBinLabel(6, "ub");
     h1->GetXaxis()->SetBinLabel(7, "x");
+
+    h1->GetXaxis()->SetLabelSize(0.05);
+    h1->GetYaxis()->SetLabelSize(0.04);
+    h1->GetXaxis()->SetTitleSize(0.045);
+    h1->GetXaxis()->SetTitleOffset(1.2);
+    h1->GetYaxis()->SetTitleOffset(1.4);
+    h1->GetYaxis()->SetTitleSize(0.045);
 
     // Calculate the sum of bins up to the 6th bin
     double sumOfBins = 0;
@@ -102,28 +109,29 @@ void JetPairs() {
     }
 
     // Draw the histogram
-    tdrDraw(hJetPairs,"HPz",kNone,kOrange-2,kSolid,-1,1001,kOrange-2);
-    hJetPairs->SetFillColorAlpha(kOrange-2,0.25);
+    tdrDraw(hJetPairs,"HPz",kNone,kGreen-6,kSolid,-1,1001,kGreen-6);
+    hJetPairs->SetFillColorAlpha(kGreen-7,0.45);
 
 
 
     // Create a legend
     TLegend *leg = tdrLeg(0.5,0.8-0.05*1,0.7,0.82);
     leg->AddEntry(hJetPairs, "Jet pairs", "FPLE");
+    leg->SetTextSize(0.035);
     
     //leg->Draw();
 
     // Update the canvas to reflect the changes
     TLatex *tex1 = new TLatex();
-    tex1->SetNDC(); tex1->SetTextSize(0.045); 
+    tex1->SetNDC(); tex1->SetTextSize(0.035); 
     
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c1->SaveAs("pdf/jetpairs.pdf");
+    c1->SaveAs("pdf/jetpairs2.pdf");
 
 
-    TH1D *h12 = tdrHist("h12","N fraction, reco scaled",0,1,"Jet pair",1,8);
+    TH1D *h12 = tdrHist("h12","N_{scal. reco} fraction",0,1,"Jet pair",1,8);
     TCanvas *c12 = tdrCanvas("c12",h12,8,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
@@ -134,6 +142,13 @@ void JetPairs() {
     h12->GetXaxis()->SetBinLabel(5, "cb");
     h12->GetXaxis()->SetBinLabel(6, "ub");
     h12->GetXaxis()->SetBinLabel(7, "x");
+
+    h12->GetXaxis()->SetLabelSize(0.05);
+    h12->GetYaxis()->SetLabelSize(0.04);
+    h12->GetXaxis()->SetTitleSize(0.045);
+    h12->GetXaxis()->SetTitleOffset(1.2);
+    h12->GetYaxis()->SetTitleOffset(1.4);
+    h12->GetYaxis()->SetTitleSize(0.045);
 
     // Calculate the sum of bins from 1 to 7
     double sumOfBins1to7 = 0;
@@ -162,25 +177,26 @@ void JetPairs() {
     }
 
     // Draw the histogram
-    tdrDraw(hJetPairs_scaled,"HPz",kNone,kOrange-2,kSolid,-1,1001,kOrange-2);
-    hJetPairs_scaled->SetFillColorAlpha(kOrange-2,0.25);
+    tdrDraw(hJetPairs_scaled,"HPz",kNone,kGreen-6,kSolid,-1,1001,kGreen-6);
+    hJetPairs_scaled->SetFillColorAlpha(kGreen-7,0.45);
 
 
 
     // Create a legend
     TLegend *leg12 = tdrLeg(0.5,0.8-0.05*1,0.7,0.82);
     leg12->AddEntry(hJetPairs_scaled, "Scaled jet pairs", "FPLE");
+    leg12->SetTextSize(0.035);
     
     //leg->Draw();
 
     // Update the canvas to reflect the changes
     TLatex *tex12 = new TLatex();
-    tex12->SetNDC(); tex12->SetTextSize(0.045); 
+    tex12->SetNDC(); tex12->SetTextSize(0.035); 
     
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c12->SaveAs("pdf/jetpairs_scaled.pdf");
+    c12->SaveAs("pdf/jetpairs_scaled2.pdf");
 
 
 
@@ -196,6 +212,13 @@ void JetPairs() {
     h2->GetXaxis()->SetBinLabel(6, "ub");
     h2->GetXaxis()->SetBinLabel(7, "x");
 
+    h2->GetXaxis()->SetLabelSize(0.05);
+    h2->GetYaxis()->SetLabelSize(0.04);
+    h2->GetXaxis()->SetTitleSize(0.045);
+    h2->GetXaxis()->SetTitleOffset(1.2);
+    h2->GetYaxis()->SetTitleOffset(1.4);
+    h2->GetYaxis()->SetTitleSize(0.045);
+
     // Draw the histogram
     tdrDraw(hAverageMasses_gen,"Histe",kNone,kAzure+2,kSolid,-1,1001,kAzure+2);
     hAverageMasses_gen->SetFillColorAlpha(kAzure+7,0.45);
@@ -210,7 +233,7 @@ void JetPairs() {
 
     // Update the canvas to reflect the changes
     TLatex *tex2 = new TLatex();
-    tex2->SetNDC(); tex2->SetTextSize(0.035); 
+    tex2->SetNDC(); tex2->SetTextSize(0.03); 
     tex2->DrawLatex(0.31,0.85,"fitProb > 0.2");
     tex2->DrawLatex(0.31,0.81,"genmass > 30 GeV");
     tex2->DrawLatex(0.2,0.74,Form("cs  %1.3f #pm %1.3f",h_cs_gen->GetMean(),h_cs_gen->GetMeanError()));
@@ -223,11 +246,18 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c2->SaveAs("pdf/jetpairsavmass_gen.pdf");
+    c2->SaveAs("pdf/jetpairsavmass_gen2.pdf");
 
-    TH1D *h3 = tdrHist("h3","Normalised N, gen",0,0.1,"Mass (GeV)",30,140);
+    TH1D *h3 = tdrHist("h3","N_{gen} fraction",0,0.1,"Mass (GeV)",30,140);
     TCanvas *c3 = tdrCanvas("c3",h3,8,11,kSquare);
     //gPad->SetLogy();
+
+    h3->GetXaxis()->SetLabelSize(0.05);
+    h3->GetYaxis()->SetLabelSize(0.04);
+    h3->GetXaxis()->SetTitleSize(0.045);
+    h3->GetXaxis()->SetTitleOffset(1.2);
+    h3->GetYaxis()->SetTitleOffset(1.4);
+    h3->GetYaxis()->SetTitleSize(0.045);
 
     h_cs_gen->Scale(1./h_cs_gen->Integral());
     h_ud_gen->Scale(1./h_ud_gen->Integral());
@@ -263,7 +293,7 @@ void JetPairs() {
 
 
     // Create a legend
-    TLegend *leg3 = tdrLeg(0.75,0.7-0.05*7,0.9,0.8);
+    TLegend *leg3 = tdrLeg(0.75,0.75-0.05*7,0.9,0.8);
     leg3->AddEntry(h_cs_gen, "CS", "PLE");
     leg3->AddEntry(h_ud_gen, "UD", "PLE");
     leg3->AddEntry(h_cd_gen, "CD", "PLE");
@@ -284,7 +314,7 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c3->SaveAs("pdf/jetpairsmass_gen.pdf");
+    c3->SaveAs("pdf/jetpairsmass_gen2.pdf");
 
 
 
@@ -311,6 +341,13 @@ void JetPairs() {
     h4->GetXaxis()->SetBinLabel(6, "ub");
     h4->GetXaxis()->SetBinLabel(7, "x");
 
+    h4->GetXaxis()->SetLabelSize(0.05);
+    h4->GetYaxis()->SetLabelSize(0.04);
+    h4->GetXaxis()->SetTitleSize(0.045);
+    h4->GetXaxis()->SetTitleOffset(1.2);
+    h4->GetYaxis()->SetTitleOffset(1.4);
+    h4->GetYaxis()->SetTitleSize(0.045);
+
     // Draw the histogram
     tdrDraw(hAverageMasses_reco,"HPz",kNone,kAzure+2,kSolid,-1,1001,kAzure+2);
     hAverageMasses_reco->SetFillColorAlpha(kAzure+7,0.45);
@@ -326,7 +363,7 @@ void JetPairs() {
 
     // Update the canvas to reflect the changes
     TLatex *tex4 = new TLatex();
-    tex4->SetNDC(); tex4->SetTextSize(0.035); 
+    tex4->SetNDC(); tex4->SetTextSize(0.03); 
     tex4->DrawLatex(0.31,0.85,"fitProb > 0.2");
     tex4->DrawLatex(0.31,0.81,"recomass > 30 GeV");
     tex4->DrawLatex(0.2,0.74,Form("cs  %1.3f #pm %1.3f",h_cs_reco->GetMean(),h_cs_reco->GetMeanError()));
@@ -339,12 +376,19 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c4->SaveAs("pdf/jetpairsavmass_reco.pdf");
+    c4->SaveAs("pdf/jetpairsavmass_reco2.pdf");
 
     
-    TH1D *h5 = tdrHist("h5","Normalised N, reco",0,0.06-1e-3,"Mass (GeV)",30,140);
+    TH1D *h5 = tdrHist("h5","N_{reco} fraction",0,0.06-1e-3,"Mass (GeV)",30,140);
     TCanvas *c5 = tdrCanvas("c5",h5,8,11,kSquare);
     //gPad->SetLogy();
+
+    h5->GetXaxis()->SetLabelSize(0.04);
+    h5->GetYaxis()->SetLabelSize(0.04);
+    h5->GetXaxis()->SetTitleSize(0.045);
+    h5->GetXaxis()->SetTitleOffset(1.2);
+    h5->GetYaxis()->SetTitleOffset(1.4);
+    h5->GetYaxis()->SetTitleSize(0.045);
 
     h_cs_reco->Scale(1./h_cs_reco->Integral());
     h_ud_reco->Scale(1./h_ud_reco->Integral());
@@ -380,7 +424,7 @@ void JetPairs() {
 
 
     // Create a legend
-    TLegend *leg5 = tdrLeg(0.75,0.7-0.05*7,0.9,0.8);
+    TLegend *leg5 = tdrLeg(0.75,0.75-0.05*7,0.9,0.8);
     leg5->AddEntry(h_cs_reco, "CS", "PLE");
     leg5->AddEntry(h_ud_reco, "UD", "PLE");
     leg5->AddEntry(h_cd_reco, "CD", "PLE");
@@ -401,7 +445,7 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c5->SaveAs("pdf/jetpairsmass_reco.pdf");
+    c5->SaveAs("pdf/jetpairsmass_reco2.pdf");
 
 
 
@@ -411,7 +455,7 @@ void JetPairs() {
 ////// SCALED RECOJETS ////////////
 
 
-    TH1D *h10 = tdrHist("h10","Average mass (GeV)",82+2e-1,86,"Jet pair, reco scaled",1,8);
+    TH1D *h10 = tdrHist("h10","Average mass (GeV)",82+2e-1,86,"Jet pair, scal. reco",1,8);
     TCanvas *c10 = tdrCanvas("c10",h10,8,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
@@ -422,6 +466,13 @@ void JetPairs() {
     h10->GetXaxis()->SetBinLabel(5, "cb");
     h10->GetXaxis()->SetBinLabel(6, "ub");
     h10->GetXaxis()->SetBinLabel(7, "x");
+
+    h10->GetXaxis()->SetLabelSize(0.05);
+    h10->GetYaxis()->SetLabelSize(0.04);
+    h10->GetXaxis()->SetTitleSize(0.045);
+    h10->GetXaxis()->SetTitleOffset(1.2);
+    h10->GetYaxis()->SetTitleOffset(1.4);
+    h10->GetYaxis()->SetTitleSize(0.045);
 
     // Draw the histogram
     tdrDraw(hAverageMasses_reco_scaled,"HPz",kNone,kAzure+2,kSolid,-1,1001,kAzure+2);
@@ -438,9 +489,9 @@ void JetPairs() {
 
     // Update the canvas to reflect the changes
     TLatex *tex10 = new TLatex();
-    tex10->SetNDC(); tex10->SetTextSize(0.035); 
+    tex10->SetNDC(); tex10->SetTextSize(0.03); 
     tex10->DrawLatex(0.31,0.85,"fitProb > 0.2");
-    tex10->DrawLatex(0.31,0.81,"recomass, scaled > 30 GeV");
+    tex10->DrawLatex(0.31,0.81,"scal. recomass > 30 GeV");
     tex10->DrawLatex(0.2,0.74,Form("cs  %1.3f #pm %1.3f",h_cs_reco_scaled->GetMean(),h_cs_reco_scaled->GetMeanError()));
     tex10->DrawLatex(0.2,0.7,Form("ud  %1.3f #pm %1.3f",h_ud_reco_scaled->GetMean(),h_ud_reco_scaled->GetMeanError()));
     tex10->DrawLatex(0.2,0.66,Form("cd  %1.3f #pm %1.3f",h_cd_reco_scaled->GetMean(),h_cd_reco_scaled->GetMeanError()));
@@ -451,11 +502,18 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c10->SaveAs("pdf/jetpairsavmass_reco_scaled.pdf");
+    c10->SaveAs("pdf/jetpairsavmass_reco_scaled2.pdf");
 
     
-    TH1D *h11 = tdrHist("h11","Normalised N, reco scaled",0,0.06-1e-3,"Mass (GeV)",30,140);
+    TH1D *h11 = tdrHist("h11","N_{scal. reco} fraction",0,0.06-1e-3,"Mass (GeV)",30,140);
     TCanvas *c11 = tdrCanvas("c11",h11,8,11,kSquare);
+
+    h11->GetXaxis()->SetLabelSize(0.04);
+    h11->GetYaxis()->SetLabelSize(0.04);
+    h11->GetXaxis()->SetTitleSize(0.045);
+    h11->GetXaxis()->SetTitleOffset(1.2);
+    h11->GetYaxis()->SetTitleOffset(1.4);
+    h11->GetYaxis()->SetTitleSize(0.045);
     //gPad->SetLogy();
 
     h_cs_reco_scaled->Scale(1./h_cs_reco_scaled->Integral());
@@ -492,7 +550,7 @@ void JetPairs() {
 
 
     // Create a legend
-    TLegend *leg11 = tdrLeg(0.75,0.7-0.05*7,0.9,0.8);
+    TLegend *leg11 = tdrLeg(0.75,0.75-0.05*7,0.9,0.8);
     leg11->AddEntry(h_cs_reco_scaled, "CS", "PLE");
     leg11->AddEntry(h_ud_reco_scaled, "UD", "PLE");
     leg11->AddEntry(h_cd_reco_scaled, "CD", "PLE");
@@ -513,12 +571,12 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c11->SaveAs("pdf/jetpairsmass_reco_scaled.pdf");
+    c11->SaveAs("pdf/jetpairsmass_reco_scaled2.pdf");
 
 
 
 ///////////Without fitProb //////////
-
+/*
 
 
 
@@ -562,7 +620,7 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c6->SaveAs("pdf/jetpairsavmass_gen_without_fitprob.pdf");
+    c6->SaveAs("pdf/jetpairsavmass_gen_without_fitprob2.pdf");
 
     TH1D *h7 = tdrHist("h7","Normalised N, gen",0,0.1,"Mass (GeV)",30,140);
     TCanvas *c7 = tdrCanvas("c7",h7,8,11,kSquare);
@@ -623,7 +681,7 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c7->SaveAs("pdf/jetpairsmass_gen_without_fitprob.pdf");
+    c7->SaveAs("pdf/jetpairsmass_gen_without_fitprob2.pdf");
 
 
 
@@ -668,7 +726,7 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c8->SaveAs("pdf/jetpairsavmass_reco_without_fitprob.pdf");
+    c8->SaveAs("pdf/jetpairsavmass_reco_without_fitprob2.pdf");
 
     
     TH1D *h9 = tdrHist("h9","Normalised N, reco",0,0.06-1e-3,"Mass (GeV)",30,140);
@@ -729,5 +787,6 @@ void JetPairs() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c9->SaveAs("pdf/jetpairsmass_reco_without_fitprob.pdf");
+    c9->SaveAs("pdf/jetpairsmass_reco_without_fitprob2.pdf");
+    */
 }

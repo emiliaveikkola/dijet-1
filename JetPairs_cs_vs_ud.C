@@ -13,25 +13,25 @@
 void JetPairs_cs_vs_ud() {
     setTDRStyle();
     // Open the ROOT file and get the histogram
-    TFile *file = new TFile("output_stag3.root", "READ");
-    TFile *file_cs = new TFile("output_stag_cs_0.2.root", "READ");
-    TFile *file_ud = new TFile("output_stag_ud_0.2.root", "READ");
+    TFile *file = new TFile("output_stag3new2.root", "READ");
+    TFile *file_cs = new TFile("output_stag3_cs.root", "READ");
+    TFile *file_ud = new TFile("output_stag3_ud.root", "READ");
 
     TH1D *hJetPairs = (TH1D*)file->Get("hJetPairs");
     TH1D *hJetPairs_scaled = (TH1D*)file->Get("hJetPairs_scaled");
 
-    TH1D *cs_hJetPairs = (TH1D*)file_cs->Get("cs_hJetPairs");
-    TH1D *cs_hJetPairs_scaled = (TH1D*)file_cs->Get("cs_hJetPairs_scaled");
+    TH1D *cs_hJetPairs = (TH1D*)file_cs->Get("hJetPairs");
+    TH1D *cs_hJetPairs_scaled = (TH1D*)file_cs->Get("hJetPairs_scaled");
 
-    TH1D *ud_hJetPairs = (TH1D*)file_ud->Get("ud_hJetPairs");
-    TH1D *ud_hJetPairs_scaled = (TH1D*)file_ud->Get("ud_hJetPairs_scaled");
+    TH1D *ud_hJetPairs = (TH1D*)file_ud->Get("hJetPairs");
+    TH1D *ud_hJetPairs_scaled = (TH1D*)file_ud->Get("hJetPairs_scaled");
 
 
     
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
 
-    TH1D *h1 = tdrHist("h1","N fraction, reco scaled",0,1.2,"Jet pair",1,8);
+    TH1D *h1 = tdrHist("h1","N_{scal. reco} fraction",0,1.2,"Jet pair",1,8);
     TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
@@ -42,6 +42,13 @@ void JetPairs_cs_vs_ud() {
     h1->GetXaxis()->SetBinLabel(5, "cb");
     h1->GetXaxis()->SetBinLabel(6, "ub");
     h1->GetXaxis()->SetBinLabel(7, "x/all");
+
+    h1->GetXaxis()->SetLabelSize(0.05);
+    h1->GetYaxis()->SetLabelSize(0.04);
+    h1->GetXaxis()->SetTitleSize(0.045);
+    h1->GetXaxis()->SetTitleOffset(1.2);
+    h1->GetYaxis()->SetTitleOffset(1.4);
+    h1->GetYaxis()->SetTitleSize(0.045);
 
     // Calculate the sum of bins from 1 to 7
     double sumOfBins1to7 = 0;
@@ -147,22 +154,23 @@ void JetPairs_cs_vs_ud() {
     TLegend *leg1 = tdrLeg(0.48,0.8-0.05*2,0.7,0.82);
     leg1->AddEntry(ud_hJetPairs, "Jet pairs (UD)", "FPLE");
     leg1->AddEntry(hJetPairs, "Jet pairs", "FPLE");
+    leg1->SetTextSize(0.035);
     
     
     //leg->Draw();
 
     // Update the canvas to reflect the changes
     TLatex *tex1 = new TLatex();
-    tex1->SetNDC(); tex1->SetTextSize(0.045);
+    tex1->SetNDC(); tex1->SetTextSize(0.035);
     tex1->DrawLatex(0.18,0.75,"fitProb > 0.2");
     
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c1->SaveAs("pdf/jetpairs_ud.pdf");
+    c1->SaveAs("pdf/jetpairs_ud2.pdf");
 
 
-    TH1D *h3 = tdrHist("h3","N fraction, reco scaled",0,1.2,"Jet pair",1,8);
+    TH1D *h3 = tdrHist("h3","N_{scal. reco} fraction",0,1.2,"Jet pair",1,8);
     TCanvas *c3 = tdrCanvas("c3",h3,8,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
@@ -174,7 +182,12 @@ void JetPairs_cs_vs_ud() {
     h3->GetXaxis()->SetBinLabel(6, "ub");
     h3->GetXaxis()->SetBinLabel(7, "x/all");
 
-
+    h3->GetXaxis()->SetLabelSize(0.05);
+    h3->GetYaxis()->SetLabelSize(0.04);
+    h3->GetXaxis()->SetTitleSize(0.045);
+    h3->GetXaxis()->SetTitleOffset(1.2);
+    h3->GetYaxis()->SetTitleOffset(1.4);
+    h3->GetYaxis()->SetTitleSize(0.045);
 
     // Draw the histogram
 
@@ -192,19 +205,20 @@ void JetPairs_cs_vs_ud() {
     TLegend *leg3 = tdrLeg(0.48,0.8-0.05*2,0.7,0.82);
     leg3->AddEntry(cs_hJetPairs, "Jet pairs (CS)", "FPLE");
     leg3->AddEntry(hJetPairs, "Jet pairs", "FPLE");
+    leg3->SetTextSize(0.035);
     
     
     //leg->Draw();
 
     // Update the canvas to reflect the changes
     TLatex *tex3 = new TLatex();
-    tex3->SetNDC(); tex3->SetTextSize(0.045);
+    tex3->SetNDC(); tex3->SetTextSize(0.035);
     tex3->DrawLatex(0.18,0.75,"fitProb > 0.2"); 
     
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c3->SaveAs("pdf/jetpairs_cs.pdf");
+    c3->SaveAs("pdf/jetpairs_cs2.pdf");
 
 
 
@@ -212,7 +226,7 @@ void JetPairs_cs_vs_ud() {
 
 
     
-    TH1D *h2 = tdrHist("h2","N fraction, reco scaled",0,1.2,"Jet pair",1,8);
+    TH1D *h2 = tdrHist("h2","N_{scal. reco} fraction",0,1.2,"Jet pair",1,8);
     TCanvas *c2 = tdrCanvas("c2",h2,8,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
@@ -223,6 +237,13 @@ void JetPairs_cs_vs_ud() {
     h2->GetXaxis()->SetBinLabel(5, "cb");
     h2->GetXaxis()->SetBinLabel(6, "ub");
     h2->GetXaxis()->SetBinLabel(7, "x/all");
+
+    h2->GetXaxis()->SetLabelSize(0.05);
+    h2->GetYaxis()->SetLabelSize(0.04);
+    h2->GetXaxis()->SetTitleSize(0.045);
+    h2->GetXaxis()->SetTitleOffset(1.2);
+    h2->GetYaxis()->SetTitleOffset(1.4);
+    h2->GetYaxis()->SetTitleSize(0.045);
 
     // Calculate the sum2 of bins from 1 to 7
     double sum2OfBins1to7 = 0;
@@ -323,24 +344,25 @@ void JetPairs_cs_vs_ud() {
 
     // Create a legend
     TLegend *leg2 = tdrLeg(0.48,0.8-0.05*2,0.7,0.82);
-    leg2->AddEntry(ud_hJetPairs_scaled, "Scaled jet pairs (UD)", "FPLE");
-    leg2->AddEntry(hJetPairs_scaled, "Scaled jet pairs", "FPLE");
+    leg2->AddEntry(ud_hJetPairs_scaled, "Re-scal. jet pairs (UD)", "FPLE");
+    leg2->AddEntry(hJetPairs_scaled, "Re-scal. jet pairs", "FPLE");
+    leg2->SetTextSize(0.035);
 
     
     //leg->Draw();
 
     // Update the canvas to reflect the changes
     TLatex *tex2 = new TLatex();
-    tex2->SetNDC(); tex2->SetTextSize(0.045);
+    tex2->SetNDC(); tex2->SetTextSize(0.035);
     tex2->DrawLatex(0.18,0.75,"fitProb > 0.2"); 
     
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c2->SaveAs("pdf/jetpairs_scaled_ud.pdf");
+    c2->SaveAs("pdf/jetpairs_scaled_ud2.pdf");
 
 
-    TH1D *h4 = tdrHist("h4","N fraction, reco scaled",0,1.2,"Jet pair",1,8);
+    TH1D *h4 = tdrHist("h4","N_{scal. reco} fraction",0,1.2,"Jet pair",1,8);
     TCanvas *c4 = tdrCanvas("c4",h4,8,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
@@ -351,6 +373,13 @@ void JetPairs_cs_vs_ud() {
     h4->GetXaxis()->SetBinLabel(5, "cb");
     h4->GetXaxis()->SetBinLabel(6, "ub");
     h4->GetXaxis()->SetBinLabel(7, "x/all");
+
+    h4->GetXaxis()->SetLabelSize(0.05);
+    h4->GetYaxis()->SetLabelSize(0.04);
+    h4->GetXaxis()->SetTitleSize(0.045);
+    h4->GetXaxis()->SetTitleOffset(1.2);
+    h4->GetYaxis()->SetTitleOffset(1.4);
+    h4->GetYaxis()->SetTitleSize(0.045);
 
 
 
@@ -368,20 +397,21 @@ void JetPairs_cs_vs_ud() {
 
     // Create a legend
     TLegend *leg4 = tdrLeg(0.48,0.8-0.05*2,0.7,0.82);
-    leg4->AddEntry(cs_hJetPairs_scaled, "Scaled jet pairs (CS)", "FPLE");
-    leg4->AddEntry(hJetPairs_scaled, "Scaled jet pairs", "FPLE");
+    leg4->AddEntry(cs_hJetPairs_scaled, "Re-scal. jet pairs (CS)", "FPLE");
+    leg4->AddEntry(hJetPairs_scaled, "Re-scal. jet pairs", "FPLE");
+    leg4->SetTextSize(0.035);
 
     
     //leg->Draw();
 
     // Update the canvas to reflect the changes
     TLatex *tex4 = new TLatex();
-    tex4->SetNDC(); tex4->SetTextSize(0.045);
+    tex4->SetNDC(); tex4->SetTextSize(0.035);
     tex4->DrawLatex(0.18,0.75,"fitProb > 0.2"); 
     
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c4->SaveAs("pdf/jetpairs_scaled_cs.pdf");
+    c4->SaveAs("pdf/jetpairs_scaled_cs2.pdf");
 
 }

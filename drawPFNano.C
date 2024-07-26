@@ -102,7 +102,7 @@ void drawPFNano() {
   leg1->SetTextSize(0.035);
   tex->SetNDC(); tex->SetTextSize(0.04);
   tex->DrawLatex(0.33,0.86,"|#eta| < 1.3"); //AK4PFPUPPI
-  tex->DrawLatex(0.33,0.81,"80 < p^{genjet}_{T} < 100 GeV"); //Pythia8 CP5, QCDFlat MC");
+  tex->DrawLatex(0.33,0.80,"80 < p^{genjet}_{T} < 100 GeV"); //Pythia8 CP5, QCDFlat MC");
   
   TH1D *href = prq->ProjectionX("href");
   TH1D *hrq = prq->ProjectionX("hrq"); 
@@ -185,7 +185,7 @@ void drawPFNano() {
   leg2->SetTextSize(0.035);
   tex->SetNDC(); tex->SetTextSize(0.04);
   tex->DrawLatex(0.33,0.86,"|#eta| < 1.3");
-  tex->DrawLatex(0.33,0.81,"80 < p^{genjet}_{T} < 100 GeV");
+  tex->DrawLatex(0.33,0.80,"80 < p^{genjet}_{T} < 100 GeV");
   //tex->DrawLatex(0.33,0.76,"AK4PFPUPPI");
   //tex->DrawLatex(0.33,0.76,"AK4GEN");
  
@@ -283,7 +283,7 @@ void drawPFNano() {
   leg3->SetTextSize(0.035);
   tex->SetNDC(); tex->SetTextSize(0.04);
   tex->DrawLatex(0.33,0.86,"|#eta| < 1.3");
-  tex->DrawLatex(0.33,0.81,"80 < p^{genjet}_{T} < 100 GeV");
+  tex->DrawLatex(0.33,0.80,"80 < p^{genjet}_{T} < 100 GeV");
   //tex->DrawLatex(0.33,0.76,"AK4PFPUPPI");
   //tex->DrawLatex(0.33,0.76,"AK4GEN");
 
@@ -335,7 +335,7 @@ void drawPFNano() {
   leg4->SetTextSize(0.035);
   tex->SetNDC(); tex->SetTextSize(0.04);
   tex->DrawLatex(0.33,0.86,"|#eta| < 1.3");
-  tex->DrawLatex(0.33,0.81,"80 < p^{genjet}_{T} < 100 GeV");
+  tex->DrawLatex(0.33,0.80,"80 < p^{genjet}_{T} < 100 GeV");
   //tex->DrawLatex(0.33,0.76,"AK4PFPUPPI");
   //tex->DrawLatex(0.33,0.76,"AK4GEN");
 

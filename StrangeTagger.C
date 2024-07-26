@@ -266,10 +266,10 @@ void StrangeTagger::Loop()
     TFile* fout;
 
     bool DATA = false;
-    bool SCALEDMASS = true;
+    bool SCALEDMASS = false;
     if (DATA) {fout = new TFile("output_stag_DATA2.root", "RECREATE");}
     else if (SCALEDMASS) {fout = new TFile("output_stag_scaledmass2.root", "RECREATE");}
-    else {fout = new TFile("output_stag3new.root", "RECREATE");}
+    else {fout = new TFile("output_stag3new2.root", "RECREATE");}
 
 
    double vptd[] =
@@ -335,13 +335,13 @@ void StrangeTagger::Loop()
 
    TH1D *hAverageMass_loop_gen = new TH1D("hAverageMass_loop_gen", ";Jet pair;Average Mass (GeV)", 7, 1, 8);
 
-   TH1D *h_cs_gen = new TH1D("h_cs_gen", ";Mass;N",200,0,1);
-   TH1D *h_ud_gen = new TH1D("h_ud_gen", ";Mass;N",200,0,1);
-   TH1D *h_cd_gen = new TH1D("h_cd_gen", ";Mass;N",200,0,1);
-   TH1D *h_us_gen = new TH1D("h_us_gen", ";Mass;N",200,0,1);
-   TH1D *h_cb_gen = new TH1D("h_cb_gen", ";Mass;N",200,0,1);
-   TH1D *h_ub_gen = new TH1D("h_ub_gen", ";Mass;N",200,0,1);
-   TH1D *h_x_gen = new TH1D("h_x_gen", ";Mass;N",200,0,1);
+   TH1D *h_cs_gen = new TH1D("h_cs_gen", ";Mass;N",200,0,200);
+   TH1D *h_ud_gen = new TH1D("h_ud_gen", ";Mass;N",200,0,200);
+   TH1D *h_cd_gen = new TH1D("h_cd_gen", ";Mass;N",200,0,200);
+   TH1D *h_us_gen = new TH1D("h_us_gen", ";Mass;N",200,0,200);
+   TH1D *h_cb_gen = new TH1D("h_cb_gen", ";Mass;N",200,0,200);
+   TH1D *h_ub_gen = new TH1D("h_ub_gen", ";Mass;N",200,0,200);
+   TH1D *h_x_gen = new TH1D("h_x_gen", ";Mass;N",200,0,200);
 
    TH1D *h_cs_reco = new TH1D("h_cs_reco", ";Mass;N",200,0,200);
    TH1D *h_ud_reco = new TH1D("h_ud_reco", ";Mass;N",200,0,200);
@@ -728,7 +728,8 @@ std::map<std::string, int&> counters = {
          p4recojet_scaled2.SetPtEtaPhiM(scaled_reco_pt2, eta2, phi2, m2);
 
          double recomass_scaled = (p4recojet_scaled1 + p4recojet_scaled2).M();
-
+      //if (ctag1 > 0.43 || ctag2 > 0.43){
+      //if (ctag1 < 0.06 && ctag2 < 0.06){   
          if (fitProb > 0.2){
             if (binIndex == 1){
                h_cs->Fill(0);
@@ -969,14 +970,14 @@ std::map<std::string, int&> counters = {
 
             hJetFlavourPairMCDATA->Fill(pairIndexMC, pairIndexDATA);
             if (genmass > 30) {
-               hMassFlavorPairs_gen->Fill(binIndex,genmass);
-               if (binIndex == 1) {h_cs_gen->Fill(genmass);}
-               if (binIndex == 2) {h_ud_gen->Fill(genmass);}
-               if (binIndex == 3) {h_cd_gen->Fill(genmass);}          
-               if (binIndex == 4) {h_us_gen->Fill(genmass);}
-               if (binIndex == 5) {h_cb_gen->Fill(genmass);}
-               if (binIndex == 6) {h_ub_gen->Fill(genmass);}
-               if (binIndex == 7) {h_x_gen->Fill(genmass);}
+               hMassFlavorPairs_gen->Fill(binIndex,genmass,weight);
+               if (binIndex == 1) {h_cs_gen->Fill(genmass,weight);}
+               if (binIndex == 2) {h_ud_gen->Fill(genmass,weight);}
+               if (binIndex == 3) {h_cd_gen->Fill(genmass,weight);}          
+               if (binIndex == 4) {h_us_gen->Fill(genmass,weight);}
+               if (binIndex == 5) {h_cb_gen->Fill(genmass,weight);}
+               if (binIndex == 6) {h_ub_gen->Fill(genmass,weight);}
+               if (binIndex == 7) {h_x_gen->Fill(genmass,weight);}
             }
             if ((ctag1 > 0.43 && ctag2 <= 0.43) ||
                ((ctag1 > 0.43 && ctag2 > 0.43) && ctag1 > ctag2) ||
@@ -1122,24 +1123,24 @@ std::map<std::string, int&> counters = {
 
             
             if (recomass > 30) {
-               if (binIndex == 1) {h_cs_reco_scaled->Fill(recomass);}
+               if (binIndex == 1) {h_cs_reco_scaled->Fill(recomass,weight);}
                if ((flav1 == 1 || flav2 == 1) || (flav1 == 2 || flav2 == 2)){
-                  if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass);}          
-                  if (binIndex == 4) {h_us_reco_scaled->Fill(recomass);}
-                  if (binIndex == 5) {h_cb_reco_scaled->Fill(recomass);}
-                  if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass);}
-                  if (binIndex == 7) {h_x_reco_scaled->Fill(recomass);}
+                  if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass, weight);}          
+                  if (binIndex == 4) {h_us_reco_scaled->Fill(recomass, weight);}
+                  if (binIndex == 5) {h_cb_reco_scaled->Fill(recomass, weight);}
+                  if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass, weight);}
+                  if (binIndex == 7) {h_x_reco_scaled->Fill(recomass, weight);}
                } // ud jets
             } //recomass > 30
 
             if (scaled_reco_pt1 >= 30 && scaled_reco_pt2 >= 30 ){
-               if (binIndex == 2) {h_ud_reco_scaled->Fill(recomass_scaled);}
+               if (binIndex == 2) {h_ud_reco_scaled->Fill(recomass_scaled, weight);}
                if ((flav1 != 1 && flav2 != 1) && (flav1 != 2 && flav2 != 2)){
-                  if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass_scaled);}          
-                  if (binIndex == 4) {h_us_reco_scaled->Fill(recomass_scaled);}
-                  if (binIndex == 5) {h_cb_reco_scaled->Fill(recomass_scaled);}
-                  if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass_scaled);}
-                  if (binIndex == 7) {h_x_reco_scaled->Fill(recomass_scaled);}
+                  if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass_scaled, weight);}          
+                  if (binIndex == 4) {h_us_reco_scaled->Fill(recomass_scaled, weight);}
+                  if (binIndex == 5) {h_cb_reco_scaled->Fill(recomass_scaled, weight);}
+                  if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass_scaled, weight);}
+                  if (binIndex == 7) {h_x_reco_scaled->Fill(recomass_scaled, weight);}
                } // not ud jets
             }  // reco scaled pt >= 30
 
@@ -1293,6 +1294,7 @@ std::map<std::string, int&> counters = {
                   if (binIndex == 7) {h_x_reco_wfp_scaled->Fill(recowfpmass_scaled);}
                } // not ud jets
             }  // reco scaled pt >= 30
+      //}
       } // jentry
 
       // Assuming h3MassFlavorPairs_DATAMC is your TH3 object and it's already filled
