@@ -24,8 +24,16 @@ void Ctag() {
 
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
-    TH1D *h1 = tdrHist("h1","ctag > 0.43",0,0.28,"p_{T, reco}",21,200);
+    TH1D *h1 = tdrHist("h1","ctag > 0.43",0,0.28,"p^{reco}_{T}",21,200);
     TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
+
+
+    h1->GetXaxis()->SetLabelSize(0.04);
+    h1->GetYaxis()->SetLabelSize(0.04);
+    h1->GetXaxis()->SetTitleSize(0.045);
+    h1->GetXaxis()->SetTitleOffset(1.2);
+    h1->GetYaxis()->SetTitleOffset(1.4);
+    h1->GetYaxis()->SetTitleSize(0.045);
     //gPad->SetLogy();
     //c1->SetLogx();
 
@@ -41,12 +49,12 @@ void Ctag() {
     ps2->SetMarkerSize(0.8);
 
     // Create a legend
-    TLegend *leg = tdrLeg(0.55,0.5-0.05*4,0.75,0.53);
-    leg->AddEntry(p, "charm, jet1", "ple");
-    leg->AddEntry(p2, "charm, jet2", "ple");
-    leg->AddEntry(ps, "strange, jet1", "ple");
-    leg->AddEntry(ps2, "strange, jet2", "ple");
-    leg->SetTextSize(0.045);
+    TLegend *leg = tdrLeg(0.75,0.5-0.05*4,0.9,0.53);
+    leg->AddEntry(p, "c_{jet1}", "ple");
+    leg->AddEntry(p2, "c_{jet2}", "ple");
+    leg->AddEntry(ps, "s_{jet1}", "ple");
+    leg->AddEntry(ps2, "s_{jet2}", "ple");
+    leg->SetTextSize(0.03);
     leg->Draw();
 
     // Update the canvas to reflect the changes
@@ -58,5 +66,5 @@ void Ctag() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c1->SaveAs("pdf/ctag.pdf");
+    c1->SaveAs("pdf/ctag2.pdf");
 }

@@ -32,7 +32,7 @@ void DeltaPhi() {
     extraText = "Private";
     TH1D *h1 = tdrHist("h1","N",0,0.06,"#Delta#Phi",-2,2);
     TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
-    h1->GetYaxis()->SetTitleOffset(1.7);
+    h1->GetYaxis()->SetTitleOffset(1.5);
     h1->GetYaxis()->SetTitleSize(0.05);
     h1->GetXaxis()->SetTitleSize(0.05);
     h1->GetYaxis()->SetLabelSize(0.045);
@@ -42,13 +42,13 @@ void DeltaPhi() {
 
     // Draw the histogram
     tdrDraw(h_phi_d,"histe",kNone,kAzure+7,kSolid, -1, kNone);
-    h_phi_d->SetMarkerSize(0.8);
+    h_phi_d->SetLineWidth(2);
     tdrDraw(h_phi_u,"histe",kNone,kPink-9,kSolid, -1, kNone);
-    h_phi_u->SetMarkerSize(0.8);
+    h_phi_u->SetLineWidth(2);
     tdrDraw(h_phi_s,"histe",kNone,kOrange-3,kSolid, -1, kNone);
-    h_phi_s->SetMarkerSize(0.8);
+    h_phi_s->SetLineWidth(2);
     tdrDraw(h_phi_c,"histe",kNone,kSpring-5,kSolid, -1, kNone);
-    h_phi_c->SetMarkerSize(0.8);
+    h_phi_c->SetLineWidth(2);
 
 
 
@@ -71,5 +71,5 @@ void DeltaPhi() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c1->SaveAs("pdf/deltaphi.pdf");
+    c1->SaveAs("pdf/deltaphi2.pdf");
 }

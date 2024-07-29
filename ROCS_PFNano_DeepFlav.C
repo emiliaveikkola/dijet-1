@@ -72,10 +72,16 @@ void ROCS_PFNano_DeepFlav() {
 
 
     TH1D *h2 = tdrHist("h2","mis-id rate ",1e-3-5e-4,1,"jet efficiency, DeepFlav",0.079,1);
-    h2->GetXaxis()->SetTitleSize(0.05);
-    h2->GetYaxis()->SetTitleSize(0.05);
-    TCanvas *c2 = tdrCanvas("c2",h2,8,11,kRectangular);
-    c2->SetCanvasSize(800, 620); // Customize the size as needed
+    //h2->GetXaxis()->SetTitleSize(0.05);
+    //h2->GetYaxis()->SetTitleSize(0.05);
+    TCanvas *c2 = tdrCanvas("c2",h2,8,11,kSquare);
+    //c2->SetCanvasSize(800, 620); // Customize the size as needed
+    h2->GetXaxis()->SetLabelSize(0.04);
+    h2->GetYaxis()->SetLabelSize(0.04);
+    h2->GetXaxis()->SetTitleSize(0.045);
+    h2->GetXaxis()->SetTitleOffset(1.2);
+    h2->GetYaxis()->SetTitleOffset(1.4);
+    h2->GetYaxis()->SetTitleSize(0.045);
     c2->SetLogy();
 
     // Define the specific x-coordinates where grid lines should appear
@@ -162,19 +168,19 @@ void ROCS_PFNano_DeepFlav() {
          << " mis-tag = "<< y5_080 << " (target = 0.60)" << endl << flush;
 
 
-    rocCurveCUDS_cvl->SetLineColor(kBlue);
+    rocCurveCUDS_cvl->SetLineColor(kAzure+7);
     rocCurveCUDS_cvl->SetLineWidth(2);
     rocCurveCUDS_cvl->Draw("same");
 
-    rocCurveCB_cvb->SetLineColor(kGreen+2);
+    rocCurveCB_cvb->SetLineColor(kGreen+1);
     rocCurveCB_cvb->SetLineWidth(2);
     rocCurveCB_cvb->Draw("same");
 
-    rocCurveBUDS_b->SetLineColor(kPink+5);
+    rocCurveBUDS_b->SetLineColor(kViolet-2);
     rocCurveBUDS_b->SetLineWidth(2);
     rocCurveBUDS_b->Draw("same");
 
-    rocCurveBC_b->SetLineColor(kOrange+7);
+    rocCurveBC_b->SetLineColor(kOrange-3);
     rocCurveBC_b->SetLineWidth(2);
     rocCurveBC_b->Draw("same");
 
@@ -251,7 +257,7 @@ void ROCS_PFNano_DeepFlav() {
     TGraph *graph1 = new TGraph(nPoints1, x1, y1);
     graph1->SetTitle("Data Points;X values;Y values");
     graph1->SetLineWidth(2);
-    graph1->SetLineColor(kRed);
+    graph1->SetLineColor(kPink-3);
 
     // Draw the graph
     graph1->Draw("same");
@@ -419,23 +425,23 @@ void ROCS_PFNano_DeepFlav() {
     //graphAvg->SetLineWidth(2);
     //graphAvg->Draw("same"); // Draw with markers and lines
 
-    TLegend *leg2 = tdrLeg(0.69,0.19-0.04*2,0.8,0.28);
+    TLegend *leg2 = tdrLeg(0.7,0.32-0.035*4,0.86,0.32);
     leg2->AddEntry(rocCurveCUDS_cvl, "c vs uds", "L");
     leg2->AddEntry(rocCurveCB_cvb, "c vs b", "L");
     leg2->AddEntry(rocCurveBUDS_b, "b vs uds", "L");
     leg2->AddEntry(rocCurveBC_b, "b vs c", "L");
     leg2->AddEntry(graph1, "c vs uds (ref t#bar{t})", "L");
-    leg2->SetTextSize(0.035);
+    leg2->SetTextSize(0.03);
 
     leg2->Draw();
 
     // Update the canvas to reflect the changes
     gPad->Update();
 
-    gPad->SetRightMargin(0.10);
-    gPad->SetLeftMargin(0.10);
-    gPad->SetTopMargin(0.10);
-    gPad->SetBottomMargin(0.10);
+    //gPad->SetRightMargin(0.10);
+    //gPad->SetLeftMargin(0.10);
+    //gPad->SetTopMargin(0.10);
+    //gPad->SetBottomMargin(0.10);
 
 
 
@@ -444,5 +450,5 @@ void ROCS_PFNano_DeepFlav() {
     c2->Modified();
     c2->Update();
        // Save the canvas
-    c2->SaveAs("pdf/ROC_PFNAno_DeepFlav.pdf");
+    c2->SaveAs("pdf/ROC_PFNAno_DeepFlav2.pdf");
 }

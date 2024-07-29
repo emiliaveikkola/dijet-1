@@ -65,6 +65,7 @@ void CharmvsStrangept() {
     h1->GetXaxis()->SetTitleSize(0.05);
     h1->GetYaxis()->SetLabelSize(0.045);
     h1->GetXaxis()->SetLabelSize(0.045);
+    
     //gPad->SetLogy();
     //c1->SetLogx();
 
@@ -105,20 +106,19 @@ void CharmvsStrangept() {
 
     // Create a legend
     TLegend *leg = tdrLeg(0.5,1.05-0.05*13,0.7,0.82);
-    leg->AddEntry(h_s, "s, tag, MC", "PLE");
     leg->AddEntry(h_s_gen, "s, gen, MC", "PLE");
+    leg->AddEntry(h_s, "s, tag, MC", "PLE");
     leg->AddEntry(h_s_scaled, "scaled s, tag, MC", "PLE");
-    leg->AddEntry(h_c, "c, tag, MC", "PLE");
+    leg->AddEntry(h_s_data, "s, data", "PLE");
+    leg->AddEntry(h_s_scaled_data, "scaled s, data", "PLE");
     leg->AddEntry(h_c_gen, "c, gen, MC", "PLE");
+    leg->AddEntry(h_c, "c, tag, MC", "PLE");
     leg->AddEntry(h_c_scaled, "scaled c, tag, MC", "PLE");
+    leg->AddEntry(h_c_data, "c, data", "PLE");
+    leg->AddEntry(h_c_scaled_data, "scaled c, data", "PLE");
 
     leg->AddEntry(h_u, "u, gen, MC", "PLE");
     leg->AddEntry(h_d, "d, gen, MC", "PLE");
-
-    leg->AddEntry(h_s_data, "s, data", "PLE");
-    leg->AddEntry(h_s_scaled_data, "scaled s, data", "PLE");
-    leg->AddEntry(h_c_data, "c, data", "PLE");
-    leg->AddEntry(h_c_scaled_data, "scaled c, data", "PLE");
     leg->SetTextSize(0.035);
 
     //leg->Draw();
@@ -132,11 +132,17 @@ void CharmvsStrangept() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c1->SaveAs("pdf/charmvsstrangept.pdf");
+    c1->SaveAs("pdf/charmvsstrangept2.pdf");
 
     TH1D *h_s_vs_c = (TH1D*)file->Get("h_s_vs_c");
     TH1D *h2 = tdrHist("h2","s-c/s+c",-0.15,0.1,"p_{T} (GeV)",25,200);
     TCanvas *c2 = tdrCanvas("c2",h2,8,11,kSquare);
+
+    h2->GetYaxis()->SetTitleOffset(1.65);
+    h2->GetYaxis()->SetTitleSize(0.05);
+    h2->GetXaxis()->SetTitleSize(0.05);
+    h2->GetYaxis()->SetLabelSize(0.045);
+    h2->GetXaxis()->SetLabelSize(0.045);
 
     tdrDraw(h_s_vs_c,"Pz",kFullCircle,kAzure+7);
     h_s_vs_c->SetMarkerSize(0.8);
@@ -149,12 +155,18 @@ void CharmvsStrangept() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c2->SaveAs("pdf/cvssprofile.pdf");
+    c2->SaveAs("pdf/cvssprofile2.pdf");
 
 
     TH1D *hPtFlavorPairs_DATAMC = (TH1D*)file3->Get("hPtFlavorPairs_DATAMC_0.995_1.015");
     TH1D *h3 = tdrHist("h3","N",0.1,3000,"(s-c)/(s+c)",-1,1);
     TCanvas *c3 = tdrCanvas("c3",h3,8,11,kSquare);
+
+    h3->GetYaxis()->SetTitleOffset(1.65);
+    h3->GetYaxis()->SetTitleSize(0.05);
+    h3->GetXaxis()->SetTitleSize(0.05);
+    h3->GetYaxis()->SetLabelSize(0.045);
+    h3->GetXaxis()->SetLabelSize(0.045);
     //c3->SetLogy();
 
     tdrDraw(hPtFlavorPairs_DATAMC,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -169,12 +181,18 @@ void CharmvsStrangept() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c3->SaveAs("pdf/s-cprofile.pdf");
+    c3->SaveAs("pdf/s-cprofile2.pdf");
 
 
     TH1D *hMassFlavorPairs_DATAMC = (TH1D*)file3->Get("hMassFlavorPairs_DATAMC_0.995_1.015");
     TH1D *h4 = tdrHist("h4","N",0,3000,"Mass (GeV)",55,120);
     TCanvas *c4 = tdrCanvas("c4",h4,8,11,kSquare);
+
+    h4->GetYaxis()->SetTitleOffset(1.65);
+    h4->GetYaxis()->SetTitleSize(0.05);
+    h4->GetXaxis()->SetTitleSize(0.05);
+    h4->GetYaxis()->SetLabelSize(0.045);
+    h4->GetXaxis()->SetLabelSize(0.045);
     //c3->SetLogy();
 
     tdrDraw(hMassFlavorPairs_DATAMC,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -189,5 +207,5 @@ void CharmvsStrangept() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c4->SaveAs("pdf/Mass_profile.pdf");
+    c4->SaveAs("pdf/Mass_profile2.pdf");
 }

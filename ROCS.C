@@ -236,14 +236,18 @@ void ROCS() {
     gPad->Update();
 
     // Save the canvas as a .pdf file
-    c1->SaveAs("pdf/ROC1S.pdf");
+    c1->SaveAs("pdf/ROC1S2.pdf");
 
 
     TH1D *h2 = tdrHist("h2","mis-id rate ",1e-3-5e-4,1,"jet efficiency",0.079,1);
-    h2->GetXaxis()->SetTitleSize(0.05);
-    h2->GetYaxis()->SetTitleSize(0.05);
-    TCanvas *c2 = tdrCanvas("c2",h2,8,11,kRectangular);
-    c2->SetCanvasSize(800, 620); // Customize the size as needed
+    TCanvas *c2 = tdrCanvas("c2",h2,8,11,kSquare);
+    h2->GetXaxis()->SetLabelSize(0.04);
+    h2->GetYaxis()->SetLabelSize(0.04);
+    h2->GetXaxis()->SetTitleSize(0.045);
+    h2->GetXaxis()->SetTitleOffset(1.2);
+    h2->GetYaxis()->SetTitleOffset(1.4);
+    h2->GetYaxis()->SetTitleSize(0.045);
+    //c2->SetCanvasSize(800, 620); // Customize the size as needed
     c2->SetLogy();
 
     // Define the specific x-coordinates where grid lines should appear
@@ -353,12 +357,12 @@ void ROCS() {
     cout << "for ctag > " << x5_cut_080 << " ctag_eff = " << x5_080 << " (target = 0.80)"
          << " mis-tag = "<< y5_080 << " (target = 0.60)" << endl << flush;
     rocCurveSX->SetLineColor(kOrange+7);
-    rocCurveSUD->SetLineColor(kGreen+1);
+    rocCurveSUD->SetLineColor(kAzure+7);
     rocCurveSC->SetLineColor(kBlue-4);
 
     rocCurveCX->SetLineColor(kViolet+2);
     rocCurveCX_old->SetLineColor(kGreen+1);
-    rocCurveCUDS->SetLineColor(kBlue);
+    rocCurveCUDS->SetLineColor(kViolet-2);
     rocCurveCS->SetLineColor(kOrange-3);
     rocCurveCG->SetLineColor(kOrange);
 
@@ -453,7 +457,7 @@ void ROCS() {
     TGraph *graph1 = new TGraph(nPoints1, x1, y1);
     graph1->SetTitle("Data Points;X values;Y values");
     graph1->SetLineWidth(2);
-    graph1->SetLineColor(kRed);
+    graph1->SetLineColor(kGreen+1);
 
     // Draw the graph
     graph1->Draw("same");
@@ -617,7 +621,7 @@ for (int i = 0; i < numPoints; i++) {
 
 TGraph *graphAvg = new TGraph(numPoints, &xCommon[0], &yAvg[0]);
 
-graphAvg->SetLineColor(kOrange+7);
+graphAvg->SetLineColor(kPink-3);
 graphAvg->SetLineWidth(2);
 graphAvg->Draw("same"); // Draw with markers and lines
 
@@ -639,10 +643,10 @@ graphAvg->Draw("same"); // Draw with markers and lines
     // Update the canvas to reflect the changes
     gPad->Update();
 
-    gPad->SetRightMargin(0.10);
-    gPad->SetLeftMargin(0.10);
-    gPad->SetTopMargin(0.10);
-    gPad->SetBottomMargin(0.10);
+    //gPad->SetRightMargin(0.10);
+    //gPad->SetLeftMargin(0.10);
+    //gPad->SetTopMargin(0.10);
+    //gPad->SetBottomMargin(0.10);
 
 
 
@@ -651,5 +655,5 @@ graphAvg->Draw("same"); // Draw with markers and lines
     c2->Modified();
     c2->Update();
        // Save the canvas
-    c2->SaveAs("pdf/ROC_Curvesall.pdf");
+    c2->SaveAs("pdf/ROC_Curvesall2.pdf");
 }
