@@ -85,7 +85,7 @@ void drawPFNano() {
   //TH1D *h = tdrHist("h","Response over ud",0.87,1.05,//0.92,1.02,//0.95,1.05,
 		    //TH1D *h = tdrHist("h","Raw response",0.80,1.10,
   TH1D *h = tdrHist("h","Raw response over ud",0.90,1.04,
-		    "p_{T,genjet} (GeV)",15,3500);
+		    "p^{genjet}_{T} (GeV)",15,3500);
   TCanvas *c1 = tdrCanvas("c1",h,8,11,kSquare);
   gPad->SetLogx();
 
@@ -318,7 +318,7 @@ void drawPFNano() {
   
 
   TH1D *h4 = tdrHist("h4","N_{can} per bin (a.u.)",2e-6,9e1,
-  		     "p_{T,cand} / p_{T,jet}",0.4e-2,1.);
+  		     "p^{cand}_{T} / p^{jet}_{T}",0.4e-2,1.);
   // Clone to get better zoomable Logx axis
   //TH1D *h4 = (TH1D*)hffq->Clone("h4"); h2->Reset();
   //h4->SetYTitle("N_{cand} per bin (a.u.)");
