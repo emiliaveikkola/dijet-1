@@ -83,8 +83,8 @@ void drawPFNano() {
   extraText = "Private";
   lumi_136TeV = "PFNano";
   //TH1D *h = tdrHist("h","Response over ud",0.87,1.05,//0.92,1.02,//0.95,1.05,
-		    //TH1D *h = tdrHist("h","Raw response",0.80,1.10,
-  TH1D *h = tdrHist("h","Raw response over ud",0.90,1.04,
+		    TH1D *h = tdrHist("h","Raw response",0.80,1.10,
+ // TH1D *h = tdrHist("h","Raw response over ud",0.90,1.04,
 		    "p^{genjet}_{T} (GeV)",15,3500);
   TCanvas *c1 = tdrCanvas("c1",h,8,11,kSquare);
   gPad->SetLogx();
@@ -96,8 +96,8 @@ void drawPFNano() {
   h->GetYaxis()->SetTitleOffset(1.4);
   h->GetYaxis()->SetTitleSize(0.045);
 
-  //TLegend *leg1 = tdrLeg(0.65,0.90-0.045*7,0.90,0.90);
-  TLegend *leg1 = tdrLeg(0.65,0.20,0.90,0.20+0.045*7);
+  TLegend *leg1 = tdrLeg(0.75,0.85-0.045*7,0.90,0.85);
+  //TLegend *leg1 = tdrLeg(0.65,0.20,0.90,0.20+0.045*7);
   leg1->SetY1NDC(leg1->GetY1NDC()-0.07);
   leg1->SetTextSize(0.035);
   tex->SetNDC(); tex->SetTextSize(0.04);
@@ -112,7 +112,7 @@ void drawPFNano() {
   TH1D *hrc = prc->ProjectionX("hrc");
   TH1D *hrb = prb->ProjectionX("hrb");
   TH1D *hrg = prg->ProjectionX("hrg");
-
+/*
   hrq->Divide(href);
   hru->Divide(href);
   hrd->Divide(href);
@@ -120,7 +120,7 @@ void drawPFNano() {
   hrc->Divide(href);
   hrb->Divide(href);
   hrg->Divide(href);
-
+*/
   tdrDraw(hrq,"Pz",kNone,kBlack);
   tdrDraw(hru,"Pz",kNone,kGray+2);
   tdrDraw(hrd,"Pz",kNone,kMagenta+2);
@@ -128,7 +128,7 @@ void drawPFNano() {
   tdrDraw(hrc,"Pz",kNone,kGreen+2);
   tdrDraw(hrb,"Pz",kNone,kRed);
   tdrDraw(hrg,"Pz",kNone,kBlue);
-  
+  /*
 
   // Some testing: shift ud response by constant to match with g
   TH1D *hrgsim = (TH1D*)hrq->Clone("hrgsim");
@@ -149,7 +149,7 @@ void drawPFNano() {
   tdrDraw(hrgsim2,"HIST",kNone,kCyan+3,kSolid,-1,kNone);
   //
   tdrDraw(hrssim,"HIST",kNone,kOrange+2,kSolid,-1,kNone);
-
+*/
   leg1->AddEntry(hrq,"ud jets","PLE");
   leg1->AddEntry(hru,"u jets","PLE");
   leg1->AddEntry(hrd,"d jets","PLE");
@@ -251,7 +251,9 @@ void drawPFNano() {
   //TF1 *fg = new TF1("fg","2*[0]*pow(x+[0]/x,-sqrt(3))",1e-3,0.3);
   TF1 *fg = new TF1("fg","[0]*pow(x+[2]/x,[1])",1e-3,0.35);
   fg->SetParameters(f1->GetParameter(0),f1->GetParameter(1),1e-4);
-  fg->SetParameters(0.5*f1->GetParameter(0),-1);
+  // The next line should update only the third parameter instead of overwriting all:
+  fg->SetParameter(2, 0.5 * f1->GetParameter(0));
+  //fg->SetParameters(0.5*f1->GetParameter(0),-1);
   hdrg->Fit(fg,"QRN");
   fg->SetLineColor(kCyan+1);
   fg->Draw("SAME");
