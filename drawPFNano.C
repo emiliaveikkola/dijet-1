@@ -228,13 +228,13 @@ void drawPFNano() {
   hdrq->Fit(f1,"QRN");
   f1->SetRange(1e-3,0.4);
   f1->SetLineColor(kGray+1);
-  f1->Draw("SAME");
+  //f1->Draw("SAME");
 
   TF1 *f2 = new TF1("f2","[0]*pow(x+[2]/x,[1])",1e-3,0.3);
   f2->SetParameters(f1->GetParameter(0),f1->GetParameter(1),1e-4);
   hdrq->Fit(f2,"QRN");
   f2->SetLineColor(kGray+2);
-  f2->Draw("SAME");
+  //f2->Draw("SAME");
   h2->GetXaxis()->SetRangeUser(1e-3,0.4);
   h2->GetYaxis()->SetRangeUser(1e-3,2);
   gPad->SetLogx();
@@ -246,7 +246,7 @@ void drawPFNano() {
   TF1 *f3 = new TF1("f3","2*[0]*pow(x+[0]/x,-sqrt(3))",1e-3,0.3);
   f3->SetParameter(0, 0.5*f1->GetParameter(0));
   f3->SetLineColor(kOrange+2);
-  f3->Draw("SAME");
+  //f3->Draw("SAME");
 
   //TF1 *fg = new TF1("fg","2*[0]*pow(x+[0]/x,-sqrt(3))",1e-3,0.3);
   TF1 *fg = new TF1("fg","[0]*pow(x+[2]/x,[1])",1e-3,0.35);
@@ -256,12 +256,12 @@ void drawPFNano() {
   //fg->SetParameters(0.5*f1->GetParameter(0),-1);
   hdrg->Fit(fg,"QRN");
   fg->SetLineColor(kCyan+1);
-  fg->Draw("SAME");
+  //fg->Draw("SAME");
   // For gluons sqrt(3)->sqrt(e)? [0]=[2]?
   TF1 *fg2 = new TF1("fg2","[0]*pow(x+[0]/x,-sqrt(TMath::E()))",1e-3,0.35);
   fg2->SetParameter(0,0.5*(fg->GetParameter(0)+fg->GetParameter(2)));
   fg2->SetLineColor(kCyan+2);
-  fg2->Draw("SAME");
+  //fg2->Draw("SAME");
   h2->GetXaxis()->SetTitleOffset(1.1);
   h2->GetYaxis()->SetTitleOffset(1.4);
   //CMS_lumi(c2, 8, 11);
@@ -382,7 +382,7 @@ void drawPFNano() {
   hffq->Fit(f1ff0,"QRN");
   f1ff0->SetRange(1e-3,1);//1.9);
   f1ff0->SetLineColor(kGray+1);
-  f1ff0->Draw("SAME");
+  //f1ff0->Draw("SAME");
 
   /*
   //TF1 *f1ff = new TF1("f1ff","[0]/x",0.004,0.1);

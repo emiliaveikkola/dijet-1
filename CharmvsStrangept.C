@@ -58,8 +58,8 @@ void CharmvsStrangept() {
     setTDRStyle();
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
-    TH1D *h1 = tdrHist("h1","N fraction",0,0.04,"p_{T} (GeV)",25,200);
-    TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
+    TH1D *h1 = tdrHist("h1","N fraction",0,0.035,"p_{T} (GeV)",25,200);
+    TCanvas *c1 = tdrCanvas("c1",h1,4,11,kSquare);
     h1->GetYaxis()->SetTitleOffset(1.65);
     h1->GetYaxis()->SetTitleSize(0.05);
     h1->GetXaxis()->SetTitleSize(0.05);
@@ -70,55 +70,58 @@ void CharmvsStrangept() {
     //c1->SetLogx();
 
     // Draw the histogram
-    tdrDraw(h_s,"Pz",kFullCircle,kOrange-3);
-    h_s->SetMarkerSize(0.7);
-    tdrDraw(h_s_scaled,"Pz",kFullDiamond,kPink-9);
-    h_s_scaled->SetMarkerSize(0.9);
-    tdrDraw(h_c,"Pz",kFullCircle,kSpring-5);
-    h_c->SetMarkerSize(0.7);
-    tdrDraw(h_c_scaled,"Pz",kFullDiamond,kAzure+7);
-    h_c_scaled->SetMarkerSize(0.9);
+    tdrDraw(h_s,"HPz",kNone,kOrange-2,kSolid,-1,1001,kOrange-2);
+    h_s->SetFillColorAlpha(kOrange-2,0.4);
+    //tdrDraw(h_s_scaled,"Pz",kFullDiamond,kPink-9);
+    //h_s_scaled->SetMarkerSize(0.9);
+    tdrDraw(h_c,"HPz",kNone,kGreen-6,kSolid,-1,1001,kGreen-6);
+    h_c->SetFillColorAlpha(kGreen-6,0.3);
+    //tdrDraw(h_c_scaled,"Pz",kFullDiamond,kAzure+7);
+    //h_c_scaled->SetMarkerSize(0.9);
 
-    tdrDraw(h_s_gen,"Pz",kOpenCircle,kOrange-3);
-    h_s_gen->SetMarkerSize(0.7);
+    tdrDraw(h_s_gen,"HPz",kNone,kOrange+7,kSolid,-1,0,kRed-4);
+    h_s_gen->SetLineWidth(2);
     //tdrDraw(h_s_scaled_gen,"Pz",kOpenDiamond,kPink-9);
     //h_s_scaled_gen->SetMarkerSize(0.9);
-    tdrDraw(h_c_gen,"Pz",kOpenCircle,kSpring-5);
-    h_c_gen->SetMarkerSize(0.7);
+    tdrDraw(h_c_gen,"HPz",kNone,kGreen-2,kSolid,-1,0,kAzure-3);
+    h_c_gen->SetLineWidth(2);
+ 
     //tdrDraw(h_c_scaled_gen,"Pz",kOpenDiamond,kAzure+7)
     //h_c_scaled_gen->SetMarkerSize(0.9);
 
-    tdrDraw(h_u,"Pz",kOpenCircle,kGray+1);
-    h_u->SetMarkerSize(0.7);
-    tdrDraw(h_d,"Pz",kOpenCircle,kBlack);
-    h_d->SetMarkerSize(0.7);
 
-    tdrDraw(h_s_data,"Pz",kFullCircle,kOrange-2);
-    h_s_data->SetMarkerSize(0.8);
-    tdrDraw(h_s_scaled_data,"Pz",kFullDiamond,kPink-8);
-    h_s_scaled_data->SetMarkerSize(1);
-    tdrDraw(h_c_data,"Pz",kFullCircle,kSpring-4);
-    h_c_data->SetMarkerSize(0.8);
-    tdrDraw(h_c_scaled_data,"Pz",kFullDiamond,kAzure+6);
-    h_c_scaled_data->SetMarkerSize(1);
+    tdrDraw(h_u,"HPz",kNone,kMagenta-7,kSolid,-1,0,kYellow);
+     h_u->SetLineWidth(2);
+    tdrDraw(h_d,"HPz",kNone,kAzure+8,kSolid,-1,0,kViolet+1);
+     h_d->SetLineWidth(2);
+
+
+    tdrDraw(h_s_data,"Pz",kFullDiamond,kOrange+7);
+    h_s_data->SetMarkerSize(1);
+    //tdrDraw(h_s_scaled_data,"Pz",kFullDiamond,kPink-8);
+    //h_s_scaled_data->SetMarkerSize(1);
+    tdrDraw(h_c_data,"Pz",kFullDiamond,kSpring-6);
+    h_c_data->SetMarkerSize(1);
+    //tdrDraw(h_c_scaled_data,"Pz",kFullDiamond,kAzure+6);
+    //h_c_scaled_data->SetMarkerSize(1);
 
 
 
     // Create a legend
-    TLegend *leg = tdrLeg(0.5,1.05-0.05*13,0.7,0.82);
-    leg->AddEntry(h_s_gen, "s, gen, MC", "PLE");
-    leg->AddEntry(h_s, "s, tag, MC", "PLE");
-    leg->AddEntry(h_s_scaled, "scaled s, tag, MC", "PLE");
+    TLegend *leg = tdrLeg(0.6,0.8-0.05*8,0.8,0.8);
+    leg->AddEntry(h_s_gen, "s, gen, MC", "F");
+    leg->AddEntry(h_s, "s, tag, MC", "F");
+    //leg->AddEntry(h_s_scaled, "scaled s, tag, MC", "PLE");
     leg->AddEntry(h_s_data, "s, data", "PLE");
-    leg->AddEntry(h_s_scaled_data, "scaled s, data", "PLE");
-    leg->AddEntry(h_c_gen, "c, gen, MC", "PLE");
-    leg->AddEntry(h_c, "c, tag, MC", "PLE");
-    leg->AddEntry(h_c_scaled, "scaled c, tag, MC", "PLE");
+    //leg->AddEntry(h_s_scaled_data, "scaled s, data", "PLE");
+    leg->AddEntry(h_c_gen, "c, gen, MC", "F");
+    leg->AddEntry(h_c, "c, tag, MC", "F");
+    //leg->AddEntry(h_c_scaled, "scaled c, tag, MC", "PLE");
     leg->AddEntry(h_c_data, "c, data", "PLE");
-    leg->AddEntry(h_c_scaled_data, "scaled c, data", "PLE");
+    //leg->AddEntry(h_c_scaled_data, "scaled c, data", "PLE");
 
-    leg->AddEntry(h_u, "u, gen, MC", "PLE");
-    leg->AddEntry(h_d, "d, gen, MC", "PLE");
+    leg->AddEntry(h_u, "u, gen, MC", "F");
+    leg->AddEntry(h_d, "d, gen, MC", "F");
     leg->SetTextSize(0.035);
 
     //leg->Draw();
@@ -135,14 +138,14 @@ void CharmvsStrangept() {
     c1->SaveAs("pdf/charmvsstrangept2.pdf");
 
     TH1D *h_s_vs_c = (TH1D*)file->Get("h_s_vs_c");
-    TH1D *h2 = tdrHist("h2","s-c/s+c",-0.15,0.1,"p_{T} (GeV)",25,200);
-    TCanvas *c2 = tdrCanvas("c2",h2,8,11,kSquare);
+    TH1D *h2 = tdrHist("h2","(p_{T,s}- p_{T,c})/(p_{T,s}+ p_{T,c})",-0.15,0.1,"p_{T} (GeV)",25,200);
+    TCanvas *c2 = tdrCanvas("c2",h2,4,11,kSquare);
 
-    h2->GetYaxis()->SetTitleOffset(1.65);
+    h2->GetYaxis()->SetTitleOffset(1.45);
     h2->GetYaxis()->SetTitleSize(0.05);
     h2->GetXaxis()->SetTitleSize(0.05);
-    h2->GetYaxis()->SetLabelSize(0.045);
-    h2->GetXaxis()->SetLabelSize(0.045);
+    h2->GetYaxis()->SetLabelSize(0.04);
+    h2->GetXaxis()->SetLabelSize(0.04);
 
     tdrDraw(h_s_vs_c,"Pz",kFullCircle,kAzure+7);
     h_s_vs_c->SetMarkerSize(0.8);
@@ -159,8 +162,8 @@ void CharmvsStrangept() {
 
 
     TH1D *hPtFlavorPairs_DATAMC = (TH1D*)file3->Get("hPtFlavorPairs_DATAMC_0.995_1.015");
-    TH1D *h3 = tdrHist("h3","N",0.1,3000,"(s-c)/(s+c)",-1,1);
-    TCanvas *c3 = tdrCanvas("c3",h3,8,11,kSquare);
+    TH1D *h3 = tdrHist("h3","N",0.1,3000,"(p_{T,s}- p_{T,c})/(p_{T,s}+ p_{T,c})",-1,1);
+    TCanvas *c3 = tdrCanvas("c3",h3,4,11,kSquare);
 
     h3->GetYaxis()->SetTitleOffset(1.65);
     h3->GetYaxis()->SetTitleSize(0.05);
@@ -186,7 +189,7 @@ void CharmvsStrangept() {
 
     TH1D *hMassFlavorPairs_DATAMC = (TH1D*)file3->Get("hMassFlavorPairs_DATAMC_0.995_1.015");
     TH1D *h4 = tdrHist("h4","N",0,3000,"Mass (GeV)",55,120);
-    TCanvas *c4 = tdrCanvas("c4",h4,8,11,kSquare);
+    TCanvas *c4 = tdrCanvas("c4",h4,4,11,kSquare);
 
     h4->GetYaxis()->SetTitleOffset(1.65);
     h4->GetYaxis()->SetTitleSize(0.05);

@@ -30,8 +30,8 @@ void DeltaPhi() {
     setTDRStyle();
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
-    TH1D *h1 = tdrHist("h1","N",0,0.06,"#Delta#Phi",-2,2);
-    TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
+    TH1D *h1 = tdrHist("h1","N",0,0.06,"#Delta#Phi(jet,W)",-2,2);
+    TCanvas *c1 = tdrCanvas("c1",h1,4,11,kSquare);
     h1->GetYaxis()->SetTitleOffset(1.5);
     h1->GetYaxis()->SetTitleSize(0.05);
     h1->GetXaxis()->SetTitleSize(0.05);

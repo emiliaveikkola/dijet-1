@@ -314,12 +314,23 @@ h3all_mass->Scale(scale_factor2);
     // Divide the canvas into a 3x3 grid
     c3->Divide(4, 4);
     gStyle->SetOptStat(0);
+
+    for (int i = 1; i <= 16; ++i) {
+    c3->cd(i);
+    
+    // Set minimal margins inside each pad
+    gPad->SetLeftMargin(0.12);  // Leave enough space for the y-axis title
+    gPad->SetRightMargin(0.02);  // Minimal right margin
+    gPad->SetTopMargin(0.02);  // Minimal top margin
+    gPad->SetBottomMargin(0.12);
+    gPad->Update();
+    }
     c3->cd(1);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3gencstagx,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -341,8 +352,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg1= tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg1->AddEntry(h3gencstagx, "MC", "FPLE");
-    leg1->AddEntry(h3gencstagx_scaled, "scaled MC", "FPLE");
-    leg1->AddEntry(h3gencstagx_mass, "re-scaled MC", "FPLE");
+    leg1->AddEntry(h3gencstagx_scaled, "MC (init.)", "FPLE");
+    leg1->AddEntry(h3gencstagx_mass, "MC (init.+JES)", "FPLE");
 
      // Update the canvas to reflect the changes
     TLatex *tex1 = new TLatex();
@@ -354,10 +365,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(2);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
 
         // Draw the histogram
@@ -379,8 +390,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg2= tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg2->AddEntry(h3genudtagx, "MC", "FPLE");
-    leg2->AddEntry(h3genudtagx_scaled, "scaled MC", "FPLE");
-    leg2->AddEntry(h3genudtagx_mass, "re-scaled MC", "FPLE");
+    leg2->AddEntry(h3genudtagx_scaled, "MC (init.)", "FPLE");
+    leg2->AddEntry(h3genudtagx_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex2 = new TLatex();
     tex2->SetNDC(); tex2->SetTextSize(0.045);
@@ -390,10 +401,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(3);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3genxtagx,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -414,8 +425,8 @@ h3all_mass->Scale(scale_factor2);
 
         TLegend *leg3= tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg3->AddEntry(h3genxtagx, "MC", "FPLE");
-    leg3->AddEntry(h3genxtagx_scaled, "scaled MC", "FPLE");
-    leg3->AddEntry(h3genxtagx_mass, "re-scaled MC", "FPLE");
+    leg3->AddEntry(h3genxtagx_scaled, "MC (init.)", "FPLE");
+    leg3->AddEntry(h3genxtagx_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex3 = new TLatex();
     tex3->SetNDC(); tex3->SetTextSize(0.045);
@@ -427,10 +438,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(4);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3tagxall,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -455,8 +466,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg4 = tdrLeg(0.75,0.8-0.05*4,0.9,0.82);
     leg4->AddEntry(h3tagxall, "MC", "FPLE");
-    leg4->AddEntry(h3tagxall_scaled, "scaled MC", "FPLE");
-    leg4->AddEntry(h3tagxall_mass, "re-scaled MC", "FPLE");
+    leg4->AddEntry(h3tagxall_scaled, "MC (init.)", "FPLE");
+    leg4->AddEntry(h3tagxall_mass, "MC (init.+JES)", "FPLE");
     leg4->AddEntry(h3tagxall_data, "DATA", "PLE");
 
     TLatex *tex4 = new TLatex();
@@ -470,10 +481,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(5);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3gencstagud,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -494,8 +505,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg5= tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg5->AddEntry(h3gencstagud, "MC", "FPLE");
-    leg5->AddEntry(h3gencstagud_scaled, "scaled MC", "FPLE");
-    leg5->AddEntry(h3gencstagud_mass, "re-scaled MC", "FPLE");
+    leg5->AddEntry(h3gencstagud_scaled, "MC (init.)", "FPLE");
+    leg5->AddEntry(h3gencstagud_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex5 = new TLatex();
     tex5->SetNDC(); tex5->SetTextSize(0.045);
@@ -506,10 +517,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(6);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3genudtagud,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -534,18 +545,18 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg6= tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg6->AddEntry(h3genudtagud, "MC", "FPLE");
-    leg6->AddEntry(h3genudtagud_scaled, "scaled MC", "FPLE");
-    leg6->AddEntry(h3genudtagud_mass, "re-scaled MC", "FPLE");
+    leg6->AddEntry(h3genudtagud_scaled, "MC (init.)", "FPLE");
+    leg6->AddEntry(h3genudtagud_mass, "MC (init.+JES)", "FPLE");
 
     // Update the canvas to reflect the changes
     gPad->Update();
 
     c3->cd(7);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3genxtagud,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -566,8 +577,8 @@ h3all_mass->Scale(scale_factor2);
 
         TLegend *leg7 = tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg7->AddEntry(h3genxtagud, "MC", "FPLE");
-    leg7->AddEntry(h3genxtagud_scaled, "scaled MC", "FPLE");
-    leg7->AddEntry(h3genxtagud_mass, "re-scaled MC", "FPLE");
+    leg7->AddEntry(h3genxtagud_scaled, "MC (init.)", "FPLE");
+    leg7->AddEntry(h3genxtagud_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex7 = new TLatex();
     tex7->SetNDC(); tex7->SetTextSize(0.045);
@@ -578,10 +589,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(8);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3tagudall,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -605,8 +616,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg8 = tdrLeg(0.75,0.8-0.05*4,0.9,0.82);
     leg8->AddEntry(h3tagudall, "MC", "FPLE");
-    leg8->AddEntry(h3tagudall_scaled, "scaled MC", "FPLE");
-    leg8->AddEntry(h3tagudall_mass, "re-scaled MC", "FPLE");
+    leg8->AddEntry(h3tagudall_scaled, "MC (init.)", "FPLE");
+    leg8->AddEntry(h3tagudall_mass, "MC (init.+JES)", "FPLE");
     leg8->AddEntry(h3tagudall_data, "DATA", "PLE");
 
 
@@ -619,10 +630,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(9);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3gencstagcs,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -642,8 +653,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg9 = tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg9->AddEntry(h3gencstagcs, "MC", "FPLE");
-    leg9->AddEntry(h3gencstagcs_scaled, "scaled MC", "FPLE");
-    leg9->AddEntry(h3gencstagcs_mass, "re-scaled MC", "FPLE");
+    leg9->AddEntry(h3gencstagcs_scaled, "MC (init.)", "FPLE");
+    leg9->AddEntry(h3gencstagcs_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex9 = new TLatex();
     tex9->SetNDC(); tex9->SetTextSize(0.045);
@@ -654,10 +665,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(10);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3genudtagcs,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -679,8 +690,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg10 = tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg10->AddEntry(h3genudtagcs, "MC", "FPLE");
-    leg10->AddEntry(h3genudtagcs_scaled, "scaled MC", "FPLE");
-    leg10->AddEntry(h3genudtagcs_mass, "re-scaled MC", "FPLE");
+    leg10->AddEntry(h3genudtagcs_scaled, "MC (init.)", "FPLE");
+    leg10->AddEntry(h3genudtagcs_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex10 = new TLatex();
     tex10->SetNDC(); tex10->SetTextSize(0.045);
@@ -691,10 +702,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(11);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3genxtagcs,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -715,8 +726,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg11 = tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg11->AddEntry(h3genxtagcs, "MC", "FPLE");
-    leg11->AddEntry(h3genxtagcs_scaled, "scaled MC", "FPLE");
-    leg11->AddEntry(h3genxtagcs_mass, "re-scaled MC", "FPLE");
+    leg11->AddEntry(h3genxtagcs_scaled, "MC (init.)", "FPLE");
+    leg11->AddEntry(h3genxtagcs_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex11 = new TLatex();
     tex11->SetNDC(); tex11->SetTextSize(0.045);
@@ -727,10 +738,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(12);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3tagcsall,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -754,8 +765,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg12 = tdrLeg(0.75,0.8-0.05*4,0.9,0.82);
     leg12->AddEntry(h3tagcsall, "MC", "FPLE");
-    leg12->AddEntry(h3tagcsall_scaled, "scaled MC", "FPLE");
-    leg12->AddEntry(h3tagcsall_mass, "re-scaled MC", "FPLE");
+    leg12->AddEntry(h3tagcsall_scaled, "MC (init.)", "FPLE");
+    leg12->AddEntry(h3tagcsall_mass, "MC (init.+JES)", "FPLE");
     leg12->AddEntry(h3tagcsall_data, "DATA", "PLE");
 
     TLatex *tex12 = new TLatex();
@@ -767,10 +778,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(13);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3gencsall,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -791,8 +802,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg13= tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg13->AddEntry(h3gencsall, "MC", "FPLE");
-    leg13->AddEntry(h3gencsall_scaled, "scaled MC", "FPLE");
-    leg13->AddEntry(h3gencsall_mass, "re-scaled MC", "FPLE");
+    leg13->AddEntry(h3gencsall_scaled, "MC (init.)", "FPLE");
+    leg13->AddEntry(h3gencsall_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex13 = new TLatex();
     tex13->SetNDC(); tex13->SetTextSize(0.045);
@@ -803,10 +814,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(14);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3genudall,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -827,8 +838,8 @@ h3all_mass->Scale(scale_factor2);
 
         TLegend *leg14= tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg14->AddEntry(h3genudall, "MC", "FPLE");
-    leg14->AddEntry(h3genudall_scaled, "scaled MC", "FPLE");
-    leg14->AddEntry(h3genudall_mass, "re-scaled MC", "FPLE");
+    leg14->AddEntry(h3genudall_scaled, "MC (init.)", "FPLE");
+    leg14->AddEntry(h3genudall_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex14 = new TLatex();
     tex14->SetNDC(); tex14->SetTextSize(0.045);
@@ -840,10 +851,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(15);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3genxall,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -864,8 +875,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg15= tdrLeg(0.75,0.8-0.05*3,0.9,0.82);
     leg15->AddEntry(h3genxall, "MC", "FPLE");
-    leg15->AddEntry(h3genxall_scaled, "scaled MC", "FPLE");
-    leg15->AddEntry(h3genxall_mass, "re-scaled MC", "FPLE");
+    leg15->AddEntry(h3genxall_scaled, "MC (init.)", "FPLE");
+    leg15->AddEntry(h3genxall_mass, "MC (init.+JES)", "FPLE");
 
     TLatex *tex15 = new TLatex();
     tex15->SetNDC(); tex15->SetTextSize(0.045);
@@ -877,10 +888,10 @@ h3all_mass->Scale(scale_factor2);
 
     c3->cd(16);
 
-    gPad->SetLeftMargin(0.1);
-    gPad->SetRightMargin(0.01);
-    gPad->SetBottomMargin(0.08);
-    gPad->SetTopMargin(0);
+    //gPad->SetLeftMargin(0.1);
+    //gPad->SetRightMargin(0.01);
+    //gPad->SetBottomMargin(0.08);
+    //gPad->SetTopMargin(0);
 
     // Draw the histogram
     tdrDraw(h3all,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
@@ -904,8 +915,8 @@ h3all_mass->Scale(scale_factor2);
 
     TLegend *leg16 = tdrLeg(0.75,0.8-0.05*4,0.9,0.82);
     leg16->AddEntry(h3all, "MC", "FPLE");
-    leg16->AddEntry(h3all_scaled, "scaled MC", "FPLE");
-    leg16->AddEntry(h3all_mass, "re-scaled MC", "FPLE");
+    leg16->AddEntry(h3all_scaled, "MC (init.)", "FPLE");
+    leg16->AddEntry(h3all_mass, "MC (init.+JES)", "FPLE");
     leg16->AddEntry(h3all_data, "DATA", "PLE");
     
 
@@ -913,12 +924,114 @@ h3all_mass->Scale(scale_factor2);
     tex16->SetNDC(); tex16->SetTextSize(0.045);
     tex16->DrawLatex(0.17,0.85,"all");
 
+h3gencstagx->GetXaxis()->SetTitleSize(0.06);  
+h3gencstagx->GetXaxis()->SetLabelSize(0.05);  
+h3gencstagx->GetYaxis()->SetTitleSize(0.06);  
+h3gencstagx->GetYaxis()->SetLabelSize(0.05);  
+
+h3genudtagx->GetXaxis()->SetTitleSize(0.06);  
+h3genudtagx->GetXaxis()->SetLabelSize(0.05);  
+h3genudtagx->GetYaxis()->SetTitleSize(0.06);  
+h3genudtagx->GetYaxis()->SetLabelSize(0.05);  
+
+h3genxtagx->GetXaxis()->SetTitleSize(0.06);  
+h3genxtagx->GetXaxis()->SetLabelSize(0.05);  
+h3genxtagx->GetYaxis()->SetTitleSize(0.06);  
+h3genxtagx->GetYaxis()->SetLabelSize(0.05);  
+
+h3tagxall->GetXaxis()->SetTitleSize(0.06);  
+h3tagxall->GetXaxis()->SetLabelSize(0.05);  
+h3tagxall->GetYaxis()->SetTitleSize(0.06);  
+h3tagxall->GetYaxis()->SetLabelSize(0.05);  
+
+h3gencstagud->GetXaxis()->SetTitleSize(0.06);  
+h3gencstagud->GetXaxis()->SetLabelSize(0.05);  
+h3gencstagud->GetYaxis()->SetTitleSize(0.06);  
+h3gencstagud->GetYaxis()->SetLabelSize(0.05);  
+
+h3genudtagud->GetXaxis()->SetTitleSize(0.06);  
+h3genudtagud->GetXaxis()->SetLabelSize(0.05);  
+h3genudtagud->GetYaxis()->SetTitleSize(0.06);  
+h3genudtagud->GetYaxis()->SetLabelSize(0.05);  
+
+h3genxtagud->GetXaxis()->SetTitleSize(0.06);  
+h3genxtagud->GetXaxis()->SetLabelSize(0.05);  
+h3genxtagud->GetYaxis()->SetTitleSize(0.06);  
+h3genxtagud->GetYaxis()->SetLabelSize(0.05);  
+
+h3tagudall->GetXaxis()->SetTitleSize(0.06);  
+h3tagudall->GetXaxis()->SetLabelSize(0.05);  
+h3tagudall->GetYaxis()->SetTitleSize(0.06);  
+h3tagudall->GetYaxis()->SetLabelSize(0.05);  
+
+h3gencstagcs->GetXaxis()->SetTitleSize(0.06);  
+h3gencstagcs->GetXaxis()->SetLabelSize(0.05);  
+h3gencstagcs->GetYaxis()->SetTitleSize(0.06);  
+h3gencstagcs->GetYaxis()->SetLabelSize(0.05);  
+
+h3genudtagcs->GetXaxis()->SetTitleSize(0.06);  
+h3genudtagcs->GetXaxis()->SetLabelSize(0.05);  
+h3genudtagcs->GetYaxis()->SetTitleSize(0.06);  
+h3genudtagcs->GetYaxis()->SetLabelSize(0.05);  
+
+h3genxtagcs->GetXaxis()->SetTitleSize(0.06);  
+h3genxtagcs->GetXaxis()->SetLabelSize(0.05);  
+h3genxtagcs->GetYaxis()->SetTitleSize(0.06);  
+h3genxtagcs->GetYaxis()->SetLabelSize(0.05);  
+
+h3tagcsall->GetXaxis()->SetTitleSize(0.06);  
+h3tagcsall->GetXaxis()->SetLabelSize(0.05);  
+h3tagcsall->GetYaxis()->SetTitleSize(0.06);  
+h3tagcsall->GetYaxis()->SetLabelSize(0.05);  
+
+h3gencsall->GetXaxis()->SetTitleSize(0.06);  
+h3gencsall->GetXaxis()->SetLabelSize(0.05);  
+h3gencsall->GetYaxis()->SetTitleSize(0.06);  
+h3gencsall->GetYaxis()->SetLabelSize(0.05);  
+
+h3genudall->GetXaxis()->SetTitleSize(0.06);  
+h3genudall->GetXaxis()->SetLabelSize(0.05);  
+h3genudall->GetYaxis()->SetTitleSize(0.06);  
+h3genudall->GetYaxis()->SetLabelSize(0.05);  
+
+h3genxall->GetXaxis()->SetTitleSize(0.06);  
+h3genxall->GetXaxis()->SetLabelSize(0.05);  
+h3genxall->GetYaxis()->SetTitleSize(0.06);  
+h3genxall->GetYaxis()->SetLabelSize(0.05);  
+
+h3all->GetXaxis()->SetTitleSize(0.06);  
+h3all->GetXaxis()->SetLabelSize(0.05);  
+h3all->GetYaxis()->SetTitleSize(0.06);  
+h3all->GetYaxis()->SetLabelSize(0.05);
+
+
+    
+    h3gencstagcs->GetYaxis()->SetTitleOffset(1.1);
+    h3gencstagud->GetYaxis()->SetTitleOffset(1.1);
+    h3gencstagx->GetYaxis()->SetTitleOffset(1.1);
+    h3all->GetYaxis()->SetTitleOffset(1.1);
+    h3genudtagcs->GetYaxis()->SetTitleOffset(1.1);
+    h3genudtagud->GetYaxis()->SetTitleOffset(1.1);
+    h3genudtagx->GetYaxis()->SetTitleOffset(1.1);
+    h3genxtagcs->GetYaxis()->SetTitleOffset(1.1);
+    h3genxtagud->GetYaxis()->SetTitleOffset(1.1);
+    h3genxtagx->GetYaxis()->SetTitleOffset(1.1);
+
+    h3gencsall->GetYaxis()->SetTitleOffset(1.1);
+    h3genudall->GetYaxis()->SetTitleOffset(1.1);
+    h3genxall->GetYaxis()->SetTitleOffset(1.1);
+    h3tagcsall->GetYaxis()->SetTitleOffset(1.1);
+    h3tagudall->GetYaxis()->SetTitleOffset(1.1);
+    h3tagxall->GetYaxis()->SetTitleOffset(1.1);
+
     // Update the canvas to reflect the changes
     gPad->Update();
 
 
     // Save the canvas as a .pdf file
     c3->SaveAs("pdf/MCvsDATA_Pt_re-scaled1.pdf");
+
+
 
 
 
@@ -974,8 +1087,8 @@ setTDRStyle();
 
     TLegend *leg103 = tdrLeg(0.68,1.15-0.05*4,0.85,0.7);
     leg103->AddEntry(h3tagcsall, "MC", "FPLE");
-    leg103->AddEntry(h3tagcsall_scaled, "scaled MC", "FPLE");
-    leg103->AddEntry(h3tagcsall_mass, "re-scaled MC", "FPLE");
+    leg103->AddEntry(h3tagcsall_scaled, "MC (init.)", "FPLE");
+    leg103->AddEntry(h3tagcsall_mass, "MC (init.+JES)", "FPLE");
     leg103->AddEntry(h3tagcsall_data, "DATA", "PLE");
     //leg103->SetTextSize(0.037);
 
@@ -1020,8 +1133,8 @@ setTDRStyle();
 
     TLegend *leg102 = tdrLeg(0.68,1.15-0.05*4,0.85,0.7);
     leg102->AddEntry(h3tagudall, "MC", "FPLE");
-    leg102->AddEntry(h3tagudall_scaled, "scaled MC", "FPLE");
-    leg102->AddEntry(h3tagudall_mass, "re-scaled MC", "FPLE");
+    leg102->AddEntry(h3tagudall_scaled, "MC (init.)", "FPLE");
+    leg102->AddEntry(h3tagudall_mass, "MC (init.+JES)", "FPLE");
     leg102->AddEntry(h3tagudall_data, "DATA", "PLE");
 
 
@@ -1068,8 +1181,8 @@ setTDRStyle();
 
     TLegend *leg101 = tdrLeg(0.68,1.15-0.05*4,0.85,0.7);
     leg101->AddEntry(h3tagxall, "MC", "FPLE");
-    leg101->AddEntry(h3tagxall_scaled, "scaled MC", "FPLE");
-    leg101->AddEntry(h3tagxall_mass, "re-scaled MC", "FPLE");
+    leg101->AddEntry(h3tagxall_scaled, "MC (init.)", "FPLE");
+    leg101->AddEntry(h3tagxall_mass, "MC (init.+JES)", "FPLE");
     leg101->AddEntry(h3tagxall_data, "DATA", "PLE");
 
     TLatex *tex101 = new TLatex();
@@ -1114,8 +1227,8 @@ setTDRStyle();
 
     TLegend *leg104 = tdrLeg(0.68,1.15-0.05*4,0.85,0.7);
     leg104->AddEntry(h3all, "MC", "FPLE");
-    leg104->AddEntry(h3all_scaled, "scaled MC", "FPLE");
-    leg104->AddEntry(h3all_mass, "re-scaled MC", "FPLE");
+    leg104->AddEntry(h3all_scaled, "MC (init.)", "FPLE");
+    leg104->AddEntry(h3all_mass, "MC (init.+JES)", "FPLE");
     leg104->AddEntry(h3all_data, "DATA", "PLE");
     
 
@@ -1196,13 +1309,13 @@ setTDRStyle();
 
     // Draw the chi2/ndf value on the plot
     tex103->DrawLatex(0.17, 0.85, Form("#chi_{MC}^{2} / NDF = %1.1f / %d", chi27, ndf7));
-    tex103->DrawLatex(0.17, 0.78, Form("#chi_{scal.MC}^{2} / NDF = %1.1f / %d", chi27m, ndf7m));
-    tex103->DrawLatex(0.17, 0.71, Form("#chi_{re-scal.MC}^{2} / NDF = %1.1f / %d", chi27f, ndf7f));
+    tex103->DrawLatex(0.17, 0.78, Form("#chi_{MC (init.)}^{2} / NDF = %1.1f / %d", chi27m, ndf7m));
+    tex103->DrawLatex(0.17, 0.71, Form("#chi_{MC (init.+JES)}^{2} / NDF = %1.1f / %d", chi27f, ndf7f));
 
     TLegend *leg107 = tdrLeg(0.62,1.10-0.05*3,0.8,0.8);
     leg107->AddEntry(h_tagcsvsdata, "MC", "PLE");
-    leg107->AddEntry(h_tagcsvsdata_scaled, "scaled MC", "PLE");
-    leg107->AddEntry(h_tagcsvsdata_mass, "re-scaled MC", "PLE");
+    leg107->AddEntry(h_tagcsvsdata_scaled, "MC (init.)", "PLE");
+    leg107->AddEntry(h_tagcsvsdata_mass, "MC (init.+JES)", "PLE");
 
     TLatex *tex107 = new TLatex();
     tex107->SetNDC(); tex107->SetTextSize(0.045);
@@ -1279,8 +1392,8 @@ setTDRStyle();
 
     TLegend *leg106 = tdrLeg(0.62,1.10-0.05*3,0.8,0.8);
     leg106->AddEntry(h_tagudvsdata, "MC", "PLE");
-    leg106->AddEntry(h_tagudvsdata_scaled, "scaled MC", "PLE");
-    leg106->AddEntry(h_tagudvsdata_mass, "re-scaled MC", "PLE");
+    leg106->AddEntry(h_tagudvsdata_scaled, "MC (init.)", "PLE");
+    leg106->AddEntry(h_tagudvsdata_mass, "MC (init.+JES)", "PLE");
     
 
     TLatex *tex106 = new TLatex();
@@ -1289,8 +1402,8 @@ setTDRStyle();
 
     // Draw the chi2/ndf value on the plot
     tex106->DrawLatex(0.17, 0.85, Form("#chi_{MC}^{2} / NDF = %1.1f / %d", chi26, ndf6));
-    tex106->DrawLatex(0.17, 0.78, Form("#chi_{scal.MC}^{2} / NDF = %1.1f / %d", chi26m, ndf6m));
-    tex106->DrawLatex(0.17, 0.71, Form("#chi_{re-scal.MC}^{2} / NDF = %1.1f / %d", chi26f, ndf6f));
+    tex106->DrawLatex(0.17, 0.78, Form("#chi_{MC (init.)}^{2} / NDF = %1.1f / %d", chi26m, ndf6m));
+    tex106->DrawLatex(0.17, 0.71, Form("#chi_{MC (init.+JES)}^{2} / NDF = %1.1f / %d", chi26f, ndf6f));
 
     // Update the canvas to reflect the changes
     gPad->Update();
@@ -1361,8 +1474,8 @@ setTDRStyle();
 
     TLegend *leg105 = tdrLeg(0.6,1.10-0.05*3,0.8,0.8);
     leg105->AddEntry(h_tagxvsdata, "MC", "PLE");
-    leg105->AddEntry(h_tagxvsdata_scaled, "scaled MC", "PLE");
-    leg105->AddEntry(h_tagxvsdata_mass, "re-scaled MC", "PLE");
+    leg105->AddEntry(h_tagxvsdata_scaled, "MC (init.)", "PLE");
+    leg105->AddEntry(h_tagxvsdata_mass, "MC (init.+JES)", "PLE");
     
 
     TLatex *tex105 = new TLatex();
@@ -1371,8 +1484,8 @@ setTDRStyle();
 
     // Draw the chi2/ndf value on the plot
     tex105->DrawLatex(0.17, 0.85, Form("#chi_{MC}^{2} / NDF = %1.1f / %d", chi25, ndf5));
-    tex105->DrawLatex(0.17, 0.78, Form("#chi_{scal.MC}^{2} / NDF = %1.1f / %d", chi25m, ndf5m));
-    tex105->DrawLatex(0.17, 0.71, Form("#chi_{re-scal.MC}^{2} / NDF = %1.1f / %d", chi25f, ndf5f));
+    tex105->DrawLatex(0.17, 0.78, Form("#chi_{MC (init.)}^{2} / NDF = %1.1f / %d", chi25m, ndf5m));
+    tex105->DrawLatex(0.17, 0.71, Form("#chi_{MC (init.+JES)}^{2} / NDF = %1.1f / %d", chi25f, ndf5f));
 
     // Update the canvas to reflect the changes
     gPad->Update();
@@ -1444,13 +1557,13 @@ setTDRStyle();
 
     // Draw the chi2/ndf value on the plot
     tex103->DrawLatex(0.17, 0.85, Form("#chi_{MC}^{2} / NDF = %1.1f / %d", chi28, ndf8));
-    tex103->DrawLatex(0.17, 0.78, Form("#chi_{scal.MC}^{2} / NDF = %1.1f / %d", chi28m, ndf8m));
-    tex103->DrawLatex(0.17, 0.71, Form("#chi_{re-scal.MC}^{2} / NDF = %1.1f / %d", chi28f, ndf8f));
+    tex103->DrawLatex(0.17, 0.78, Form("#chi_{MC (init.)}^{2} / NDF = %1.1f / %d", chi28m, ndf8m));
+    tex103->DrawLatex(0.17, 0.71, Form("#chi_{MC (init.+JES)}^{2} / NDF = %1.1f / %d", chi28f, ndf8f));
 
     TLegend *leg108 = tdrLeg(0.62,1.10-0.05*3,0.8,0.8);
     leg108->AddEntry(h_allvsdata, "MC", "PLE");
-    leg108->AddEntry(h_allvsdata_scaled, "scaled MC", "PLE");
-    leg108->AddEntry(h_allvsdata_mass, "scaled MC", "PLE");
+    leg108->AddEntry(h_allvsdata_scaled, "MC (init.)", "PLE");
+    leg108->AddEntry(h_allvsdata_mass, "MC (init.+JES)", "PLE");
     
 
     TLatex *tex108 = new TLatex();

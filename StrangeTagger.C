@@ -269,7 +269,7 @@ void StrangeTagger::Loop()
     bool SCALEDMASS = false;
     if (DATA) {fout = new TFile("output_stag_DATA2.root", "RECREATE");}
     else if (SCALEDMASS) {fout = new TFile("output_stag_scaledmass2.root", "RECREATE");}
-    else {fout = new TFile("output_stag3new2.root", "RECREATE");}
+    else {fout = new TFile("output_stag3new2_test.root", "RECREATE");}
 
 
    double vptd[] =
@@ -971,13 +971,13 @@ std::map<std::string, int&> counters = {
             hJetFlavourPairMCDATA->Fill(pairIndexMC, pairIndexDATA);
             if (genmass > 30) {
                hMassFlavorPairs_gen->Fill(binIndex,genmass,weight);
-               if (binIndex == 1) {h_cs_gen->Fill(genmass,weight);}
-               if (binIndex == 2) {h_ud_gen->Fill(genmass,weight);}
+               if (binIndex == 1 || binIndex == 3) {h_cs_gen->Fill(genmass,weight);}
+               if (binIndex == 2 || binIndex == 4) {h_ud_gen->Fill(genmass,weight);}
                if (binIndex == 3) {h_cd_gen->Fill(genmass,weight);}          
                if (binIndex == 4) {h_us_gen->Fill(genmass,weight);}
                if (binIndex == 5) {h_cb_gen->Fill(genmass,weight);}
                if (binIndex == 6) {h_ub_gen->Fill(genmass,weight);}
-               if (binIndex == 7) {h_x_gen->Fill(genmass,weight);}
+               if (binIndex == 5 || binIndex == 6 || binIndex == 7) {h_x_gen->Fill(genmass,weight);}
             }
             if ((ctag1 > 0.43 && ctag2 <= 0.43) ||
                ((ctag1 > 0.43 && ctag2 > 0.43) && ctag1 > ctag2) ||
@@ -1124,24 +1124,35 @@ std::map<std::string, int&> counters = {
             
             if (recomass > 30) {
                if (binIndex == 1) {h_cs_reco_scaled->Fill(recomass,weight);}
-               if ((flav1 == 1 || flav2 == 1) || (flav1 == 2 || flav2 == 2)){
-                  if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass, weight);}          
-                  if (binIndex == 4) {h_us_reco_scaled->Fill(recomass, weight);}
-                  if (binIndex == 5) {h_cb_reco_scaled->Fill(recomass, weight);}
-                  if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass, weight);}
-                  if (binIndex == 7) {h_x_reco_scaled->Fill(recomass, weight);}
+               if (binIndex == 5) {h_cb_reco_scaled->Fill(recomass, weight);}
+               if ((flav1 == 1 || flav1 == -1) || (flav1 == 2 || flav1 == -2)){
+                  double recomass_scaled1 = (p4recojet_scaled1 + p4recojet2).M();
+                  if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass_scaled1, weight);}          
+                  if (binIndex == 4) {h_us_reco_scaled->Fill(recomass_scaled1, weight);}
+                  if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass_scaled1, weight);}
+                  if (binIndex == 7) {h_x_reco_scaled->Fill(recomass_scaled1, weight);}
                } // ud jets
+               if ((flav2 == 1 || flav2 == -1) || (flav2 == 2 || flav2 == -2)){
+                  double recomass_scaled2 = (p4recojet1 + p4recojet_scaled2).M();
+                  if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass_scaled2, weight);}          
+                  if (binIndex == 4) {h_us_reco_scaled->Fill(recomass_scaled2, weight);}
+                  if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass_scaled2, weight);}
+                  if (binIndex == 7) {h_x_reco_scaled->Fill(recomass_scaled2, weight);}
+               } // ud jets
+               if ((flav2 != 1 && flav2 != -1) && (flav2 != 2 && flav2 != -2) && (flav1 != 1 && flav1 != -1) && (flav1 != 2 && flav1 != -2)) {
+                 if (binIndex == 7) {h_x_reco_scaled->Fill(recomass, weight);}
+               }
             } //recomass > 30
 
             if (scaled_reco_pt1 >= 30 && scaled_reco_pt2 >= 30 ){
                if (binIndex == 2) {h_ud_reco_scaled->Fill(recomass_scaled, weight);}
-               if ((flav1 != 1 && flav2 != 1) && (flav1 != 2 && flav2 != 2)){
-                  if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass_scaled, weight);}          
-                  if (binIndex == 4) {h_us_reco_scaled->Fill(recomass_scaled, weight);}
-                  if (binIndex == 5) {h_cb_reco_scaled->Fill(recomass_scaled, weight);}
-                  if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass_scaled, weight);}
-                  if (binIndex == 7) {h_x_reco_scaled->Fill(recomass_scaled, weight);}
-               } // not ud jets
+               //if ((flav1 != 1 && flav2 != 1) && (flav1 != 2 && flav2 != 2) && (flav1 != -1 && flav2 != -1) && (flav1 != -2 && flav2 != -2)){
+               //   if (binIndex == 3) {h_cd_reco_scaled->Fill(recomass_scaled, weight);}          
+               //   if (binIndex == 4) {h_us_reco_scaled->Fill(recomass_scaled, weight);}
+               //   if (binIndex == 5) {h_cb_reco_scaled->Fill(recomass_scaled, weight);}
+               //   if (binIndex == 6) {h_ub_reco_scaled->Fill(recomass_scaled, weight);}
+               //   if (binIndex == 7) {h_x_reco_scaled->Fill(recomass_scaled, weight);}
+               //} // not ud jets
             }  // reco scaled pt >= 30
 
 

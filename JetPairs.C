@@ -13,7 +13,7 @@
 void JetPairs() {
     setTDRStyle();
     // Open the ROOT file and get the histogram
-    TFile *file = new TFile("output_stag3new2.root", "READ");
+    TFile *file = new TFile("output_stag3new2_test.root", "READ");
 
     TH1D *hJetPairs = (TH1D*)file->Get("hJetPairs");
     TH1D *hJetPairs_scaled = (TH1D*)file->Get("hJetPairs_scaled");
@@ -77,7 +77,7 @@ void JetPairs() {
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
     TH1D *h1 = tdrHist("h1","N_{reco} fraction",0,1,"Jet pair",1,8);
-    TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
+    TCanvas *c1 = tdrCanvas("c1",h1,4,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
     h1->GetXaxis()->SetBinLabel(1, "cs");
@@ -131,8 +131,8 @@ void JetPairs() {
     c1->SaveAs("pdf/jetpairs2.pdf");
 
 
-    TH1D *h12 = tdrHist("h12","N_{scal. reco} fraction",0,1,"Jet pair",1,8);
-    TCanvas *c12 = tdrCanvas("c12",h12,8,11,kSquare);
+    TH1D *h12 = tdrHist("h12","N_{reco} fraction",0,1,"Jet pair",1,8);
+    TCanvas *c12 = tdrCanvas("c12",h12,4,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
     h12->GetXaxis()->SetBinLabel(1, "cs");
@@ -177,14 +177,18 @@ void JetPairs() {
     }
 
     // Draw the histogram
-    tdrDraw(hJetPairs_scaled,"HPz",kNone,kGreen-6,kSolid,-1,1001,kGreen-6);
-    hJetPairs_scaled->SetFillColorAlpha(kGreen-7,0.45);
+
+    tdrDraw(hJetPairs_scaled,"HPz",kNone,kAzure+2,kSolid,-1,1001,kAzure+2);
+    hJetPairs_scaled->SetFillColorAlpha(kAzure+7,0.65);
+    tdrDraw(hJetPairs,"HPz",kNone,kRed-7,kSolid,-1,1001,kRed-7);
+    hJetPairs->SetFillColorAlpha(kRed-7,0.45);
 
 
 
     // Create a legend
-    TLegend *leg12 = tdrLeg(0.5,0.8-0.05*1,0.7,0.82);
+    TLegend *leg12 = tdrLeg(0.5,0.8-0.05*2,0.7,0.82);
     leg12->AddEntry(hJetPairs_scaled, "Scaled jet pairs", "FPLE");
+    leg12->AddEntry(hJetPairs, "Jet pairs", "FPLE");
     leg12->SetTextSize(0.035);
     
     //leg->Draw();
@@ -201,7 +205,7 @@ void JetPairs() {
 
 
     TH1D *h2 = tdrHist("h2","Average mass (GeV)",78-1e-1,87-1e-2,"Jet pair, gen",1,8);
-    TCanvas *c2 = tdrCanvas("c2",h2,8,11,kSquare);
+    TCanvas *c2 = tdrCanvas("c2",h2,4,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
     h2->GetXaxis()->SetBinLabel(1, "cs");
@@ -249,7 +253,7 @@ void JetPairs() {
     c2->SaveAs("pdf/jetpairsavmass_gen2.pdf");
 
     TH1D *h3 = tdrHist("h3","N_{gen} fraction",0,0.1,"Mass (GeV)",30,140);
-    TCanvas *c3 = tdrCanvas("c3",h3,8,11,kSquare);
+    TCanvas *c3 = tdrCanvas("c3",h3,4,11,kSquare);
     //gPad->SetLogy();
 
     h3->GetXaxis()->SetLabelSize(0.05);
@@ -292,6 +296,9 @@ void JetPairs() {
     h_cs_gen->SetMarkerSize(0.8);
 
 
+
+
+
     // Create a legend
     TLegend *leg3 = tdrLeg(0.75,0.75-0.05*7,0.9,0.8);
     leg3->AddEntry(h_cs_gen, "CS", "PLE");
@@ -330,7 +337,7 @@ void JetPairs() {
 
 
     TH1D *h4 = tdrHist("h4","Average mass (GeV)",82+2e-1,86,"Jet pair, reco",1,8);
-    TCanvas *c4 = tdrCanvas("c4",h4,8,11,kSquare);
+    TCanvas *c4 = tdrCanvas("c4",h4,4,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
     h4->GetXaxis()->SetBinLabel(1, "cs");
@@ -351,6 +358,7 @@ void JetPairs() {
     // Draw the histogram
     tdrDraw(hAverageMasses_reco,"HPz",kNone,kAzure+2,kSolid,-1,1001,kAzure+2);
     hAverageMasses_reco->SetFillColorAlpha(kAzure+7,0.45);
+    
 
 
 
@@ -380,7 +388,7 @@ void JetPairs() {
 
     
     TH1D *h5 = tdrHist("h5","N_{reco} fraction",0,0.06-1e-3,"Mass (GeV)",30,140);
-    TCanvas *c5 = tdrCanvas("c5",h5,8,11,kSquare);
+    TCanvas *c5 = tdrCanvas("c5",h5,4,11,kSquare);
     //gPad->SetLogy();
 
     h5->GetXaxis()->SetLabelSize(0.04);
@@ -455,8 +463,8 @@ void JetPairs() {
 ////// SCALED RECOJETS ////////////
 
 
-    TH1D *h10 = tdrHist("h10","Average mass (GeV)",82+2e-1,86,"Jet pair, scal. reco",1,8);
-    TCanvas *c10 = tdrCanvas("c10",h10,8,11,kSquare);
+    TH1D *h10 = tdrHist("h10","Average mass (GeV)",78-1e-1,87-1e-2,"Jet pair",1,8);
+    TCanvas *c10 = tdrCanvas("c10",h10,4,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
     h10->GetXaxis()->SetBinLabel(1, "cs");
@@ -475,15 +483,23 @@ void JetPairs() {
     h10->GetYaxis()->SetTitleSize(0.045);
 
     // Draw the histogram
+    tdrDraw(hAverageMasses_gen,"HPz",kNone,kRed-7,kSolid,-1,1001,kRed-7);
+    hAverageMasses_gen->SetFillColorAlpha(kRed-7,0.75);
+    tdrDraw(hAverageMasses_reco,"HPz",kNone,kGreen-6,kSolid,-1,1001,kGreen-6);
+    hAverageMasses_reco->SetFillColorAlpha(kGreen-6,0.45);
     tdrDraw(hAverageMasses_reco_scaled,"HPz",kNone,kAzure+2,kSolid,-1,1001,kAzure+2);
-    hAverageMasses_reco_scaled->SetFillColorAlpha(kAzure+7,0.45);
+    hAverageMasses_reco_scaled->SetFillColorAlpha(kAzure+7,0.35);
+
 
 
 
     // Create a legend
-    TLegend *leg10 = tdrLeg(0.2,0.71-0.05*1,0.35,0.73);
-    //leg4->AddEntry(hAverageMasses, "Average mass", "FPLE");
-    //leg4->SetTextSize(0.035);
+    TLegend *leg10 = tdrLeg(0.5,0.4-0.05*3,0.75,0.4);
+    leg10->AddEntry(hAverageMasses_gen, "Jet pairs (gen)", "FPLE");
+    leg10->AddEntry(hAverageMasses_reco, "Jet pairs (reco)", "FPLE");
+    leg10->AddEntry(hAverageMasses_reco_scaled, "Scaled jet pairs (reco)", "FPLE");
+
+    leg10->SetTextSize(0.035);
     
     //leg->Draw();
 
@@ -491,22 +507,22 @@ void JetPairs() {
     TLatex *tex10 = new TLatex();
     tex10->SetNDC(); tex10->SetTextSize(0.03); 
     tex10->DrawLatex(0.31,0.85,"fitProb > 0.2");
-    tex10->DrawLatex(0.31,0.81,"scal. recomass > 30 GeV");
-    tex10->DrawLatex(0.2,0.74,Form("cs  %1.3f #pm %1.3f",h_cs_reco_scaled->GetMean(),h_cs_reco_scaled->GetMeanError()));
-    tex10->DrawLatex(0.2,0.7,Form("ud  %1.3f #pm %1.3f",h_ud_reco_scaled->GetMean(),h_ud_reco_scaled->GetMeanError()));
-    tex10->DrawLatex(0.2,0.66,Form("cd  %1.3f #pm %1.3f",h_cd_reco_scaled->GetMean(),h_cd_reco_scaled->GetMeanError()));
-    tex10->DrawLatex(0.2,0.62,Form("us  %1.3f #pm %1.3f",h_us_reco_scaled->GetMean(),h_us_reco_scaled->GetMeanError()));
-    tex10->DrawLatex(0.2,0.58,Form("cb  %1.3f #pm %1.3f",h_cb_reco_scaled->GetMean(),h_cb_reco_scaled->GetMeanError()));
-    tex10->DrawLatex(0.2,0.54,Form("ub  %1.3f #pm %1.3f",h_ub_reco_scaled->GetMean(),h_ub_reco_scaled->GetMeanError()));
-    tex10->DrawLatex(0.2,0.5,Form(" x   %1.3f #pm %1.3f",h_x_reco_scaled->GetMean(),h_x_reco_scaled->GetMeanError()));
+    tex10->DrawLatex(0.31,0.81,"jet pair mass > 30 GeV");
+    tex10->DrawLatex(0.2,0.5,Form("cs  %1.3f #pm %1.3f",h_cs_reco_scaled->GetMean(),h_cs_reco_scaled->GetMeanError()));
+    tex10->DrawLatex(0.2,0.46,Form("ud  %1.3f #pm %1.3f",h_ud_reco_scaled->GetMean(),h_ud_reco_scaled->GetMeanError()));
+    tex10->DrawLatex(0.2,0.42,Form("cd  %1.3f #pm %1.3f",h_cd_reco_scaled->GetMean(),h_cd_reco_scaled->GetMeanError()));
+    tex10->DrawLatex(0.2,0.38,Form("us  %1.3f #pm %1.3f",h_us_reco_scaled->GetMean(),h_us_reco_scaled->GetMeanError()));
+    tex10->DrawLatex(0.2,0.34,Form("cb  %1.3f #pm %1.3f",h_cb_reco_scaled->GetMean(),h_cb_reco_scaled->GetMeanError()));
+    tex10->DrawLatex(0.2,0.3,Form("ub  %1.3f #pm %1.3f",h_ub_reco_scaled->GetMean(),h_ub_reco_scaled->GetMeanError()));
+    tex10->DrawLatex(0.2,0.26,Form(" x   %1.3f #pm %1.3f",h_x_reco_scaled->GetMean(),h_x_reco_scaled->GetMeanError()));
     gPad->Update();
 
     // Save the canvas as a .pdf file
     c10->SaveAs("pdf/jetpairsavmass_reco_scaled2.pdf");
 
     
-    TH1D *h11 = tdrHist("h11","N_{scal. reco} fraction",0,0.06-1e-3,"Mass (GeV)",30,140);
-    TCanvas *c11 = tdrCanvas("c11",h11,8,11,kSquare);
+    TH1D *h11 = tdrHist("h11","N_{scal.} fraction",0,0.1-1e-3,"Jet pair mass (GeV)",30,140);
+    TCanvas *c11 = tdrCanvas("c11",h11,4,11,kSquare);
 
     h11->GetXaxis()->SetLabelSize(0.04);
     h11->GetYaxis()->SetLabelSize(0.04);
@@ -526,38 +542,47 @@ void JetPairs() {
 
     // Draw the histogram
 
+    tdrDraw(h_ud_gen,"HPz",kNone,kPink-8,kSolid,-1,1001,kPink-8);
+    h_ud_gen->SetFillColorAlpha(kPink-8,0.1);
 
-    tdrDraw(h_x_reco_scaled,"Pz",kFullDiamond,kViolet+1);
-    h_x_reco_scaled->SetMarkerSize(0.8);
+    tdrDraw(h_cs_gen,"HPz",kNone,kAzure+2,kSolid,-1,1001,kAzure+2);
+    h_cs_gen->SetFillColorAlpha(kAzure+2,0.1);
 
-    tdrDraw(h_ub_reco_scaled,"Pz",kFullDiamond,kRed-4);
-    h_ub_reco_scaled->SetMarkerSize(0.8);
+    tdrDraw(h_x_gen,"HPz",kNone,kGreen-2,kSolid,-1,1001,kGreen-2);
+    h_x_gen->SetFillColorAlpha(kGreen-2,0.1);
 
-    tdrDraw(h_cb_reco_scaled,"Pz",kFullDiamond,kSpring-5);
-    h_cb_reco_scaled->SetMarkerSize(0.8);
 
-    tdrDraw(h_us_reco_scaled,"Pz",kFullDiamond,kOrange-2);
-    h_us_reco_scaled->SetMarkerSize(0.8);
+    tdrDraw(h_x_reco,"Pz",kFullDiamond,kGreen-3);
+    h_x_reco->SetMarkerSize(0.8);
 
-    tdrDraw(h_cd_reco_scaled,"Pz",kFullDiamond,kGreen+3);
-    h_cd_reco_scaled->SetMarkerSize(0.8);
+    tdrDraw(h_ub_reco,"Pz",kFullDiamond,kGreen-3);
+    h_ub_reco->SetMarkerSize(0.8);
 
-    tdrDraw(h_ud_reco_scaled,"Pz",kFullDiamond,kAzure+1);
-    h_ud_reco_scaled->SetMarkerSize(0.8);
+    tdrDraw(h_cb_reco,"Pz",kFullDiamond,kGreen-3);
+    h_cb_reco->SetMarkerSize(0.8);
 
-    tdrDraw(h_cs_reco_scaled,"Pz",kFullDiamond,kOrange+7);
-    h_cs_reco_scaled->SetMarkerSize(0.8);
+    tdrDraw(h_us_reco,"Pz",kFullDiamond,kPink-9);
+    h_us_reco->SetMarkerSize(0.8);
+
+    tdrDraw(h_cd_reco,"Pz",kFullDiamond,kAzure+7);
+    h_cd_reco->SetMarkerSize(0.8);
+
+    tdrDraw(h_ud_reco,"Pz",kFullDiamond,kPink-9);
+    h_ud_reco->SetMarkerSize(0.8);
+
+    tdrDraw(h_cs_reco,"Pz",kFullDiamond,kAzure+7);
+    h_cs_reco->SetMarkerSize(0.8);
 
 
     // Create a legend
-    TLegend *leg11 = tdrLeg(0.75,0.75-0.05*7,0.9,0.8);
-    leg11->AddEntry(h_cs_reco_scaled, "CS", "PLE");
-    leg11->AddEntry(h_ud_reco_scaled, "UD", "PLE");
-    leg11->AddEntry(h_cd_reco_scaled, "CD", "PLE");
-    leg11->AddEntry(h_us_reco_scaled, "US", "PLE");
-    leg11->AddEntry(h_cb_reco_scaled, "CB", "PLE");
-    leg11->AddEntry(h_ub_reco_scaled, "UB", "PLE");
-    leg11->AddEntry(h_x_reco_scaled, "X", "PLE");
+    TLegend *leg11 = tdrLeg(0.6,0.85-0.05*6,0.8,0.85);
+    leg11->AddEntry(h_ud_gen, "ud + us (gen)", "FPLE");
+    leg11->AddEntry(h_cs_gen, "cs + cd (gen)", "FPLE");
+    leg11->AddEntry(h_x_gen, "x + cb + ub (gen)", "FPLE");
+    leg11->AddEntry(h_ud_reco, "ud + us (reco)", "PLE");
+    leg11->AddEntry(h_cs_reco, "cs + cd (reco)", "PLE");
+    //leg11->AddEntry(h_ub_reco_scaled, "UB", "PLE");
+    leg11->AddEntry(h_x_reco, "x + cb + ub (reco)", "PLE");
     leg11->SetTextSize(0.035);
 
     
@@ -567,7 +592,7 @@ void JetPairs() {
     TLatex *tex11 = new TLatex();
     tex11->SetNDC(); tex11->SetTextSize(0.035); 
     tex11->DrawLatex(0.18,0.75,"fitProb > 0.2");
-    tex11->DrawLatex(0.18,0.71,"recomass > 30 GeV");
+    //tex11->DrawLatex(0.18,0.71,"jet pair mass > 30 GeV");
     gPad->Update();
 
     // Save the canvas as a .pdf file

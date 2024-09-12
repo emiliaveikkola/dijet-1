@@ -460,7 +460,7 @@ void ROCS() {
     graph1->SetLineColor(kGreen+1);
 
     // Draw the graph
-    graph1->Draw("same");
+    //graph1->Draw("same");
 
 
         std::vector<std::pair<double, double>> dataPoints2 = {
@@ -623,17 +623,17 @@ TGraph *graphAvg = new TGraph(numPoints, &xCommon[0], &yAvg[0]);
 
 graphAvg->SetLineColor(kPink-3);
 graphAvg->SetLineWidth(2);
-graphAvg->Draw("same"); // Draw with markers and lines
+//graphAvg->Draw("same"); // Draw with markers and lines
 
-    TLegend *leg2 = tdrLeg(0.65,0.25-0.04*2,0.8,0.35);
+    TLegend *leg2 = tdrLeg(0.65,0.35-0.04*2,0.8,0.35);
     //leg2->AddEntry(rocCurveSX, "s vs x", "PLE");
     leg2->AddEntry(rocCurveSUD, "s vs ud", "L");
-    leg2->AddEntry(graphAvg, "s vs ud (ref)", "L");
+    //leg2->AddEntry(graphAvg, "s vs ud (ref)", "L");
     //leg2->AddEntry(rocCurveSC, "s vs c", "PLE");
     //leg2->AddEntry(rocCurveCX, "c vs x", "L");
     //leg2->AddEntry(rocCurveCX_old, "c vs x, old", "L");
     leg2->AddEntry(rocCurveCUDS, "c vs uds", "L");
-    leg2->AddEntry(graph1, "c vs uds (ref)", "L");
+    //leg2->AddEntry(graph1, "c vs uds (ref)", "L");
     //leg2->AddEntry(rocCurveCS, "c vs s", "L");
     //leg2->AddEntry(rocCurveCG, "c vs g", "L");
     leg2->SetTextSize(0.035);

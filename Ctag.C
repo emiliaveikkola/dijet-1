@@ -25,7 +25,7 @@ void Ctag() {
     lumi_136TeV = "Run3 simulation";
     extraText = "Private";
     TH1D *h1 = tdrHist("h1","ctag > 0.43",0,0.28,"p^{reco}_{T}",21,200);
-    TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
+    TCanvas *c1 = tdrCanvas("c1",h1,4,11,kSquare);
 
 
     h1->GetXaxis()->SetLabelSize(0.04);

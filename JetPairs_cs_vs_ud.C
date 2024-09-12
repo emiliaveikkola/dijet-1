@@ -32,7 +32,7 @@ void JetPairs_cs_vs_ud() {
     extraText = "Private";
 
     TH1D *h1 = tdrHist("h1","N_{scal. reco} fraction",0,1.2,"Jet pair",1,8);
-    TCanvas *c1 = tdrCanvas("c1",h1,8,11,kSquare);
+    TCanvas *c1 = tdrCanvas("c1",h1,4,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
     h1->GetXaxis()->SetBinLabel(1, "cs");
@@ -363,7 +363,7 @@ void JetPairs_cs_vs_ud() {
 
 
     TH1D *h4 = tdrHist("h4","N_{scal. reco} fraction",0,1.2,"Jet pair",1,8);
-    TCanvas *c4 = tdrCanvas("c4",h4,8,11,kSquare);
+    TCanvas *c4 = tdrCanvas("c4",h4,4,11,kSquare);
     //gPad->SetLogy();
     //c1->SetLogx();
     h4->GetXaxis()->SetBinLabel(1, "cs");
@@ -384,21 +384,36 @@ void JetPairs_cs_vs_ud() {
 
 
     // Draw the histogram
+    tdrDraw(cs_hJetPairs,"HPz",kNone,kAzure+8,kSolid,kAzure+7,1001,kAzure+8);
+    cs_hJetPairs->SetFillColorAlpha(kAzure+8,0.8);
 
-    tdrDraw(cs_hJetPairs_scaled,"HPz",kNone,kAzure+7,kSolid,-1,1001,kAzure+7);
-    cs_hJetPairs_scaled->SetFillColorAlpha(kAzure+7,0.75);
+    tdrDraw(hJetPairs,"HPz",kNone,kRed-9,kSolid,kRed-7,1001,kRed-9);
+    hJetPairs->SetFillColorAlpha(kRed-9,0.55);
 
-    tdrDraw(hJetPairs_scaled,"HPz",kNone,kRed-7,kSolid,-1,1001,kRed-7);
-    hJetPairs_scaled->SetFillColorAlpha(kRed-7,0.5);
-
+    tdrDraw(ud_hJetPairs,"HPz",kNone,kGreen-7,kSolid,kGreen-6,1001,kGreen-7);
+    ud_hJetPairs->SetFillColorAlpha(kGreen-7,0.35);
+/*
+    tdrDraw(cs_hJetPairs,"HPz",kNone,kAzure-3,kSolid,-1,1001,0);
+    cs_hJetPairs->SetMarkerSize(1.5);
+    tdrDraw(hJetPairs,"HPz",kNone,kSpring-6,kSolid,-1,1001,0);
+    hJetPairs->SetMarkerSize(1.5);
+    tdrDraw(ud_hJetPairs,"HPz",kNone,kPink-9,kSolid,-1,1001,0);
+    ud_hJetPairs->SetMarkerSize(1.5);
+*/
  
 
 
 
     // Create a legend
-    TLegend *leg4 = tdrLeg(0.48,0.8-0.05*2,0.7,0.82);
-    leg4->AddEntry(cs_hJetPairs_scaled, "Re-scal. jet pairs (CS)", "FPLE");
-    leg4->AddEntry(hJetPairs_scaled, "Re-scal. jet pairs", "FPLE");
+    TLegend *leg4 = tdrLeg(0.48,0.8-0.05*3,0.7,0.82);
+    leg4->AddEntry(hJetPairs, "Jet pairs (all)", "FPLE");
+    leg4->AddEntry(ud_hJetPairs, "Jet pairs (ud tagged)", "FPLE");
+    leg4->AddEntry(cs_hJetPairs, "Jet pairs (cs tagged)", "FPLE");
+    
+    //leg4->AddEntry(hJetPairs_scaled, "Scal. jet pairs (all)", "PLE");
+    //leg4->AddEntry(ud_hJetPairs_scaled, "Scal. jet pairs (ud tagged)", "PLE");
+    //leg4->AddEntry(cs_hJetPairs_scaled, "Scal. jet pairs (cs tagged)", "PLE");
+    
     leg4->SetTextSize(0.035);
 
     
@@ -407,7 +422,7 @@ void JetPairs_cs_vs_ud() {
     // Update the canvas to reflect the changes
     TLatex *tex4 = new TLatex();
     tex4->SetNDC(); tex4->SetTextSize(0.035);
-    tex4->DrawLatex(0.18,0.75,"fitProb > 0.2"); 
+    tex4->DrawLatex(0.18,0.77,"fitProb > 0.2"); 
     
     gPad->Update();
 
